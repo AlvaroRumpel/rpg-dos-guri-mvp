@@ -1,0 +1,488 @@
+[
+  {
+    "id": "humano-racial",
+    "name": "Determinação Humana",
+    "type": "Poder racial",
+    "description": "Depois de rolar um teste importante e antes da consequência final, soma +2 ao resultado.",
+    "suggestedTest": "Conforme situação",
+    "effect": "Soma +2 em um teste importante",
+    "usageLimit": "session"
+  },
+  {
+    "id": "elfo-racial",
+    "name": "Reflexo Élfico",
+    "type": "Poder racial",
+    "description": "Quando um inimigo acertar um ataque contra o elfo, força nova rolagem e fica com o novo resultado.",
+    "suggestedTest": "Conforme situação",
+    "effect": "Força nova rolagem de um ataque recebido",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "anao-racial",
+    "name": "Corpo de Pedra",
+    "type": "Poder racial",
+    "description": "Quando sofrer dano, pode reduzir esse dano em 1d4 + 1.",
+    "suggestedTest": "Conforme situação",
+    "effect": "Reduz dano em 1d4 + 1",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "orc-racial",
+    "name": "Fúria Orc",
+    "type": "Poder racial",
+    "description": "Depois de acertar um ataque corpo a corpo, pode causar +1d4 de dano.",
+    "suggestedTest": "Conforme situação",
+    "effect": "Causa +1d4 de dano corpo a corpo",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-1",
+    "name": "Golpe Poderoso",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, causa +3 de dano ao acertar corpo a corpo",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, causa +3 de dano ao acertar corpo a corpo",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-2",
+    "name": "Postura Defensiva",
+    "type": "Habilidade de classe",
+    "description": "Pode gastar ação para ganhar +2 de Defesa até o próximo turno",
+    "suggestedTest": "Conforme situação",
+    "effect": "Pode gastar ação para ganhar +2 de Defesa até o próximo turno",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-3",
+    "name": "Proteger Aliado",
+    "type": "Habilidade de classe",
+    "description": "Pode entrar na frente de um ataque contra aliado próximo",
+    "suggestedTest": "Conforme situação",
+    "effect": "Pode entrar na frente de um ataque contra aliado próximo",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-4",
+    "name": "Fôlego de Batalha",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, recupera 1d6 de Vida",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, recupera 1d6 de Vida",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-5",
+    "name": "Ataque Duplo",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, pode atacar duas vezes no mesmo turno",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, pode atacar duas vezes no mesmo turno",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-6",
+    "name": "Quebrar Defesa",
+    "type": "Habilidade de classe",
+    "description": "Ao acertar, pode reduzir a Defesa do alvo até o próximo turno",
+    "suggestedTest": "Conforme situação",
+    "effect": "Ao acertar, pode reduzir a Defesa do alvo até o próximo turno",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-7",
+    "name": "Resistência de Ferro",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, reduz dano recebido em 1d6",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, reduz dano recebido em 1d6",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-8",
+    "name": "Presença Intimidadora",
+    "type": "Habilidade de classe",
+    "description": "Pode intimidar inimigos em combate com vantagem",
+    "suggestedTest": "Conforme situação",
+    "effect": "Pode intimidar inimigos em combate com vantagem",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-9",
+    "name": "Golpe Devastador",
+    "type": "Habilidade de classe",
+    "description": "Melhora o Golpe Poderoso para +1d8 de dano",
+    "suggestedTest": "Conforme situação",
+    "effect": "Melhora o Golpe Poderoso para +1d8 de dano",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-10",
+    "name": "Campeão de Batalha",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, transforma um acerto comum em crítico",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, transforma um acerto comum em crítico",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-1",
+    "name": "Ataque Oportunista",
+    "type": "Habilidade de classe",
+    "description": "Causa +4 de dano contra inimigo distraído, flanqueado, surpreso ou pelas costas",
+    "suggestedTest": "Conforme situação",
+    "effect": "Causa +4 de dano contra inimigo distraído, flanqueado, surpreso ou pelas costas",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-2",
+    "name": "Movimento Ágil",
+    "type": "Habilidade de classe",
+    "description": "Depois de atacar, pode se mover sem dar abertura imediata",
+    "suggestedTest": "Conforme situação",
+    "effect": "Depois de atacar, pode se mover sem dar abertura imediata",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-3",
+    "name": "Sumir nas Sombras",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, pode tentar se esconder com vantagem",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, pode tentar se esconder com vantagem",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-4",
+    "name": "Esquiva Astuta",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, reduz dano recebido em 1d6 + Agilidade",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, reduz dano recebido em 1d6 + Agilidade",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-5",
+    "name": "Ataque Preciso",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, ganha vantagem em um ataque",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, ganha vantagem em um ataque",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-6",
+    "name": "Truque Sujo",
+    "type": "Habilidade de classe",
+    "description": "Atrapalha um inimigo e impõe desvantagem no próximo ataque dele",
+    "suggestedTest": "Conforme situação",
+    "effect": "Atrapalha um inimigo e impõe desvantagem no próximo ataque dele",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-7",
+    "name": "Emboscada Perfeita",
+    "type": "Habilidade de classe",
+    "description": "Se iniciar escondido ou surpreender o alvo, causa dano extra",
+    "suggestedTest": "Conforme situação",
+    "effect": "Se iniciar escondido ou surpreender o alvo, causa dano extra",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-8",
+    "name": "Evasão",
+    "type": "Habilidade de classe",
+    "description": "Se passar em teste contra armadilha, explosão ou magia de área, não sofre dano",
+    "suggestedTest": "Conforme situação",
+    "effect": "Se passar em teste contra armadilha, explosão ou magia de área, não sofre dano",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-9",
+    "name": "Oportunista Mortal",
+    "type": "Habilidade de classe",
+    "description": "Melhora o Ataque Oportunista de +4 para +1d8",
+    "suggestedTest": "Conforme situação",
+    "effect": "Melhora o Ataque Oportunista de +4 para +1d8",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-10",
+    "name": "Mestre das Sombras",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, pode atacar e desaparecer na mesma ação",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, pode atacar e desaparecer na mesma ação",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-1",
+    "name": "Magia Arcana",
+    "type": "Habilidade de classe",
+    "description": "Começa com 3 magias simples e 1 magia forte",
+    "suggestedTest": "Conforme situação",
+    "effect": "Começa com 3 magias simples e 1 magia forte",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-2",
+    "name": "Truque Arcano",
+    "type": "Habilidade de classe",
+    "description": "Pode fazer pequenos efeitos mágicos simples",
+    "suggestedTest": "Conforme situação",
+    "effect": "Pode fazer pequenos efeitos mágicos simples",
+    "usageLimit": "free"
+  },
+  {
+    "id": "mago-3",
+    "name": "Foco Arcano",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, ganha +2 em um teste de magia",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, ganha +2 em um teste de magia",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-4",
+    "name": "Escudo Arcano",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, recebe +2 de Defesa contra um ataque",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, recebe +2 de Defesa contra um ataque",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-5",
+    "name": "Magia Potente",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, causa +1d4 de dano com magia ofensiva",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, causa +1d4 de dano com magia ofensiva",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-6",
+    "name": "Ritualista",
+    "type": "Habilidade de classe",
+    "description": "Pode realizar rituais fora de combate para efeitos mágicos maiores",
+    "suggestedTest": "Conforme situação",
+    "effect": "Pode realizar rituais fora de combate para efeitos mágicos maiores",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-7",
+    "name": "Controle Arcano",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, pode atrapalhar ou deslocar um inimigo com magia",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, pode atrapalhar ou deslocar um inimigo com magia",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-8",
+    "name": "Contra-Magia",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, pode tentar enfraquecer ou cancelar uma magia inimiga",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, pode tentar enfraquecer ou cancelar uma magia inimiga",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-9",
+    "name": "Magia Superior",
+    "type": "Habilidade de classe",
+    "description": "Suas magias ofensivas simples passam de 1d6 para 1d8",
+    "suggestedTest": "Conforme situação",
+    "effect": "Suas magias ofensivas simples passam de 1d6 para 1d8",
+    "usageLimit": "free"
+  },
+  {
+    "id": "mago-10",
+    "name": "Surto Arcano",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, pode usar duas magias simples no mesmo turno",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, pode usar duas magias simples no mesmo turno",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-1",
+    "name": "Cura Sagrada",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, cura 1d6 + Presença",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, cura 1d6 + Presença",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-2",
+    "name": "Benção",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, concede +2 no próximo teste de um aliado",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, concede +2 no próximo teste de um aliado",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-3",
+    "name": "Escudo da Fé",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, concede +2 de Defesa a um aliado",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, concede +2 de Defesa a um aliado",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-4",
+    "name": "Palavra de Coragem",
+    "type": "Habilidade de classe",
+    "description": "Remove medo, hesitação ou desvantagem mental de um aliado",
+    "suggestedTest": "Conforme situação",
+    "effect": "Remove medo, hesitação ou desvantagem mental de um aliado",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-5",
+    "name": "Cura Maior",
+    "type": "Habilidade de classe",
+    "description": "Melhora a Cura Sagrada para 1d8 + Presença",
+    "suggestedTest": "Conforme situação",
+    "effect": "Melhora a Cura Sagrada para 1d8 + Presença",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-6",
+    "name": "Afastar Sombras",
+    "type": "Habilidade de classe",
+    "description": "Pode afastar mortos-vivos, criaturas sombrias ou corrompidas",
+    "suggestedTest": "Conforme situação",
+    "effect": "Pode afastar mortos-vivos, criaturas sombrias ou corrompidas",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-7",
+    "name": "Aura Protetora",
+    "type": "Habilidade de classe",
+    "description": "Aliados próximos recebem +1 de Defesa por uma rodada",
+    "suggestedTest": "Conforme situação",
+    "effect": "Aliados próximos recebem +1 de Defesa por uma rodada",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-8",
+    "name": "Purificação",
+    "type": "Habilidade de classe",
+    "description": "Remove veneno, doença simples, maldição fraca ou corrupção leve",
+    "suggestedTest": "Conforme situação",
+    "effect": "Remove veneno, doença simples, maldição fraca ou corrupção leve",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-9",
+    "name": "Intervenção Divina",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por combate, transforma uma falha de aliado em nova chance",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por combate, transforma uma falha de aliado em nova chance",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-10",
+    "name": "Milagre",
+    "type": "Habilidade de classe",
+    "description": "Uma vez por sessão, realiza um grande feito divino com aprovação do mestre",
+    "suggestedTest": "Conforme situação",
+    "effect": "Uma vez por sessão, realiza um grande feito divino com aprovação do mestre",
+    "usageLimit": "session"
+  },
+  {
+    "id": "cura-sagrada",
+    "name": "Cura Sagrada",
+    "type": "Cura divina",
+    "description": "Uso: Ação. Alcance: Aliado próximo",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "1d6 + Presença",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "bencao",
+    "name": "Benção",
+    "type": "Bênção divina",
+    "description": "Uso: Ação. Alcance: Aliado próximo",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "+2 no próximo teste",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "escudo-da-fe",
+    "name": "Escudo da Fé",
+    "type": "Proteção divina",
+    "description": "Uso: Ação. Alcance: Aliado próximo. Duração: Até o início do próximo turno do Clérigo",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "+2 de Defesa",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "palavra-de-coragem",
+    "name": "Palavra de Coragem",
+    "type": "Apoio espiritual",
+    "description": "Uso: Ação. Alcance: Aliado próximo",
+    "suggestedTest": "Pode exigir 1d20 + Presença + Misticismo",
+    "effect": "Remove medo, hesitação ou desvantagem mental simples",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "cura-maior",
+    "name": "Cura Maior",
+    "type": "Cura divina aprimorada",
+    "description": "Uso: Ação. Alcance: Aliado próximo",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "1d8 + Presença",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "afastar-sombras",
+    "name": "Afastar Sombras",
+    "type": "Poder divino contra criaturas sombrias",
+    "description": "Uso: Ação. Alcance: Área próxima",
+    "suggestedTest": "1d20 + Presença + Misticismo",
+    "effect": "Afasta, enfraquece ou atrapalha criaturas sombrias",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "aura-protetora",
+    "name": "Aura Protetora",
+    "type": "Proteção divina em área",
+    "description": "Uso: Ação. Alcance: Aliados próximos. Duração: Até o início do próximo turno do Clérigo",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "+1 de Defesa",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "purificacao",
+    "name": "Purificação",
+    "type": "Purificação divina",
+    "description": "Uso: Ação ou ritual curto. Alcance: Toque ou aliado próximo",
+    "suggestedTest": "1d20 + Presença + Misticismo ou 1d20 + Intelecto + Ofício",
+    "effect": "Remove ou reduz efeitos negativos",
+    "usageLimit": "free"
+  },
+  {
+    "id": "intervencao-divina",
+    "name": "Intervenção Divina",
+    "type": "Intervenção divina",
+    "description": "Uso: Reação narrativa ou ação especial. Alcance: Aliado próximo",
+    "suggestedTest": "Não exige teste do Clérigo",
+    "effect": "Aliado rerrola um teste importante",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "milagre",
+    "name": "Milagre",
+    "type": "Grande poder divino",
+    "description": "Uso: Ação especial. Alcance: Cena",
+    "suggestedTest": "Depende do mestre",
+    "effect": "Grande feito divino aprovado pelo mestre",
+    "usageLimit": "session"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "ritual-arcano",
+    "name": "Ritual arcano",
+    "suggestedRoll": "1d20 + Intelecto + Misticismo",
+    "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+  },
+  {
+    "id": "ritual-de-conhecimento",
+    "name": "Ritual de conhecimento",
+    "suggestedRoll": "1d20 + Intelecto + Conhecimento",
+    "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+  },
+  {
+    "id": "ritual-divino",
+    "name": "Ritual divino",
+    "suggestedRoll": "1d20 + Presença + Misticismo",
+    "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+  },
+  {
+    "id": "ritual-de-cura-fisica",
+    "name": "Ritual de cura física",
+    "suggestedRoll": "1d20 + Intelecto + Ofício",
+    "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+  }
+]

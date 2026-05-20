@@ -1,0 +1,142 @@
+[
+  {
+    "id": "pocao-de-cura",
+    "name": "Poção de Cura",
+    "type": "Consumivel",
+    "description": "Recupera 1d6 + 2 de Vida",
+    "defaultQuantity": 1,
+    "roll": "1d6",
+    "fixedBonus": 2,
+    "effectKind": "heal"
+  },
+  {
+    "id": "pocao-de-folego",
+    "name": "Poção de Fôlego",
+    "type": "Consumivel",
+    "description": "Remove exaustão simples ou concede vantagem em um teste físico",
+    "defaultQuantity": 1,
+    "roll": null,
+    "fixedBonus": 0,
+    "effectKind": null
+  },
+  {
+    "id": "oleo-afiado",
+    "name": "Óleo Afiado",
+    "type": "Consumivel",
+    "description": "Ao passar em uma arma cortante, o próximo ataque que acertar causa +1 de dano",
+    "defaultQuantity": 1,
+    "roll": null,
+    "fixedBonus": 0,
+    "effectKind": "damage"
+  },
+  {
+    "id": "oleo-sagrado",
+    "name": "Óleo Sagrado",
+    "type": "Consumivel",
+    "description": "Ao passar em uma arma, o próximo ataque contra morto-vivo, sombra ou criatura corrompida causa +1d4 de dano",
+    "defaultQuantity": 1,
+    "roll": "1d4",
+    "fixedBonus": 0,
+    "effectKind": "damage"
+  },
+  {
+    "id": "bomba-de-fumaca",
+    "name": "Bomba de Fumaça",
+    "type": "Consumivel",
+    "description": "Cria fumaça suficiente para permitir fuga, esconderijo ou desvantagem em ataque à distância",
+    "defaultQuantity": 1,
+    "roll": null,
+    "fixedBonus": 0,
+    "effectKind": null
+  },
+  {
+    "id": "agua-benta",
+    "name": "Água Benta",
+    "type": "Consumivel",
+    "description": "Causa 1d4 de dano em criatura sombria ou ajuda em uma purificação simples",
+    "defaultQuantity": 1,
+    "roll": "1d4",
+    "fixedBonus": 0,
+    "effectKind": "damage"
+  },
+  {
+    "id": "pergaminho-de-luz",
+    "name": "Pergaminho de Luz",
+    "type": "Consumivel",
+    "description": "Cria luz mágica por uma cena",
+    "defaultQuantity": 1,
+    "roll": null,
+    "fixedBonus": 0,
+    "effectKind": null
+  },
+  {
+    "id": "pergaminho-de-protecao",
+    "name": "Pergaminho de Proteção",
+    "type": "Consumivel",
+    "description": "Concede +1 de Defesa contra o próximo ataque recebido",
+    "defaultQuantity": 1,
+    "roll": null,
+    "fixedBonus": 0,
+    "effectKind": null
+  },
+  {
+    "id": "antidoto-simples",
+    "name": "Antídoto Simples",
+    "type": "Consumivel",
+    "description": "Remove veneno fraco ou concede vantagem para resistir a veneno mais forte",
+    "defaultQuantity": 1,
+    "roll": null,
+    "fixedBonus": 0,
+    "effectKind": null
+  },
+  {
+    "id": "kit-de-curativo",
+    "name": "Kit de Curativo",
+    "type": "Consumivel",
+    "description": "Permite tentar estabilizar ou ajudar um aliado ferido com Ofício",
+    "defaultQuantity": 1,
+    "roll": null,
+    "fixedBonus": 0,
+    "effectKind": "heal"
+  },
+  {
+    "id": "tocha",
+    "name": "Tocha",
+    "type": "Item util",
+    "description": "Iluminação simples para uma cena ou exploração curta.",
+    "defaultQuantity": 2,
+    "fixedBonus": 0
+  },
+  {
+    "id": "corda",
+    "name": "Corda",
+    "type": "Item util",
+    "description": "Corda comum para escalada, amarras e improvisos.",
+    "defaultQuantity": 1,
+    "fixedBonus": 0
+  },
+  {
+    "id": "ferramentas-simples",
+    "name": "Ferramentas simples",
+    "type": "Item util",
+    "description": "Ferramentas úteis para ações de Ofício.",
+    "defaultQuantity": 1,
+    "fixedBonus": 0
+  },
+  {
+    "id": "mochila",
+    "name": "Mochila",
+    "type": "Item util",
+    "description": "Carrega itens comuns de aventura.",
+    "defaultQuantity": 1,
+    "fixedBonus": 0
+  },
+  {
+    "id": "flechas-ou-virotes",
+    "name": "Flechas ou virotes",
+    "type": "Item util",
+    "description": "Munição narrativa para arco ou besta.",
+    "defaultQuantity": 1,
+    "fixedBonus": 0
+  }
+]

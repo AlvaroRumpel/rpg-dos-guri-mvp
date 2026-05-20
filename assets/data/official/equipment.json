@@ -1,0 +1,757 @@
+[
+  {
+    "id": "soco-chute-ou-arma-improvisada-leve",
+    "name": "Soco, chute ou arma improvisada leve",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Força",
+    "properties": [
+      "Leve"
+    ],
+    "recommendedClasses": [
+      "Todas"
+    ]
+  },
+  {
+    "id": "adaga",
+    "name": "Adaga",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Agilidade",
+    "properties": [
+      "Leve",
+      "arremesso"
+    ],
+    "recommendedClasses": [
+      "Ladino",
+      "Mago"
+    ]
+  },
+  {
+    "id": "faca-de-arremesso",
+    "name": "Faca de arremesso",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Agilidade",
+    "properties": [
+      "Leve",
+      "arremesso"
+    ],
+    "recommendedClasses": [
+      "Ladino"
+    ]
+  },
+  {
+    "id": "cajado",
+    "name": "Cajado",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Força ou Intelecto",
+    "properties": [
+      "Foco"
+    ],
+    "recommendedClasses": [
+      "Mago",
+      "Clérigo"
+    ]
+  },
+  {
+    "id": "clava",
+    "name": "Clava",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Força",
+    "properties": [
+      "Simples"
+    ],
+    "recommendedClasses": [
+      "Guerreiro",
+      "Clérigo"
+    ]
+  },
+  {
+    "id": "maca",
+    "name": "Maça",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Força",
+    "properties": [
+      "Simples"
+    ],
+    "recommendedClasses": [
+      "Clérigo",
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "espada-curta",
+    "name": "Espada curta",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Força ou Agilidade",
+    "properties": [
+      "Leve"
+    ],
+    "recommendedClasses": [
+      "Guerreiro",
+      "Ladino"
+    ]
+  },
+  {
+    "id": "sabre",
+    "name": "Sabre",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Agilidade",
+    "properties": [
+      "Leve"
+    ],
+    "recommendedClasses": [
+      "Ladino",
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "rapieira",
+    "name": "Rapieira",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Agilidade",
+    "properties": [
+      "Leve"
+    ],
+    "recommendedClasses": [
+      "Ladino",
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "machadinha",
+    "name": "Machadinha",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Força",
+    "properties": [
+      "Arremesso"
+    ],
+    "recommendedClasses": [
+      "Guerreiro",
+      "Orcs"
+    ]
+  },
+  {
+    "id": "lanca-curta",
+    "name": "Lança curta",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Força",
+    "properties": [
+      "Alcance",
+      "arremesso"
+    ],
+    "recommendedClasses": [
+      "Guerreiro",
+      "Clérigo"
+    ]
+  },
+  {
+    "id": "arco-curto",
+    "name": "Arco curto",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Agilidade",
+    "properties": [
+      "Distância"
+    ],
+    "recommendedClasses": [
+      "Ladino",
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "besta-leve",
+    "name": "Besta leve",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d6",
+    "attribute": "Agilidade",
+    "properties": [
+      "Distância"
+    ],
+    "recommendedClasses": [
+      "Ladino",
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "funda",
+    "name": "Funda",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Agilidade",
+    "properties": [
+      "Distância"
+    ],
+    "recommendedClasses": [
+      "Todas"
+    ]
+  },
+  {
+    "id": "chicote",
+    "name": "Chicote",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Agilidade",
+    "properties": [
+      "Alcance"
+    ],
+    "recommendedClasses": [
+      "Ladino"
+    ]
+  },
+  {
+    "id": "espada-longa",
+    "name": "Espada longa",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Marcial"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "machado-de-batalha",
+    "name": "Machado de batalha",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Marcial"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "martelo-de-guerra",
+    "name": "Martelo de guerra",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Marcial"
+    ],
+    "recommendedClasses": [
+      "Guerreiro",
+      "Clérigo"
+    ]
+  },
+  {
+    "id": "lanca-longa",
+    "name": "Lança longa",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Alcance",
+      "pesada"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "alabarda",
+    "name": "Alabarda",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Alcance",
+      "pesada"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "espada-grande",
+    "name": "Espada grande",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Pesada"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "machado-grande",
+    "name": "Machado grande",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Pesada"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "martelo-pesado",
+    "name": "Martelo pesado",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Força",
+    "properties": [
+      "Pesada"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "arco-longo",
+    "name": "Arco longo",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Agilidade",
+    "properties": [
+      "Distância",
+      "pesada"
+    ],
+    "recommendedClasses": [
+      "Guerreiro",
+      "Ladino"
+    ]
+  },
+  {
+    "id": "besta-pesada",
+    "name": "Besta pesada",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d8",
+    "attribute": "Agilidade",
+    "properties": [
+      "Distância",
+      "pesada"
+    ],
+    "recommendedClasses": [
+      "Guerreiro"
+    ]
+  },
+  {
+    "id": "varinha",
+    "name": "Varinha",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Intelecto",
+    "properties": [
+      "Foco"
+    ],
+    "recommendedClasses": [
+      "Mago"
+    ]
+  },
+  {
+    "id": "grimorio",
+    "name": "Grimório",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Intelecto",
+    "properties": [
+      "Foco"
+    ],
+    "recommendedClasses": [
+      "Mago"
+    ]
+  },
+  {
+    "id": "simbolo-sagrado",
+    "name": "Símbolo sagrado",
+    "category": "weapon",
+    "description": "Arma comum oficial.",
+    "damage": "1d4",
+    "attribute": "Presença",
+    "properties": [
+      "Foco"
+    ],
+    "recommendedClasses": [
+      "Clérigo"
+    ]
+  },
+  {
+    "id": "adaga-silenciosa",
+    "name": "Adaga Silenciosa",
+    "category": "weapon",
+    "description": "Base: Adaga. Uma vez por combate, concede +1 no ataque se o Ladino estiver escondido",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "faca-do-trapaceiro",
+    "name": "Faca do Trapaceiro",
+    "category": "weapon",
+    "description": "Base: Faca de arremesso. Uma vez por combate, se errar o arremesso, pode sacar outra faca sem gastar ação",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "espada-de-guarda",
+    "name": "Espada de Guarda",
+    "category": "weapon",
+    "description": "Base: Espada curta. Enquanto proteger um aliado próximo, recebe +1 de Defesa contra o próximo ataque",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "espada-do-duelista",
+    "name": "Espada do Duelista",
+    "category": "weapon",
+    "description": "Base: Rapieira. Uma vez por combate, pode ganhar +2 em um ataque contra um único inimigo focado nele",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "machado-brutal",
+    "name": "Machado Brutal",
+    "category": "weapon",
+    "description": "Base: Machado de batalha. Uma vez por combate, ao acertar, causa +1 de dano",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "martelo-quebra-ossos",
+    "name": "Martelo Quebra-Ossos",
+    "category": "weapon",
+    "description": "Base: Martelo de guerra. Uma vez por combate, ao acertar, o alvo sofre -1 no próximo ataque físico",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "lanca-de-cacador",
+    "name": "Lança de Caçador",
+    "category": "weapon",
+    "description": "Base: Lança curta. Uma vez por combate, pode atacar primeiro contra um inimigo que se aproximou",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "arco-do-batedor",
+    "name": "Arco do Batedor",
+    "category": "weapon",
+    "description": "Base: Arco curto. Uma vez por combate, concede vantagem em um ataque feito antes do alvo agir",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "besta-de-precisao",
+    "name": "Besta de Precisão",
+    "category": "weapon",
+    "description": "Base: Besta leve. Uma vez por combate, pode ignorar cobertura leve",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "cajado-runico",
+    "name": "Cajado Rúnico",
+    "category": "weapon",
+    "description": "Base: Cajado. Uma vez por combate, concede +1 em um teste de magia",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "varinha-instavel",
+    "name": "Varinha Instável",
+    "category": "weapon",
+    "description": "Base: Varinha. Uma vez por combate, se uma magia ofensiva acertar, causa +1 de dano arcano",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "simbolo-de-prata",
+    "name": "Símbolo de Prata",
+    "category": "weapon",
+    "description": "Base: Símbolo sagrado. Uma vez por combate, concede +1 em um teste contra mortos-vivos, sombras ou maldições",
+    "properties": [
+      "Especial"
+    ]
+  },
+  {
+    "id": "broquel",
+    "name": "Broquel",
+    "category": "shield",
+    "description": "Pequeno e leve, combina com duelistas",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-de-madeira",
+    "name": "Escudo de madeira",
+    "category": "shield",
+    "description": "Simples, barato e comum",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-de-ferro",
+    "name": "Escudo de ferro",
+    "category": "shield",
+    "description": "Mais resistente e pesado",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-de-torre",
+    "name": "Escudo de torre",
+    "category": "shield",
+    "description": "Grande, pode ajudar a proteger aliados em corredor ou porta",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-do-protetor",
+    "name": "Escudo do Protetor",
+    "category": "shield",
+    "description": "Uma vez por combate, ao proteger aliado próximo, reduz 1d4 do dano recebido",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-espelhado",
+    "name": "Escudo Espelhado",
+    "category": "shield",
+    "description": "Uma vez por sessão, concede vantagem contra uma magia visual, ilusão ou efeito de medo",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-de-carvalho",
+    "name": "Escudo de Carvalho",
+    "category": "shield",
+    "description": "Uma vez por combate, recebe +2 de Defesa contra um ataque à distância",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-de-pedra",
+    "name": "Escudo de Pedra",
+    "category": "shield",
+    "description": "Uma vez por combate, reduz 2 de dano físico recebido",
+    "defenseBonus": 1
+  },
+  {
+    "id": "escudo-da-fe",
+    "name": "Escudo da Fé",
+    "category": "shield",
+    "description": "Uma vez por combate, o Clérigo pode conceder +1 de Defesa a um aliado próximo até o próximo turno",
+    "defenseBonus": 1
+  },
+  {
+    "id": "sem-armadura",
+    "name": "Sem armadura",
+    "category": "armor",
+    "description": "Roupas comuns",
+    "baseDefense": 10
+  },
+  {
+    "id": "armadura-leve",
+    "name": "Armadura leve",
+    "category": "armor",
+    "description": "Couro, couro batido, roupas reforçadas",
+    "baseDefense": 11
+  },
+  {
+    "id": "armadura-media",
+    "name": "Armadura média",
+    "category": "armor",
+    "description": "Cota de malha, placas leves, couro pesado",
+    "baseDefense": 12
+  },
+  {
+    "id": "armadura-pesada",
+    "name": "Armadura pesada",
+    "category": "armor",
+    "description": "Placas, ferro reforçado, armadura completa simples",
+    "baseDefense": 13
+  },
+  {
+    "id": "anel-da-sorte",
+    "name": "Anel da Sorte",
+    "category": "accessory",
+    "description": "Uma vez por sessão, pode rolar novamente um dado e ficar com o novo resultado"
+  },
+  {
+    "id": "anel-do-pulso-firme",
+    "name": "Anel do Pulso Firme",
+    "category": "accessory",
+    "description": "Concede +1 em um ataque à distância uma vez por combate"
+  },
+  {
+    "id": "anel-do-duelista",
+    "name": "Anel do Duelista",
+    "category": "accessory",
+    "description": "Uma vez por combate, contra um único inimigo, recebe +1 de Defesa até o próximo turno"
+  },
+  {
+    "id": "anel-de-ferro-frio",
+    "name": "Anel de Ferro Frio",
+    "category": "accessory",
+    "description": "Uma vez por sessão, ganha vantagem contra medo ou intimidação"
+  },
+  {
+    "id": "anel-de-sangue-quente",
+    "name": "Anel de Sangue Quente",
+    "category": "accessory",
+    "description": "Uma vez por combate, ao cair para 0 de Vida, pode fazer um teste de Vigor dificuldade 12. Se passar, fica com 1 de Vida"
+  },
+  {
+    "id": "anel-de-foco-arcano",
+    "name": "Anel de Foco Arcano",
+    "category": "accessory",
+    "description": "Uma vez por combate, concede +1 em um teste de magia arcana"
+  },
+  {
+    "id": "anel-de-oracao",
+    "name": "Anel de Oração",
+    "category": "accessory",
+    "description": "Uma vez por combate, concede +1 em um teste de poder divino ou espiritual"
+  },
+  {
+    "id": "anel-do-passo-leve",
+    "name": "Anel do Passo Leve",
+    "category": "accessory",
+    "description": "Uma vez por sessão, concede vantagem em um teste de Furtividade"
+  },
+  {
+    "id": "amuleto-de-pedra",
+    "name": "Amuleto de Pedra",
+    "category": "accessory",
+    "description": "Uma vez por sessão, reduz 2 de dano recebido"
+  },
+  {
+    "id": "colar-da-coragem",
+    "name": "Colar da Coragem",
+    "category": "accessory",
+    "description": "Uma vez por sessão, remove medo simples ou hesitação do usuário"
+  },
+  {
+    "id": "amuleto-do-cacador",
+    "name": "Amuleto do Caçador",
+    "category": "accessory",
+    "description": "Concede +1 em um teste de Percepção ou Natureza uma vez por sessão"
+  },
+  {
+    "id": "colar-de-prata",
+    "name": "Colar de Prata",
+    "category": "accessory",
+    "description": "Contra mortos-vivos, sombras ou maldições, concede +1 em um teste uma vez por combate"
+  },
+  {
+    "id": "amuleto-da-ultima-luz",
+    "name": "Amuleto da Última Luz",
+    "category": "accessory",
+    "description": "Uma vez por sessão, quando um aliado próximo cair inconsciente, o usuário pode conceder 1 de Vida a ele como ação"
+  },
+  {
+    "id": "colar-do-sabio",
+    "name": "Colar do Sábio",
+    "category": "accessory",
+    "description": "Concede +1 em um teste de Conhecimento uma vez por sessão"
+  },
+  {
+    "id": "amuleto-da-respiracao",
+    "name": "Amuleto da Respiração",
+    "category": "accessory",
+    "description": "Uma vez por sessão, concede vantagem para resistir a veneno, fumaça, sufocamento ou ambiente ruim"
+  },
+  {
+    "id": "colar-da-presenca",
+    "name": "Colar da Presença",
+    "category": "accessory",
+    "description": "Uma vez por sessão, concede +1 em um teste de Influência"
+  },
+  {
+    "id": "bracelete-de-couro-negro",
+    "name": "Bracelete de Couro Negro",
+    "category": "accessory",
+    "description": "Concede +1 em Furtividade uma vez por sessão"
+  },
+  {
+    "id": "bracelete-de-ferro",
+    "name": "Bracelete de Ferro",
+    "category": "accessory",
+    "description": "Uma vez por combate, reduz 1 de dano físico recebido"
+  },
+  {
+    "id": "cinto-de-forca-controlada",
+    "name": "Cinto de Força Controlada",
+    "category": "accessory",
+    "description": "Concede +1 em Força enquanto usado, respeitando o limite de +6"
+  },
+  {
+    "id": "cinto-de-folego",
+    "name": "Cinto de Fôlego",
+    "category": "accessory",
+    "description": "Uma vez por sessão, concede vantagem em um teste de Atletismo ou Vigor"
+  },
+  {
+    "id": "broche-de-nobreza",
+    "name": "Broche de Nobreza",
+    "category": "accessory",
+    "description": "Concede +1 em um teste de Influência com nobres, autoridades ou comerciantes"
+  },
+  {
+    "id": "broche-de-companheiro",
+    "name": "Broche de Companheiro",
+    "category": "accessory",
+    "description": "Uma vez por sessão, ao ajudar um aliado, o aliado recebe +2 em vez de vantagem, se o mestre achar mais simples"
+  },
+  {
+    "id": "luvas-de-precisao",
+    "name": "Luvas de Precisão",
+    "category": "accessory",
+    "description": "Uma vez por combate, concede +1 em ataque com arma leve"
+  },
+  {
+    "id": "luvas-de-oficio",
+    "name": "Luvas de Ofício",
+    "category": "accessory",
+    "description": "Concede +1 em um teste de Ofício uma vez por sessão"
+  }
+]

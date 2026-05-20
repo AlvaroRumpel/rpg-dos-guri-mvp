@@ -1,0 +1,67 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isShortText(value, max) {
+      return value is string && value.size() > 0 && value.size() <= max;
+    }
+
+    function validTable(data) {
+      return isShortText(data.name, 80)
+        && isShortText(data.code, 16)
+        && (!('pendingPlayerNames' in data) || (data.pendingPlayerNames is list && data.pendingPlayerNames.size() <= 12))
+        && (!('activeCombatId' in data) || data.activeCombatId is string || data.activeCombatId == null);
+    }
+
+    function validCharacter(data) {
+      return isShortText(data.name, 80)
+        && isShortText(data.race, 40)
+        && isShortText(data.characterClass, 40)
+        && data.level is int
+        && data.level >= 1
+        && data.level <= 10
+        && data.currentHp is int
+        && data.currentHp >= 0;
+    }
+
+    function validCombat(data) {
+      return data.active is bool
+        && data.round is int
+        && data.round >= 1
+        && data.round <= 999;
+    }
+
+    match /tables/{tableId} {
+      allow read: if true;
+      allow create, update: if validTable(request.resource.data);
+      allow delete: if false;
+
+      match /characters/{characterId} {
+        allow read: if true;
+        allow create, update: if validCharacter(request.resource.data);
+        allow delete: if true;
+      }
+
+      match /combats/{combatId} {
+        allow read: if true;
+        allow create, update: if validCombat(request.resource.data);
+        allow delete: if false;
+      }
+
+      match /logs/{logId} {
+        allow read: if true;
+        allow create: if isShortText(request.resource.data.message, 240);
+        allow update, delete: if false;
+      }
+    }
+
+    match /libraries/rpg-dos-guri/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "humano",
+    "name": "Humano",
+    "identity": "Versatilidade e força de vontade",
+    "powerName": "Determinação Humana",
+    "powerDescription": "Depois de rolar um teste importante e antes da consequência final, soma +2 ao resultado.",
+    "powerEffect": "Soma +2 em um teste importante",
+    "usageLimit": "session"
+  },
+  {
+    "id": "elfo",
+    "name": "Elfo",
+    "identity": "Reflexos e sentidos aguçados",
+    "powerName": "Reflexo Élfico",
+    "powerDescription": "Quando um inimigo acertar um ataque contra o elfo, força nova rolagem e fica com o novo resultado.",
+    "powerEffect": "Força nova rolagem de um ataque recebido",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "anao",
+    "name": "Anão",
+    "identity": "Resistência e teimosia",
+    "powerName": "Corpo de Pedra",
+    "powerDescription": "Quando sofrer dano, pode reduzir esse dano em 1d4 + 1.",
+    "powerEffect": "Reduz dano em 1d4 + 1",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "orc",
+    "name": "Orc",
+    "identity": "Força e intensidade",
+    "powerName": "Fúria Orc",
+    "powerDescription": "Depois de acertar um ataque corpo a corpo, pode causar +1d4 de dano.",
+    "powerEffect": "Causa +1d4 de dano corpo a corpo",
+    "usageLimit": "combat"
+  }
+]

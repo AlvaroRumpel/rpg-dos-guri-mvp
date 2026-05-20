@@ -1,0 +1,42 @@
+[
+  {
+    "id": "guerreiro",
+    "name": "Guerreiro",
+    "role": "Linha de frente e dano físico",
+    "skills": [
+      "Atletismo",
+      "Combate"
+    ],
+    "initialPowerName": "Golpe Poderoso"
+  },
+  {
+    "id": "ladino",
+    "name": "Ladino",
+    "role": "Furtividade e precisão",
+    "skills": [
+      "Furtividade",
+      "Percepção"
+    ],
+    "initialPowerName": "Ataque Oportunista"
+  },
+  {
+    "id": "mago",
+    "name": "Mago",
+    "role": "Magia arcana e utilidade",
+    "skills": [
+      "Conhecimento",
+      "Misticismo"
+    ],
+    "initialPowerName": "Magia Arcana"
+  },
+  {
+    "id": "clerigo",
+    "name": "Clérigo",
+    "role": "Cura, fé e proteção",
+    "skills": [
+      "Ofício",
+      "Misticismo"
+    ],
+    "initialPowerName": "Cura Sagrada"
+  }
+]

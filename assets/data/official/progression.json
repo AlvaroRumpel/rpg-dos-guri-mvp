@@ -1,0 +1,322 @@
+[
+  {
+    "id": "guerreiro-1",
+    "characterClass": "Guerreiro",
+    "level": 1,
+    "name": "Golpe Poderoso",
+    "description": "Uma vez por combate, causa +3 de dano ao acertar corpo a corpo",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-2",
+    "characterClass": "Guerreiro",
+    "level": 2,
+    "name": "Postura Defensiva",
+    "description": "Pode gastar ação para ganhar +2 de Defesa até o próximo turno",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-3",
+    "characterClass": "Guerreiro",
+    "level": 3,
+    "name": "Proteger Aliado",
+    "description": "Pode entrar na frente de um ataque contra aliado próximo",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-4",
+    "characterClass": "Guerreiro",
+    "level": 4,
+    "name": "Fôlego de Batalha",
+    "description": "Uma vez por combate, recupera 1d6 de Vida",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-5",
+    "characterClass": "Guerreiro",
+    "level": 5,
+    "name": "Ataque Duplo",
+    "description": "Uma vez por combate, pode atacar duas vezes no mesmo turno",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-6",
+    "characterClass": "Guerreiro",
+    "level": 6,
+    "name": "Quebrar Defesa",
+    "description": "Ao acertar, pode reduzir a Defesa do alvo até o próximo turno",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-7",
+    "characterClass": "Guerreiro",
+    "level": 7,
+    "name": "Resistência de Ferro",
+    "description": "Uma vez por combate, reduz dano recebido em 1d6",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-8",
+    "characterClass": "Guerreiro",
+    "level": 8,
+    "name": "Presença Intimidadora",
+    "description": "Pode intimidar inimigos em combate com vantagem",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "guerreiro-9",
+    "characterClass": "Guerreiro",
+    "level": 9,
+    "name": "Golpe Devastador",
+    "description": "Melhora o Golpe Poderoso para +1d8 de dano",
+    "usageLimit": "free"
+  },
+  {
+    "id": "guerreiro-10",
+    "characterClass": "Guerreiro",
+    "level": 10,
+    "name": "Campeão de Batalha",
+    "description": "Uma vez por combate, transforma um acerto comum em crítico",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-1",
+    "characterClass": "Ladino",
+    "level": 1,
+    "name": "Ataque Oportunista",
+    "description": "Causa +4 de dano contra inimigo distraído, flanqueado, surpreso ou pelas costas",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-2",
+    "characterClass": "Ladino",
+    "level": 2,
+    "name": "Movimento Ágil",
+    "description": "Depois de atacar, pode se mover sem dar abertura imediata",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-3",
+    "characterClass": "Ladino",
+    "level": 3,
+    "name": "Sumir nas Sombras",
+    "description": "Uma vez por combate, pode tentar se esconder com vantagem",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-4",
+    "characterClass": "Ladino",
+    "level": 4,
+    "name": "Esquiva Astuta",
+    "description": "Uma vez por combate, reduz dano recebido em 1d6 + Agilidade",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-5",
+    "characterClass": "Ladino",
+    "level": 5,
+    "name": "Ataque Preciso",
+    "description": "Uma vez por combate, ganha vantagem em um ataque",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "ladino-6",
+    "characterClass": "Ladino",
+    "level": 6,
+    "name": "Truque Sujo",
+    "description": "Atrapalha um inimigo e impõe desvantagem no próximo ataque dele",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-7",
+    "characterClass": "Ladino",
+    "level": 7,
+    "name": "Emboscada Perfeita",
+    "description": "Se iniciar escondido ou surpreender o alvo, causa dano extra",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-8",
+    "characterClass": "Ladino",
+    "level": 8,
+    "name": "Evasão",
+    "description": "Se passar em teste contra armadilha, explosão ou magia de área, não sofre dano",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-9",
+    "characterClass": "Ladino",
+    "level": 9,
+    "name": "Oportunista Mortal",
+    "description": "Melhora o Ataque Oportunista de +4 para +1d8",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ladino-10",
+    "characterClass": "Ladino",
+    "level": 10,
+    "name": "Mestre das Sombras",
+    "description": "Uma vez por combate, pode atacar e desaparecer na mesma ação",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-1",
+    "characterClass": "Mago",
+    "level": 1,
+    "name": "Magia Arcana",
+    "description": "Começa com 3 magias simples e 1 magia forte",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-2",
+    "characterClass": "Mago",
+    "level": 2,
+    "name": "Truque Arcano",
+    "description": "Pode fazer pequenos efeitos mágicos simples",
+    "usageLimit": "free"
+  },
+  {
+    "id": "mago-3",
+    "characterClass": "Mago",
+    "level": 3,
+    "name": "Foco Arcano",
+    "description": "Uma vez por combate, ganha +2 em um teste de magia",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-4",
+    "characterClass": "Mago",
+    "level": 4,
+    "name": "Escudo Arcano",
+    "description": "Uma vez por combate, recebe +2 de Defesa contra um ataque",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-5",
+    "characterClass": "Mago",
+    "level": 5,
+    "name": "Magia Potente",
+    "description": "Uma vez por combate, causa +1d4 de dano com magia ofensiva",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-6",
+    "characterClass": "Mago",
+    "level": 6,
+    "name": "Ritualista",
+    "description": "Pode realizar rituais fora de combate para efeitos mágicos maiores",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-7",
+    "characterClass": "Mago",
+    "level": 7,
+    "name": "Controle Arcano",
+    "description": "Uma vez por combate, pode atrapalhar ou deslocar um inimigo com magia",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-8",
+    "characterClass": "Mago",
+    "level": 8,
+    "name": "Contra-Magia",
+    "description": "Uma vez por combate, pode tentar enfraquecer ou cancelar uma magia inimiga",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "mago-9",
+    "characterClass": "Mago",
+    "level": 9,
+    "name": "Magia Superior",
+    "description": "Suas magias ofensivas simples passam de 1d6 para 1d8",
+    "usageLimit": "free"
+  },
+  {
+    "id": "mago-10",
+    "characterClass": "Mago",
+    "level": 10,
+    "name": "Surto Arcano",
+    "description": "Uma vez por combate, pode usar duas magias simples no mesmo turno",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-1",
+    "characterClass": "Clérigo",
+    "level": 1,
+    "name": "Cura Sagrada",
+    "description": "Uma vez por combate, cura 1d6 + Presença",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-2",
+    "characterClass": "Clérigo",
+    "level": 2,
+    "name": "Benção",
+    "description": "Uma vez por combate, concede +2 no próximo teste de um aliado",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-3",
+    "characterClass": "Clérigo",
+    "level": 3,
+    "name": "Escudo da Fé",
+    "description": "Uma vez por combate, concede +2 de Defesa a um aliado",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-4",
+    "characterClass": "Clérigo",
+    "level": 4,
+    "name": "Palavra de Coragem",
+    "description": "Remove medo, hesitação ou desvantagem mental de um aliado",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-5",
+    "characterClass": "Clérigo",
+    "level": 5,
+    "name": "Cura Maior",
+    "description": "Melhora a Cura Sagrada para 1d8 + Presença",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-6",
+    "characterClass": "Clérigo",
+    "level": 6,
+    "name": "Afastar Sombras",
+    "description": "Pode afastar mortos-vivos, criaturas sombrias ou corrompidas",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-7",
+    "characterClass": "Clérigo",
+    "level": 7,
+    "name": "Aura Protetora",
+    "description": "Aliados próximos recebem +1 de Defesa por uma rodada",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-8",
+    "characterClass": "Clérigo",
+    "level": 8,
+    "name": "Purificação",
+    "description": "Remove veneno, doença simples, maldição fraca ou corrupção leve",
+    "usageLimit": "free"
+  },
+  {
+    "id": "clerigo-9",
+    "characterClass": "Clérigo",
+    "level": 9,
+    "name": "Intervenção Divina",
+    "description": "Uma vez por combate, transforma uma falha de aliado em nova chance",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "clerigo-10",
+    "characterClass": "Clérigo",
+    "level": 10,
+    "name": "Milagre",
+    "description": "Uma vez por sessão, realiza um grande feito divino com aprovação do mestre",
+    "usageLimit": "session"
+  }
+]

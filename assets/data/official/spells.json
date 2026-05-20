@@ -1,0 +1,227 @@
+[
+  {
+    "id": "bola-de-fogo-pequena",
+    "name": "Bola de Fogo Pequena",
+    "tier": "Magia simples",
+    "description": "Tema: Fogo. Uso: Ação. Alcance: Médio. Duração: Imediata",
+    "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
+    "effect": "1d6 de fogo",
+    "usageLimit": "free"
+  },
+  {
+    "id": "raio-arcano",
+    "name": "Raio Arcano",
+    "tier": "Magia simples",
+    "description": "Tema: Energia arcana. Uso: Ação. Alcance: Médio. Duração: Imediata",
+    "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
+    "effect": "1d6 de energia arcana",
+    "usageLimit": "free"
+  },
+  {
+    "id": "luz-magica",
+    "name": "Luz Mágica",
+    "tier": "Magia simples",
+    "description": "Tema: Luz. Uso: Ação. Alcance: Próximo. Duração: Uma cena ou até ser apagada pelo Mago",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "empurrao-arcano",
+    "name": "Empurrão Arcano",
+    "tier": "Magia simples",
+    "description": "Tema: Força. Uso: Ação. Alcance: Curto. Duração: Imediata",
+    "suggestedTest": "1d20 + Intelecto",
+    "effect": "Normalmente nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "detectar-magia",
+    "name": "Detectar Magia",
+    "tier": "Magia simples",
+    "description": "Tema: Percepção mágica. Uso: Ação ou investigação. Alcance: Cena próxima. Duração: Alguns instantes",
+    "suggestedTest": "Pode exigir 1d20 + Intelecto + Misticismo",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "sono-leve",
+    "name": "Sono Leve",
+    "tier": "Magia simples",
+    "description": "Tema: Encantamento. Uso: Ação. Alcance: Curto. Duração: Curta, conforme a cena",
+    "suggestedTest": "1d20 + Intelecto",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "maos-magicas",
+    "name": "Mãos Mágicas",
+    "tier": "Magia simples",
+    "description": "Tema: Manipulação arcana. Uso: Ação. Alcance: Curto. Duração: Enquanto o Mago mantiver atenção na ação",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "nevoa-leve",
+    "name": "Névoa Leve",
+    "tier": "Magia simples",
+    "description": "Tema: Névoa e ocultação. Uso: Ação. Alcance: Área próxima. Duração: Uma rodada ou uma cena curta",
+    "suggestedTest": "Pode exigir 1d20 + Intelecto",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ilusao-menor",
+    "name": "Ilusão Menor",
+    "tier": "Magia simples",
+    "description": "Tema: Ilusão. Uso: Ação. Alcance: Curto. Duração: Breve",
+    "suggestedTest": "Pode exigir 1d20 + Intelecto",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "toque-gelado",
+    "name": "Toque Gelado",
+    "tier": "Magia simples",
+    "description": "Tema: Gelo. Uso: Ação. Alcance: Curto",
+    "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
+    "effect": "1d6 de frio. Pode reduzir movimento, se o mestre permitir",
+    "usageLimit": "free"
+  },
+  {
+    "id": "faisca-eletrica",
+    "name": "Faísca Elétrica",
+    "tier": "Magia simples",
+    "description": "Tema: Eletricidade. Uso: Ação. Alcance: Médio",
+    "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
+    "effect": "1d6 elétrico",
+    "usageLimit": "free"
+  },
+  {
+    "id": "lamina-arcana",
+    "name": "Lâmina Arcana",
+    "tier": "Magia simples",
+    "description": "Tema: Encantamento de arma. Uso: Ação. Alcance: Toque ou próximo. Duração: Até o próximo ataque ou fim da cena curta, a critério do mestre",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "+1d4 de dano arcano no próximo ataque que acertar",
+    "usageLimit": "free"
+  },
+  {
+    "id": "armadura-mistica",
+    "name": "Armadura Mística",
+    "tier": "Magia simples",
+    "description": "Tema: Proteção. Uso: Ação. Alcance: Pessoal. Duração: Até o fim da cena ou até sofrer dano",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "+1 de Defesa",
+    "usageLimit": "free"
+  },
+  {
+    "id": "passo-leve",
+    "name": "Passo Leve",
+    "tier": "Magia simples",
+    "description": "Tema: Silêncio e mobilidade. Uso: Ação. Alcance: Toque ou aliado próximo. Duração: Alguns minutos ou uma cena curta",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "Pode conceder vantagem em Furtividade",
+    "usageLimit": "free"
+  },
+  {
+    "id": "ler-runas",
+    "name": "Ler Runas",
+    "tier": "Magia simples",
+    "description": "Tema: Conhecimento arcano. Uso: Investigação. Alcance: Visual. Duração: Enquanto analisa as runas",
+    "suggestedTest": "1d20 + Intelecto + Conhecimento ou Misticismo, se necessário",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "tranca-arcana",
+    "name": "Tranca Arcana",
+    "tier": "Magia simples",
+    "description": "Tema: Proteção e bloqueio. Uso: Ação. Alcance: Toque ou próximo. Duração: Uma cena",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "Sela porta, baú, janela ou passagem simples",
+    "usageLimit": "free"
+  },
+  {
+    "id": "som-fantasma",
+    "name": "Som Fantasma",
+    "tier": "Magia simples",
+    "description": "Tema: Ilusão sonora. Uso: Ação. Alcance: Curto ou médio. Duração: Breve",
+    "suggestedTest": "Pode exigir 1d20 + Intelecto",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "marca-arcana",
+    "name": "Marca Arcana",
+    "tier": "Magia simples",
+    "description": "Tema: Identificação mágica. Uso: Ação. Alcance: Toque. Duração: Até ser apagada ou conforme decisão do mestre",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "purificar-pequeno-objeto",
+    "name": "Purificar Pequeno Objeto",
+    "tier": "Magia simples",
+    "description": "Tema: Purificação menor. Uso: Ação ou fora de combate. Alcance: Toque. Duração: Imediata",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "sussurro-arcano",
+    "name": "Sussurro Arcano",
+    "tier": "Magia simples",
+    "description": "Tema: Comunicação. Uso: Ação ou fala curta. Alcance: Criatura próxima que o Mago veja ou saiba onde está. Duração: Imediata",
+    "suggestedTest": "Normalmente não exige teste",
+    "effect": "Nenhum",
+    "usageLimit": "free"
+  },
+  {
+    "id": "bola-de-fogo",
+    "name": "Bola de Fogo",
+    "tier": "Magia forte",
+    "description": "Tema: Fogo em área. Uso: Ação. Alcance: Médio",
+    "suggestedTest": "1d20 + Intelecto contra Defesa de cada alvo na área",
+    "effect": "1d8 de fogo em cada alvo atingido",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "raio-relampejante",
+    "name": "Raio Relampejante",
+    "tier": "Magia forte",
+    "description": "Tema: Eletricidade. Uso: Ação. Alcance: Linha reta em alcance médio",
+    "suggestedTest": "1d20 + Intelecto contra Defesa do alvo principal",
+    "effect": "1d10 elétrico no alvo principal",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "prisao-arcana",
+    "name": "Prisão Arcana",
+    "tier": "Magia forte",
+    "description": "Tema: Controle. Uso: Ação. Alcance: Médio",
+    "suggestedTest": "1d20 + Intelecto contra Defesa do alvo ou dificuldade 14",
+    "effect": "Nenhum",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "invisibilidade-curta",
+    "name": "Invisibilidade Curta",
+    "tier": "Magia forte",
+    "description": "Tema: Ocultação. Uso: Ação. Alcance: Pessoal. Duração: Até o fim do próximo turno ou até atacar/fazer magia ofensiva",
+    "suggestedTest": "Normalmente não exige teste para ativar",
+    "effect": "Fica invisível por pouco tempo",
+    "usageLimit": "combat"
+  },
+  {
+    "id": "explosao-telecinetica",
+    "name": "Explosão Telecinética",
+    "tier": "Magia forte",
+    "description": "Tema: Força em área. Uso: Ação. Alcance: Ponto próximo",
+    "suggestedTest": "1d20 + Intelecto contra Defesa dos alvos próximos",
+    "effect": "1d6 de força. Alvos atingidos são empurrados ou caem, se fizer sentido",
+    "usageLimit": "combat"
+  }
+]

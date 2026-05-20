@@ -1,0 +1,98 @@
+[
+  {
+    "id": "guerreiro-defensor",
+    "name": "Guerreiro defensor",
+    "characterClass": "Guerreiro",
+    "items": [
+      "Arma principal: espada longa ou martelo de guerra",
+      "Secundário: escudo",
+      "Armadura média",
+      "Kit de curativo",
+      "Corda ou tochas."
+    ]
+  },
+  {
+    "id": "guerreiro-brutal",
+    "name": "Guerreiro brutal",
+    "characterClass": "Guerreiro",
+    "items": [
+      "Machado de batalha, espada grande ou martelo pesado",
+      "Armadura média ou pesada",
+      "Faca simples",
+      "Corda",
+      "Ração de viagem."
+    ]
+  },
+  {
+    "id": "ladino-infiltrador",
+    "name": "Ladino infiltrador",
+    "characterClass": "Ladino",
+    "items": [
+      "Adaga",
+      "Espada curta ou rapieira",
+      "Armadura leve",
+      "Ferramentas simples",
+      "Corda fina ou bomba de fumaça."
+    ]
+  },
+  {
+    "id": "ladino-arqueiro",
+    "name": "Ladino arqueiro",
+    "characterClass": "Ladino",
+    "items": [
+      "Arco curto ou besta leve",
+      "Adaga",
+      "Armadura leve",
+      "Flechas ou virotes",
+      "Capa escura."
+    ]
+  },
+  {
+    "id": "mago-estudioso",
+    "name": "Mago estudioso",
+    "characterClass": "Mago",
+    "items": [
+      "Cajado ou varinha",
+      "Grimório",
+      "Roupa comum",
+      "Pergaminho simples",
+      "Tinta, pena ou pequeno kit de escrita."
+    ]
+  },
+  {
+    "id": "mago-aventureiro",
+    "name": "Mago aventureiro",
+    "characterClass": "Mago",
+    "items": [
+      "Cajado",
+      "Adaga",
+      "Roupa reforçada ou armadura leve, se o mestre permitir",
+      "Mochila",
+      "Tochas ou luz mágica."
+    ]
+  },
+  {
+    "id": "clerigo-curandeiro",
+    "name": "Clérigo curandeiro",
+    "characterClass": "Clérigo",
+    "items": [
+      "Maça ou cajado",
+      "Símbolo sagrado",
+      "Armadura leve ou média",
+      "Kit de curativo",
+      "Água benta."
+    ]
+  },
+  {
+    "id": "clerigo-de-batalha",
+    "name": "Clérigo de batalha",
+    "characterClass": "Clérigo",
+    "items": [
+      "Arma principal: martelo de guerra ou maça",
+      "Secundário: escudo",
+      "Armadura média",
+      "Símbolo sagrado simples preso ao pescoço, sem efeito especial de equipamento",
+      "Poção de cura."
+    ]
+  }
+]

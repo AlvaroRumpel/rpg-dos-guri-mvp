@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "RPG dos Guri - Edge",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "edge",
+      "program": "lib/main.dart",
+      "args": [
+        "--web-port",
+        "5173"
+      ]
+    },
+    {
+      "name": "RPG dos Guri - Web Server",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "web-server",
+      "program": "lib/main.dart",
+      "args": [
+        "--web-port",
+        "5173"
+      ]
+    }
+  ]
+}
