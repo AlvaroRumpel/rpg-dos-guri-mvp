@@ -9,7 +9,8 @@
       "Armadura média",
       "Kit de curativo",
       "Corda ou tochas."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   },
   {
     "id": "guerreiro-brutal",
@@ -21,7 +22,8 @@
       "Faca simples",
       "Corda",
       "Ração de viagem."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   },
   {
     "id": "ladino-infiltrador",
@@ -33,7 +35,8 @@
       "Armadura leve",
       "Ferramentas simples",
       "Corda fina ou bomba de fumaça."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   },
   {
     "id": "ladino-arqueiro",
@@ -45,7 +48,8 @@
       "Armadura leve",
       "Flechas ou virotes",
       "Capa escura."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   },
   {
     "id": "mago-estudioso",
@@ -57,7 +61,8 @@
       "Roupa comum",
       "Pergaminho simples",
       "Tinta, pena ou pequeno kit de escrita."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   },
   {
     "id": "mago-aventureiro",
@@ -69,7 +74,8 @@
       "Roupa reforçada ou armadura leve, se o mestre permitir",
       "Mochila",
       "Tochas ou luz mágica."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   },
   {
     "id": "clerigo-curandeiro",
@@ -81,7 +87,8 @@
       "Armadura leve ou média",
       "Kit de curativo",
       "Água benta."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   },
   {
     "id": "clerigo-de-batalha",
@@ -93,6 +100,7 @@
       "Armadura média",
       "Símbolo sagrado simples preso ao pescoço, sem efeito especial de equipamento",
       "Poção de cura."
-    ]
+    ],
+    "source": "Livro de Armas e Itens > Kits iniciais"
   }
 ]

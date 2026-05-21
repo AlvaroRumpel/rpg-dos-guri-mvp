@@ -6,7 +6,17 @@
     "description": "Tema: Fogo. Uso: Ação. Alcance: Médio. Duração: Imediata",
     "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
     "effect": "1d6 de fogo",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Médio",
+    "duration": "Imediata",
+    "roll": "1d20",
+    "damage": "1d6 de fogo",
+    "healing": null,
+    "extraEffect": "Dano no nível 9: 1d8 de fogo",
+    "notes": "O Mago escolhe um alvo visível e lança uma pequena bola flamejante.\nSe o teste igualar ou superar a Defesa do alvo, a magia acerta e causa o dano indicado.. Atacar um goblin à distância;\nQueimar uma corda;\nAcender material inflamável;\nForçar um inimigo a sair de uma posição.. A Bola de Fogo Pequena não explode em área. Ela atinge apenas um alvo.\nPode causar pequenos efeitos no ambiente, como incendiar palha, papel, cortina ou óleo.",
+    "source": "Grimório > Bola de Fogo Pequena"
   },
   {
     "id": "raio-arcano",
@@ -15,7 +25,17 @@
     "description": "Tema: Energia arcana. Uso: Ação. Alcance: Médio. Duração: Imediata",
     "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
     "effect": "1d6 de energia arcana",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Médio",
+    "duration": "Imediata",
+    "roll": "1d20",
+    "damage": "1d6 de energia arcana",
+    "healing": null,
+    "extraEffect": "Dano no nível 9: 1d8 de energia arcana",
+    "notes": "O Mago dispara um raio de energia contra um alvo visível.\nÉ uma das magias ofensivas mais simples e confiáveis.. Atacar um inimigo à distância;\nQuebrar um objeto frágil;\nAtingir uma criatura resistente a fogo;\nMostrar poder arcano em uma cena dramática.. Raio Arcano é dano mágico puro. Ele não incendeia, congela ou empurra, salvo se o mestre permitir por efeito narrativo pequeno.",
+    "source": "Grimório > Raio Arcano"
   },
   {
     "id": "luz-magica",
@@ -24,7 +44,17 @@
     "description": "Tema: Luz. Uso: Ação. Alcance: Próximo. Duração: Uma cena ou até ser apagada pelo Mago",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Próximo",
+    "duration": "Uma cena ou até ser apagada pelo Mago",
+    "roll": null,
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago cria uma luz flutuante que ilumina uma área próxima.\nA luz pode acompanhar o grupo lentamente ou ficar parada em um ponto.. Iluminar uma caverna;\nRevelar uma sala escura;\nAfastar criaturas que temem luz;\nMarcar a posição do grupo;\nAjudar em investigação visual.. Em geral, não precisa de teste.\nContra sombras mágicas, escuridão sobrenatural ou criaturas sombrias, pode exigir teste de Intelecto ou Misticismo.",
+    "source": "Grimório > Luz Mágica"
   },
   {
     "id": "empurrao-arcano",
@@ -33,7 +63,17 @@
     "description": "Tema: Força. Uso: Ação. Alcance: Curto. Duração: Imediata",
     "suggestedTest": "1d20 + Intelecto",
     "effect": "Normalmente nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Curto",
+    "duration": "Imediata",
+    "roll": "1d20",
+    "damage": "Normalmente nenhum",
+    "healing": null,
+    "extraEffect": "Dificuldade: 12 contra objetos simples ou Defesa do alvo contra criaturas",
+    "notes": "O Mago projeta uma onda curta de força arcana.\nSe passar no teste, empurra uma criatura ou objeto pequeno alguns passos.. Empurrar um inimigo para longe;\nDerrubar uma criatura perto de uma borda;\nFechar uma porta à distância;\nTirar um objeto da mão de alguém, se fizer sentido;\nCriar espaço para fugir.. Empurrão Arcano é controle, não dano.\nSe o alvo bater em algo perigoso, cair de lugar alto ou for empurrado para uma armadilha, o mestre pode aplicar consequência ou dano narrativo.",
+    "source": "Grimório > Empurrão Arcano"
   },
   {
     "id": "detectar-magia",
@@ -42,7 +82,17 @@
     "description": "Tema: Percepção mágica. Uso: Ação ou investigação. Alcance: Cena próxima. Duração: Alguns instantes",
     "suggestedTest": "Pode exigir 1d20 + Intelecto + Misticismo",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação ou investigação",
+    "range": "Cena próxima",
+    "duration": "Alguns instantes",
+    "roll": "1d20",
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "Dificuldade: 12, 16 ou mais se a magia estiver escondida",
+    "notes": "O Mago sente a presença de magia próxima.\nA magia pode revelar:\nItens mágicos;\nPortas encantadas;\nArmadilhas mágicas;\nCriaturas sobrenaturais;\nEnergia corrompida;\nResquícios de ritual.. Descobrir se uma espada é encantada;\nPerceber uma armadilha mágica;\nSentir corrupção em uma sala;\nEncontrar uma porta selada por runas;\nIdentificar a presença de uma criatura invisível ou espiritual.. Detectar Magia revela presença, não necessariamente explicação completa.\nPara entender exatamente o que a magia faz, o mestre pode pedir teste de Conhecimento ou Misticismo.",
+    "source": "Grimório > Detectar Magia"
   },
   {
     "id": "sono-leve",
@@ -51,7 +101,17 @@
     "description": "Tema: Encantamento. Uso: Ação. Alcance: Curto. Duração: Curta, conforme a cena",
     "suggestedTest": "1d20 + Intelecto",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Curto",
+    "duration": "Curta, conforme a cena",
+    "roll": "1d20",
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "Dificuldade: 12 ou Defesa do alvo",
+    "notes": "O Mago tenta adormecer uma criatura fraca, cansada ou distraída.\nSe passar no teste, o alvo adormece ou fica sonolento.. Fazer um guarda cochilar;\nAcalmar uma criatura pequena;\nEvitar combate contra inimigo fraco;\nCriar abertura para fuga;\nDistrair alguém por alguns instantes.. Sono Leve não funciona bem contra:\nChefes;\nMortos-vivos;\nCriaturas muito fortes;\nAlvos em alerta total;\nAlvos no meio de combate intenso.\nContra inimigos importantes, a magia pode apenas causar hesitação ou desvantagem em uma ação.",
+    "source": "Grimório > Sono Leve"
   },
   {
     "id": "maos-magicas",
@@ -60,7 +120,17 @@
     "description": "Tema: Manipulação arcana. Uso: Ação. Alcance: Curto. Duração: Enquanto o Mago mantiver atenção na ação",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Curto",
+    "duration": "Enquanto o Mago mantiver atenção na ação",
+    "roll": null,
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago move um objeto pequeno à distância.\nPode puxar, empurrar, levantar ou carregar algo leve.. Puxar uma chave;\nAbrir uma gaveta leve;\nPegar um frasco do outro lado de uma grade;\nDerrubar um copo;\nSegurar uma folha ou pergaminho;\nAcionar uma alavanca pequena.. Mãos Mágicas não serve para atacar diretamente.\nTambém não carrega objetos pesados nem substitui força física em ações grandes.",
+    "source": "Grimório > Mãos Mágicas"
   },
   {
     "id": "nevoa-leve",
@@ -69,7 +139,17 @@
     "description": "Tema: Névoa e ocultação. Uso: Ação. Alcance: Área próxima. Duração: Uma rodada ou uma cena curta",
     "suggestedTest": "Pode exigir 1d20 + Intelecto",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Área próxima",
+    "duration": "Uma rodada ou uma cena curta",
+    "roll": "1d20",
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "Dificuldade: 12 ou Defesa do alvo, se usada contra inimigos atentos",
+    "notes": "O Mago cria uma pequena névoa em uma área próxima.\nA névoa dificulta visão e pode ajudar em furtividade.. Ajudar um aliado a se esconder;\nAtrair inimigos para uma emboscada;\nDificultar ataques à distância;\nCobrir uma fuga;\nCriar clima de mistério em uma cena.. Em combate, a Névoa Leve pode:\nDar vantagem para se esconder;\nImpor desvantagem em um ataque à distância;\nBloquear visão parcial;\nCriar cobertura narrativa.\nNão deve cegar todos automaticamente.",
+    "source": "Grimório > Névoa Leve"
   },
   {
     "id": "ilusao-menor",
@@ -78,7 +158,17 @@
     "description": "Tema: Ilusão. Uso: Ação. Alcance: Curto. Duração: Breve",
     "suggestedTest": "Pode exigir 1d20 + Intelecto",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Curto",
+    "duration": "Breve",
+    "roll": "1d20",
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "Dificuldade: 12 ou maior contra inimigos atentos",
+    "notes": "O Mago cria uma pequena ilusão visual ou sonora.\nA ilusão não é real e não causa dano.. Criar um ruído distante;\nFazer uma sombra falsa;\nImitar uma voz curta;\nCriar uma marca brilhante;\nFazer parecer que há um objeto simples no local;\nDistrair um guarda.. A ilusão engana melhor quando o alvo está distraído ou quando a cena ajuda.\nSe alguém interagir diretamente com a ilusão, pode perceber que ela não é real.",
+    "source": "Grimório > Ilusão Menor"
   },
   {
     "id": "toque-gelado",
@@ -86,8 +176,18 @@
     "tier": "Magia simples",
     "description": "Tema: Gelo. Uso: Ação. Alcance: Curto",
     "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
-    "effect": "1d6 de frio. Pode reduzir movimento, se o mestre permitir",
-    "usageLimit": "free"
+    "effect": "1d6 de frio",
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Curto",
+    "duration": null,
+    "roll": "1d20",
+    "damage": "1d6 de frio",
+    "healing": null,
+    "extraEffect": "Pode reduzir movimento, se o mestre permitir. Dano no nível 9: 1d8 de frio",
+    "notes": "O Mago lança energia fria contra um alvo próximo.\nSe acertar, causa dano de frio.\nEm algumas cenas, o frio pode dificultar movimento do alvo até o próximo turno.. Ferir uma criatura de fogo;\nCongelar uma fechadura simples;\nReduzir a velocidade de um perseguidor;\nCriar gelo fino em uma superfície pequena.. O efeito de lentidão deve ser leve.\nSugestão: o alvo se move menos, perde posição ou tem dificuldade para perseguir alguém até o próximo turno.",
+    "source": "Grimório > Toque Gelado"
   },
   {
     "id": "faisca-eletrica",
@@ -96,7 +196,17 @@
     "description": "Tema: Eletricidade. Uso: Ação. Alcance: Médio",
     "suggestedTest": "1d20 + Intelecto contra Defesa do alvo",
     "effect": "1d6 elétrico",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Médio",
+    "duration": null,
+    "roll": "1d20",
+    "damage": "1d6 elétrico",
+    "healing": null,
+    "extraEffect": "Dano no nível 9: 1d8 elétrico",
+    "notes": "O Mago dispara uma descarga elétrica contra um alvo.\nA magia também pode interagir com pequenos mecanismos e objetos frágeis.. Atacar uma criatura;\nAtivar mecanismo simples;\nCausar curto em objeto frágil;\nAssustar animais pequenos;\nIluminar brevemente um local escuro com clarão.. Faísca Elétrica não deve resolver qualquer máquina complexa automaticamente.\nPara mecanismos importantes, peça teste de Intelecto + Misticismo ou Intelecto + Ofício.",
+    "source": "Grimório > Faísca Elétrica"
   },
   {
     "id": "lamina-arcana",
@@ -105,7 +215,17 @@
     "description": "Tema: Encantamento de arma. Uso: Ação. Alcance: Toque ou próximo. Duração: Até o próximo ataque ou fim da cena curta, a critério do mestre",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "+1d4 de dano arcano no próximo ataque que acertar",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Toque ou próximo",
+    "duration": "Até o próximo ataque ou fim da cena curta, a critério do mestre",
+    "roll": null,
+    "damage": "+1d4 de dano arcano no próximo ataque que acertar",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago envolve uma arma simples com energia arcana.\nNo próximo ataque feito com essa arma, se acertar, causa **+1d4 de dano arcano**.. Fortalecer a espada do Guerreiro;\nEncantar uma adaga antes de uma emboscada;\nAjudar contra criatura resistente a dano comum;\nPreparar um golpe decisivo.. A magia exige preparação.\nEla não soma dano se o ataque errar.\nSó uma arma pode estar sob Lâmina Arcana por vez, salvo decisão do mestre.",
+    "source": "Grimório > Lâmina Arcana"
   },
   {
     "id": "armadura-mistica",
@@ -114,7 +234,17 @@
     "description": "Tema: Proteção. Uso: Ação. Alcance: Pessoal. Duração: Até o fim da cena ou até sofrer dano",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "+1 de Defesa",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Pessoal",
+    "duration": "Até o fim da cena ou até sofrer dano",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago cria uma proteção mágica leve ao redor de si.\nEnquanto ativa, recebe **+1 de Defesa**.. Preparar-se antes de entrar em uma sala perigosa;\nSobreviver melhor em combate;\nExplorar ruínas com risco de armadilhas;\nProteger-se enquanto mantém distância.. Armadura Mística não acumula com outra Armadura Mística.\nEla não deve substituir armaduras físicas pesadas.",
+    "source": "Grimório > Armadura Mística"
   },
   {
     "id": "passo-leve",
@@ -123,7 +253,17 @@
     "description": "Tema: Silêncio e mobilidade. Uso: Ação. Alcance: Toque ou aliado próximo. Duração: Alguns minutos ou uma cena curta",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "Pode conceder vantagem em Furtividade",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Toque ou aliado próximo",
+    "duration": "Alguns minutos ou uma cena curta",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago reduz o som dos passos de si mesmo ou de um aliado próximo.\nSe fizer sentido, concede vantagem em um teste de Furtividade.. Ajudar o Ladino a se infiltrar;\nPassar por um corredor cheio de guardas;\nEvitar acordar uma criatura;\nCaminhar sobre folhas secas sem fazer barulho.. Passo Leve não deixa invisível.\nO personagem ainda pode ser visto, farejado ou percebido por outros meios.",
+    "source": "Grimório > Passo Leve"
   },
   {
     "id": "ler-runas",
@@ -132,7 +272,17 @@
     "description": "Tema: Conhecimento arcano. Uso: Investigação. Alcance: Visual. Duração: Enquanto analisa as runas",
     "suggestedTest": "1d20 + Intelecto + Conhecimento ou Misticismo, se necessário",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Investigação",
+    "range": "Visual",
+    "duration": "Enquanto analisa as runas",
+    "roll": "1d20",
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "Dificuldade: 12, 16 ou mais",
+    "notes": "O Mago tenta entender símbolos antigos, inscrições mágicas ou marcas arcanas simples.. Traduzir inscrições em ruínas;\nEntender aviso mágico;\nDecifrar um selo;\nDescobrir o nome de uma entidade;\nInterpretar um mapa antigo.. Ler Runas não deve revelar todos os segredos de uma vez.\nEm caso de sucesso parcial, revele uma pista útil, mas incompleta.",
+    "source": "Grimório > Ler Runas"
   },
   {
     "id": "tranca-arcana",
@@ -141,7 +291,17 @@
     "description": "Tema: Proteção e bloqueio. Uso: Ação. Alcance: Toque ou próximo. Duração: Uma cena",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "Sela porta, baú, janela ou passagem simples",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Toque ou próximo",
+    "duration": "Uma cena",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago sela magicamente uma porta, baú, janela ou passagem simples.\nPara abrir à força, uma criatura precisa vencer a dificuldade definida pelo mestre.. Travar uma porta durante uma fuga;\nProteger um quarto durante descanso;\nSelar um baú importante;\nGanhar tempo contra perseguidores.. Tranca Arcana não deve impedir chefes ou criaturas muito fortes por muito tempo.\nContra inimigos poderosos, ela pode apenas atrasar uma rodada ou criar uma dificuldade.",
+    "source": "Grimório > Tranca Arcana"
   },
   {
     "id": "som-fantasma",
@@ -150,7 +310,17 @@
     "description": "Tema: Ilusão sonora. Uso: Ação. Alcance: Curto ou médio. Duração: Breve",
     "suggestedTest": "Pode exigir 1d20 + Intelecto",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Curto ou médio",
+    "duration": "Breve",
+    "roll": "1d20",
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "Dificuldade: 12 ou maior contra alvos atentos",
+    "notes": "O Mago cria um som ilusório em um ponto próximo.\nO som pode ser curto e simples.. Distrair um guarda;\nImitar passos;\nFazer uma porta parecer ter rangido;\nCriar sussurros assustadores;\nAtrair inimigos para outro corredor.. Som Fantasma é parecido com Ilusão Menor, mas focado apenas em som.\nEle é mais útil para distração do que para enganar por muito tempo.",
+    "source": "Grimório > Som Fantasma"
   },
   {
     "id": "marca-arcana",
@@ -159,7 +329,17 @@
     "description": "Tema: Identificação mágica. Uso: Ação. Alcance: Toque. Duração: Até ser apagada ou conforme decisão do mestre",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Toque",
+    "duration": "Até ser apagada ou conforme decisão do mestre",
+    "roll": null,
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago coloca uma marca mágica discreta em um objeto, parede ou pessoa voluntária.\nA marca pode brilhar, identificar algo como seu ou servir de pista.. Marcar uma trilha;\nIdentificar um item do grupo;\nDeixar sinal secreto em uma parede;\nRastrear um objeto marcado;\nProvar que algo foi tocado pelo Mago.. Marca Arcana não deve virar rastreamento infinito sem limite.\nSe o objeto estiver muito longe, protegido ou em outra dimensão, a marca pode não ser sentida.",
+    "source": "Grimório > Marca Arcana"
   },
   {
     "id": "purificar-pequeno-objeto",
@@ -168,7 +348,17 @@
     "description": "Tema: Purificação menor. Uso: Ação ou fora de combate. Alcance: Toque. Duração: Imediata",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação ou fora de combate",
+    "range": "Toque",
+    "duration": "Imediata",
+    "roll": null,
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago limpa, seca, aquece, resfria ou purifica levemente um pequeno objeto, alimento ou líquido.. Limpar água barrenta simples;\nTirar mau cheiro de uma roupa;\nSecar um pergaminho;\nRemover sujeira de uma chave;\nAquecer comida fria;\nEsfriar bebida quente.. Não remove:\nVenenos fortes;\nMaldições;\nDoenças graves;\nCorrupção espiritual;\nEfeitos mágicos perigosos.",
+    "source": "Grimório > Purificar Pequeno Objeto"
   },
   {
     "id": "sussurro-arcano",
@@ -177,7 +367,17 @@
     "description": "Tema: Comunicação. Uso: Ação ou fala curta. Alcance: Criatura próxima que o Mago veja ou saiba onde está. Duração: Imediata",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "Nenhum",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Grimório",
+    "actionCost": "Ação ou fala curta",
+    "range": "Criatura próxima que o Mago veja ou saiba onde está",
+    "duration": "Imediata",
+    "roll": null,
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago envia uma mensagem curta para uma criatura próxima.\nA mensagem chega como um sussurro mágico.. Avisar um aliado em silêncio;\nCoordenar emboscada;\nChamar alguém sem gritar;\nAssustar uma criatura supersticiosa;\nMandar uma palavra-chave durante infiltração.. Não permite conversa longa.\nPode falhar se houver:\nBarreira mágica;\nGrande distância;\nInterferência sobrenatural;\nAlvo protegido contra magia mental.",
+    "source": "Grimório > Sussurro Arcano"
   },
   {
     "id": "bola-de-fogo",
@@ -186,7 +386,17 @@
     "description": "Tema: Fogo em área. Uso: Ação. Alcance: Médio",
     "suggestedTest": "1d20 + Intelecto contra Defesa de cada alvo na área",
     "effect": "1d8 de fogo em cada alvo atingido",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Médio",
+    "duration": null,
+    "roll": "1d20",
+    "damage": "1d8 de fogo em cada alvo atingido",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago lança uma explosão de fogo em uma pequena área.\nCada alvo dentro da área é resolvido separadamente contra a Defesa.\nQuem for atingido sofre **1d8 de dano de fogo**.. Atingir grupo de inimigos juntos;\nIncendiar uma barricada frágil;\nDestruir objetos inflamáveis;\nAbrir espaço em combate;\nCriar um momento decisivo contra vários inimigos.. Cuidado com aliados próximos.\nA Bola de Fogo é uma magia forte, mas a área deve continuar pequena para manter o sistema simples.",
+    "source": "Grimório > Bola de Fogo"
   },
   {
     "id": "raio-relampejante",
@@ -195,7 +405,17 @@
     "description": "Tema: Eletricidade. Uso: Ação. Alcance: Linha reta em alcance médio",
     "suggestedTest": "1d20 + Intelecto contra Defesa do alvo principal",
     "effect": "1d10 elétrico no alvo principal",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Linha reta em alcance médio",
+    "duration": null,
+    "roll": "1d20",
+    "damage": "1d10 elétrico no alvo principal",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago dispara um raio elétrico poderoso em linha reta.\nSe acertar o alvo principal, causa **1d10 de dano elétrico**.\nSe houver outro inimigo logo atrás ou muito próximo, o mestre pode permitir que ele sofra **1d4 de dano elétrico**.. Atacar inimigo forte;\nAtingir dois inimigos alinhados;\nDestruir mecanismo instável;\nCriar clarão assustador;\nFinalizar uma criatura vulnerável a eletricidade.. O dano secundário deve depender do posicionamento.\nSe os inimigos não estiverem próximos ou alinhados, não há alvo extra.",
+    "source": "Grimório > Raio Relampejante"
   },
   {
     "id": "prisao-arcana",
@@ -203,8 +423,18 @@
     "tier": "Magia forte",
     "description": "Tema: Controle. Uso: Ação. Alcance: Médio",
     "suggestedTest": "1d20 + Intelecto contra Defesa do alvo ou dificuldade 14",
-    "effect": "Nenhum",
-    "usageLimit": "combat"
+    "effect": "Alvo fica Preso até o fim do próximo turno dele",
+    "usageLimit": "combat",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Médio",
+    "duration": null,
+    "roll": "1d20",
+    "damage": "Nenhum",
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago conjura correntes, runas ou energia mágica para prender uma criatura.\nSe passar no teste, o alvo fica **Preso** até o fim do próximo turno dele.. Segurar um inimigo perigoso;\nImpedir fuga;\nProteger um aliado ferido;\nCriar abertura para o grupo atacar;\nInterromper uma criatura que avançaria contra o Mago.. Criaturas muito grandes, chefes ou seres muito fortes podem sofrer apenas efeito parcial.\nEfeitos parciais possíveis:\nMovimento reduzido;\nDesvantagem no próximo ataque;\nPerde posição;\nPrecisa gastar ação para se libertar.",
+    "source": "Grimório > Prisão Arcana"
   },
   {
     "id": "invisibilidade-curta",
@@ -213,7 +443,17 @@
     "description": "Tema: Ocultação. Uso: Ação. Alcance: Pessoal. Duração: Até o fim do próximo turno ou até atacar/fazer magia ofensiva",
     "suggestedTest": "Normalmente não exige teste para ativar",
     "effect": "Fica invisível por pouco tempo",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Pessoal",
+    "duration": "Até o fim do próximo turno ou até atacar/fazer magia ofensiva",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Mago fica invisível por pouco tempo.\nA invisibilidade acaba se ele:\nAtacar;\nLançar magia ofensiva;\nFazer algo muito chamativo;\nChegar ao fim do próximo turno.. Fugir de perigo;\nPassar por guardas;\nEvitar ser alvo direto;\nReposicionar-se em combate;\nCriar uma cena de mistério.. Invisibilidade não apaga sons, pegadas ou cheiro.\nInimigos atentos ainda podem suspeitar da posição do Mago.",
+    "source": "Grimório > Invisibilidade Curta"
   },
   {
     "id": "explosao-telecinetica",
@@ -221,7 +461,17 @@
     "tier": "Magia forte",
     "description": "Tema: Força em área. Uso: Ação. Alcance: Ponto próximo",
     "suggestedTest": "1d20 + Intelecto contra Defesa dos alvos próximos",
-    "effect": "1d6 de força. Alvos atingidos são empurrados ou caem, se fizer sentido",
-    "usageLimit": "combat"
+    "effect": "1d6 de força",
+    "usageLimit": "combat",
+    "origin": "Grimório",
+    "actionCost": "Ação",
+    "range": "Ponto próximo",
+    "duration": null,
+    "roll": "1d20",
+    "damage": "1d6 de força",
+    "healing": null,
+    "extraEffect": "Alvos atingidos são empurrados ou caem, se fizer sentido",
+    "notes": "O Mago libera uma onda de força ao redor de um ponto próximo.\nAlvos atingidos sofrem **1d6 de dano de força** e podem ser empurrados ou cair.. Afastar inimigos cercando o grupo;\nDerrubar criaturas frágeis;\nAbrir espaço para fugir;\nQuebrar formação inimiga;\nJogar objetos leves para longe.. Essa magia é ótima para controle de cena.\nContra criaturas grandes ou chefes, o empurrão pode ser reduzido ou virar apenas perda de posição.",
+    "source": "Grimório > Explosão Telecinética"
   }
 ]

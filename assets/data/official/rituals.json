@@ -4,27 +4,51 @@
     "name": "Ritual arcano",
     "suggestedRoll": "1d20 + Intelecto + Misticismo",
     "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
-    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20",
+    "origin": "Ritual",
+    "actionCost": "Fora de combate",
+    "roll": "1d20",
+    "effect": "Efeito definido pelo mestre conforme a cena.",
+    "extraEffect": "Falhas podem gerar consequência narrativa.",
+    "source": "Grimório > Rituais"
   },
   {
     "id": "ritual-de-conhecimento",
     "name": "Ritual de conhecimento",
     "suggestedRoll": "1d20 + Intelecto + Conhecimento",
     "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
-    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20",
+    "origin": "Ritual",
+    "actionCost": "Fora de combate",
+    "roll": "1d20",
+    "effect": "Efeito definido pelo mestre conforme a cena.",
+    "extraEffect": "Falhas podem gerar consequência narrativa.",
+    "source": "Grimório > Rituais"
   },
   {
     "id": "ritual-divino",
     "name": "Ritual divino",
     "suggestedRoll": "1d20 + Presença + Misticismo",
     "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
-    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20",
+    "origin": "Ritual",
+    "actionCost": "Fora de combate",
+    "roll": "1d20",
+    "effect": "Efeito definido pelo mestre conforme a cena.",
+    "extraEffect": "Falhas podem gerar consequência narrativa.",
+    "source": "Grimório > Rituais"
   },
   {
     "id": "ritual-de-cura-fisica",
     "name": "Ritual de cura física",
     "suggestedRoll": "1d20 + Intelecto + Ofício",
     "description": "Ritual fora de combate. O mestre define efeito, risco e consequência.",
-    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20"
+    "difficulty": "Simples: 8; Útil ou importante: 12; Perigoso ou antigo: 16; Muito poderoso: 20",
+    "origin": "Ritual",
+    "actionCost": "Fora de combate",
+    "roll": "1d20",
+    "effect": "Efeito definido pelo mestre conforme a cena.",
+    "extraEffect": "Falhas podem gerar consequência narrativa.",
+    "source": "Grimório > Rituais"
   }
 ]

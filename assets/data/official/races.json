@@ -6,33 +6,61 @@
     "powerName": "Determinação Humana",
     "powerDescription": "Depois de rolar um teste importante e antes da consequência final, soma +2 ao resultado.",
     "powerEffect": "Soma +2 em um teste importante",
-    "usageLimit": "session"
+    "usageLimit": "session",
+    "origin": "Raça",
+    "actionCost": "Ao disparar o efeito",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Humanos são versáteis, ambiciosos, adaptáveis e imprevisíveis.\nEles vivem menos que elfos e anões, mas costumam agir com mais urgência. Onde outras raças esperam séculos para mudar o mundo, humanos tentam fazer isso em uma geração.\nHumanos podem ser heróis, reis, mercenários, estudiosos, criminosos, sacerdotes, camponeses ou aventureiros sem origem nobre.\nA maior força de um humano é sua capacidade de se adaptar.\nUm humano pode ser interpretado como alguém que:\nQuer provar seu valor;\nBusca glória, riqueza ou redenção;\nSe adapta rapidamente a situações ruins;\nAprende com os erros;\nNão tem uma tradição racial tão rígida quanto outras raças;\nUsa força de vontade para superar limites.\nQuando o humano falhar em um teste importante, ele pode tentar transformar a falha em esforço final.\nDepois de rolar um teste e antes do mestre encerrar a consequência, o humano pode somar **+2** ao resultado.\nEsse poder representa foco, teimosia, improviso e força de vontade.\nUse este poder quando o personagem estiver tentando algo importante, como:\nEscapar de uma armadilha;\nResistir a uma intimidação;\nAcertar um ataque decisivo;\nConvencer alguém em um momento crítico;\nSegurar uma porta enquanto aliados fogem;\nCompletar uma ação arriscada.\nPara manter o jogo simples, o mestre pode usar uma das duas opções abaixo:\nO humano pode usar **Determinação Humana uma vez por sessão**.\nO humano pode usar **Determinação Humana uma vez por descanso longo**.\nA segunda opção costuma ser mais fácil de controlar quando a campanha tiver várias cenas importantes na mesma sessão.\nUm soldado adaptável, mercenário experiente ou combatente que vence pela insistência.\nUm trapaceiro esperto, informante urbano, ladrão carismático ou aventureiro improvisador.\nUm estudioso ambicioso que tenta dominar forças maiores do que ele.\nUm devoto movido por fé, culpa, esperança ou senso de dever.\nVocê quer provar que humanos podem ser tão grandiosos quanto raças antigas.\nVocê nasceu em uma vila comum, mas sempre sonhou com aventura.\nVocê cometeu um erro grave e agora busca redenção.\nVocê não tem linhagem especial, só vontade de sobreviver.\nVocê foi treinado por alguém de outra raça e carrega costumes misturados.",
+    "source": "Livro de Raças e Classes > Humano"
   },
   {
     "id": "elfo",
     "name": "Elfo",
-    "identity": "Reflexos e sentidos aguçados",
+    "identity": "Graça, memória antiga e reflexos rápidos",
     "powerName": "Reflexo Élfico",
     "powerDescription": "Quando um inimigo acertar um ataque contra o elfo, força nova rolagem e fica com o novo resultado.",
-    "powerEffect": "Força nova rolagem de um ataque recebido",
-    "usageLimit": "combat"
+    "powerEffect": "Força nova rolagem contra um ataque recebido",
+    "usageLimit": "combat",
+    "origin": "Raça",
+    "actionCost": "Reação",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Elfos são antigos, graciosos e ligados à magia, à natureza, aos sentidos ou às artes.\nEles costumam perceber detalhes que outras raças ignoram. Seus movimentos são precisos, sua percepção é refinada e sua relação com o tempo é diferente da dos humanos.\nNem todo elfo precisa ser calmo, elegante ou sábio. Alguns podem ser arrogantes, impulsivos, exilados, curiosos ou completamente desconectados das tradições élficas.\nUm elfo pode ser interpretado como alguém que:\nPercebe pequenos detalhes do ambiente;\nAge com calma mesmo em perigo;\nTem ligação com florestas, estrelas, magia ou música;\nCarrega memórias de uma cultura antiga;\nTem dificuldade em entender a pressa dos humanos;\nSente que pertence a um mundo que está desaparecendo.\nUma vez por combate, quando um inimigo acertar um ataque contra o elfo, o elfo pode reagir rapidamente.\nO inimigo deve rolar novamente o ataque e ficar com o novo resultado.\nSe o novo resultado não atingir a Defesa do elfo, o ataque erra.\nEsse poder representa sentidos aguçados, reflexos sobrenaturais e movimentos graciosos.\nUse este poder quando:\nUm ataque forte acertar o elfo;\nO elfo estiver prestes a cair;\nUm chefe acertar um golpe perigoso;\nO jogador quiser representar uma esquiva elegante;\nO personagem estiver em uma cena de combate importante.\nEsse poder não anula automaticamente o ataque.\nEle apenas força uma nova rolagem.\nSe o novo ataque também acertar, o elfo sofre o dano normalmente.\nUm espadachim elegante, arqueiro disciplinado ou guardião antigo.\nUm batedor silencioso, espião refinado ou assassino preciso.\nUm estudioso de magia antiga, guardião de runas ou herdeiro de tradição arcana.\nUm devoto de forças naturais, entidades antigas, estrelas ou espíritos protetores.\nVocê foi enviado para observar o mundo dos humanos.\nSua floresta, templo ou cidade antiga foi ameaçada.\nVocê busca recuperar uma relíquia élfica perdida.\nVocê abandonou sua tradição por discordar dos mais velhos.\nVocê quer entender por que as raças jovens vivem com tanta pressa.",
+    "source": "Livro de Raças e Classes > Elfo"
   },
   {
     "id": "anao",
     "name": "Anão",
-    "identity": "Resistência e teimosia",
+    "identity": "Resistência, honra e ligação com pedra e metal",
     "powerName": "Corpo de Pedra",
     "powerDescription": "Quando sofrer dano, pode reduzir esse dano em 1d4 + 1.",
-    "powerEffect": "Reduz dano em 1d4 + 1",
-    "usageLimit": "combat"
+    "powerEffect": "Reduz dano recebido em 1d4 + 1",
+    "usageLimit": "combat",
+    "origin": "Raça",
+    "actionCost": "Ao disparar o efeito",
+    "roll": "1d4",
+    "damage": "1d4",
+    "healing": null,
+    "notes": "Anões são resistentes, teimosos e ligados a pedra, metal, honra, memória e tradição.\nEles costumam valorizar trabalho duro, juramentos, família, clã e coisas bem-feitas.\nUm anão não precisa ser apenas um guerreiro de machado. Ele pode ser um sacerdote, minerador, ferreiro, mercador, explorador, escriba de clã ou aventureiro exilado.\nUm anão pode ser interpretado como alguém que:\nValoriza promessas e dívidas;\nNão desiste facilmente;\nConfia mais em ações do que em palavras;\nGosta de objetos bem construídos;\nRespeita ancestrais e tradições;\nTem orgulho difícil de quebrar.\nUma vez por combate, quando o anão sofrer dano, ele pode reduzir esse dano em:\n**1d4 + 1**\nEsse poder representa resistência física, teimosia e capacidade de aguentar pancada.\nUse este poder quando:\nO anão sofrer um dano alto;\nO personagem estiver protegendo alguém;\nUm golpe poderia derrubar o anão;\nO personagem quiser resistir heroicamente;\nO jogador quiser mostrar a dureza do personagem.\nSe o ataque acertou, o dano mínimo continua sendo **1**, salvo se o mestre decidir que a redução fez sentido para anular completamente um dano muito pequeno.\nUm defensor de escudo, mercenário resistente, guarda de clã ou combatente pesado.\nUm arrombador de cofres, explorador de túneis, contrabandista ou especialista em armadilhas.\nUm estudioso de runas, encantador de armas, alquimista ou sábio das montanhas.\nUm sacerdote dos ancestrais, curandeiro de batalha ou guardião de juramentos.\nVocê foi expulso do seu clã e quer recuperar sua honra.\nVocê carrega uma dívida antiga de família.\nVocê procura uma forja lendária perdida.\nVocê jurou proteger alguém até a morte.\nVocê acredita que uma antiga fortaleza anã precisa ser retomada.",
+    "source": "Livro de Raças e Classes > Anão"
   },
   {
     "id": "orc",
     "name": "Orc",
-    "identity": "Força e intensidade",
+    "identity": "Força bruta, instinto e presença intimidadora",
     "powerName": "Fúria Orc",
     "powerDescription": "Depois de acertar um ataque corpo a corpo, pode causar +1d4 de dano.",
-    "powerEffect": "Causa +1d4 de dano corpo a corpo",
-    "usageLimit": "combat"
+    "powerEffect": "Causa +1d4 de dano ao acertar corpo a corpo",
+    "usageLimit": "combat",
+    "origin": "Raça",
+    "actionCost": "Ao disparar o efeito",
+    "roll": "1d4",
+    "damage": "1d4",
+    "healing": null,
+    "notes": "Orcs são fortes, intensos e frequentemente julgados pela aparência, reputação ou história de seu povo.\nEles podem ser guerreiros ferozes, protetores leais, andarilhos, caçadores, líderes tribais, mercenários ou pessoas tentando fugir de um passado violento.\nA força de um orc não está apenas na brutalidade. Também pode estar na coragem, na franqueza, no instinto e na capacidade de agir quando outros hesitam.\nUm orc pode ser interpretado como alguém que:\nAge de forma direta;\nValoriza força, coragem ou lealdade;\nNão gosta de ser subestimado;\nCarrega raiva, orgulho ou culpa;\nProtege os seus com intensidade;\nTem dificuldade em lidar com preconceito de outras raças.\nUma vez por combate, depois de acertar um ataque corpo a corpo, o orc pode causar:\n**+1d4 de dano**\nEsse poder representa explosão de força, agressividade e instinto de batalha.\nUse este poder quando:\nO orc acertar um golpe importante;\nO inimigo estiver perto de cair;\nO personagem estiver protegendo alguém;\nA cena pedir um momento brutal;\nO jogador quiser mostrar a força emocional do personagem.\nA Fúria Orc não precisa significar descontrole total.\nEla pode representar:\nRaiva;\nInstinto;\nCoragem;\nAdrenalina;\nProteção;\nVontade de vencer.\nUm combatente brutal, protetor de tribo, mercenário temido ou guerreiro honrado.\nUm intimidador de rua, caçador silencioso, assassino de emboscada ou sobrevivente urbano.\nUm xamã arcano, feiticeiro instintivo ou portador de magia selvagem.\nUm líder espiritual, curandeiro tribal, devoto de guerra ou protetor dos fracos.\nVocê quer provar que não é o monstro que dizem.\nVocê abandonou uma tribo violenta.\nVocê busca vingança contra quem destruiu seu povo.\nVocê protege alguém mais fraco como forma de honra.\nVocê luta para controlar uma raiva antiga.",
+    "source": "Livro de Raças e Classes > Orc"
   }
 ]

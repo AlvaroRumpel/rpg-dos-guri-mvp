@@ -11,7 +11,10 @@
     ],
     "recommendedClasses": [
       "Todas"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "adaga",
@@ -27,7 +30,10 @@
     "recommendedClasses": [
       "Ladino",
       "Mago"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "faca-de-arremesso",
@@ -42,7 +48,10 @@
     ],
     "recommendedClasses": [
       "Ladino"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "cajado",
@@ -57,7 +66,10 @@
     "recommendedClasses": [
       "Mago",
       "Clérigo"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "clava",
@@ -72,7 +84,10 @@
     "recommendedClasses": [
       "Guerreiro",
       "Clérigo"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "maca",
@@ -87,7 +102,10 @@
     "recommendedClasses": [
       "Clérigo",
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "espada-curta",
@@ -102,7 +120,10 @@
     "recommendedClasses": [
       "Guerreiro",
       "Ladino"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "sabre",
@@ -117,7 +138,10 @@
     "recommendedClasses": [
       "Ladino",
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "rapieira",
@@ -132,7 +156,10 @@
     "recommendedClasses": [
       "Ladino",
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "machadinha",
@@ -147,7 +174,10 @@
     "recommendedClasses": [
       "Guerreiro",
       "Orcs"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "lanca-curta",
@@ -163,7 +193,10 @@
     "recommendedClasses": [
       "Guerreiro",
       "Clérigo"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "arco-curto",
@@ -178,7 +211,10 @@
     "recommendedClasses": [
       "Ladino",
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "besta-leve",
@@ -193,7 +229,10 @@
     "recommendedClasses": [
       "Ladino",
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d6",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "funda",
@@ -207,7 +246,10 @@
     ],
     "recommendedClasses": [
       "Todas"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "chicote",
@@ -221,7 +263,10 @@
     ],
     "recommendedClasses": [
       "Ladino"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "espada-longa",
@@ -235,7 +280,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "machado-de-batalha",
@@ -249,7 +297,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "martelo-de-guerra",
@@ -264,7 +315,10 @@
     "recommendedClasses": [
       "Guerreiro",
       "Clérigo"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "lanca-longa",
@@ -279,7 +333,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "alabarda",
@@ -294,7 +351,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "espada-grande",
@@ -308,7 +368,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "machado-grande",
@@ -322,7 +385,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "martelo-pesado",
@@ -336,7 +402,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "arco-longo",
@@ -352,7 +421,10 @@
     "recommendedClasses": [
       "Guerreiro",
       "Ladino"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "besta-pesada",
@@ -367,7 +439,10 @@
     ],
     "recommendedClasses": [
       "Guerreiro"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d8",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "varinha",
@@ -381,7 +456,10 @@
     ],
     "recommendedClasses": [
       "Mago"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "grimorio",
@@ -395,7 +473,10 @@
     ],
     "recommendedClasses": [
       "Mago"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "simbolo-sagrado",
@@ -409,7 +490,10 @@
     ],
     "recommendedClasses": [
       "Clérigo"
-    ]
+    ],
+    "origin": "Arma comum",
+    "roll": "1d4",
+    "source": "Livro de Armas e Itens > Armas comuns"
   },
   {
     "id": "adaga-silenciosa",
@@ -418,7 +502,11 @@
     "description": "Base: Adaga. Uma vez por combate, concede +1 no ataque se o Ladino estiver escondido",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, concede +1 no ataque se o Ladino estiver escondido",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "faca-do-trapaceiro",
@@ -427,7 +515,11 @@
     "description": "Base: Faca de arremesso. Uma vez por combate, se errar o arremesso, pode sacar outra faca sem gastar ação",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, se errar o arremesso, pode sacar outra faca sem gastar ação",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "espada-de-guarda",
@@ -436,7 +528,11 @@
     "description": "Base: Espada curta. Enquanto proteger um aliado próximo, recebe +1 de Defesa contra o próximo ataque",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "free",
+    "effect": "Enquanto proteger um aliado próximo, recebe +1 de Defesa contra o próximo ataque",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "espada-do-duelista",
@@ -445,7 +541,11 @@
     "description": "Base: Rapieira. Uma vez por combate, pode ganhar +2 em um ataque contra um único inimigo focado nele",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, pode ganhar +2 em um ataque contra um único inimigo focado nele",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "machado-brutal",
@@ -454,7 +554,11 @@
     "description": "Base: Machado de batalha. Uma vez por combate, ao acertar, causa +1 de dano",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, ao acertar, causa +1 de dano",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "martelo-quebra-ossos",
@@ -463,7 +567,11 @@
     "description": "Base: Martelo de guerra. Uma vez por combate, ao acertar, o alvo sofre -1 no próximo ataque físico",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, ao acertar, o alvo sofre -1 no próximo ataque físico",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "lanca-de-cacador",
@@ -472,7 +580,11 @@
     "description": "Base: Lança curta. Uma vez por combate, pode atacar primeiro contra um inimigo que se aproximou",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, pode atacar primeiro contra um inimigo que se aproximou",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "arco-do-batedor",
@@ -481,7 +593,11 @@
     "description": "Base: Arco curto. Uma vez por combate, concede vantagem em um ataque feito antes do alvo agir",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, concede vantagem em um ataque feito antes do alvo agir",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "besta-de-precisao",
@@ -490,7 +606,11 @@
     "description": "Base: Besta leve. Uma vez por combate, pode ignorar cobertura leve",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, pode ignorar cobertura leve",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "cajado-runico",
@@ -499,7 +619,11 @@
     "description": "Base: Cajado. Uma vez por combate, concede +1 em um teste de magia",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, concede +1 em um teste de magia",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "varinha-instavel",
@@ -508,7 +632,11 @@
     "description": "Base: Varinha. Uma vez por combate, se uma magia ofensiva acertar, causa +1 de dano arcano",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, se uma magia ofensiva acertar, causa +1 de dano arcano",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "simbolo-de-prata",
@@ -517,241 +645,377 @@
     "description": "Base: Símbolo sagrado. Uma vez por combate, concede +1 em um teste contra mortos-vivos, sombras ou maldições",
     "properties": [
       "Especial"
-    ]
+    ],
+    "origin": "Arma especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, concede +1 em um teste contra mortos-vivos, sombras ou maldições",
+    "source": "Livro de Armas e Itens > Armas especiais simples"
   },
   {
     "id": "broquel",
     "name": "Broquel",
     "category": "shield",
     "description": "Pequeno e leve, combina com duelistas",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo comum",
+    "source": "Livro de Armas e Itens > Escudos comuns"
   },
   {
     "id": "escudo-de-madeira",
     "name": "Escudo de madeira",
     "category": "shield",
     "description": "Simples, barato e comum",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo comum",
+    "source": "Livro de Armas e Itens > Escudos comuns"
   },
   {
     "id": "escudo-de-ferro",
     "name": "Escudo de ferro",
     "category": "shield",
     "description": "Mais resistente e pesado",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo comum",
+    "source": "Livro de Armas e Itens > Escudos comuns"
   },
   {
     "id": "escudo-de-torre",
     "name": "Escudo de torre",
     "category": "shield",
     "description": "Grande, pode ajudar a proteger aliados em corredor ou porta",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo comum",
+    "source": "Livro de Armas e Itens > Escudos comuns"
   },
   {
     "id": "escudo-do-protetor",
     "name": "Escudo do Protetor",
     "category": "shield",
     "description": "Uma vez por combate, ao proteger aliado próximo, reduz 1d4 do dano recebido",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, ao proteger aliado próximo, reduz 1d4 do dano recebido",
+    "source": "Livro de Armas e Itens > Escudos especiais"
   },
   {
     "id": "escudo-espelhado",
     "name": "Escudo Espelhado",
     "category": "shield",
     "description": "Uma vez por sessão, concede vantagem contra uma magia visual, ilusão ou efeito de medo",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo especial",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, concede vantagem contra uma magia visual, ilusão ou efeito de medo",
+    "source": "Livro de Armas e Itens > Escudos especiais"
   },
   {
     "id": "escudo-de-carvalho",
     "name": "Escudo de Carvalho",
     "category": "shield",
     "description": "Uma vez por combate, recebe +2 de Defesa contra um ataque à distância",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, recebe +2 de Defesa contra um ataque à distância",
+    "source": "Livro de Armas e Itens > Escudos especiais"
   },
   {
     "id": "escudo-de-pedra",
     "name": "Escudo de Pedra",
     "category": "shield",
     "description": "Uma vez por combate, reduz 2 de dano físico recebido",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, reduz 2 de dano físico recebido",
+    "source": "Livro de Armas e Itens > Escudos especiais"
   },
   {
     "id": "escudo-da-fe",
     "name": "Escudo da Fé",
     "category": "shield",
     "description": "Uma vez por combate, o Clérigo pode conceder +1 de Defesa a um aliado próximo até o próximo turno",
-    "defenseBonus": 1
+    "defenseBonus": 1,
+    "origin": "Escudo especial",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, o Clérigo pode conceder +1 de Defesa a um aliado próximo até o próximo turno",
+    "source": "Livro de Armas e Itens > Escudos especiais"
   },
   {
     "id": "sem-armadura",
     "name": "Sem armadura",
     "category": "armor",
     "description": "Roupas comuns",
-    "baseDefense": 10
+    "baseDefense": 10,
+    "origin": "Armadura comum",
+    "source": "Livro de Armas e Itens > Armaduras comuns"
   },
   {
     "id": "armadura-leve",
     "name": "Armadura leve",
     "category": "armor",
     "description": "Couro, couro batido, roupas reforçadas",
-    "baseDefense": 11
+    "baseDefense": 11,
+    "origin": "Armadura comum",
+    "source": "Livro de Armas e Itens > Armaduras comuns"
   },
   {
     "id": "armadura-media",
     "name": "Armadura média",
     "category": "armor",
     "description": "Cota de malha, placas leves, couro pesado",
-    "baseDefense": 12
+    "baseDefense": 12,
+    "origin": "Armadura comum",
+    "source": "Livro de Armas e Itens > Armaduras comuns"
   },
   {
     "id": "armadura-pesada",
     "name": "Armadura pesada",
     "category": "armor",
     "description": "Placas, ferro reforçado, armadura completa simples",
-    "baseDefense": 13
+    "baseDefense": 13,
+    "origin": "Armadura comum",
+    "source": "Livro de Armas e Itens > Armaduras comuns"
   },
   {
     "id": "anel-da-sorte",
     "name": "Anel da Sorte",
     "category": "accessory",
-    "description": "Uma vez por sessão, pode rolar novamente um dado e ficar com o novo resultado"
+    "description": "Uma vez por sessão, pode rolar novamente um dado e ficar com o novo resultado",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, pode rolar novamente um dado e ficar com o novo resultado",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "anel-do-pulso-firme",
     "name": "Anel do Pulso Firme",
     "category": "accessory",
-    "description": "Concede +1 em um ataque à distância uma vez por combate"
+    "description": "Concede +1 em um ataque à distância uma vez por combate",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Concede +1 em um ataque à distância uma vez por combate",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "anel-do-duelista",
     "name": "Anel do Duelista",
     "category": "accessory",
-    "description": "Uma vez por combate, contra um único inimigo, recebe +1 de Defesa até o próximo turno"
+    "description": "Uma vez por combate, contra um único inimigo, recebe +1 de Defesa até o próximo turno",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, contra um único inimigo, recebe +1 de Defesa até o próximo turno",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "anel-de-ferro-frio",
     "name": "Anel de Ferro Frio",
     "category": "accessory",
-    "description": "Uma vez por sessão, ganha vantagem contra medo ou intimidação"
+    "description": "Uma vez por sessão, ganha vantagem contra medo ou intimidação",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, ganha vantagem contra medo ou intimidação",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "anel-de-sangue-quente",
     "name": "Anel de Sangue Quente",
     "category": "accessory",
-    "description": "Uma vez por combate, ao cair para 0 de Vida, pode fazer um teste de Vigor dificuldade 12. Se passar, fica com 1 de Vida"
+    "description": "Uma vez por combate, ao cair para 0 de Vida, pode fazer um teste de Vigor dificuldade 12. Se passar, fica com 1 de Vida",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, ao cair para 0 de Vida, pode fazer um teste de Vigor dificuldade 12. Se passar, fica com 1 de Vida",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "anel-de-foco-arcano",
     "name": "Anel de Foco Arcano",
     "category": "accessory",
-    "description": "Uma vez por combate, concede +1 em um teste de magia arcana"
+    "description": "Uma vez por combate, concede +1 em um teste de magia arcana",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, concede +1 em um teste de magia arcana",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "anel-de-oracao",
     "name": "Anel de Oração",
     "category": "accessory",
-    "description": "Uma vez por combate, concede +1 em um teste de poder divino ou espiritual"
+    "description": "Uma vez por combate, concede +1 em um teste de poder divino ou espiritual",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, concede +1 em um teste de poder divino ou espiritual",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "anel-do-passo-leve",
     "name": "Anel do Passo Leve",
     "category": "accessory",
-    "description": "Uma vez por sessão, concede vantagem em um teste de Furtividade"
+    "description": "Uma vez por sessão, concede vantagem em um teste de Furtividade",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, concede vantagem em um teste de Furtividade",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "amuleto-de-pedra",
     "name": "Amuleto de Pedra",
     "category": "accessory",
-    "description": "Uma vez por sessão, reduz 2 de dano recebido"
+    "description": "Uma vez por sessão, reduz 2 de dano recebido",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, reduz 2 de dano recebido",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "colar-da-coragem",
     "name": "Colar da Coragem",
     "category": "accessory",
-    "description": "Uma vez por sessão, remove medo simples ou hesitação do usuário"
+    "description": "Uma vez por sessão, remove medo simples ou hesitação do usuário",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, remove medo simples ou hesitação do usuário",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "amuleto-do-cacador",
     "name": "Amuleto do Caçador",
     "category": "accessory",
-    "description": "Concede +1 em um teste de Percepção ou Natureza uma vez por sessão"
+    "description": "Concede +1 em um teste de Percepção ou Natureza uma vez por sessão",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Concede +1 em um teste de Percepção ou Natureza uma vez por sessão",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "colar-de-prata",
     "name": "Colar de Prata",
     "category": "accessory",
-    "description": "Contra mortos-vivos, sombras ou maldições, concede +1 em um teste uma vez por combate"
+    "description": "Contra mortos-vivos, sombras ou maldições, concede +1 em um teste uma vez por combate",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Contra mortos-vivos, sombras ou maldições, concede +1 em um teste uma vez por combate",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "amuleto-da-ultima-luz",
     "name": "Amuleto da Última Luz",
     "category": "accessory",
-    "description": "Uma vez por sessão, quando um aliado próximo cair inconsciente, o usuário pode conceder 1 de Vida a ele como ação"
+    "description": "Uma vez por sessão, quando um aliado próximo cair inconsciente, o usuário pode conceder 1 de Vida a ele como ação",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, quando um aliado próximo cair inconsciente, o usuário pode conceder 1 de Vida a ele como ação",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "colar-do-sabio",
     "name": "Colar do Sábio",
     "category": "accessory",
-    "description": "Concede +1 em um teste de Conhecimento uma vez por sessão"
+    "description": "Concede +1 em um teste de Conhecimento uma vez por sessão",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Concede +1 em um teste de Conhecimento uma vez por sessão",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "amuleto-da-respiracao",
     "name": "Amuleto da Respiração",
     "category": "accessory",
-    "description": "Uma vez por sessão, concede vantagem para resistir a veneno, fumaça, sufocamento ou ambiente ruim"
+    "description": "Uma vez por sessão, concede vantagem para resistir a veneno, fumaça, sufocamento ou ambiente ruim",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, concede vantagem para resistir a veneno, fumaça, sufocamento ou ambiente ruim",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "colar-da-presenca",
     "name": "Colar da Presença",
     "category": "accessory",
-    "description": "Uma vez por sessão, concede +1 em um teste de Influência"
+    "description": "Uma vez por sessão, concede +1 em um teste de Influência",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, concede +1 em um teste de Influência",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "bracelete-de-couro-negro",
     "name": "Bracelete de Couro Negro",
     "category": "accessory",
-    "description": "Concede +1 em Furtividade uma vez por sessão"
+    "description": "Concede +1 em Furtividade uma vez por sessão",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Concede +1 em Furtividade uma vez por sessão",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "bracelete-de-ferro",
     "name": "Bracelete de Ferro",
     "category": "accessory",
-    "description": "Uma vez por combate, reduz 1 de dano físico recebido"
+    "description": "Uma vez por combate, reduz 1 de dano físico recebido",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, reduz 1 de dano físico recebido",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "cinto-de-forca-controlada",
     "name": "Cinto de Força Controlada",
     "category": "accessory",
-    "description": "Concede +1 em Força enquanto usado, respeitando o limite de +6"
+    "description": "Concede +1 em Força enquanto usado, respeitando o limite de +6",
+    "origin": "Acessório",
+    "usageLimit": "free",
+    "effect": "Concede +1 em Força enquanto usado, respeitando o limite de +6",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "cinto-de-folego",
     "name": "Cinto de Fôlego",
     "category": "accessory",
-    "description": "Uma vez por sessão, concede vantagem em um teste de Atletismo ou Vigor"
+    "description": "Uma vez por sessão, concede vantagem em um teste de Atletismo ou Vigor",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, concede vantagem em um teste de Atletismo ou Vigor",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "broche-de-nobreza",
     "name": "Broche de Nobreza",
     "category": "accessory",
-    "description": "Concede +1 em um teste de Influência com nobres, autoridades ou comerciantes"
+    "description": "Concede +1 em um teste de Influência com nobres, autoridades ou comerciantes",
+    "origin": "Acessório",
+    "usageLimit": "free",
+    "effect": "Concede +1 em um teste de Influência com nobres, autoridades ou comerciantes",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "broche-de-companheiro",
     "name": "Broche de Companheiro",
     "category": "accessory",
-    "description": "Uma vez por sessão, ao ajudar um aliado, o aliado recebe +2 em vez de vantagem, se o mestre achar mais simples"
+    "description": "Uma vez por sessão, ao ajudar um aliado, o aliado recebe +2 em vez de vantagem, se o mestre achar mais simples",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Uma vez por sessão, ao ajudar um aliado, o aliado recebe +2 em vez de vantagem, se o mestre achar mais simples",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "luvas-de-precisao",
     "name": "Luvas de Precisão",
     "category": "accessory",
-    "description": "Uma vez por combate, concede +1 em ataque com arma leve"
+    "description": "Uma vez por combate, concede +1 em ataque com arma leve",
+    "origin": "Acessório",
+    "usageLimit": "combat",
+    "effect": "Uma vez por combate, concede +1 em ataque com arma leve",
+    "source": "Livro de Armas e Itens > Acessórios"
   },
   {
     "id": "luvas-de-oficio",
     "name": "Luvas de Ofício",
     "category": "accessory",
-    "description": "Concede +1 em um teste de Ofício uma vez por sessão"
+    "description": "Concede +1 em um teste de Ofício uma vez por sessão",
+    "origin": "Acessório",
+    "usageLimit": "session",
+    "effect": "Concede +1 em um teste de Ofício uma vez por sessão",
+    "source": "Livro de Armas e Itens > Acessórios"
   }
 ]

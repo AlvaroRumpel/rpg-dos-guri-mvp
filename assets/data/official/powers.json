@@ -6,7 +6,14 @@
     "description": "Depois de rolar um teste importante e antes da consequência final, soma +2 ao resultado.",
     "suggestedTest": "Conforme situação",
     "effect": "Soma +2 em um teste importante",
-    "usageLimit": "session"
+    "usageLimit": "session",
+    "origin": "Raça",
+    "actionCost": "Ao disparar o efeito",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Humanos são versáteis, ambiciosos, adaptáveis e imprevisíveis.\nEles vivem menos que elfos e anões, mas costumam agir com mais urgência. Onde outras raças esperam séculos para mudar o mundo, humanos tentam fazer isso em uma geração.\nHumanos podem ser heróis, reis, mercenários, estudiosos, criminosos, sacerdotes, camponeses ou aventureiros sem origem nobre.\nA maior força de um humano é sua capacidade de se adaptar.\nUm humano pode ser interpretado como alguém que:\nQuer provar seu valor;\nBusca glória, riqueza ou redenção;\nSe adapta rapidamente a situações ruins;\nAprende com os erros;\nNão tem uma tradição racial tão rígida quanto outras raças;\nUsa força de vontade para superar limites.\nQuando o humano falhar em um teste importante, ele pode tentar transformar a falha em esforço final.\nDepois de rolar um teste e antes do mestre encerrar a consequência, o humano pode somar **+2** ao resultado.\nEsse poder representa foco, teimosia, improviso e força de vontade.\nUse este poder quando o personagem estiver tentando algo importante, como:\nEscapar de uma armadilha;\nResistir a uma intimidação;\nAcertar um ataque decisivo;\nConvencer alguém em um momento crítico;\nSegurar uma porta enquanto aliados fogem;\nCompletar uma ação arriscada.\nPara manter o jogo simples, o mestre pode usar uma das duas opções abaixo:\nO humano pode usar **Determinação Humana uma vez por sessão**.\nO humano pode usar **Determinação Humana uma vez por descanso longo**.\nA segunda opção costuma ser mais fácil de controlar quando a campanha tiver várias cenas importantes na mesma sessão.\nUm soldado adaptável, mercenário experiente ou combatente que vence pela insistência.\nUm trapaceiro esperto, informante urbano, ladrão carismático ou aventureiro improvisador.\nUm estudioso ambicioso que tenta dominar forças maiores do que ele.\nUm devoto movido por fé, culpa, esperança ou senso de dever.\nVocê quer provar que humanos podem ser tão grandiosos quanto raças antigas.\nVocê nasceu em uma vila comum, mas sempre sonhou com aventura.\nVocê cometeu um erro grave e agora busca redenção.\nVocê não tem linhagem especial, só vontade de sobreviver.\nVocê foi treinado por alguém de outra raça e carrega costumes misturados.",
+    "source": "Livro de Raças e Classes > Humano"
   },
   {
     "id": "elfo-racial",
@@ -14,8 +21,15 @@
     "type": "Poder racial",
     "description": "Quando um inimigo acertar um ataque contra o elfo, força nova rolagem e fica com o novo resultado.",
     "suggestedTest": "Conforme situação",
-    "effect": "Força nova rolagem de um ataque recebido",
-    "usageLimit": "combat"
+    "effect": "Força nova rolagem contra um ataque recebido",
+    "usageLimit": "combat",
+    "origin": "Raça",
+    "actionCost": "Reação",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Elfos são antigos, graciosos e ligados à magia, à natureza, aos sentidos ou às artes.\nEles costumam perceber detalhes que outras raças ignoram. Seus movimentos são precisos, sua percepção é refinada e sua relação com o tempo é diferente da dos humanos.\nNem todo elfo precisa ser calmo, elegante ou sábio. Alguns podem ser arrogantes, impulsivos, exilados, curiosos ou completamente desconectados das tradições élficas.\nUm elfo pode ser interpretado como alguém que:\nPercebe pequenos detalhes do ambiente;\nAge com calma mesmo em perigo;\nTem ligação com florestas, estrelas, magia ou música;\nCarrega memórias de uma cultura antiga;\nTem dificuldade em entender a pressa dos humanos;\nSente que pertence a um mundo que está desaparecendo.\nUma vez por combate, quando um inimigo acertar um ataque contra o elfo, o elfo pode reagir rapidamente.\nO inimigo deve rolar novamente o ataque e ficar com o novo resultado.\nSe o novo resultado não atingir a Defesa do elfo, o ataque erra.\nEsse poder representa sentidos aguçados, reflexos sobrenaturais e movimentos graciosos.\nUse este poder quando:\nUm ataque forte acertar o elfo;\nO elfo estiver prestes a cair;\nUm chefe acertar um golpe perigoso;\nO jogador quiser representar uma esquiva elegante;\nO personagem estiver em uma cena de combate importante.\nEsse poder não anula automaticamente o ataque.\nEle apenas força uma nova rolagem.\nSe o novo ataque também acertar, o elfo sofre o dano normalmente.\nUm espadachim elegante, arqueiro disciplinado ou guardião antigo.\nUm batedor silencioso, espião refinado ou assassino preciso.\nUm estudioso de magia antiga, guardião de runas ou herdeiro de tradição arcana.\nUm devoto de forças naturais, entidades antigas, estrelas ou espíritos protetores.\nVocê foi enviado para observar o mundo dos humanos.\nSua floresta, templo ou cidade antiga foi ameaçada.\nVocê busca recuperar uma relíquia élfica perdida.\nVocê abandonou sua tradição por discordar dos mais velhos.\nVocê quer entender por que as raças jovens vivem com tanta pressa.",
+    "source": "Livro de Raças e Classes > Elfo"
   },
   {
     "id": "anao-racial",
@@ -23,8 +37,15 @@
     "type": "Poder racial",
     "description": "Quando sofrer dano, pode reduzir esse dano em 1d4 + 1.",
     "suggestedTest": "Conforme situação",
-    "effect": "Reduz dano em 1d4 + 1",
-    "usageLimit": "combat"
+    "effect": "Reduz dano recebido em 1d4 + 1",
+    "usageLimit": "combat",
+    "origin": "Raça",
+    "actionCost": "Ao disparar o efeito",
+    "roll": "1d4",
+    "damage": "1d4",
+    "healing": null,
+    "notes": "Anões são resistentes, teimosos e ligados a pedra, metal, honra, memória e tradição.\nEles costumam valorizar trabalho duro, juramentos, família, clã e coisas bem-feitas.\nUm anão não precisa ser apenas um guerreiro de machado. Ele pode ser um sacerdote, minerador, ferreiro, mercador, explorador, escriba de clã ou aventureiro exilado.\nUm anão pode ser interpretado como alguém que:\nValoriza promessas e dívidas;\nNão desiste facilmente;\nConfia mais em ações do que em palavras;\nGosta de objetos bem construídos;\nRespeita ancestrais e tradições;\nTem orgulho difícil de quebrar.\nUma vez por combate, quando o anão sofrer dano, ele pode reduzir esse dano em:\n**1d4 + 1**\nEsse poder representa resistência física, teimosia e capacidade de aguentar pancada.\nUse este poder quando:\nO anão sofrer um dano alto;\nO personagem estiver protegendo alguém;\nUm golpe poderia derrubar o anão;\nO personagem quiser resistir heroicamente;\nO jogador quiser mostrar a dureza do personagem.\nSe o ataque acertou, o dano mínimo continua sendo **1**, salvo se o mestre decidir que a redução fez sentido para anular completamente um dano muito pequeno.\nUm defensor de escudo, mercenário resistente, guarda de clã ou combatente pesado.\nUm arrombador de cofres, explorador de túneis, contrabandista ou especialista em armadilhas.\nUm estudioso de runas, encantador de armas, alquimista ou sábio das montanhas.\nUm sacerdote dos ancestrais, curandeiro de batalha ou guardião de juramentos.\nVocê foi expulso do seu clã e quer recuperar sua honra.\nVocê carrega uma dívida antiga de família.\nVocê procura uma forja lendária perdida.\nVocê jurou proteger alguém até a morte.\nVocê acredita que uma antiga fortaleza anã precisa ser retomada.",
+    "source": "Livro de Raças e Classes > Anão"
   },
   {
     "id": "orc-racial",
@@ -32,8 +53,15 @@
     "type": "Poder racial",
     "description": "Depois de acertar um ataque corpo a corpo, pode causar +1d4 de dano.",
     "suggestedTest": "Conforme situação",
-    "effect": "Causa +1d4 de dano corpo a corpo",
-    "usageLimit": "combat"
+    "effect": "Causa +1d4 de dano ao acertar corpo a corpo",
+    "usageLimit": "combat",
+    "origin": "Raça",
+    "actionCost": "Ao disparar o efeito",
+    "roll": "1d4",
+    "damage": "1d4",
+    "healing": null,
+    "notes": "Orcs são fortes, intensos e frequentemente julgados pela aparência, reputação ou história de seu povo.\nEles podem ser guerreiros ferozes, protetores leais, andarilhos, caçadores, líderes tribais, mercenários ou pessoas tentando fugir de um passado violento.\nA força de um orc não está apenas na brutalidade. Também pode estar na coragem, na franqueza, no instinto e na capacidade de agir quando outros hesitam.\nUm orc pode ser interpretado como alguém que:\nAge de forma direta;\nValoriza força, coragem ou lealdade;\nNão gosta de ser subestimado;\nCarrega raiva, orgulho ou culpa;\nProtege os seus com intensidade;\nTem dificuldade em lidar com preconceito de outras raças.\nUma vez por combate, depois de acertar um ataque corpo a corpo, o orc pode causar:\n**+1d4 de dano**\nEsse poder representa explosão de força, agressividade e instinto de batalha.\nUse este poder quando:\nO orc acertar um golpe importante;\nO inimigo estiver perto de cair;\nO personagem estiver protegendo alguém;\nA cena pedir um momento brutal;\nO jogador quiser mostrar a força emocional do personagem.\nA Fúria Orc não precisa significar descontrole total.\nEla pode representar:\nRaiva;\nInstinto;\nCoragem;\nAdrenalina;\nProteção;\nVontade de vencer.\nUm combatente brutal, protetor de tribo, mercenário temido ou guerreiro honrado.\nUm intimidador de rua, caçador silencioso, assassino de emboscada ou sobrevivente urbano.\nUm xamã arcano, feiticeiro instintivo ou portador de magia selvagem.\nUm líder espiritual, curandeiro tribal, devoto de guerra ou protetor dos fracos.\nVocê quer provar que não é o monstro que dizem.\nVocê abandonou uma tribo violenta.\nVocê busca vingança contra quem destruiu seu povo.\nVocê protege alguém mais fraco como forma de honra.\nVocê luta para controlar uma raiva antiga.",
+    "source": "Livro de Raças e Classes > Orc"
   },
   {
     "id": "guerreiro-1",
@@ -42,7 +70,14 @@
     "description": "Uma vez por combate, causa +3 de dano ao acertar corpo a corpo",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, causa +3 de dano ao acertar corpo a corpo",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 1",
+    "actionCost": null,
+    "roll": null,
+    "damage": "+3 de dano",
+    "healing": null,
+    "notes": "Uma vez por combate, ao acertar um ataque corpo a corpo, o Guerreiro causa:\n**+3 de dano**\nO jogador declara o uso depois de saber que acertou.\nEssa é a habilidade base do Guerreiro.\nEla representa força, técnica e capacidade de colocar peso no golpe.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 1"
   },
   {
     "id": "guerreiro-2",
@@ -51,7 +86,14 @@
     "description": "Pode gastar ação para ganhar +2 de Defesa até o próximo turno",
     "suggestedTest": "Conforme situação",
     "effect": "Pode gastar ação para ganhar +2 de Defesa até o próximo turno",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 2",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": null,
+    "healing": "+2 de Defesa",
+    "notes": "O Guerreiro pode gastar sua ação para assumir uma postura defensiva.\nAté o início do próximo turno dele, recebe:\n**+2 de Defesa**\nDurante esse tempo, ele está focado em bloquear, aparar, recuar, proteger pontos vitais ou usar o escudo melhor.\nEssa habilidade é boa para segurar inimigos fortes, proteger corredor, ganhar tempo ou sobreviver até um aliado curar.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 2"
   },
   {
     "id": "guerreiro-3",
@@ -60,7 +102,14 @@
     "description": "Pode entrar na frente de um ataque contra aliado próximo",
     "suggestedTest": "Conforme situação",
     "effect": "Pode entrar na frente de um ataque contra aliado próximo",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 3",
+    "actionCost": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, quando um aliado próximo for alvo de um ataque, o Guerreiro pode se colocar na frente.\nO ataque passa a mirar o Guerreiro em vez do aliado.\nO inimigo rola o ataque contra a Defesa do Guerreiro.\nRegras simples:\nO aliado precisa estar próximo;\nO Guerreiro precisa conseguir se mover até ele ou já estar ao lado;\nSó funciona contra ataques físicos ou ataques que façam sentido bloquear;\nNão funciona contra efeitos que atingem uma área inteira, salvo se o mestre permitir.\nEssa habilidade reforça o papel do Guerreiro como protetor do grupo.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 3"
   },
   {
     "id": "guerreiro-4",
@@ -69,7 +118,14 @@
     "description": "Uma vez por combate, recupera 1d6 de Vida",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, recupera 1d6 de Vida",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 4",
+    "actionCost": "Ação",
+    "roll": "1d6",
+    "damage": null,
+    "healing": "1d6",
+    "notes": "Uma vez por combate, o Guerreiro pode recuperar parte da própria vida.\nComo ação, ele recupera:\n**1d6 de Vida**\nEssa cura não pode passar da vida máxima.\nEla representa resistência, adrenalina, controle da dor e capacidade de continuar lutando mesmo ferido.\nNão é magia. É o Guerreiro respirando fundo, ignorando a dor e voltando para a luta.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 4"
   },
   {
     "id": "guerreiro-5",
@@ -78,7 +134,14 @@
     "description": "Uma vez por combate, pode atacar duas vezes no mesmo turno",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, pode atacar duas vezes no mesmo turno",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 5",
+    "actionCost": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, o Guerreiro pode fazer dois ataques no mesmo turno.\nEle escolhe uma das opções:\nAtacar o mesmo inimigo duas vezes;\nAtacar dois inimigos próximos diferentes.\nCada ataque exige uma rolagem separada.\nEssa habilidade marca o Guerreiro ficando claramente mais perigoso.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 5"
   },
   {
     "id": "guerreiro-6",
@@ -87,7 +150,14 @@
     "description": "Ao acertar, pode reduzir a Defesa do alvo até o próximo turno",
     "suggestedTest": "Conforme situação",
     "effect": "Ao acertar, pode reduzir a Defesa do alvo até o próximo turno",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 6",
+    "actionCost": null,
+    "roll": null,
+    "damage": "-2 de Defesa",
+    "healing": null,
+    "notes": "Uma vez por combate, quando o Guerreiro acertar um ataque corpo a corpo, ele pode quebrar a postura do inimigo.\nAlém do dano normal, o alvo sofre:\n**-2 de Defesa até o início do próximo turno do Guerreiro**\nIsso representa abrir a guarda, desequilibrar, quebrar escudo, empurrar ou deixar o inimigo vulnerável.\nEssa habilidade ajuda o grupo inteiro a acertar aquele alvo.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 6"
   },
   {
     "id": "guerreiro-7",
@@ -96,7 +166,14 @@
     "description": "Uma vez por combate, reduz dano recebido em 1d6",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, reduz dano recebido em 1d6",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 7",
+    "actionCost": null,
+    "roll": "1d6",
+    "damage": "1d6",
+    "healing": null,
+    "notes": "Uma vez por combate, quando sofrer dano, o Guerreiro pode reduzir esse dano em:\n**1d6**\nO jogador usa depois de saber quanto dano sofreu.\nO dano mínimo de um ataque que acertou continua sendo **1**, salvo se o mestre decidir que o golpe foi completamente bloqueado.\nEssa habilidade diferencia o Guerreiro de outras classes: ele não só bate, ele aguenta.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 7"
   },
   {
     "id": "guerreiro-8",
@@ -105,7 +182,14 @@
     "description": "Pode intimidar inimigos em combate com vantagem",
     "suggestedTest": "Conforme situação",
     "effect": "Pode intimidar inimigos em combate com vantagem",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 8",
+    "actionCost": null,
+    "roll": "1d20",
+    "damage": null,
+    "healing": null,
+    "notes": "O Guerreiro passa a impor respeito em combate.\nQuando tentar intimidar um inimigo durante uma cena de combate, ele pode rolar com vantagem.\nRolagens sugeridas:\n**1d20 + Presença + Influência**\nou, se fizer mais sentido pela ameaça física:\n**1d20 + Força + Influência**\nSe passar, o inimigo pode:\nHesitar;\nRecuar;\nAtacar com desvantagem no próximo ataque;\nFocar no Guerreiro em vez de um aliado;\nRevelar medo ou perder confiança.\nO mestre decide o efeito conforme a cena.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 8"
   },
   {
     "id": "guerreiro-9",
@@ -114,7 +198,14 @@
     "description": "Melhora o Golpe Poderoso para +1d8 de dano",
     "suggestedTest": "Conforme situação",
     "effect": "Melhora o Golpe Poderoso para +1d8 de dano",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 9",
+    "actionCost": null,
+    "roll": "1d8",
+    "damage": "1d8",
+    "healing": null,
+    "notes": "O Golpe Poderoso melhora.\nEm vez de causar **+3 de dano**, agora causa:\n**+1d8 de dano**\nContinua sendo usado uma vez por combate, depois de acertar um ataque corpo a corpo.\nEssa habilidade substitui a versão antiga do Golpe Poderoso.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 9"
   },
   {
     "id": "guerreiro-10",
@@ -123,7 +214,14 @@
     "description": "Uma vez por combate, transforma um acerto comum em crítico",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, transforma um acerto comum em crítico",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Guerreiro nível 10",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": "20",
+    "healing": null,
+    "notes": "Uma vez por combate, quando o Guerreiro acertar um ataque corpo a corpo, ele pode transformar esse acerto em um sucesso crítico.\nIsso significa que ele pode aplicar o efeito de crítico mesmo sem ter tirado 20 natural.\nO mestre pode permitir um dos efeitos de crítico do sistema:\nDano dobrado;\nDerrubar o inimigo;\nDesarmar o inimigo;\nGanhar vantagem na próxima ação;\nRealizar algo impressionante na cena.\nEssa habilidade só pode ser usada depois de acertar.\nEla não transforma uma falha em acerto.\nUsa escudo, armadura e protege aliados.\nFoco sugerido:\nForça;\nVigor;\nAtletismo;\nCombate.\nUsa espada curta, espada longa ou arma leve, focando precisão e mobilidade.\nFoco sugerido:\nForça ou Agilidade;\nCombate;\nPercepção.\nUsa machado, martelo ou arma pesada, focando dano alto.\nFoco sugerido:\nForça;\nVigor;\nAtletismo;\nInfluência para intimidação.\nUm guerreiro que lidera, organiza e inspira.\nFoco sugerido:\nForça;\nPresença;\nCombate;\nInfluência.\nVocê lutou em uma guerra e carrega traumas dela.\nVocê foi guarda de uma cidade corrupta.\nVocê quer se tornar conhecido como o maior guerreiro da região.\nVocê protege alguém por juramento.\nVocê aprendeu a lutar nas ruas, não em quartéis.",
+    "source": "Livro de Raças e Classes > Guerreiro > Nível 10"
   },
   {
     "id": "ladino-1",
@@ -132,7 +230,14 @@
     "description": "Causa +4 de dano contra inimigo distraído, flanqueado, surpreso ou pelas costas",
     "suggestedTest": "Conforme situação",
     "effect": "Causa +4 de dano contra inimigo distraído, flanqueado, surpreso ou pelas costas",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Ladino nível 1",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": "+4 de dano",
+    "healing": null,
+    "notes": "Quando o Ladino ataca um inimigo **distraído, flanqueado, surpreso ou pelas costas**, ele causa:\n**+4 de dano**\nO mestre decide se a situação permite o uso da habilidade.\nEssa é a habilidade principal do Ladino.\nEla representa precisão, malandragem e capacidade de atacar no momento certo.\nFunciona quando:\nO inimigo está lutando contra outro aliado;\nO Ladino está escondido;\nO inimigo foi surpreendido;\nO Ladino ataca pelas costas;\nO alvo está caído, preso ou distraído.\nNão funciona quando:\nO inimigo está totalmente focado no Ladino;\nO Ladino ataca de frente sem nenhuma vantagem;\nA situação não favorece golpe preciso;\nO inimigo percebeu claramente a aproximação dele.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 1"
   },
   {
     "id": "ladino-2",
@@ -141,7 +246,14 @@
     "description": "Depois de atacar, pode se mover sem dar abertura imediata",
     "suggestedTest": "Conforme situação",
     "effect": "Depois de atacar, pode se mover sem dar abertura imediata",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Ladino nível 2",
+    "actionCost": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Depois de fazer um ataque, o Ladino pode se mover alguns passos sem dar abertura imediata para o inimigo.\nNa prática, isso permite que ele ataque e recue.\nUma vez por turno, depois de atacar, o Ladino pode se afastar de um inimigo próximo sem sofrer consequência automática por sair de perto.\nEssa habilidade não aumenta a distância total que ele pode andar no turno. Ela apenas permite se reposicionar com segurança.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 2"
   },
   {
     "id": "ladino-3",
@@ -150,7 +262,14 @@
     "description": "Uma vez por combate, pode tentar se esconder com vantagem",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, pode tentar se esconder com vantagem",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Ladino nível 3",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": null,
+    "healing": "1d20",
+    "notes": "Uma vez por combate, se houver cobertura, escuridão, distração ou confusão na cena, o Ladino pode tentar se esconder com vantagem.\nRolagem sugerida:\n**1d20 + Agilidade + Furtividade**\nSe passar, ele fica escondido ou fora do foco dos inimigos.\nPode contar como cobertura:\nEscuridão;\nCaixa, parede, árvore ou coluna;\nMultidão;\nFumaça;\nUm aliado chamando atenção;\nBagunça no campo de batalha.\nSe o Ladino conseguir se esconder, o próximo ataque dele provavelmente poderá usar **Ataque Oportunista**.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 3"
   },
   {
     "id": "ladino-4",
@@ -159,7 +278,14 @@
     "description": "Uma vez por combate, reduz dano recebido em 1d6 + Agilidade",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, reduz dano recebido em 1d6 + Agilidade",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Ladino nível 4",
+    "actionCost": null,
+    "roll": "1d6",
+    "damage": "1d6",
+    "healing": null,
+    "notes": "Uma vez por combate, quando um inimigo acertar um ataque contra o Ladino, ele pode usar seus reflexos para tentar evitar parte do golpe.\nO Ladino reduz o dano recebido em:\n**1d6 + Agilidade**\nSe o dano for reduzido a 0, o Ladino escapa completamente do golpe.\nEssa habilidade representa esquiva, reflexo, malandragem, uso do ambiente e capacidade de não estar exatamente onde o inimigo achou que ele estaria.\nEla dá sobrevivência ao Ladino sem transformar ele em tanque.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 4"
   },
   {
     "id": "ladino-5",
@@ -168,7 +294,14 @@
     "description": "Uma vez por combate, ganha vantagem em um ataque",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, ganha vantagem em um ataque",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Ladino nível 5",
+    "actionCost": null,
+    "roll": "2d20",
+    "damage": "2d20",
+    "healing": null,
+    "notes": "Uma vez por combate, antes de fazer um ataque, o Ladino pode mirar cuidadosamente e ganhar vantagem nesse ataque.\nEle rola:\n**2d20 e usa o melhor resultado**\nEssa habilidade representa mira, calma, leitura do inimigo e precisão.\nSe o ataque também cumprir a condição de **Ataque Oportunista**, o Ladino pode aplicar o dano extra normalmente.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 5"
   },
   {
     "id": "ladino-6",
@@ -177,7 +310,14 @@
     "description": "Atrapalha um inimigo e impõe desvantagem no próximo ataque dele",
     "suggestedTest": "Conforme situação",
     "effect": "Atrapalha um inimigo e impõe desvantagem no próximo ataque dele",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Ladino nível 6",
+    "actionCost": "Reação",
+    "roll": "1d20",
+    "damage": null,
+    "healing": "1d20",
+    "notes": "O Ladino pode usar sua ação para atrapalhar um inimigo próximo com um truque rápido.\nRolagens sugeridas:\n**1d20 + Agilidade + Furtividade**\nou, se for mais social/intimidatório:\n**1d20 + Presença + Influência**\nA dificuldade normalmente é a **Defesa do alvo** ou **12**, se for um inimigo comum.\nSe passar, o inimigo sofre um efeito simples até o próximo turno dele.\nEscolha um:\nO inimigo tem desvantagem no próximo ataque;\nO inimigo perde a reação imediata contra o Ladino;\nO inimigo fica distraído, permitindo Ataque Oportunista de um aliado;\nO inimigo recua alguns passos;\nO inimigo deixa cair um item pequeno, se fizer sentido.\nExemplos narrativos:\nJogar areia nos olhos;\nPuxar o manto do inimigo;\nCortar uma correia da armadura;\nFingir um ataque e bater por outro lado;\nDerrubar uma cadeira no caminho;\nUsar insulto ou provocação para tirar o foco do alvo.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 6"
   },
   {
     "id": "ladino-7",
@@ -186,7 +326,14 @@
     "description": "Se iniciar escondido ou surpreender o alvo, causa dano extra",
     "suggestedTest": "Conforme situação",
     "effect": "Se iniciar escondido ou surpreender o alvo, causa dano extra",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Ladino nível 7",
+    "actionCost": "Ação",
+    "roll": "1d6",
+    "damage": "1d6",
+    "healing": null,
+    "notes": "Quando o Ladino iniciar um combate escondido, ou quando surpreender completamente um inimigo, o primeiro ataque que acertar causa dano extra.\nDano extra:\n**+1d6**\nEsse dano pode acumular com **Ataque Oportunista**, se a situação permitir.\nEmboscada Perfeita só funciona uma vez no início de uma cena de combate ou emboscada.\nNão é para ser usada todo turno.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 7"
   },
   {
     "id": "ladino-8",
@@ -195,7 +342,14 @@
     "description": "Se passar em teste contra armadilha, explosão ou magia de área, não sofre dano",
     "suggestedTest": "Conforme situação",
     "effect": "Se passar em teste contra armadilha, explosão ou magia de área, não sofre dano",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Ladino nível 8",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": "1d20",
+    "healing": "1d20",
+    "notes": "Quando o Ladino precisar fazer um teste para evitar armadilha, explosão, desabamento, magia de área ou efeito semelhante, ele pode usar sua agilidade para escapar completamente.\nSe passar no teste, não sofre dano.\nSe falhar, sofre o efeito normalmente.\nRolagens comuns:\n**1d20 + Agilidade**\nou:\n**1d20 + Agilidade + Furtividade**\nquando fizer sentido pela movimentação, cobertura ou reflexo.\nEssa habilidade representa o Ladino escapando no último segundo, rolando para trás de uma parede, pulando fora da área ou se jogando atrás de cobertura.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 8"
   },
   {
     "id": "ladino-9",
@@ -204,7 +358,14 @@
     "description": "Melhora o Ataque Oportunista de +4 para +1d8",
     "suggestedTest": "Conforme situação",
     "effect": "Melhora o Ataque Oportunista de +4 para +1d8",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Ladino nível 9",
+    "actionCost": null,
+    "roll": "1d8",
+    "damage": "1d8",
+    "healing": null,
+    "notes": "O Ataque Oportunista melhora.\nEm vez de causar **+4 de dano**, passa a causar:\n**+1d8 de dano**\nEssa habilidade substitui a versão anterior.\nO Ladino fica mais explosivo e perigoso quando ataca no momento certo.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 9"
   },
   {
     "id": "ladino-10",
@@ -213,7 +374,14 @@
     "description": "Uma vez por combate, pode atacar e desaparecer na mesma ação",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, pode atacar e desaparecer na mesma ação",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Ladino nível 10",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": "1d20",
+    "healing": "1d20",
+    "notes": "Uma vez por combate, o Ladino pode atacar e desaparecer na mesma ação.\nEle faz um ataque normalmente.\nDepois do ataque, se houver qualquer cobertura, distração, escuridão ou confusão na cena, ele pode tentar se esconder imediatamente.\nRolagem sugerida:\n**1d20 + Agilidade + Furtividade**\nSe passar, ele termina o turno escondido ou fora do foco dos inimigos.\nEssa é a habilidade final dele: atacar no momento certo e nunca ficar onde o inimigo espera.\nFoca em emboscada, dano alto e ataques pelas costas.\nFoco sugerido:\nAgilidade;\nFurtividade;\nPercepção;\nCombate.\nFoca em mentiras, disfarces, golpes e manipulação.\nFoco sugerido:\nPresença;\nInfluência;\nFurtividade;\nPercepção.\nFoca em exploração, rastreio e movimento silencioso.\nFoco sugerido:\nAgilidade;\nNatureza;\nPercepção;\nFurtividade.\nFoca em fechaduras, armadilhas, ferramentas e infiltração.\nFoco sugerido:\nAgilidade;\nIntelecto;\nOfício;\nPercepção.\nVocê roubava para sobreviver.\nVocê pertenceu a uma guilda criminosa.\nVocê traiu alguém perigoso.\nVocê trabalha como espião para uma facção.\nVocê finge ser covarde, mas sempre salva o grupo na hora certa.",
+    "source": "Livro de Raças e Classes > Ladino > Nível 10"
   },
   {
     "id": "mago-1",
@@ -222,7 +390,14 @@
     "description": "Começa com 3 magias simples e 1 magia forte",
     "suggestedTest": "Conforme situação",
     "effect": "Começa com 3 magias simples e 1 magia forte",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 1",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": null,
+    "healing": null,
+    "notes": "O Mago começa com:\n3 magias simples escolhidas entre as 9 magias simples básicas;\n1 magia forte escolhida entre as 5 magias fortes disponíveis.\nEle pode usar magia em seu turno como ação.\nQuando a magia for simples e sem risco, o mestre pode permitir que funcione sem rolagem.\nQuando for ofensiva, perigosa ou mudar muito a cena, o Mago rola:\n**1d20 + Intelecto**\nSe a magia envolver conhecimento mágico mais profundo, pode somar **Misticismo**, se o mestre permitir:\n**1d20 + Intelecto + Misticismo**",
+    "source": "Livro de Raças e Classes > Mago > Nível 1"
   },
   {
     "id": "mago-2",
@@ -231,7 +406,14 @@
     "description": "Pode fazer pequenos efeitos mágicos simples",
     "suggestedTest": "Conforme situação",
     "effect": "Pode fazer pequenos efeitos mágicos simples",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Mago nível 2",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "O Mago aprende a fazer pequenos efeitos mágicos simples.\nEsses truques não servem para causar dano direto nem resolver desafios grandes, mas ajudam na interpretação e na criatividade.\nExemplos:\nAcender uma vela;\nApagar uma chama pequena;\nFazer um objeto leve tremer;\nCriar uma faísca;\nMudar levemente a cor de um objeto;\nFazer uma voz ecoar de forma fraca;\nAbrir ou fechar uma porta destrancada próxima;\nFazer uma pequena marca mágica brilhar;\nCriar um som curto e simples.\nSe for algo pequeno, sem risco e sem impacto direto em combate, não precisa rolar.\nSe o truque for usado para distrair, enganar ou ajudar em um teste, o mestre pode pedir rolagem.",
+    "source": "Livro de Raças e Classes > Mago > Nível 2"
   },
   {
     "id": "mago-3",
@@ -240,7 +422,14 @@
     "description": "Uma vez por combate, ganha +2 em um teste de magia",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, ganha +2 em um teste de magia",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 3",
+    "actionCost": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, antes de fazer um teste de magia, o Mago pode concentrar sua energia arcana.\nEle recebe:\n**+2 no teste de magia**\nPode ser usado em magias ofensivas, rituais rápidos ou efeitos mágicos importantes.",
+    "source": "Livro de Raças e Classes > Mago > Nível 3"
   },
   {
     "id": "mago-4",
@@ -249,7 +438,14 @@
     "description": "Uma vez por combate, recebe +2 de Defesa contra um ataque",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, recebe +2 de Defesa contra um ataque",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 4",
+    "actionCost": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, quando for alvo de um ataque, o Mago pode criar uma barreira mágica rápida.\nEle recebe:\n**+2 de Defesa contra esse ataque**\nO jogador usa depois que o inimigo declara o ataque, mas antes de o mestre confirmar o resultado final.\nEssa habilidade é importante porque o Mago é frágil, mas não deve cair por qualquer erro pequeno de posicionamento.",
+    "source": "Livro de Raças e Classes > Mago > Nível 4"
   },
   {
     "id": "mago-5",
@@ -258,7 +454,14 @@
     "description": "Uma vez por combate, causa +1d4 de dano com magia ofensiva",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, causa +1d4 de dano com magia ofensiva",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 5",
+    "actionCost": null,
+    "roll": "1d4",
+    "damage": "1d4",
+    "healing": null,
+    "notes": "Uma vez por combate, quando acertar uma magia ofensiva, o Mago pode causar dano extra.\nDano extra:\n**+1d4**\nFunciona com magias ofensivas simples ou fortes, desde que o ataque tenha acertado.",
+    "source": "Livro de Raças e Classes > Mago > Nível 5"
   },
   {
     "id": "mago-6",
@@ -267,7 +470,14 @@
     "description": "Pode realizar rituais fora de combate para efeitos mágicos maiores",
     "suggestedTest": "Conforme situação",
     "effect": "Pode realizar rituais fora de combate para efeitos mágicos maiores",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 6",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": null,
+    "healing": null,
+    "notes": "O Mago aprende a fazer rituais fora de combate.\nRituais são magias mais lentas, usadas com preparação.\nElas podem servir para:\nIdentificar um item mágico;\nDetectar uma maldição;\nAbrir uma passagem selada;\nCriar proteção temporária em um acampamento;\nConversar com uma presença mágica fraca;\nEntender runas antigas;\nLocalizar energia sobrenatural próxima.\nUm ritual exige tempo, concentração e descrição do que o Mago está fazendo.\nRolagem sugerida:\n**1d20 + Intelecto + Misticismo**\nDificuldades sugeridas:",
+    "source": "Livro de Raças e Classes > Mago > Nível 6"
   },
   {
     "id": "mago-7",
@@ -276,7 +486,14 @@
     "description": "Uma vez por combate, pode atrapalhar ou deslocar um inimigo com magia",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, pode atrapalhar ou deslocar um inimigo com magia",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 7",
+    "actionCost": null,
+    "roll": "1d20",
+    "damage": "1d20",
+    "healing": null,
+    "notes": "Uma vez por combate, o Mago pode usar magia para atrapalhar, deslocar ou controlar um inimigo.\nO Mago escolhe um alvo e faz um teste:\n**1d20 + Intelecto**\nContra a Defesa do alvo ou dificuldade definida pelo mestre.\nSe passar, escolha um efeito:\nEmpurrar o inimigo alguns passos;\nDerrubar o inimigo, se fizer sentido;\nDeixar o inimigo com desvantagem no próximo ataque;\nImpedir o inimigo de se aproximar até o próximo turno;\nFazer o inimigo perder posição ou cobertura.\nEssa habilidade dá ao Mago controle de cena sem transformar ele em causador de dano puro.",
+    "source": "Livro de Raças e Classes > Mago > Nível 7"
   },
   {
     "id": "mago-8",
@@ -285,7 +502,14 @@
     "description": "Uma vez por combate, pode tentar enfraquecer ou cancelar uma magia inimiga",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, pode tentar enfraquecer ou cancelar uma magia inimiga",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 8",
+    "actionCost": null,
+    "roll": "1d20",
+    "damage": "1d20",
+    "healing": null,
+    "notes": "Uma vez por combate, quando uma criatura próxima usar magia, ritual, maldição ou poder sobrenatural, o Mago pode tentar interferir.\nRolagem sugerida:\n**1d20 + Intelecto + Misticismo**\nDificuldade sugerida:\nSe passar, o Mago escolhe um efeito, conforme a cena:\nCancelar uma magia simples;\nReduzir o dano mágico em 1d6;\nDar vantagem para um aliado resistir;\nImpedir um efeito secundário;\nEnfraquecer uma maldição temporariamente.\nContra-Magia não deve anular automaticamente chefes ou momentos importantes.\nContra magia muito forte, o efeito pode ser parcial.",
+    "source": "Livro de Raças e Classes > Mago > Nível 8"
   },
   {
     "id": "mago-9",
@@ -294,7 +518,14 @@
     "description": "Suas magias ofensivas simples passam de 1d6 para 1d8",
     "suggestedTest": "Conforme situação",
     "effect": "Suas magias ofensivas simples passam de 1d6 para 1d8",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Mago nível 9",
+    "actionCost": null,
+    "roll": "1d6",
+    "damage": "1d6",
+    "healing": null,
+    "notes": "As magias ofensivas simples do Mago ficam mais fortes.\nQuando o Mago usar uma magia simples ofensiva que normalmente causaria:\n**1d6 de dano**\nEla passa a causar:\n**1d8 de dano**\nEssa habilidade melhora o dano constante do Mago, mas ainda mantém Guerreiro e Ladino relevantes.",
+    "source": "Livro de Raças e Classes > Mago > Nível 9"
   },
   {
     "id": "mago-10",
@@ -303,7 +534,14 @@
     "description": "Uma vez por combate, pode usar duas magias simples no mesmo turno",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, pode usar duas magias simples no mesmo turno",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Mago nível 10",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": "1",
+    "healing": "1",
+    "notes": "Uma vez por combate, o Mago pode liberar uma grande sequência de energia mágica.\nNesse turno, ele pode usar **duas magias simples** em vez de uma.\nCada magia é resolvida separadamente.\nSurto Arcano não pode ser usado com magias fortes nem com rituais longos.\nEssa é a habilidade final do Mago: por um momento, ele acelera o fluxo arcano e faz mais do que qualquer outro conjurador conseguiria fazer normalmente.\nA lista completa de magias não fica neste livro.\nEste livro define apenas como a classe Mago funciona, quantas magias ele conhece e quando aprende novas magias.\nAs descrições completas das magias, incluindo testes, dano, alcance, duração, exemplos de uso, observações para o mestre e sugestões de ilustração, ficam no **RPG dos Guri — Grimório**.\nUse o Grimório sempre que:\nUm Mago escolher suas magias iniciais;\nUm Mago subir de nível e aprender novas magias;\nO mestre precisar consultar o efeito exato de uma magia;\nO grupo encontrar pergaminhos, rituais ou efeitos mágicos;\nFor necessário diferenciar magias simples, magias fortes, rituais e poderes sobrenaturais.\nResumo da regra do Mago:\nNo nível 1, o Mago escolhe **3 magias simples básicas** e **1 magia forte**;\nNos níveis 2, 4, 6, 8 e 10, aprende **1 nova magia simples**;\nNos níveis 3, 5, 7 e 9, aprende **1 nova magia forte**;\nSe não quiser escolher uma magia forte, pode escolher **duas magias simples** no lugar;\nO Mago pode usar apenas **1 magia forte por combate**.\nFoca em dano direto e energia arcana.\nFoco sugerido:\nIntelecto;\nMisticismo;\nConhecimento;\nPercepção.\nFoca em engano, distração e efeitos criativos.\nFoco sugerido:\nIntelecto;\nPresença;\nMisticismo;\nInfluência.\nFoca em conhecimento, runas, lendas e investigação.\nFoco sugerido:\nIntelecto;\nConhecimento;\nPercepção;\nOfício.\nFoca em magia estranha, pactos, maldições e forças obscuras.\nFoco sugerido:\nIntelecto ou Presença;\nMisticismo;\nInfluência;\nConhecimento.\nVocê roubou um grimório proibido.\nVocê foi expulso de uma academia mágica.\nVocê busca entender uma magia que quase te matou.\nVocê tem um mestre desaparecido.\nVocê quer provar que sua magia não é perigosa.",
+    "source": "Livro de Raças e Classes > Mago > Nível 10"
   },
   {
     "id": "clerigo-1",
@@ -312,7 +550,14 @@
     "description": "Uma vez por combate, cura 1d6 + Presença",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, cura 1d6 + Presença",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 1",
+    "actionCost": "Ação",
+    "roll": "1d6",
+    "damage": null,
+    "healing": "1d6",
+    "notes": "Uma vez por combate, o Clérigo pode curar um aliado próximo.\nA cura é:\n**1d6 + Presença**\nA cura não pode ultrapassar a vida máxima do alvo.\nEssa é a habilidade principal do Clérigo.\nEla representa fé, energia espiritual, imposição de mãos, oração, bênção ou qualquer forma de poder divino que combine com o personagem.\nUse quando:\nUm aliado estiver quase caindo;\nUm aliado estiver inconsciente;\nO grupo precisar se manter no combate;\nA cena pedir um momento de fé ou esperança.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 1"
   },
   {
     "id": "clerigo-2",
@@ -321,7 +566,14 @@
     "description": "Uma vez por combate, concede +2 no próximo teste de um aliado",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, concede +2 no próximo teste de um aliado",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 2",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, o Clérigo pode abençoar um aliado próximo.\nO aliado recebe:\n**+2 no próximo teste**\nEsse teste pode ser:\nAtaque;\nResistência;\nPerícia;\nTeste contra medo;\nTeste para escapar;\nQualquer ação importante que faça sentido.\nEssa habilidade reforça o papel do Clérigo como suporte direto.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 2"
   },
   {
     "id": "clerigo-3",
@@ -330,7 +582,14 @@
     "description": "Uma vez por combate, concede +2 de Defesa a um aliado",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, concede +2 de Defesa a um aliado",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 3",
+    "actionCost": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, o Clérigo pode proteger um aliado próximo com energia espiritual.\nO alvo recebe:\n**+2 de Defesa até o início do próximo turno do Clérigo**\nEsse poder pode ser usado para proteger alguém que está sendo focado por inimigos.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 3"
   },
   {
     "id": "clerigo-4",
@@ -339,7 +598,14 @@
     "description": "Remove medo, hesitação ou desvantagem mental de um aliado",
     "suggestedTest": "Conforme situação",
     "effect": "Remove medo, hesitação ou desvantagem mental de um aliado",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 4",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": null,
+    "healing": "1d20",
+    "notes": "Uma vez por combate, o Clérigo pode usar uma palavra sagrada, oração, grito de fé ou discurso inspirador para fortalecer um aliado.\nO Clérigo escolhe um aliado próximo.\nEsse aliado pode remover um dos seguintes efeitos:\nMedo;\nHesitação;\nDesvantagem causada por intimidação;\nDesvantagem causada por efeito mental simples;\nParalisia emocional ou pânico narrativo.\nSe o efeito for forte, o Clérigo faz um teste:\n**1d20 + Presença + Misticismo**\nDificuldade sugerida:\nEssa habilidade não é cura de vida. Ela faz o Clérigo proteger o grupo de efeitos emocionais, espirituais e sobrenaturais.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 4"
   },
   {
     "id": "clerigo-5",
@@ -348,7 +614,14 @@
     "description": "Melhora a Cura Sagrada para 1d8 + Presença",
     "suggestedTest": "Conforme situação",
     "effect": "Melhora a Cura Sagrada para 1d8 + Presença",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 5",
+    "actionCost": null,
+    "roll": "1d8",
+    "damage": null,
+    "healing": "1d8",
+    "notes": "A Cura Sagrada melhora.\nEm vez de curar:\n**1d6 + Presença**\npassa a curar:\n**1d8 + Presença**\nEssa habilidade substitui a versão anterior da Cura Sagrada.\nContinua podendo ser usada **uma vez por combate**.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 5"
   },
   {
     "id": "clerigo-6",
@@ -357,7 +630,14 @@
     "description": "Pode afastar mortos-vivos, criaturas sombrias ou corrompidas",
     "suggestedTest": "Conforme situação",
     "effect": "Pode afastar mortos-vivos, criaturas sombrias ou corrompidas",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 6",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, o Clérigo pode erguer seu símbolo, fazer uma oração ou liberar energia espiritual para afastar criaturas sombrias.\nFunciona contra:\nMortos-vivos;\nEspíritos fracos;\nCriaturas corrompidas;\nDemônios menores;\nSombras;\nSeres amaldiçoados.\nO Clérigo faz um teste:\n**1d20 + Presença + Misticismo**\nDificuldade sugerida:\nSe passar, as criaturas afetadas podem:\nRecuar;\nHesitar;\nPerder a próxima ação ofensiva;\nAtacar com desvantagem;\nFugir, se forem fracas.\nContra chefes, essa habilidade não deve vencer a luta sozinha.\nEm vez disso, pode causar um efeito parcial, como:\nDar desvantagem no próximo ataque do chefe;\nImpedir uma habilidade sombria naquele turno;\nAbrir uma brecha para o grupo agir.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 6"
   },
   {
     "id": "clerigo-7",
@@ -366,7 +646,14 @@
     "description": "Aliados próximos recebem +1 de Defesa por uma rodada",
     "suggestedTest": "Conforme situação",
     "effect": "Aliados próximos recebem +1 de Defesa por uma rodada",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 7",
+    "actionCost": null,
+    "roll": null,
+    "damage": null,
+    "healing": "+1 de Defesa",
+    "notes": "Uma vez por combate, o Clérigo pode criar uma aura de proteção ao redor de si.\nAté o início do próximo turno do Clérigo, aliados próximos recebem:\n**+1 de Defesa**\nO próprio Clérigo também recebe esse bônus.\nUse quando:\nO grupo estiver cercado;\nUm chefe for atacar vários personagens;\nOs aliados estiverem com pouca vida;\nO grupo precisar sobreviver por mais uma rodada.\nEssa habilidade é simples, útil e diferente da proteção individual do Escudo da Fé.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 7"
   },
   {
     "id": "clerigo-8",
@@ -375,7 +662,14 @@
     "description": "Remove veneno, doença simples, maldição fraca ou corrupção leve",
     "suggestedTest": "Conforme situação",
     "effect": "Remove veneno, doença simples, maldição fraca ou corrupção leve",
-    "usageLimit": "free"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 8",
+    "actionCost": "Ação",
+    "roll": "1d20",
+    "damage": null,
+    "healing": "1d20",
+    "notes": "O Clérigo pode purificar venenos, doenças simples, corrupção espiritual leve ou maldições fracas.\nFora de combate, isso normalmente exige alguns minutos de oração, cuidado ou ritual.\nEm combate, pode exigir uma ação e um teste.\nRolagem sugerida:\n**1d20 + Presença + Misticismo**\nou, se envolver cuidado físico:\n**1d20 + Intelecto + Ofício**\nDificuldade sugerida:\nPurificação não deve remover automaticamente uma grande maldição de campanha.\nContra efeitos muito fortes, ela pode:\nReduzir sintomas;\nGanhar tempo;\nRevelar a origem da maldição;\nPermitir que o grupo descubra como curar definitivamente.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 8"
   },
   {
     "id": "clerigo-9",
@@ -384,7 +678,14 @@
     "description": "Uma vez por combate, transforma uma falha de aliado em nova chance",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por combate, transforma uma falha de aliado em nova chance",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Clérigo nível 9",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "notes": "Uma vez por combate, quando um aliado próximo falhar em um teste importante, o Clérigo pode invocar sua fé para dar uma nova chance.\nO aliado pode rolar novamente o teste.\nEle deve ficar com o novo resultado.\nPode ser usado em:\nAtaques importantes;\nTestes para resistir a medo;\nTestes para não cair;\nTestes para escapar;\nTestes para salvar outro personagem;\nQualquer ação decisiva aprovada pelo mestre.\nIntervenção Divina não garante sucesso.\nEla apenas permite uma nova tentativa.\nEssa habilidade representa uma força superior interferindo no momento certo.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 9"
   },
   {
     "id": "clerigo-10",
@@ -393,7 +694,14 @@
     "description": "Uma vez por sessão, realiza um grande feito divino com aprovação do mestre",
     "suggestedTest": "Conforme situação",
     "effect": "Uma vez por sessão, realiza um grande feito divino com aprovação do mestre",
-    "usageLimit": "session"
+    "usageLimit": "session",
+    "origin": "Clérigo nível 10",
+    "actionCost": "Ação",
+    "roll": null,
+    "damage": null,
+    "healing": "1 de Vida",
+    "notes": "Uma vez por sessão, o Clérigo pode pedir um milagre.\nO milagre é um grande efeito divino, espiritual ou sagrado que pode mudar uma cena importante.\nO jogador descreve o que deseja fazer, e o mestre decide o efeito final.\nExemplos de milagre:\nLevantar imediatamente todos os aliados inconscientes próximos com 1 de Vida;\nImpedir a morte de um personagem naquele momento;\nExpulsar uma criatura sombria poderosa por alguns instantes;\nPurificar uma área corrompida;\nQuebrar uma maldição importante temporariamente;\nCriar uma proteção divina contra um ataque devastador;\nReceber uma visão clara sobre o próximo passo da aventura.\nMilagre deve ser forte, mas não deve resolver a campanha inteira sozinho.\nO ideal é que ele:\nSalve o grupo de uma situação crítica;\nMude o rumo de uma cena;\nCrie um momento memorável;\nTenha limite claro;\nNão substitua a aventura.\nSe o milagre for muito forte, o mestre pode colocar uma consequência:\nO Clérigo fica exausto;\nA entidade exige algo depois;\nO milagre funciona parcialmente;\nO poder atrai atenção de inimigos espirituais;\nO local fica marcado por energia divina.\nFoca em curar, estabilizar e proteger aliados.\nFoco sugerido:\nPresença;\nVigor;\nOfício;\nMisticismo.\nFoca em lidar com mortos-vivos, maldições e espíritos.\nFoco sugerido:\nPresença;\nIntelecto;\nMisticismo;\nConhecimento.\nFoca em combate físico e proteção.\nFoco sugerido:\nForça;\nPresença;\nVigor;\nCombate.\nFoca em influência, discursos, visões e liderança espiritual.\nFoco sugerido:\nPresença;\nInfluência;\nMisticismo;\nConhecimento.\nVocê perdeu a fé, mas ainda recebe poderes.\nVocê foi escolhido por uma entidade que não entende.\nVocê carrega uma culpa e tenta compensar ajudando os outros.\nVocê protege uma relíquia sagrada.\nVocê acredita que sua missão é salvar alguém específico.",
+    "source": "Livro de Raças e Classes > Clérigo > Nível 10"
   },
   {
     "id": "cura-sagrada",
@@ -402,7 +710,17 @@
     "description": "Uso: Ação. Alcance: Aliado próximo",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "1d6 + Presença",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Ação",
+    "range": "Aliado próximo",
+    "duration": null,
+    "roll": null,
+    "damage": null,
+    "healing": "1d6 + Presença",
+    "extraEffect": "",
+    "notes": "O Clérigo cura um aliado próximo.\nA cura não pode ultrapassar a vida máxima do alvo.\nPode ser usada em aliado consciente ou inconsciente.. Levantar um aliado caído;\nManter o Guerreiro na linha de frente;\nSalvar alguém antes do ataque de um chefe;\nCriar momento de fé em cena dramática.. Cura Sagrada é a principal ferramenta de suporte do Clérigo.\nEla deve ser confiável, simples e fácil de lembrar.",
+    "source": "Grimório > Cura Sagrada"
   },
   {
     "id": "bencao",
@@ -411,7 +729,17 @@
     "description": "Uso: Ação. Alcance: Aliado próximo",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "+2 no próximo teste",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Ação",
+    "range": "Aliado próximo",
+    "duration": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Clérigo escolhe um aliado próximo.\nEsse aliado recebe **+2 no próximo teste**.\nPode ser ataque, resistência, perícia ou qualquer ação importante que faça sentido.. Ajudar o Guerreiro a acertar um golpe decisivo;\nAjudar o Ladino a escapar;\nFortalecer um teste contra medo;\nApoiar um Mago em ritual perigoso.. A Benção deve ser usada antes ou durante uma ação importante.\nEla não deve ficar guardada indefinidamente por várias cenas, salvo decisão do mestre.",
+    "source": "Grimório > Benção"
   },
   {
     "id": "escudo-da-fe",
@@ -420,7 +748,17 @@
     "description": "Uso: Ação. Alcance: Aliado próximo. Duração: Até o início do próximo turno do Clérigo",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "+2 de Defesa",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Ação",
+    "range": "Aliado próximo",
+    "duration": "Até o início do próximo turno do Clérigo",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Clérigo protege um aliado próximo com energia espiritual.\nO alvo recebe **+2 de Defesa** até o início do próximo turno do Clérigo.. Proteger aliado com pouca vida;\nDefender o Mago de um inimigo próximo;\nSegurar um ataque de chefe;\nGanhar uma rodada para reorganizar o grupo.. Escudo da Fé protege um alvo específico.\nPara proteger vários aliados, use a habilidade Aura Protetora do Clérigo em níveis mais altos.",
+    "source": "Grimório > Escudo da Fé"
   },
   {
     "id": "palavra-de-coragem",
@@ -429,7 +767,17 @@
     "description": "Uso: Ação. Alcance: Aliado próximo",
     "suggestedTest": "Pode exigir 1d20 + Presença + Misticismo",
     "effect": "Remove medo, hesitação ou desvantagem mental simples",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Ação",
+    "range": "Aliado próximo",
+    "duration": null,
+    "roll": "1d20",
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Clérigo fortalece um aliado com palavra sagrada, oração, grito de fé ou discurso inspirador.\nPode remover:\nMedo;\nHesitação;\nDesvantagem causada por intimidação;\nDesvantagem causada por efeito mental simples;\nPânico narrativo.",
+    "source": "Grimório > Palavra de Coragem"
   },
   {
     "id": "cura-maior",
@@ -438,7 +786,17 @@
     "description": "Uso: Ação. Alcance: Aliado próximo",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "1d8 + Presença",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Ação",
+    "range": "Aliado próximo",
+    "duration": null,
+    "roll": null,
+    "damage": null,
+    "healing": "1d8 + Presença",
+    "extraEffect": "",
+    "notes": "A Cura Maior substitui a Cura Sagrada quando o Clérigo chega ao nível 5.\nEm vez de curar **1d6 + Presença**, passa a curar **1d8 + Presença**.",
+    "source": "Grimório > Cura Maior"
   },
   {
     "id": "afastar-sombras",
@@ -447,7 +805,17 @@
     "description": "Uso: Ação. Alcance: Área próxima",
     "suggestedTest": "1d20 + Presença + Misticismo",
     "effect": "Afasta, enfraquece ou atrapalha criaturas sombrias",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Ação",
+    "range": "Área próxima",
+    "duration": null,
+    "roll": "1d20",
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "Contra chefes, não deve vencer a luta sozinho.\nUse efeito parcial, como desvantagem, interrupção de habilidade sombria ou abertura para o grupo agir.",
+    "source": "Grimório > Afastar Sombras"
   },
   {
     "id": "aura-protetora",
@@ -456,7 +824,17 @@
     "description": "Uso: Ação. Alcance: Aliados próximos. Duração: Até o início do próximo turno do Clérigo",
     "suggestedTest": "Normalmente não exige teste",
     "effect": "+1 de Defesa",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Ação",
+    "range": "Aliados próximos",
+    "duration": "Até o início do próximo turno do Clérigo",
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Clérigo cria uma aura de proteção ao redor de si.\nAliados próximos e o próprio Clérigo recebem **+1 de Defesa** por uma rodada.. Proteger o grupo cercado;\nResistir a ataque de chefe;\nSegurar uma rodada crítica;\nDefender aliados inconscientes ou feridos.",
+    "source": "Grimório > Aura Protetora"
   },
   {
     "id": "purificacao",
@@ -465,7 +843,17 @@
     "description": "Uso: Ação ou ritual curto. Alcance: Toque ou aliado próximo",
     "suggestedTest": "1d20 + Presença + Misticismo ou 1d20 + Intelecto + Ofício",
     "effect": "Remove ou reduz efeitos negativos",
-    "usageLimit": "free"
+    "usageLimit": "free",
+    "origin": "Poder divino",
+    "actionCost": "Ação ou ritual curto",
+    "range": "Toque ou aliado próximo",
+    "duration": null,
+    "roll": "1d20",
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "Purificação não deve remover automaticamente uma grande maldição de campanha.\nContra efeitos muito fortes, pode:\nReduzir sintomas;\nGanhar tempo;\nRevelar origem da maldição;\nDar pista da cura definitiva.",
+    "source": "Grimório > Purificação"
   },
   {
     "id": "intervencao-divina",
@@ -474,7 +862,17 @@
     "description": "Uso: Reação narrativa ou ação especial. Alcance: Aliado próximo",
     "suggestedTest": "Não exige teste do Clérigo",
     "effect": "Aliado rerrola um teste importante",
-    "usageLimit": "combat"
+    "usageLimit": "combat",
+    "origin": "Poder divino",
+    "actionCost": "Reação narrativa ou ação especial",
+    "range": "Aliado próximo",
+    "duration": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "Quando um aliado próximo falhar em um teste importante, o Clérigo pode invocar sua fé para dar uma nova chance.\nO aliado rola novamente e fica com o novo resultado.. Intervenção Divina não garante sucesso.\nEla apenas permite uma nova tentativa.",
+    "source": "Grimório > Intervenção Divina"
   },
   {
     "id": "milagre",
@@ -483,6 +881,16 @@
     "description": "Uso: Ação especial. Alcance: Cena",
     "suggestedTest": "Depende do mestre",
     "effect": "Grande feito divino aprovado pelo mestre",
-    "usageLimit": "session"
+    "usageLimit": "session",
+    "origin": "Poder divino",
+    "actionCost": "Ação especial",
+    "range": "Cena",
+    "duration": null,
+    "roll": null,
+    "damage": null,
+    "healing": null,
+    "extraEffect": "",
+    "notes": "O Clérigo pede um milagre.\nO jogador descreve o que deseja fazer, e o mestre decide o efeito final.. Milagre deve ser forte, mas não deve resolver a campanha inteira sozinho.\nSe for muito poderoso, use consequência:\nO Clérigo fica exausto;\nA entidade exige algo depois;\nO milagre funciona parcialmente;\nO poder atrai atenção espiritual;\nO local fica marcado por energia divina.",
+    "source": "Grimório > Milagre"
   }
 ]

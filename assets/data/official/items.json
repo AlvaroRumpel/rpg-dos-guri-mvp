@@ -2,141 +2,191 @@
   {
     "id": "pocao-de-cura",
     "name": "Poção de Cura",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Recupera 1d6 + 2 de Vida",
     "defaultQuantity": 1,
     "roll": "1d6",
     "fixedBonus": 2,
-    "effectKind": "heal"
+    "effectKind": "heal",
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": "1d6",
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "pocao-de-folego",
     "name": "Poção de Fôlego",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Remove exaustão simples ou concede vantagem em um teste físico",
     "defaultQuantity": 1,
     "roll": null,
     "fixedBonus": 0,
-    "effectKind": null
+    "effectKind": null,
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": null,
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "oleo-afiado",
     "name": "Óleo Afiado",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Ao passar em uma arma cortante, o próximo ataque que acertar causa +1 de dano",
     "defaultQuantity": 1,
     "roll": null,
     "fixedBonus": 0,
-    "effectKind": "damage"
+    "effectKind": "damage",
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": "+1 de dano",
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "oleo-sagrado",
     "name": "Óleo Sagrado",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Ao passar em uma arma, o próximo ataque contra morto-vivo, sombra ou criatura corrompida causa +1d4 de dano",
     "defaultQuantity": 1,
     "roll": "1d4",
     "fixedBonus": 0,
-    "effectKind": "damage"
+    "effectKind": "damage",
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": "1d4",
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "bomba-de-fumaca",
     "name": "Bomba de Fumaça",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Cria fumaça suficiente para permitir fuga, esconderijo ou desvantagem em ataque à distância",
     "defaultQuantity": 1,
     "roll": null,
     "fixedBonus": 0,
-    "effectKind": null
+    "effectKind": null,
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": null,
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "agua-benta",
     "name": "Água Benta",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Causa 1d4 de dano em criatura sombria ou ajuda em uma purificação simples",
     "defaultQuantity": 1,
     "roll": "1d4",
     "fixedBonus": 0,
-    "effectKind": "damage"
+    "effectKind": "damage",
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": "1d4",
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "pergaminho-de-luz",
     "name": "Pergaminho de Luz",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Cria luz mágica por uma cena",
     "defaultQuantity": 1,
     "roll": null,
     "fixedBonus": 0,
-    "effectKind": null
+    "effectKind": null,
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": null,
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "pergaminho-de-protecao",
     "name": "Pergaminho de Proteção",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Concede +1 de Defesa contra o próximo ataque recebido",
     "defaultQuantity": 1,
     "roll": null,
     "fixedBonus": 0,
-    "effectKind": null
+    "effectKind": null,
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": null,
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "antidoto-simples",
     "name": "Antídoto Simples",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Remove veneno fraco ou concede vantagem para resistir a veneno mais forte",
     "defaultQuantity": 1,
     "roll": null,
     "fixedBonus": 0,
-    "effectKind": null
+    "effectKind": null,
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": null,
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "kit-de-curativo",
     "name": "Kit de Curativo",
-    "type": "Consumivel",
+    "type": "Consumível",
     "description": "Permite tentar estabilizar ou ajudar um aliado ferido com Ofício",
     "defaultQuantity": 1,
     "roll": null,
     "fixedBonus": 0,
-    "effectKind": "heal"
+    "effectKind": "heal",
+    "origin": "Item consumível",
+    "actionCost": "Ação ou conforme a cena",
+    "extraEffect": null,
+    "source": "Livro de Armas e Itens > Itens consumíveis"
   },
   {
     "id": "tocha",
     "name": "Tocha",
-    "type": "Item util",
+    "type": "Item útil",
     "description": "Iluminação simples para uma cena ou exploração curta.",
     "defaultQuantity": 2,
-    "fixedBonus": 0
+    "fixedBonus": 0,
+    "origin": "Item útil",
+    "source": "Livro de Armas e Itens > Itens úteis"
   },
   {
     "id": "corda",
     "name": "Corda",
-    "type": "Item util",
+    "type": "Item útil",
     "description": "Corda comum para escalada, amarras e improvisos.",
     "defaultQuantity": 1,
-    "fixedBonus": 0
+    "fixedBonus": 0,
+    "origin": "Item útil",
+    "source": "Livro de Armas e Itens > Itens úteis"
   },
   {
     "id": "ferramentas-simples",
     "name": "Ferramentas simples",
-    "type": "Item util",
+    "type": "Item útil",
     "description": "Ferramentas úteis para ações de Ofício.",
     "defaultQuantity": 1,
-    "fixedBonus": 0
+    "fixedBonus": 0,
+    "origin": "Item útil",
+    "source": "Livro de Armas e Itens > Itens úteis"
   },
   {
     "id": "mochila",
     "name": "Mochila",
-    "type": "Item util",
+    "type": "Item útil",
     "description": "Carrega itens comuns de aventura.",
     "defaultQuantity": 1,
-    "fixedBonus": 0
+    "fixedBonus": 0,
+    "origin": "Item útil",
+    "source": "Livro de Armas e Itens > Itens úteis"
   },
   {
     "id": "flechas-ou-virotes",
     "name": "Flechas ou virotes",
-    "type": "Item util",
+    "type": "Item útil",
     "description": "Munição narrativa para arco ou besta.",
     "defaultQuantity": 1,
-    "fixedBonus": 0
+    "fixedBonus": 0,
+    "origin": "Item útil",
+    "source": "Livro de Armas e Itens > Itens úteis"
   }
 ]

@@ -4,11 +4,52 @@ import 'dart:io';
 const _defaultVaultPath = r'E:\Obsidian\RPG dos Guri\90 Fontes Oficiais';
 const _outputPath = 'assets/data/official';
 
+const _raceInfo = {
+  'Humano': (
+    identity: 'Versatilidade e força de vontade',
+    power: 'Determinação Humana',
+    description:
+        'Depois de rolar um teste importante e antes da consequência final, soma +2 ao resultado.',
+    effect: 'Soma +2 em um teste importante',
+    limit: 'session',
+  ),
+  'Elfo': (
+    identity: 'Graça, memória antiga e reflexos rápidos',
+    power: 'Reflexo Élfico',
+    description:
+        'Quando um inimigo acertar um ataque contra o elfo, força nova rolagem e fica com o novo resultado.',
+    effect: 'Força nova rolagem contra um ataque recebido',
+    limit: 'combat',
+  ),
+  'Anão': (
+    identity: 'Resistência, honra e ligação com pedra e metal',
+    power: 'Corpo de Pedra',
+    description: 'Quando sofrer dano, pode reduzir esse dano em 1d4 + 1.',
+    effect: 'Reduz dano recebido em 1d4 + 1',
+    limit: 'combat',
+  ),
+  'Orc': (
+    identity: 'Força bruta, instinto e presença intimidadora',
+    power: 'Fúria Orc',
+    description:
+        'Depois de acertar um ataque corpo a corpo, pode causar +1d4 de dano.',
+    effect: 'Causa +1d4 de dano ao acertar corpo a corpo',
+    limit: 'combat',
+  ),
+};
+
+const _classRoles = {
+  'Guerreiro': 'Linha de frente e dano físico',
+  'Ladino': 'Mobilidade, furtividade e oportunismo',
+  'Mago': 'Magia arcana, controle e utilidade',
+  'Clérigo': 'Cura, fé, proteção e suporte',
+};
+
 Future<void> main(List<String> args) async {
   final vaultPath = _argumentValue(args, '--vault') ?? _defaultVaultPath;
   final vault = Directory(vaultPath);
   if (!vault.existsSync()) {
-    stderr.writeln('Vault oficial nao encontrado: $vaultPath');
+    stderr.writeln('Vault oficial não encontrado: $vaultPath');
     exitCode = 1;
     return;
   }
@@ -51,8 +92,9 @@ Future<void> main(List<String> args) async {
   stdout.writeln('Biblioteca oficial gerada em $_outputPath.');
   stdout.writeln(
     'Raças ${races.length}, classes ${classes.length}, progressões ${progression.length}, '
-    'magias ${spells.length}, rituais ${rituals.length}, equipamentos ${allEquipment.length}, '
-    'itens ${items.length}, kits ${starterKits.length}, monstros ${monsterTemplates.length}.',
+    'magias ${spells.length}, rituais ${rituals.length}, poderes ${divinePowers.length}, '
+    'equipamentos ${allEquipment.length}, itens ${items.length}, kits ${starterKits.length}, '
+    'monstros ${monsterTemplates.length}.',
   );
 }
 
@@ -63,76 +105,98 @@ String? _argumentValue(List<String> args, String name) {
 }
 
 Future<String> _read(Directory vault, String name) {
-  return File('${vault.path}${Platform.pathSeparator}$name').readAsString();
+  final file = File('${vault.path}${Platform.pathSeparator}$name');
+  return file.readAsString(encoding: utf8);
 }
 
 Future<void> _write(Directory output, String name, Object data) async {
   const encoder = JsonEncoder.withIndent('  ');
-  await File(
-    '${output.path}${Platform.pathSeparator}$name',
-  ).writeAsString('${encoder.convert(data)}\n');
+  final file = File('${output.path}${Platform.pathSeparator}$name');
+  await file.writeAsString('${encoder.convert(data)}\n', encoding: utf8);
 }
 
 List<Map<String, Object?>> _buildRaces(String source) {
-  final summary = _tableAfter(source, '## Raças');
-  final powerNames = {
-    'Humano': 'Determinação Humana',
-    'Elfo': 'Reflexo Élfico',
-    'Anão': 'Corpo de Pedra',
-    'Orc': 'Fúria Orc',
-  };
-  final descriptions = {
-    'Humano':
-        'Depois de rolar um teste importante e antes da consequência final, soma +2 ao resultado.',
-    'Elfo':
-        'Quando um inimigo acertar um ataque contra o elfo, força nova rolagem e fica com o novo resultado.',
-    'Anão': 'Quando sofrer dano, pode reduzir esse dano em 1d4 + 1.',
-    'Orc':
-        'Depois de acertar um ataque corpo a corpo, pode causar +1d4 de dano.',
-  };
   return [
-    for (final row in summary)
+    for (final entry in _raceInfo.entries)
       {
-        'id': _slug(row['Raça']!),
-        'name': row['Raça'],
-        'identity': row['Identidade'],
-        'powerName': powerNames[row['Raça']] ?? row['Poder'],
-        'powerDescription': descriptions[row['Raça']] ?? row['Poder'],
-        'powerEffect': row['Poder'],
-        'usageLimit': row['Raça'] == 'Humano' ? 'session' : 'combat',
+        'id': _slug(entry.key),
+        'name': entry.key,
+        'identity': entry.value.identity,
+        'powerName': entry.value.power,
+        'powerDescription': entry.value.description,
+        'powerEffect': entry.value.effect,
+        'usageLimit': entry.value.limit,
+        'origin': 'Raça',
+        'actionCost': _raceActionCost(entry.key),
+        'roll': _firstRoll(entry.value.effect)?.$1,
+        'damage': _damageFromText(entry.value.effect),
+        'healing': _healingFromText(entry.value.effect),
+        'notes': _cleanMarkdown(
+          _between(
+            source,
+            '# ${_raceNumber(entry.key)}. ${entry.key}',
+            '# ${_raceNumber(entry.key) + 1}.',
+          ),
+        ),
+        'source': 'Livro de Raças e Classes > ${entry.key}',
       },
   ];
 }
 
 List<Map<String, Object?>> _buildClasses(String source) {
-  final summary = _tableAfter(source, '## Classes');
+  final skillsTable = _tableAfter(source, '## 8.2 Perícias de classe');
+  final skillsByClass = {
+    for (final row in skillsTable)
+      row['Classe'] ?? '': _splitList(row['Perícias de classe'] ?? ''),
+  };
   return [
-    for (final row in summary)
+    for (final entry in _classRoles.entries)
       {
-        'id': _slug(row['Classe']!),
-        'name': row['Classe'],
-        'role': row['Função'],
-        'skills': _splitList(row['Perícias']!),
-        'initialPowerName': row['Habilidade'],
+        'id': _slug(entry.key),
+        'name': entry.key,
+        'role': entry.value,
+        'skills': skillsByClass[entry.key] ?? const <String>[],
+        'initialPowerName': _initialPowerName(source, entry.key),
+        'description': _firstParagraph(
+          _between(
+            source,
+            '# ${_classNumber(entry.key)}. ${entry.key}',
+            '# ${_classNumber(entry.key) + 1}.',
+          ),
+        ),
+        'source': 'Livro de Raças e Classes > ${entry.key}',
       },
   ];
 }
 
 List<Map<String, Object?>> _buildProgression(String source) {
   final result = <Map<String, Object?>>[];
-  for (final className in const ['Guerreiro', 'Ladino', 'Mago', 'Clérigo']) {
+  for (final className in _classRoles.keys) {
     final rows = _tableAfter(source, 'Progressão do $className');
+    final classSection = _between(
+      source,
+      '# ${_classNumber(className)}. $className',
+      '# ${_classNumber(className) + 1}.',
+    );
     for (final row in rows) {
       final level = int.tryParse(row['Nível'] ?? '') ?? 1;
       final name = row['Habilidade'] ?? 'Habilidade';
       final summary = row['Resumo'] ?? '';
+      final detail = _detailBlockForLevel(classSection, level, name);
       result.add({
         'id': '${_slug(className)}-$level',
         'characterClass': className,
         'level': level,
         'name': name,
         'description': summary,
-        'usageLimit': _usageLimitFromText(summary),
+        'usageLimit': _usageLimitFromText('$summary $detail'),
+        'origin': 'Classe',
+        'actionCost': _actionCostFromText('$summary $detail'),
+        'roll': _firstRoll('$summary $detail')?.$1,
+        'damage': _damageFromText('$summary $detail'),
+        'healing': _healingFromText('$summary $detail'),
+        'notes': detail,
+        'source': 'Livro de Raças e Classes > $className > Nível $level',
       });
     }
   }
@@ -145,7 +209,7 @@ List<Map<String, Object?>> _buildSpells(String source) {
     '# 6. Magias simples básicas',
     '# 9. Poderes divinos',
   );
-  return _spellLikeEntries(spellSection, power: false);
+  return _spellLikeEntries(spellSection, origin: 'Grimório', power: false);
 }
 
 List<Map<String, Object?>> _buildDivinePowers(String source) {
@@ -154,11 +218,12 @@ List<Map<String, Object?>> _buildDivinePowers(String source) {
     '# 9. Poderes divinos',
     '# 10. Rituais',
   );
-  return _spellLikeEntries(powerSection, power: true);
+  return _spellLikeEntries(powerSection, origin: 'Poder divino', power: true);
 }
 
 List<Map<String, Object?>> _spellLikeEntries(
   String section, {
+  required String origin,
   required bool power,
 }) {
   final entries = <Map<String, Object?>>[];
@@ -172,27 +237,39 @@ List<Map<String, Object?>> _spellLikeEntries(
     final row = _fieldMap(block);
     if (row.isEmpty) continue;
     final type = row['Tipo'] ?? (power ? 'Poder divino' : 'Magia');
-    final effect =
-        row['Dano'] ??
-        row['Cura'] ??
-        row['Efeito'] ??
-        row['Efeito extra'] ??
-        'Conforme descrição';
-    final extra = row['Efeito extra'];
+    final damage = row['Dano'] ?? row['Dano/Cura'];
+    final healing = row['Cura'] ?? row['Dano/Cura'];
+    final effect = row['Efeito'] ?? damage ?? healing ?? 'Conforme descrição';
+    final extra = _joinPresent([
+      row['Efeito extra'],
+      if (row['Dificuldade'] != null) 'Dificuldade: ${row['Dificuldade']}',
+      if (row['Dano no nível 9'] != null)
+        'Dano no nível 9: ${row['Dano no nível 9']}',
+    ]);
     final limit = row['Limite'] ?? type;
     entries.add({
       'id': _slug(name),
       'name': name,
       if (power) 'type': type else 'tier': _spellTier(type),
-      'description': [
+      'description': _joinPresent([
         if (row['Tema'] != null) 'Tema: ${row['Tema']}',
         if (row['Uso'] != null) 'Uso: ${row['Uso']}',
         if (row['Alcance'] != null) 'Alcance: ${row['Alcance']}',
         if (row['Duração'] != null) 'Duração: ${row['Duração']}',
-      ].join('. '),
+      ]),
       'suggestedTest': row['Teste'] ?? 'Conforme situação',
-      'effect': extra == null ? effect : '$effect. $extra',
+      'effect': effect,
       'usageLimit': _usageLimitFromText(limit),
+      'origin': origin,
+      'actionCost': row['Uso'],
+      'range': row['Alcance'],
+      'duration': row['Duração'],
+      'roll': _firstRoll(row['Teste'] ?? '')?.$1,
+      'damage': damage,
+      'healing': healing,
+      'extraEffect': extra,
+      'notes': _sectionNotes(block),
+      'source': 'Grimório > $name',
     });
   }
   return entries;
@@ -213,6 +290,12 @@ List<Map<String, Object?>> _buildRituals(String source) {
         'description':
             'Ritual fora de combate. O mestre define efeito, risco e consequência.',
         'difficulty': difficultyText,
+        'origin': 'Ritual',
+        'actionCost': 'Fora de combate',
+        'roll': _firstRoll(row['Rolagem sugerida'] ?? '')?.$1,
+        'effect': 'Efeito definido pelo mestre conforme a cena.',
+        'extraEffect': 'Falhas podem gerar consequência narrativa.',
+        'source': 'Grimório > Rituais',
       },
   ];
 }
@@ -229,6 +312,9 @@ List<Map<String, Object?>> _buildEquipment(String source) {
       'attribute': row['Atributo usado'],
       'properties': _splitList(row['Propriedade'] ?? ''),
       'recommendedClasses': _splitList(row['Classes mais indicadas'] ?? ''),
+      'origin': 'Arma comum',
+      'roll': row['Dano'],
+      'source': 'Livro de Armas e Itens > Armas comuns',
     });
   }
   for (final row in _tableAfter(source, '# 8. Armas especiais simples')) {
@@ -238,6 +324,10 @@ List<Map<String, Object?>> _buildEquipment(String source) {
       'category': 'weapon',
       'description': 'Base: ${row['Base']}. ${row['Efeito']}',
       'properties': const ['Especial'],
+      'origin': 'Arma especial',
+      'usageLimit': _usageLimitFromText(row['Efeito'] ?? ''),
+      'effect': row['Efeito'],
+      'source': 'Livro de Armas e Itens > Armas especiais simples',
     });
   }
   for (final row in _tableAfter(source, '## 10.1 Escudos comuns')) {
@@ -247,6 +337,8 @@ List<Map<String, Object?>> _buildEquipment(String source) {
       'category': 'shield',
       'description': row['Observação'],
       'defenseBonus': _signedInt(row['Defesa']),
+      'origin': 'Escudo comum',
+      'source': 'Livro de Armas e Itens > Escudos comuns',
     });
   }
   for (final row in _tableAfter(source, '## 10.2 Escudos especiais')) {
@@ -256,6 +348,10 @@ List<Map<String, Object?>> _buildEquipment(String source) {
       'category': 'shield',
       'description': row['Efeito'],
       'defenseBonus': 1,
+      'origin': 'Escudo especial',
+      'usageLimit': _usageLimitFromText(row['Efeito'] ?? ''),
+      'effect': row['Efeito'],
+      'source': 'Livro de Armas e Itens > Escudos especiais',
     });
   }
   for (final row in _tableAfter(source, '# 11. Armaduras comuns')) {
@@ -265,6 +361,8 @@ List<Map<String, Object?>> _buildEquipment(String source) {
       'category': 'armor',
       'description': row['Observação'],
       'baseDefense': int.tryParse(row['Defesa base'] ?? '') ?? 10,
+      'origin': 'Armadura comum',
+      'source': 'Livro de Armas e Itens > Armaduras comuns',
     });
   }
   for (final heading in const [
@@ -280,6 +378,10 @@ List<Map<String, Object?>> _buildEquipment(String source) {
         'name': name,
         'category': 'accessory',
         'description': effect,
+        'origin': 'Acessório',
+        'usageLimit': _usageLimitFromText(effect),
+        'effect': effect,
+        'source': 'Livro de Armas e Itens > Acessórios',
       });
     }
   }
@@ -295,12 +397,16 @@ List<Map<String, Object?>> _buildItems(String source) {
     items.add({
       'id': _slug(name),
       'name': name,
-      'type': 'Consumivel',
+      'type': 'Consumível',
       'description': effect,
       'defaultQuantity': 1,
       'roll': parsedRoll?.$1,
       'fixedBonus': parsedRoll?.$2 ?? 0,
       'effectKind': _effectKind(name, effect),
+      'origin': 'Item consumível',
+      'actionCost': 'Ação ou conforme a cena',
+      'extraEffect': _damageFromText(effect) ?? _healingFromText(effect),
+      'source': 'Livro de Armas e Itens > Itens consumíveis',
     });
   }
   const useful = {
@@ -314,10 +420,12 @@ List<Map<String, Object?>> _buildItems(String source) {
     items.add({
       'id': _slug(entry.key),
       'name': entry.key,
-      'type': 'Item util',
+      'type': 'Item útil',
       'description': entry.value,
       'defaultQuantity': entry.key == 'Tocha' ? 2 : 1,
       'fixedBonus': 0,
+      'origin': 'Item útil',
+      'source': 'Livro de Armas e Itens > Itens úteis',
     });
   }
   return items;
@@ -342,6 +450,7 @@ List<Map<String, Object?>> _buildStarterKits(String source) {
       'name': name,
       'characterClass': _classFromKitName(name),
       'items': items,
+      'source': 'Livro de Armas e Itens > Kits iniciais',
     });
   }
   return kits;
@@ -359,10 +468,6 @@ List<Map<String, Object?>> _buildMonsters(String source) {
     final block = section.substring(match.end, end);
     final row = _fieldMap(block);
     if (row.isEmpty) continue;
-    final special = RegExp(
-      r'^### Habilidade especial\s+—\s+(.+)$',
-      multiLine: true,
-    ).allMatches(block).map((match) => match.group(1)!.trim()).join('; ');
     monsters.add({
       'id': _slug(name),
       'name': name,
@@ -373,8 +478,12 @@ List<Map<String, Object?>> _buildMonsters(String source) {
       'damage': row['Dano'] ?? '1',
       'movement': row['Movimento'] ?? 'Normal',
       'instinct': row['Instinto'] ?? '',
-      'special': special,
+      'special': _specialHeading(block),
       'description': row['Função'] ?? '',
+      'behavior': _subsection(block, 'Comportamento'),
+      'encounterUse': _subsection(block, 'Uso em encontros'),
+      'rewards': _subsection(block, 'Recompensas ou pistas'),
+      'source': 'Livro de Monstros > $name',
     });
   }
   return monsters;
@@ -389,6 +498,13 @@ Map<String, Object?> _racePower(Map<String, Object?> race) {
     'suggestedTest': 'Conforme situação',
     'effect': race['powerEffect'],
     'usageLimit': race['usageLimit'],
+    'origin': race['origin'],
+    'actionCost': race['actionCost'],
+    'roll': race['roll'],
+    'damage': race['damage'],
+    'healing': race['healing'],
+    'notes': race['notes'],
+    'source': race['source'],
   };
 }
 
@@ -401,6 +517,13 @@ Map<String, Object?> _progressionPower(Map<String, Object?> progression) {
     'suggestedTest': 'Conforme situação',
     'effect': progression['description'],
     'usageLimit': progression['usageLimit'],
+    'origin': '${progression['characterClass']} nível ${progression['level']}',
+    'actionCost': progression['actionCost'],
+    'roll': progression['roll'],
+    'damage': progression['damage'],
+    'healing': progression['healing'],
+    'notes': progression['notes'],
+    'source': progression['source'],
   };
 }
 
@@ -462,6 +585,75 @@ String _between(String source, String startMarker, String endMarker) {
   return source.substring(start, end == -1 ? source.length : end);
 }
 
+String _subsection(String source, String heading) {
+  final start = source.indexOf('### $heading');
+  if (start == -1) return '';
+  final afterHeading = source.indexOf('\n', start);
+  if (afterHeading == -1) return '';
+  final next = source.indexOf('\n### ', afterHeading + 1);
+  return _cleanMarkdown(
+    source.substring(afterHeading, next == -1 ? source.length : next),
+  );
+}
+
+String _sectionNotes(String source) {
+  return _joinPresent([
+    _subsection(source, 'Como funciona'),
+    _subsection(source, 'Exemplos de uso'),
+    _subsection(source, 'Observações para o mestre'),
+  ]);
+}
+
+String _detailBlockForLevel(String source, int level, String name) {
+  final heading = '### Nível $level — $name';
+  final start = source.indexOf(heading);
+  if (start == -1) return '';
+  final next = source.indexOf('\n### Nível ', start + heading.length);
+  return _cleanMarkdown(
+    source.substring(start + heading.length, next == -1 ? source.length : next),
+  );
+}
+
+String _firstParagraph(String source) {
+  final cleaned = _cleanMarkdown(source);
+  if (cleaned.isEmpty) return '';
+  return cleaned.split('\n').firstWhere((line) => line.trim().isNotEmpty);
+}
+
+String _cleanMarkdown(String value) {
+  return const LineSplitter()
+      .convert(value)
+      .map((line) => line.trim())
+      .where((line) {
+        if (line.isEmpty) return false;
+        if (line.startsWith('#')) return false;
+        if (line.startsWith('---')) return false;
+        if (line.startsWith('>')) return false;
+        if (line.startsWith('|')) return false;
+        if (line.startsWith('### Ilustração')) return false;
+        if (line.startsWith('### Prompt')) return false;
+        return true;
+      })
+      .map((line) => line.replaceFirst(RegExp(r'^-\s+'), ''))
+      .join('\n');
+}
+
+String _joinPresent(Iterable<String?> values) {
+  return values
+      .whereType<String>()
+      .map((value) => value.trim())
+      .where((value) => value.isNotEmpty)
+      .join('. ');
+}
+
+String _specialHeading(String block) {
+  final match = RegExp(
+    r'^### Habilidade especial\s+—\s+(.+)$',
+    multiLine: true,
+  ).firstMatch(block);
+  return match?.group(1)?.trim() ?? '';
+}
+
 String _spellTier(String type) {
   final lower = type.toLowerCase();
   if (lower.contains('forte')) return 'Magia forte';
@@ -474,6 +666,43 @@ String _usageLimitFromText(String text) {
   if (lower.contains('descanso longo')) return 'longRest';
   if (lower.contains('combate') || lower.contains('forte')) return 'combat';
   return 'free';
+}
+
+String? _actionCostFromText(String text) {
+  final lower = text.toLowerCase();
+  if (lower.contains('reação')) return 'Reação';
+  if (lower.contains('ação')) return 'Ação';
+  if (lower.contains('fora de combate')) return 'Fora de combate';
+  return null;
+}
+
+String? _raceActionCost(String race) {
+  return switch (race) {
+    'Elfo' => 'Reação',
+    'Humano' || 'Anão' || 'Orc' => 'Ao disparar o efeito',
+    _ => null,
+  };
+}
+
+String? _damageFromText(String text) {
+  final lower = text.toLowerCase();
+  if (!lower.contains('dano')) return null;
+  return _firstRoll(text)?.$1 ?? _firstNumberEffect(text);
+}
+
+String? _healingFromText(String text) {
+  final lower = text.toLowerCase();
+  if (!lower.contains('cura') &&
+      !lower.contains('recupera') &&
+      !lower.contains('vida')) {
+    return null;
+  }
+  return _firstRoll(text)?.$1 ?? _firstNumberEffect(text);
+}
+
+String? _firstNumberEffect(String text) {
+  final match = RegExp(r'([+-]?\d+\s*(?:de\s+\w+)?)').firstMatch(text);
+  return match?.group(1)?.trim();
 }
 
 List<String> _splitList(String value) {
@@ -510,6 +739,32 @@ String _classFromKitName(String name) {
   if (lower.contains('mago')) return 'Mago';
   if (lower.contains('clérigo')) return 'Clérigo';
   return '';
+}
+
+String _initialPowerName(String source, String className) {
+  final rows = _tableAfter(source, 'Progressão do $className');
+  if (rows.isEmpty) return '';
+  return rows.first['Habilidade'] ?? '';
+}
+
+int _raceNumber(String race) {
+  return switch (race) {
+    'Humano' => 4,
+    'Elfo' => 5,
+    'Anão' => 6,
+    'Orc' => 7,
+    _ => 0,
+  };
+}
+
+int _classNumber(String className) {
+  return switch (className) {
+    'Guerreiro' => 9,
+    'Ladino' => 10,
+    'Mago' => 11,
+    'Clérigo' => 12,
+    _ => 0,
+  };
 }
 
 String _slug(String value) {

@@ -7,36 +7,44 @@
       "Atletismo",
       "Combate"
     ],
-    "initialPowerName": "Golpe Poderoso"
+    "initialPowerName": "Golpe Poderoso",
+    "description": "O Guerreiro é especialista em combate físico.",
+    "source": "Livro de Raças e Classes > Guerreiro"
   },
   {
     "id": "ladino",
     "name": "Ladino",
-    "role": "Furtividade e precisão",
+    "role": "Mobilidade, furtividade e oportunismo",
     "skills": [
       "Furtividade",
       "Percepção"
     ],
-    "initialPowerName": "Ataque Oportunista"
+    "initialPowerName": "Ataque Oportunista",
+    "description": "O Ladino é especialista em furtividade, precisão, truques e ataques oportunistas.",
+    "source": "Livro de Raças e Classes > Ladino"
   },
   {
     "id": "mago",
     "name": "Mago",
-    "role": "Magia arcana e utilidade",
+    "role": "Magia arcana, controle e utilidade",
     "skills": [
       "Conhecimento",
       "Misticismo"
     ],
-    "initialPowerName": "Magia Arcana"
+    "initialPowerName": "Magia Arcana",
+    "description": "O Mago manipula energia arcana, conhecimento antigo e forças sobrenaturais.",
+    "source": "Livro de Raças e Classes > Mago"
   },
   {
     "id": "clerigo",
     "name": "Clérigo",
-    "role": "Cura, fé e proteção",
+    "role": "Cura, fé, proteção e suporte",
     "skills": [
       "Ofício",
       "Misticismo"
     ],
-    "initialPowerName": "Cura Sagrada"
+    "initialPowerName": "Cura Sagrada",
+    "description": "O Clérigo usa fé, vontade, bênçãos ou energia espiritual.",
+    "source": "Livro de Raças e Classes > Clérigo"
   }
 ]

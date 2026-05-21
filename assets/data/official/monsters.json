@@ -10,7 +10,11 @@
     "movement": "Rápido, rastejante",
     "instinct": "Morder, fugir e voltar em grupo",
     "special": "Enxame Irritante",
-    "description": "Bando, pressão, distração"
+    "description": "Bando, pressão, distração",
+    "behavior": "Ratos gigantes atacam quando estão famintos, encurralados ou protegendo ninho.\nEles fogem se metade do bando morrer.",
+    "encounterUse": "4 a 8 ratos para personagens nível 1;\n1 bando de ratos como distração em esgoto;\nRatos junto de um lodo ou criatura maior.",
+    "rewards": "Marcas de mordida em madeira;\nRestos de comida roubada;\nUm cadáver pequeno arrastado para o ninho;\nUm item perdido entre lixo e ossos.",
+    "source": "Livro de Monstros > Rato de Porão Gigante"
   },
   {
     "id": "morcego-faminto",
@@ -23,7 +27,11 @@
     "movement": "Voador",
     "instinct": "Morder e sair do alcance",
     "special": "Rasante",
-    "description": "Bando voador, distração"
+    "description": "Bando voador, distração",
+    "behavior": "Morcegos famintos atacam luz, barulho e criaturas feridas.\nEles não lutam até a morte se houver rota de fuga.",
+    "encounterUse": "6 morcegos em caverna inicial;\nBando de morcegos protegendo entrada de ruína;\nMorcegos fugindo antes de uma criatura maior aparecer.",
+    "rewards": "Fezes e ossos no chão da caverna;\nMarcas de arranhão no teto;\nRuídos indicando passagens altas;\nIndício de que algo maior os assustou.",
+    "source": "Livro de Monstros > Morcego Faminto"
   },
   {
     "id": "goblin-covarde",
@@ -36,7 +44,11 @@
     "movement": "Normal",
     "instinct": "Atacar de longe, fugir se ameaçado",
     "special": "Grito de Pânico",
-    "description": "Lacaio, distração, número"
+    "description": "Lacaio, distração, número",
+    "behavior": "Goblins covardes evitam combate justo.\nEles atacam em grupo, jogam pedras, se escondem atrás de caixas e fogem quando a luta vira contra eles.",
+    "encounterUse": "3 a 6 goblins covardes para início de campanha;\n2 goblins covardes protegendo um goblin saqueador;\nLacaios do Rei Goblin.",
+    "rewards": "Faca enferrujada;\nSaco com moedas pequenas;\nMapa mal desenhado;\nSímbolo tribal rabiscado.",
+    "source": "Livro de Monstros > Goblin Covarde"
   },
   {
     "id": "esqueleto-estalado",
@@ -49,7 +61,11 @@
     "movement": "Lento",
     "instinct": "Atacar a criatura viva mais próxima",
     "special": "Não Sente Medo",
-    "description": "Lacaio morto-vivo, bando"
+    "description": "Lacaio morto-vivo, bando",
+    "behavior": "Eles obedecem ordens simples ou atacam qualquer vivo que entre na área.\nSão burros, previsíveis e insistentes.",
+    "encounterUse": "4 esqueletos estalados em cemitério inicial;\nLacaios de necromante;\nCriaturas que levantam quando o grupo pega um item.",
+    "rewards": "Ossos com marcas de ritual;\nFragmentos de armadura antiga;\nSímbolo de necromancia;\nCrânio com runa apagada.",
+    "source": "Livro de Monstros > Esqueleto Estalado"
   },
   {
     "id": "lodo-miudo",
@@ -62,7 +78,11 @@
     "movement": "Lento, rastejante",
     "instinct": "Envolver comida e matéria orgânica",
     "special": "Corpo Grudento",
-    "description": "Obstáculo vivo, nojo, desgaste"
+    "description": "Obstáculo vivo, nojo, desgaste",
+    "behavior": "Lodos miúdos não são inteligentes.\nEles avançam lentamente contra calor, cheiro de sangue e comida.",
+    "encounterUse": "2 a 4 lodos em esgoto;\nLodos cobrindo uma passagem estreita;\nLodos aparecendo depois de uma armadilha química.",
+    "rewards": "Objetos corroídos dentro da gosma;\nChave parcialmente dissolvida;\nOssos limpos demais;\nSinal de que algo alquímico contaminou o local.",
+    "source": "Livro de Monstros > Lodo Miúdo"
   },
   {
     "id": "corvo-carnical",
@@ -75,7 +95,11 @@
     "movement": "Voador",
     "instinct": "Bicar feridos e fugir",
     "special": "Farejar Sangue",
-    "description": "Presságio, bando voador"
+    "description": "Presságio, bando voador",
+    "behavior": "Eles seguem campos de batalha, cemitérios e lugares amaldiçoados.\nSe muitos corvos estiverem parados em uma área, algo morreu ou vai morrer ali.",
+    "encounterUse": "4 a 8 corvos como mau presságio;\nBando atacando personagem caído;\nCorvos servindo de olhos para uma bruxa.",
+    "rewards": "Penas negras oleosas;\nRestos de carne recente;\nUm anel preso no ninho;\nDireção para um cadáver importante.",
+    "source": "Livro de Monstros > Corvo Carniçal"
   },
   {
     "id": "aranha-de-toca",
@@ -88,7 +112,11 @@
     "movement": "Rápido, escala paredes",
     "instinct": "Morder e recuar para teias",
     "special": "Picada Irritante",
-    "description": "Bando, veneno leve, armadilha viva"
+    "description": "Bando, veneno leve, armadilha viva",
+    "behavior": "Atacam em grupo, preferem emboscada e recuam para buracos e teias.",
+    "encounterUse": "6 aranhas em uma sala cheia de teias;\nAranhas antes de uma aranha gigante;\nArmadilha natural em ruínas abandonadas.",
+    "rewards": "Teia resistente;\nPequeno casulo com item dentro;\nMarcas de veneno;\nPassagem escondida atrás de teias.",
+    "source": "Livro de Monstros > Aranha de Toca"
   },
   {
     "id": "zumbi-rastejante",
@@ -101,7 +129,11 @@
     "movement": "Muito lento, rastejante",
     "instinct": "Agarrar pernas e morder",
     "special": "Agarrar Tornozelo",
-    "description": "Horror, atraso, lacaio morto-vivo"
+    "description": "Horror, atraso, lacaio morto-vivo",
+    "behavior": "Zumbis rastejantes não têm estratégia.\nEles tentam segurar personagens para que outros mortos-vivos ataquem.",
+    "encounterUse": "3 zumbis rastejantes em corredor estreito;\nLacaios de necromante;\nObstáculo em cemitério ou campo de batalha.",
+    "rewards": "Roupas antigas;\nMedalhão de família;\nMarca de ritual no peito;\nIndício de uma praga necromântica.",
+    "source": "Livro de Monstros > Zumbi Rastejante"
   },
   {
     "id": "goblin-saqueador",
@@ -114,7 +146,11 @@
     "movement": "Normal",
     "instinct": "Cercar alvos frágeis",
     "special": "Ataque em Maioria",
-    "description": "Agressor leve, lacaio"
+    "description": "Agressor leve, lacaio",
+    "behavior": "Ele não gosta de luta justa.\nPrefere emboscada, gritaria e vantagem numérica.",
+    "encounterUse": "2 goblins saqueadores contra grupo nível 1;\n1 saqueador com 3 goblins covardes;\nPatrulha goblin junto de um arqueiro.",
+    "rewards": "Moedas roubadas;\nComida velha;\nSímbolo do bando;\nChave de jaula.",
+    "source": "Livro de Monstros > Goblin Saqueador"
   },
   {
     "id": "goblin-arqueiro",
@@ -127,7 +163,11 @@
     "movement": "Normal",
     "instinct": "Ficar longe e atacar alvos frágeis",
     "special": "Disparo Covarde",
-    "description": "Atirador, suporte"
+    "description": "Atirador, suporte",
+    "behavior": "Fica atrás de barris, pedras, árvores ou goblins maiores.\nSe for alcançado corpo a corpo, tenta fugir.",
+    "encounterUse": "1 arqueiro protegendo 2 goblins saqueadores;\nArqueiros em plataformas elevadas;\nGoblins defendendo ponte ou barricada.",
+    "rewards": "Flechas tortas;\nArco curto malfeito;\nVirotes envenenados fracos;\nRecado do chefe goblin.",
+    "source": "Livro de Monstros > Goblin Arqueiro"
   },
   {
     "id": "bandido-simples",
@@ -140,7 +180,11 @@
     "movement": "Normal",
     "instinct": "Roubar, ameaçar e fugir se perder",
     "special": "Rendição Covarde",
-    "description": "Inimigo humano comum"
+    "description": "Inimigo humano comum",
+    "behavior": "Bandidos simples querem sobreviver.\nEles atacam viajantes fracos, evitam heróis e fogem se a luta fica ruim.",
+    "encounterUse": "2 bandidos em estrada;\n3 bandidos cobrando pedágio ilegal;\nBandidos acompanhando um veterano.",
+    "rewards": "Moedas pequenas;\nCarta de cobrança;\nMapa de esconderijo;\nNome de um contratante.",
+    "source": "Livro de Monstros > Bandido Simples"
   },
   {
     "id": "lobo-de-estrada",
@@ -153,7 +197,11 @@
     "movement": "Rápido",
     "instinct": "Isolar o alvo mais fraco",
     "special": "Caçada em Matilha",
-    "description": "Agressor rápido, perseguidor"
+    "description": "Agressor rápido, perseguidor",
+    "behavior": "Lobos cercam, testam fraquezas e recuam se sofrerem dano demais.\nNão são malignos, apenas famintos.",
+    "encounterUse": "2 lobos para grupo nível 1;\n3 lobos atacando acampamento;\nLobos fugindo de uma criatura corrompida maior.",
+    "rewards": "Pegadas na lama;\nCarcaça de animal;\nMarcas de mordida;\nIndício de desequilíbrio na floresta.",
+    "source": "Livro de Monstros > Lobo de Estrada"
   },
   {
     "id": "esqueleto-armado",
@@ -166,7 +214,11 @@
     "movement": "Normal",
     "instinct": "Obedecer ordem e atacar vivos",
     "special": "Ossos Secos",
-    "description": "Soldado morto-vivo"
+    "description": "Soldado morto-vivo",
+    "behavior": "Esqueletos armados não fogem, não sentem medo e não negociam.\nEles são bons guardas de cripta.",
+    "encounterUse": "2 esqueletos armados em tumba inicial;\n1 esqueleto armado liderando 3 esqueletos estalados;\nGuarda de necromante.",
+    "rewards": "Espada enferrujada;\nEscudo com brasão antigo;\nAnel no dedo ósseo;\nRuna necromântica gravada no crânio.",
+    "source": "Livro de Monstros > Esqueleto Armado"
   },
   {
     "id": "cultista-iniciante",
@@ -179,7 +231,11 @@
     "movement": "Normal",
     "instinct": "Proteger ritual e obedecer líder",
     "special": "Sussurro Sombrio",
-    "description": "Suporte fraco, ritualista"
+    "description": "Suporte fraco, ritualista",
+    "behavior": "Cultistas iniciantes são fanáticos, mas ainda sentem medo.\nPodem fugir se o ritual falhar ou se o líder morrer.",
+    "encounterUse": "2 cultistas protegendo altar;\n3 cultistas e 1 acólito sombrio;\nCultistas tentando completar ritual enquanto o grupo luta.",
+    "rewards": "Medalhão estranho;\nLivro incompleto;\nSímbolo de culto;\nNome de uma entidade sombria.",
+    "source": "Livro de Monstros > Cultista Iniciante"
   },
   {
     "id": "guarda-corrupto",
@@ -192,7 +248,11 @@
     "movement": "Normal",
     "instinct": "Controlar, intimidar e chamar reforços",
     "special": "Chamado de Reforço",
-    "description": "Soldado urbano, obstáculo social e físico"
+    "description": "Soldado urbano, obstáculo social e físico",
+    "behavior": "Prefere prender, ameaçar e abusar da autoridade.\nPode negociar se for subornado ou intimidado.",
+    "encounterUse": "2 guardas na porta de depósito;\nGuarda corrupto protegendo bandido nobre;\nCena que pode virar combate ou negociação.",
+    "rewards": "Chave de cela;\nCarta de suborno;\nInsígnia da cidade;\nLista de pessoas extorquidas.",
+    "source": "Livro de Monstros > Guarda Corrupto"
   },
   {
     "id": "cao-de-guerra",
@@ -205,7 +265,11 @@
     "movement": "Rápido",
     "instinct": "Perseguir quem foge",
     "special": "Derrubar",
-    "description": "Perseguidor, pressão física"
+    "description": "Perseguidor, pressão física",
+    "behavior": "Cães de guerra obedecem comandos simples.\nPodem ser acalmados com comida, Natureza ou vínculo com animais.",
+    "encounterUse": "1 cão com 2 guardas;\n2 cães perseguindo o grupo;\nCão protegendo acampamento bandido.",
+    "rewards": "Coleira com brasão;\nRastro até esconderijo;\nSinal de que alguém treina animais para combate.",
+    "source": "Livro de Monstros > Cão de Guerra"
   },
   {
     "id": "bandido-veterano",
@@ -218,7 +282,11 @@
     "movement": "Normal",
     "instinct": "Derrubar o alvo mais perigoso primeiro",
     "special": "Golpe Sujo",
-    "description": "Agressor humano, líder menor"
+    "description": "Agressor humano, líder menor",
+    "behavior": "Bandido veterano sabe quando está perdendo.\nPode fugir, render-se ou tentar usar refém.",
+    "encounterUse": "1 veterano como chefe inicial;\n2 veteranos com bandidos simples;\nGuarda-costas de nobre corrupto.",
+    "rewards": "Arma de boa qualidade;\nContrato de assalto;\nMapa de rotas comerciais;\nNome de um líder maior.",
+    "source": "Livro de Monstros > Bandido Veterano"
   },
   {
     "id": "orc-mercenario",
@@ -231,7 +299,11 @@
     "movement": "Normal",
     "instinct": "Avançar contra o mais forte",
     "special": "Fúria Curta",
-    "description": "Agressor corpo a corpo"
+    "description": "Agressor corpo a corpo",
+    "behavior": "Nem todo orc mercenário é maligno.\nAlguns lutam por contrato, dívida, clã ou sobrevivência.\nPode conversar se respeitado.",
+    "encounterUse": "1 orc mercenário como rival;\n2 orcs protegendo uma caravana;\nOrc contratado por vilão humano.",
+    "rewards": "Machado bem cuidado;\nMedalhão tribal;\nContrato de mercenário;\nInformação sobre quem o contratou.",
+    "source": "Livro de Monstros > Orc Mercenário"
   },
   {
     "id": "lobo-sombrio",
@@ -244,7 +316,11 @@
     "movement": "Rápido",
     "instinct": "Caçar o isolado",
     "special": "Uivo Sombrio",
-    "description": "Agressor rápido, medo leve"
+    "description": "Agressor rápido, medo leve",
+    "behavior": "Lobos sombrios não são apenas animais.\nEles parecem guiados por corrupção, magia ou espírito maligno.",
+    "encounterUse": "1 lobo sombrio como ameaça de floresta;\n2 lobos sombrios contra grupo nível 4;\nLacaios de bruxa ou druida corrompido.",
+    "rewards": "Pelo negro com energia fria;\nPegadas que somem na névoa;\nIndício de corrupção espiritual;\nPresas usadas em ritual.",
+    "source": "Livro de Monstros > Lobo Sombrio"
   },
   {
     "id": "esqueleto-de-guarda",
@@ -257,7 +333,11 @@
     "movement": "Normal",
     "instinct": "Proteger entrada, altar ou mestre",
     "special": "Postura Imóvel",
-    "description": "Defensor morto-vivo"
+    "description": "Defensor morto-vivo",
+    "behavior": "Ele não persegue longe.\nSua ordem costuma ser proteger algo específico.",
+    "encounterUse": "1 guarda com 3 esqueletos estalados;\n2 guardas protegendo túmulo;\nGuarda-costas de necromante.",
+    "rewards": "Brasão antigo;\nChave presa à armadura;\nInscrição funerária;\nPista sobre quem foi enterrado ali.",
+    "source": "Livro de Monstros > Esqueleto de Guarda"
   },
   {
     "id": "aranha-gigante",
@@ -270,7 +350,11 @@
     "movement": "Escala paredes e teto",
     "instinct": "Prender e isolar presa",
     "special": "Teia Pegajosa",
-    "description": "Emboscador, controle leve"
+    "description": "Emboscador, controle leve",
+    "behavior": "Ataca de cima, usa escuridão e tenta separar o grupo.",
+    "encounterUse": "1 aranha gigante em caverna;\n1 aranha gigante + 6 aranhas de toca;\nAranha protegendo ovos.",
+    "rewards": "Seda resistente;\nCasulos com vítimas;\nVeneno fraco;\nItem preso em teia.",
+    "source": "Livro de Monstros > Aranha Gigante"
   },
   {
     "id": "acolito-sombrio",
@@ -283,7 +367,11 @@
     "movement": "Normal",
     "instinct": "Ficar atrás de lacaios e enfraquecer heróis",
     "special": "Benção Profana",
-    "description": "Suporte mágico, controle"
+    "description": "Suporte mágico, controle",
+    "behavior": "Evita linha de frente.\nTenta completar rituais, fortalecer lacaios e fugir se ficar sozinho.",
+    "encounterUse": "1 acólito + 2 cultistas iniciantes;\n1 acólito + 3 esqueletos;\nSubchefe antes do necromante.",
+    "rewards": "Página de ritual;\nSímbolo profano;\nVela negra;\nNome de entidade sombria.",
+    "source": "Livro de Monstros > Acólito Sombrio"
   },
   {
     "id": "soldado-corrompido",
@@ -296,7 +384,11 @@
     "movement": "Normal",
     "instinct": "Obedecer ordens sombrias",
     "special": "Dor Ignorada",
-    "description": "Soldado resistente"
+    "description": "Soldado resistente",
+    "behavior": "Não conversa de forma coerente.\nPode ter breves momentos de consciência se o grupo tentar purificar a corrupção.",
+    "encounterUse": "2 soldados corrompidos em fortaleza;\nSoldados protegendo um chefe sombrio;\nAntigos guardas de cidade amaldiçoada.",
+    "rewards": "Insígnia militar;\nVeios escuros na pele;\nCarta da família;\nIndício de maldição coletiva.",
+    "source": "Livro de Monstros > Soldado Corrompido"
   },
   {
     "id": "javaporco-selvagem",
@@ -309,7 +401,11 @@
     "movement": "Rápido em linha reta",
     "instinct": "Investir contra invasores",
     "special": "Investida",
-    "description": "Carga, pressão física"
+    "description": "Carga, pressão física",
+    "behavior": "Ataca para defender território, filhotes ou ninho.\nPode ser evitado com Natureza ou comida.",
+    "encounterUse": "1 javaporco em floresta;\n2 javaporcos protegendo clareira;\nMontaria selvagem de goblins.",
+    "rewards": "Presas valiosas;\nCouro grosso;\nPegadas profundas;\nSinal de que algo invadiu seu território.",
+    "source": "Livro de Monstros > Javaporco Selvagem"
   },
   {
     "id": "ogro-jovem",
@@ -322,7 +418,11 @@
     "movement": "Lento, passos pesados",
     "instinct": "Esmagar a maior ameaça",
     "special": "Golpe Pesado",
-    "description": "Brutamontes, dano alto"
+    "description": "Brutamontes, dano alto",
+    "behavior": "Ogro jovem é direto, irritável e fácil de enganar.\nEle pode ser distraído por comida, barulho ou provocação.",
+    "encounterUse": "Chefe para grupo nível 3;\nMonstro forte para grupo nível 5;\nOgro com goblins que o manipulam.",
+    "rewards": "Clava enorme;\nSaco com objetos roubados;\nOssos de vítimas;\nMarca de corrente indicando que era controlado.",
+    "source": "Livro de Monstros > Ogro Jovem"
   },
   {
     "id": "capitao-bandido",
@@ -335,7 +435,11 @@
     "movement": "Normal",
     "instinct": "Controlar o campo e usar aliados",
     "special": "Ordem Rápida",
-    "description": "Líder, agressor tático"
+    "description": "Líder, agressor tático",
+    "behavior": "Ele usa reféns, cobertura, negociação e retirada estratégica.\nSe capturado, pode revelar informações para sobreviver.",
+    "encounterUse": "Chefe de estrada para níveis 3 a 4;\nForte com bandidos veteranos;\nVilão menor de uma vila.",
+    "rewards": "Espada boa;\nLivro de dívidas;\nMapa de esconderijos;\nCarta de contratante nobre.",
+    "source": "Livro de Monstros > Capitão Bandido"
   },
   {
     "id": "urso-corrompido",
@@ -348,7 +452,11 @@
     "movement": "Normal, forte",
     "instinct": "Destruir o que se aproxima",
     "special": "Rugido de Dor",
-    "description": "Fera brutal, ameaça natural corrompida"
+    "description": "Fera brutal, ameaça natural corrompida",
+    "behavior": "Ele não é maligno, mas está sofrendo.\nPode ser morto, acalmado temporariamente ou purificado em cena especial.",
+    "encounterUse": "Chefe trágico de floresta;\nForte em encontro de nível 5;\nGuarda involuntário de área corrompida.",
+    "rewards": "Pelo com manchas negras;\nCristal de corrupção preso na carne;\nRastro até fonte da maldição;\nPossibilidade de purificação como solução alternativa.",
+    "source": "Livro de Monstros > Urso Corrompido"
   },
   {
     "id": "cavaleiro-sombrio",
@@ -361,7 +469,11 @@
     "movement": "Normal",
     "instinct": "Desafiar o guerreiro mais honrado ou forte",
     "special": "Contra-Golpe",
-    "description": "Duelista, defensor sombrio"
+    "description": "Duelista, defensor sombrio",
+    "behavior": "Ele luta com disciplina.\nPode reconhecer coragem, juramento ou símbolo antigo.",
+    "encounterUse": "Guarda de tumba nobre;\nMini-chefe de castelo amaldiçoado;\nRival de Guerreiro ou Clérigo.",
+    "rewards": "Espada escura;\nBrasão apagado;\nJuramento gravado na armadura;\nHistória de traição antiga.",
+    "source": "Livro de Monstros > Cavaleiro Sombrio"
   },
   {
     "id": "troll-pequeno",
@@ -374,7 +486,11 @@
     "movement": "Normal",
     "instinct": "Comer e continuar avançando",
     "special": "Regeneração Fraca",
-    "description": "Tanque, ameaça persistente"
+    "description": "Tanque, ameaça persistente",
+    "behavior": "Troll pequeno não é estratégico.\nEle avança, quebra coisas e tenta agarrar comida.",
+    "encounterUse": "Chefe físico para níveis 5 a 6;\nGuardião de ponte;\nCriatura que exige descobrir fraqueza a fogo.",
+    "rewards": "Sangue regenerativo;\nOssos de vítimas;\nTesouro preso na barriga ou caverna;\nPista de que fogo impede regeneração.",
+    "source": "Livro de Monstros > Troll Pequeno"
   },
   {
     "id": "golem-quebrado",
@@ -387,7 +503,11 @@
     "movement": "Lento",
     "instinct": "Proteger área específica",
     "special": "Corpo de Pedra",
-    "description": "Defensor, obstáculo pesado"
+    "description": "Defensor, obstáculo pesado",
+    "behavior": "Não persegue para longe.\nPode ser desligado por runa, chave antiga ou teste de Conhecimento/Misticismo.",
+    "encounterUse": "Guardião de ruína;\nObstáculo que pode ser vencido por combate ou inteligência;\nProtetor de relíquia.",
+    "rewards": "Núcleo rúnico;\nPedra rara;\nInscrição antiga;\nPista sobre civilização perdida.",
+    "source": "Livro de Monstros > Golem Quebrado"
   },
   {
     "id": "manticora-jovem",
@@ -400,7 +520,11 @@
     "movement": "Normal, voo curto",
     "instinct": "Ferir de longe antes de avançar",
     "special": "Espinho da Cauda",
-    "description": "Fera especial, atirador natural"
+    "description": "Fera especial, atirador natural",
+    "behavior": "É cruel, territorial e gosta de assustar presas.\nPode falar frases simples se o mestre quiser torná-la mais fantástica.",
+    "encounterUse": "Monstro raro em montanhas;\nCaçadora de ruínas;\nGuarda de bruxa ou feiticeiro.",
+    "rewards": "Espinhos venenosos;\nCouro raro;\nNinho com objetos brilhantes;\nMarca de caçadores anteriores.",
+    "source": "Livro de Monstros > Mantícora Jovem"
   },
   {
     "id": "elemental-menor-de-fogo",
@@ -413,7 +537,11 @@
     "movement": "Normal, atravessa pequenas frestas",
     "instinct": "Queimar combustível e criaturas próximas",
     "special": "Corpo Flamejante",
-    "description": "Dano elemental, ameaça ambiental"
+    "description": "Dano elemental, ameaça ambiental",
+    "behavior": "Não pensa como criatura comum.\nSegue calor, combustível e magia.",
+    "encounterUse": "Invocado por ritual instável;\nGuardião de forja antiga;\nConsequência de magia fora de controle.",
+    "rewards": "Cinzas mágicas;\nPedra quente no centro do corpo;\nRastro de queimadura;\nIndício de magia elemental.",
+    "source": "Livro de Monstros > Elemental Menor de Fogo"
   },
   {
     "id": "xama-goblin-da-pedra-oca",
@@ -425,8 +553,12 @@
     "damage": "1d6 mágico",
     "movement": "Normal",
     "instinct": "Fortalecer goblins e fugir se sozinho",
-    "special": "Grito Tribal; Pedra de Azar",
-    "description": "Suporte, líder goblin"
+    "special": "Grito Tribal",
+    "description": "Suporte, líder goblin",
+    "behavior": "O xamã evita combate direto.\nFica atrás dos goblins e tenta negociar se perder seus lacaios.",
+    "encounterUse": "Xamã + 2 goblins saqueadores + 3 goblins covardes;\nChefe de caverna para níveis 2 a 4;\nInimigo recorrente que sempre foge.",
+    "rewards": "Totem tribal;\nPedra mágica rachada;\nMapa da caverna;\nPergaminho roubado de mago.",
+    "source": "Livro de Monstros > Xamã Goblin da Pedra Oca"
   },
   {
     "id": "lider-dos-salteadores",
@@ -438,8 +570,12 @@
     "damage": "1d8",
     "movement": "Normal",
     "instinct": "Usar aliados e terreno",
-    "special": "Plano Sujo; Golpe de Oportunidade",
-    "description": "Líder humano, tático"
+    "special": "Plano Sujo",
+    "description": "Líder humano, tático",
+    "behavior": "É covarde o suficiente para fugir e inteligente o suficiente para voltar com reforços.",
+    "encounterUse": "Líder + 2 bandidos veteranos;\nLíder + 3 bandidos simples + 1 cão de guerra;\nConfronto em acampamento, ponte ou armazém.",
+    "rewards": "Contrato de roubo;\nChave de cofre;\nJoia roubada;\nNome de nobre financiador.",
+    "source": "Livro de Monstros > Líder dos Salteadores"
   },
   {
     "id": "necromante-iniciante",
@@ -451,8 +587,12 @@
     "damage": "1d6 sombrio",
     "movement": "Normal",
     "instinct": "Ficar longe e usar mortos como escudo",
-    "special": "Levantar Ossos; Toque de Fraqueza",
-    "description": "Invocador, suporte morto-vivo"
+    "special": "Levantar Ossos",
+    "description": "Invocador, suporte morto-vivo",
+    "behavior": "Tem medo de morrer, mas é arrogante.\nPode tentar barganhar conhecimento proibido.",
+    "encounterUse": "Necromante + 4 esqueletos estalados;\nNecromante + 2 esqueletos armados;\nChefe de cemitério para níveis 3 a 5.",
+    "rewards": "Grimório incompleto;\nPó de osso ritual;\nNome de mestre necromante;\nMapa de cripta antiga.",
+    "source": "Livro de Monstros > Necromante Iniciante"
   },
   {
     "id": "guardiao-da-mina-antiga",
@@ -464,8 +604,12 @@
     "damage": "1d8",
     "movement": "Lento",
     "instinct": "Expulsar invasores da mina",
-    "special": "Batida Sísmica; Runa Exposta",
-    "description": "Defensor pesado, obstáculo"
+    "special": "Batida Sísmica",
+    "description": "Defensor pesado, obstáculo",
+    "behavior": "Não é maligno.\nPode ser desligado se o grupo descobrir a ordem correta ou provar ligação com anões.",
+    "encounterUse": "Chefe de exploração de mina;\nGuardião de relíquia;\nCombate alternativo com solução por puzzle.",
+    "rewards": "Núcleo rúnico;\nMinério raro;\nInscrição anã;\nAcesso a sala protegida.",
+    "source": "Livro de Monstros > Guardião da Mina Antiga"
   },
   {
     "id": "bruxa-do-brejo-branco",
@@ -477,8 +621,12 @@
     "damage": "1d8 sombrio",
     "movement": "Normal, ignora terreno pantanoso",
     "instinct": "Separar, enganar e amaldiçoar",
-    "special": "Névoa do Brejo; Maldição de Osso; Rir e Sumir",
-    "description": "Controle, ilusão, maldição"
+    "special": "Névoa do Brejo",
+    "description": "Controle, ilusão, maldição",
+    "behavior": "A bruxa prefere barganhas antes de combate.\nEla oferece atalhos, cura, informação ou vingança em troca de favores perigosos.",
+    "encounterUse": "Chefe de pântano para níveis 5 a 7;\nBruxa + 2 lobos sombrios;\nBruxa + corvos carniçais como olhos;\nVilã recorrente que foge se ameaçada.",
+    "rewards": "Frasco de névoa;\nOsso marcado com nome;\nReceita de antídoto;\nPista sobre maldição maior.",
+    "source": "Livro de Monstros > Bruxa do Brejo Branco"
   },
   {
     "id": "cavaleiro-sem-juramento",
@@ -490,8 +638,12 @@
     "damage": "1d8",
     "movement": "Normal",
     "instinct": "Punir quem fala de honra ou juramento",
-    "special": "Desafio Sombrio; Aparar; Fase da Armadura Vazia",
-    "description": "Duelista, tanque, chefe marcial"
+    "special": "Desafio Sombrio",
+    "description": "Duelista, tanque, chefe marcial",
+    "behavior": "Ele conversa antes da luta.\nPode ser enfraquecido se alguém lembrar seu juramento original ou apresentar símbolo de sua antiga ordem.",
+    "encounterUse": "Chefe de castelo amaldiçoado;\nGuardião de ponte antiga;\nVilão ligado ao passado de um Guerreiro ou Clérigo.",
+    "rewards": "Fragmento da espada juramentada;\nBrasão antigo;\nArmadura amaldiçoada;\nNome de quem causou a queda do cavaleiro.",
+    "source": "Livro de Monstros > Cavaleiro Sem Juramento"
   },
   {
     "id": "rei-goblin-da-pedra-oca",
@@ -503,8 +655,12 @@
     "damage": "1d8",
     "movement": "Normal",
     "instinct": "Mandar outros morrerem por ele",
-    "special": "Joguem Neles!; Escudo Vivo; Coroa de Lata",
-    "description": "Líder de horda, controle por lacaios"
+    "special": "Joguem Neles!",
+    "description": "Líder de horda, controle por lacaios",
+    "behavior": "Ele é covarde, teatral e cruel.\nPode tentar negociar oferecendo tesouro roubado.",
+    "encounterUse": "Rei Goblin + xamã goblin + goblins covardes;\nChefe de caverna para níveis 4 a 6;\nVilão cômico, perigoso e memorável.",
+    "rewards": "Coroa de lata;\nTrono com compartimento secreto;\nTesouro roubado da vila;\nMapa para ruína mais profunda.",
+    "source": "Livro de Monstros > Rei Goblin da Pedra Oca"
   },
   {
     "id": "espectro-da-capela-afundada",
@@ -516,8 +672,12 @@
     "damage": "1d8 espiritual",
     "movement": "Flutua, atravessa frestas",
     "instinct": "Expulsar vivos e reviver tragédia",
-    "special": "Toque Gélido; Lamento dos Mortos; Fraqueza por Memória",
-    "description": "Chefe espiritual, medo, controle"
+    "special": "Toque Gélido",
+    "description": "Chefe espiritual, medo, controle",
+    "behavior": "Ele repete frases antigas, acusa os vivos e protege um segredo.\nPode ser derrotado por combate ou libertado por investigação.",
+    "encounterUse": "Chefe de capela abandonada;\nMistério espiritual;\nAmeaça que combina combate e roleplay.",
+    "rewards": "Relicário enferrujado;\nDiário molhado;\nNome gravado em sino quebrado;\nBênção espiritual se for libertado.",
+    "source": "Livro de Monstros > Espectro da Capela Afundada"
   },
   {
     "id": "alquimista-mutado",
@@ -529,8 +689,12 @@
     "damage": "1d8",
     "movement": "Normal, irregular",
     "instinct": "Testar mutações e sobreviver",
-    "special": "Frasco Instável; Mutação Descontrolada",
-    "description": "Chefe mutante, dano e condições"
+    "special": "Frasco Instável",
+    "description": "Chefe mutante, dano e condições",
+    "behavior": "Oscila entre lucidez e loucura.\nPode pedir ajuda, atacar e depois implorar para ser curado.",
+    "encounterUse": "Chefe de laboratório;\nConsequência de magia/alquimia proibida;\nVilão trágico que deixou monstros escaparem.",
+    "rewards": "Fórmula incompleta;\nPoções instáveis;\nDiário de pesquisa;\nAntídoto parcial.",
+    "source": "Livro de Monstros > Alquimista Mutado"
   },
   {
     "id": "lorde-necromante-da-coroa-fria",
@@ -542,8 +706,12 @@
     "damage": "1d10 sombrio",
     "movement": "Normal",
     "instinct": "Controlar a luta com mortos-vivos",
-    "special": "Ordem da Coroa; Levantar Servos; Frio da Sepultura",
-    "description": "Invocador, controle, vilão de arco"
+    "special": "Ordem da Coroa",
+    "description": "Invocador, controle, vilão de arco",
+    "behavior": "Ele fala como alguém que já venceu.\nTenta convencer personagens a aceitarem a morte como ordem natural.",
+    "encounterUse": "Final de arco morto-vivo;\nNecromante + 2 guardas mortos-vivos;\nRitual que precisa ser interrompido durante a luta.",
+    "rewards": "Coroa Fria quebrada;\nGrimório necromântico;\nAlmas libertadas;\nPista sobre entidade maior da morte.",
+    "source": "Livro de Monstros > Lorde Necromante da Coroa Fria"
   },
   {
     "id": "dragao-jovem-da-montanha-partida",
@@ -555,8 +723,12 @@
     "damage": "1d10",
     "movement": "Normal, voo curto",
     "instinct": "Dominar território e proteger tesouro",
-    "special": "Sopro Flamejante; Asas de Pedra; Escamas Jovens",
-    "description": "Monstro lendário, mobilidade, dano em área"
+    "special": "Sopro Flamejante",
+    "description": "Monstro lendário, mobilidade, dano em área",
+    "behavior": "É arrogante, territorial e curioso.\nPode conversar se os personagens oferecerem tesouro, informação ou respeito.",
+    "encounterUse": "Chefe final de montanha;\nAmeaça que pode ser evitada por negociação;\nDragão protegendo ovo, tesouro ou ruína.",
+    "rewards": "Escama de dragão;\nDente quebrado;\nTesouro antigo;\nMapa queimado;\nRespeito ou inimizade dracônica.",
+    "source": "Livro de Monstros > Dragão Jovem da Montanha Partida"
   },
   {
     "id": "bruxa-antiga-das-tres-vozes",
@@ -568,8 +740,12 @@
     "damage": "1d10 sombrio",
     "movement": "Normal, desaparece em sombras curtas",
     "instinct": "Quebrar a mente antes do corpo",
-    "special": "Três Vozes; Espelho Falso; Maldição Marcada",
-    "description": "Ilusão, maldição, chefe de horror"
+    "special": "Três Vozes",
+    "description": "Ilusão, maldição, chefe de horror",
+    "behavior": "Ela raramente luta sem preparar o terreno.\nUsa ilusões, promessas e segredos pessoais.",
+    "encounterUse": "Chefe de campanha sombria;\nBruxa + sombras invocadas;\nConfronto em cabana viva, espelho ou clareira ritual.",
+    "rewards": "Espelho rachado;\nFio de cabelo encantado;\nLivro de maldições;\nNome verdadeiro de outra entidade.",
+    "source": "Livro de Monstros > Bruxa Antiga das Três Vozes"
   },
   {
     "id": "golem-ancestral-de-runas",
@@ -581,7 +757,11 @@
     "damage": "1d10",
     "movement": "Lento",
     "instinct": "Proteger o segredo central",
-    "special": "Punho de Pedra; Runas Ativas; Núcleo Exposto",
-    "description": "Defensor lendário, puzzle-combate"
+    "special": "Punho de Pedra",
+    "description": "Defensor lendário, puzzle-combate",
+    "behavior": "Não fala, mas pode responder a palavras antigas, símbolos de raça anã ou magia de runas.",
+    "encounterUse": "Chefe de ruína antiga;\nGuardião de final de dungeon;\nLuta que pode ser vencida com combate, puzzle ou ritual.",
+    "rewards": "Núcleo ancestral;\nRuna de proteção;\nAcesso a câmara secreta;\nConhecimento de civilização antiga.",
+    "source": "Livro de Monstros > Golem Ancestral de Runas"
   }
 ]
