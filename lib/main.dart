@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'app/rpg_app.dart';
+import 'features/rpg/application/application.dart';
 import 'features/rpg/data/firestore_rpg_repositories.dart';
-import 'features/rpg/state/rpg_session_controller.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {

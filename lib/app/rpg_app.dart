@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'rpg_theme.dart';
-import '../features/rpg/views/session_shell.dart';
+import '../features/rpg/presentation/presentation.dart';
 
 class RpgApp extends StatelessWidget {
   const RpgApp({super.key});
