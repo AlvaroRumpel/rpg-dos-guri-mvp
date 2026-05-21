@@ -1,4 +1,4 @@
-import '../models/rpg_models.dart';
+import '../domain/domain.dart';
 
 abstract class TableRepository {
   Stream<RpgTable?> watchTable(String tableId);

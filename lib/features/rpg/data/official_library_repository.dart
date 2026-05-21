@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import '../models/rpg_models.dart';
+import '../domain/domain.dart';
 
 class OfficialLibrary {
   const OfficialLibrary({
@@ -84,6 +84,16 @@ RaceTemplate _raceFromJson(Map<String, dynamic> json) {
     powerDescription: _string(json['powerDescription']),
     powerEffect: _string(json['powerEffect']),
     usageLimit: _usageLimit(json['usageLimit']),
+    origin: _nullableString(json['origin']),
+    actionCost: _nullableString(json['actionCost']),
+    range: _nullableString(json['range']),
+    duration: _nullableString(json['duration']),
+    roll: _nullableString(json['roll']),
+    damage: _nullableString(json['damage']),
+    healing: _nullableString(json['healing']),
+    extraEffect: _nullableString(json['extraEffect']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -94,6 +104,9 @@ ClassTemplate _classFromJson(Map<String, dynamic> json) {
     role: _string(json['role']),
     skills: _stringList(json['skills']),
     initialPowerName: _string(json['initialPowerName']),
+    description: _nullableString(json['description']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -105,6 +118,16 @@ ClassProgressionEntry _progressionFromJson(Map<String, dynamic> json) {
     name: _string(json['name'], 'Habilidade'),
     description: _string(json['description']),
     usageLimit: _usageLimit(json['usageLimit']),
+    origin: _nullableString(json['origin']),
+    actionCost: _nullableString(json['actionCost']),
+    range: _nullableString(json['range']),
+    duration: _nullableString(json['duration']),
+    roll: _nullableString(json['roll']),
+    damage: _nullableString(json['damage']),
+    healing: _nullableString(json['healing']),
+    extraEffect: _nullableString(json['extraEffect']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -117,6 +140,16 @@ SpellTemplate _spellFromJson(Map<String, dynamic> json) {
     suggestedTest: _string(json['suggestedTest'], 'Conforme situacao'),
     effect: _string(json['effect']),
     usageLimit: _usageLimit(json['usageLimit']),
+    origin: _nullableString(json['origin']),
+    actionCost: _nullableString(json['actionCost']),
+    range: _nullableString(json['range']),
+    duration: _nullableString(json['duration']),
+    roll: _nullableString(json['roll']),
+    damage: _nullableString(json['damage']),
+    healing: _nullableString(json['healing']),
+    extraEffect: _nullableString(json['extraEffect']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -127,6 +160,14 @@ RitualTemplate _ritualFromJson(Map<String, dynamic> json) {
     suggestedRoll: _string(json['suggestedRoll'], 'Conforme situacao'),
     description: _string(json['description']),
     difficulty: _string(json['difficulty']),
+    origin: _nullableString(json['origin']),
+    actionCost: _nullableString(json['actionCost']),
+    range: _nullableString(json['range']),
+    duration: _nullableString(json['duration']),
+    effect: _nullableString(json['effect']),
+    extraEffect: _nullableString(json['extraEffect']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -139,6 +180,16 @@ PowerTemplate _powerFromJson(Map<String, dynamic> json) {
     suggestedTest: _string(json['suggestedTest'], 'Conforme situacao'),
     effect: _string(json['effect']),
     usageLimit: _usageLimit(json['usageLimit']),
+    origin: _nullableString(json['origin']),
+    actionCost: _nullableString(json['actionCost']),
+    range: _nullableString(json['range']),
+    duration: _nullableString(json['duration']),
+    roll: _nullableString(json['roll']),
+    damage: _nullableString(json['damage']),
+    healing: _nullableString(json['healing']),
+    extraEffect: _nullableString(json['extraEffect']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -154,6 +205,17 @@ EquipmentTemplate _equipmentFromJson(Map<String, dynamic> json) {
     recommendedClasses: _stringList(json['recommendedClasses']),
     baseDefense: _nullableInt(json['baseDefense']),
     defenseBonus: _int(json['defenseBonus']),
+    origin: _nullableString(json['origin']),
+    usageLimit: json['usageLimit'] == null
+        ? null
+        : _usageLimit(json['usageLimit']),
+    actionCost: _nullableString(json['actionCost']),
+    range: _nullableString(json['range']),
+    duration: _nullableString(json['duration']),
+    roll: _nullableString(json['roll']),
+    effect: _nullableString(json['effect']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -167,6 +229,13 @@ ItemTemplate _itemFromJson(Map<String, dynamic> json) {
     roll: _nullableString(json['roll']),
     fixedBonus: _int(json['fixedBonus']),
     effectKind: _nullableString(json['effectKind']),
+    origin: _nullableString(json['origin']),
+    actionCost: _nullableString(json['actionCost']),
+    range: _nullableString(json['range']),
+    duration: _nullableString(json['duration']),
+    extraEffect: _nullableString(json['extraEffect']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -176,6 +245,8 @@ StarterKitTemplate _starterKitFromJson(Map<String, dynamic> json) {
     name: _string(json['name'], 'Kit inicial'),
     characterClass: _string(json['characterClass']),
     items: _stringList(json['items']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 
@@ -192,6 +263,11 @@ MonsterTemplate _monsterFromJson(Map<String, dynamic> json) {
     instinct: _string(json['instinct']),
     special: _string(json['special']),
     description: _string(json['description']),
+    behavior: _nullableString(json['behavior']),
+    encounterUse: _nullableString(json['encounterUse']),
+    rewards: _nullableString(json['rewards']),
+    notes: _nullableString(json['notes']),
+    source: _nullableString(json['source']),
   );
 }
 

@@ -1,0 +1,122 @@
+import '../../domain/domain.dart';
+
+class CharacterFactory {
+  const CharacterFactory._();
+
+  static List<CharacterSheet> seedCharacters() {
+    return [
+      CharacterSheet(
+        id: 'borin',
+        name: 'Borin',
+        race: 'Anao',
+        characterClass: 'Guerreiro',
+        level: 1,
+        concept: 'Defensor teimoso da companhia',
+        attributes: const {
+          'Forca': 3,
+          'Agilidade': 0,
+          'Intelecto': 0,
+          'Presenca': 1,
+          'Vigor': 4,
+        },
+        skills: const {
+          'Atletismo': 2,
+          'Furtividade': 0,
+          'Percepcao': 1,
+          'Natureza': 0,
+          'Conhecimento': 0,
+          'Influencia': 0,
+          'Oficio': 1,
+          'Combate': 2,
+          'Misticismo': 0,
+        },
+        currentHp: 14,
+        armor: 'Armadura pesada',
+        hasShield: true,
+        mainWeapon: 'Espada longa',
+        secondaryItem: 'Escudo',
+        accessories: const [],
+        powers: const [],
+        inventory: const [],
+        statuses: const [],
+        coins: 5,
+      ),
+      CharacterSheet(
+        id: 'lyra',
+        name: 'Lyra',
+        race: 'Elfo',
+        characterClass: 'Mago',
+        level: 1,
+        concept: 'Estudiosa arcana curiosa',
+        attributes: const {
+          'Forca': -1,
+          'Agilidade': 2,
+          'Intelecto': 4,
+          'Presenca': 1,
+          'Vigor': 1,
+        },
+        skills: const {
+          'Atletismo': 0,
+          'Furtividade': 1,
+          'Percepcao': 2,
+          'Natureza': 1,
+          'Conhecimento': 2,
+          'Influencia': 0,
+          'Oficio': 0,
+          'Combate': 0,
+          'Misticismo': 3,
+        },
+        currentHp: 11,
+        armor: 'Sem armadura',
+        hasShield: false,
+        mainWeapon: 'Cajado',
+        secondaryItem: 'Bolsa de componentes',
+        accessories: const [],
+        powers: const [],
+        inventory: const [],
+        statuses: const [],
+        coins: 5,
+      ),
+    ];
+  }
+
+  static CharacterSheet blankForPlayer(String playerName) {
+    return CharacterSheet(
+      id: 'char-${DateTime.now().microsecondsSinceEpoch}',
+      name: playerName,
+      race: 'Humano',
+      characterClass: 'Guerreiro',
+      level: 1,
+      concept: 'Conceito a definir',
+      attributes: const {
+        'Forca': 0,
+        'Agilidade': 0,
+        'Intelecto': 0,
+        'Presenca': 0,
+        'Vigor': 0,
+      },
+      skills: const {
+        'Atletismo': 0,
+        'Furtividade': 0,
+        'Percepcao': 0,
+        'Natureza': 0,
+        'Conhecimento': 0,
+        'Influencia': 0,
+        'Oficio': 0,
+        'Combate': 0,
+        'Misticismo': 0,
+      },
+      currentHp: 10,
+      armor: 'Sem armadura',
+      hasShield: false,
+      mainWeapon: 'Arma simples',
+      secondaryItem: 'Item secundario',
+      accessories: const [],
+      powers: const [],
+      inventory: const [],
+      statuses: const [],
+      coins: 5,
+      ownerName: playerName,
+    );
+  }
+}

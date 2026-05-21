@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../models/rpg_models.dart';
+import '../domain/domain.dart';
 import 'rpg_firestore_mappers.dart';
 import 'rpg_repositories.dart';
 

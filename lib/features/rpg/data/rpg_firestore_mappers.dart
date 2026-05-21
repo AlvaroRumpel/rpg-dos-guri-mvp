@@ -1,4 +1,4 @@
-import '../models/rpg_models.dart';
+import '../domain/domain.dart';
 
 RpgTable tableFromMap(String id, Map<String, dynamic> data) {
   return RpgTable(
@@ -77,12 +77,22 @@ PowerEntry powerFromMap(Map<String, dynamic> data) {
     usageLimit:
         _enumByName(UsageLimit.values, data['usageLimit'] as String?) ??
         UsageLimit.free,
+    origin: data['origin'] as String?,
+    actionCost: data['actionCost'] as String?,
+    range: data['range'] as String?,
+    duration: data['duration'] as String?,
+    roll: data['roll'] as String?,
+    damage: data['damage'] as String?,
+    healing: data['healing'] as String?,
+    extraEffect: data['extraEffect'] as String?,
+    notes: data['notes'] as String?,
+    source: data['source'] as String?,
     used: data['used'] as bool? ?? false,
   );
 }
 
 Map<String, dynamic> powerToMap(PowerEntry power) {
-  return {
+  return _withoutNulls({
     'id': power.id,
     'name': power.name,
     'type': power.type,
@@ -90,8 +100,18 @@ Map<String, dynamic> powerToMap(PowerEntry power) {
     'suggestedTest': power.suggestedTest,
     'effect': power.effect,
     'usageLimit': power.usageLimit.name,
+    'origin': power.origin,
+    'actionCost': power.actionCost,
+    'range': power.range,
+    'duration': power.duration,
+    'roll': power.roll,
+    'damage': power.damage,
+    'healing': power.healing,
+    'extraEffect': power.extraEffect,
+    'notes': power.notes,
+    'source': power.source,
     'used': power.used,
-  };
+  });
 }
 
 InventoryItem inventoryItemFromMap(Map<String, dynamic> data) {
@@ -104,11 +124,18 @@ InventoryItem inventoryItemFromMap(Map<String, dynamic> data) {
     roll: data['roll'] as String?,
     fixedBonus: _int(data['fixedBonus']),
     effectKind: data['effectKind'] as String?,
+    origin: data['origin'] as String?,
+    actionCost: data['actionCost'] as String?,
+    range: data['range'] as String?,
+    duration: data['duration'] as String?,
+    extraEffect: data['extraEffect'] as String?,
+    notes: data['notes'] as String?,
+    source: data['source'] as String?,
   );
 }
 
 Map<String, dynamic> inventoryItemToMap(InventoryItem item) {
-  return {
+  return _withoutNulls({
     'id': item.id,
     'name': item.name,
     'type': item.type,
@@ -117,7 +144,14 @@ Map<String, dynamic> inventoryItemToMap(InventoryItem item) {
     'roll': item.roll,
     'fixedBonus': item.fixedBonus,
     'effectKind': item.effectKind,
-  };
+    'origin': item.origin,
+    'actionCost': item.actionCost,
+    'range': item.range,
+    'duration': item.duration,
+    'extraEffect': item.extraEffect,
+    'notes': item.notes,
+    'source': item.source,
+  });
 }
 
 StatusEntry statusFromMap(Map<String, dynamic> data) {
@@ -227,4 +261,11 @@ T? _enumByName<T extends Enum>(List<T> values, String? name) {
     if (value.name == name) return value;
   }
   return null;
+}
+
+Map<String, dynamic> _withoutNulls(Map<String, dynamic> value) {
+  return {
+    for (final entry in value.entries)
+      if (entry.value != null) entry.key: entry.value,
+  };
 }
