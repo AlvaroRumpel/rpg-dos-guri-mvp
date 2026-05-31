@@ -23,6 +23,7 @@ class CharacterSheet {
     required this.statuses,
     required this.coins,
     this.ownerName,
+    this.archived = false,
   });
 
   final String id;
@@ -44,6 +45,7 @@ class CharacterSheet {
   final List<StatusEntry> statuses;
   final int coins;
   final String? ownerName;
+  final bool archived;
 
   int get maxHp => 10 + (attributes['Vigor'] ?? 0);
 
@@ -77,6 +79,7 @@ class CharacterSheet {
     List<StatusEntry>? statuses,
     int? coins,
     String? ownerName,
+    bool? archived,
   }) {
     return CharacterSheet(
       id: id,
@@ -98,6 +101,7 @@ class CharacterSheet {
       statuses: statuses ?? this.statuses,
       coins: coins ?? this.coins,
       ownerName: ownerName ?? this.ownerName,
+      archived: archived ?? this.archived,
     );
   }
 }

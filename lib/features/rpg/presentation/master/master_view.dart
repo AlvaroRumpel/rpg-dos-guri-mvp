@@ -306,15 +306,15 @@ class _MasterSideRail extends StatelessWidget {
                   const SizedBox(height: 10),
                   _StatRow(
                     label: 'Personagens',
-                    value: '${controller.characters.length}',
+                    value: '${controller.activeCharacters.length}',
                   ),
                   _StatRow(
                     label: 'Pendentes',
                     value: '${controller.pendingPlayerNames.length}',
                   ),
                   _StatRow(
-                    label: 'Log',
-                    value: '${controller.actionLog.length}',
+                    label: 'Pedidos',
+                    value: '${controller.powerUseRequests.length}',
                   ),
                 ],
               ),
@@ -402,6 +402,8 @@ class _MasterRightRail extends StatelessWidget {
                   ],
                 ),
               ),
+          const SizedBox(height: 18),
+          _PowerRequestsPanel(controller: controller),
           const SizedBox(height: 18),
           const RpgSectionTitle(title: 'Cronica', icon: Icons.history_edu),
           const SizedBox(height: 10),
@@ -506,7 +508,7 @@ List<RpgTabItem<_MasterScene>> _masterTabs(RpgSessionController controller) {
       value: _MasterScene.roster,
       label: 'Companhia',
       icon: Icons.groups,
-      badge: controller.characters.length,
+      badge: controller.activeCharacters.length,
     ),
     const RpgTabItem(
       value: _MasterScene.library,
@@ -554,6 +556,20 @@ List<Widget> _masterActions(
       onPressed: () => _showTableDialog(context),
       icon: Icons.settings,
       label: 'Mesa',
+      variant: RpgButtonVariant.ghost,
+      small: true,
+    ),
+    RpgButton(
+      onPressed: controller.resetSessionUses,
+      icon: Icons.refresh,
+      label: 'Reset sessão',
+      variant: RpgButtonVariant.ghost,
+      small: true,
+    ),
+    RpgButton(
+      onPressed: controller.resetLongRestUses,
+      icon: Icons.bedtime,
+      label: 'Descanso longo',
       variant: RpgButtonVariant.ghost,
       small: true,
     ),
@@ -624,14 +640,115 @@ class _TableCombatScene extends StatelessWidget {
       padding: const EdgeInsets.all(22),
       children: [
         if (combat == null)
-          _NoCombatState(
-            onStart: context.read<RpgSessionController>().startCombat,
+          Column(
+            children: [
+              _PowerRequestsPanel(
+                controller: context.watch<RpgSessionController>(),
+              ),
+              const SizedBox(height: 12),
+              _NoCombatState(
+                onStart: context.read<RpgSessionController>().startCombat,
+              ),
+            ],
           )
         else if (inactiveCombat)
-          _PostCombatScene(combat: combat!)
+          Column(
+            children: [
+              _PowerRequestsPanel(
+                controller: context.watch<RpgSessionController>(),
+              ),
+              const SizedBox(height: 12),
+              _PostCombatScene(combat: combat!),
+            ],
+          )
         else
-          CombatPanel(combat: combat!),
+          Column(
+            children: [
+              _PowerRequestsPanel(
+                controller: context.watch<RpgSessionController>(),
+              ),
+              const SizedBox(height: 12),
+              CombatPanel(combat: combat!),
+            ],
+          ),
       ],
+    );
+  }
+}
+
+class _PowerRequestsPanel extends StatelessWidget {
+  const _PowerRequestsPanel({required this.controller});
+
+  final RpgSessionController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return RpgPanel(
+      inset: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const RpgPanelHeader(title: 'Pedidos de poder', icon: Icons.bolt),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: controller.powerUseRequests.isEmpty
+                ? const Text(
+                    'Nenhum pedido de poder.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: RpgTheme.inkDim),
+                  )
+                : Column(
+                    children: [
+                      for (final request in controller.powerUseRequests)
+                        RpgPanel(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          borderColor: RpgTheme.lineGold,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                request.powerName,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '${request.characterName} - ${_usageLabel(request.usageLimit)}',
+                                style: const TextStyle(
+                                  color: RpgTheme.mutedInk,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: [
+                                  RpgButton(
+                                    onPressed: () =>
+                                        controller.approvePowerUse(request.id),
+                                    label: 'Aprovar',
+                                    icon: Icons.check,
+                                    small: true,
+                                    variant: RpgButtonVariant.primary,
+                                  ),
+                                  RpgButton(
+                                    onPressed: () => controller
+                                        .discardPowerUseRequest(request.id),
+                                    label: 'Descartar',
+                                    icon: Icons.close,
+                                    small: true,
+                                    variant: RpgButtonVariant.ghost,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -678,7 +795,7 @@ class _RosterScene extends StatelessWidget {
               spacing: spacing,
               runSpacing: spacing,
               children: [
-                for (final character in controller.characters)
+                for (final character in controller.activeCharacters)
                   SizedBox(
                     width: width,
                     child: CharacterCard(
@@ -690,6 +807,36 @@ class _RosterScene extends StatelessWidget {
             );
           },
         ),
+        if (controller.archivedCharacters.isNotEmpty) ...[
+          const SizedBox(height: 20),
+          const RpgSectionTitle(
+            title: 'Arquivo',
+            subtitle: 'fichas ocultas da mesa',
+            icon: Icons.archive,
+          ),
+          const SizedBox(height: 12),
+          for (final character in controller.archivedCharacters)
+            RpgPanel(
+              margin: const EdgeInsets.only(bottom: 8),
+              inset: true,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      character.name,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  RpgButton(
+                    onPressed: () => controller.restoreCharacter(character.id),
+                    icon: Icons.unarchive,
+                    label: 'Restaurar',
+                    small: true,
+                  ),
+                ],
+              ),
+            ),
+        ],
       ],
     );
   }

@@ -1,5 +1,6 @@
 export 'shared/rpg_enums.dart';
 export 'table/rpg_table.dart';
+export 'table/power_use_request.dart';
 export 'character/character_sheet.dart';
 export 'character/power_entry.dart';
 export 'character/inventory_item.dart';

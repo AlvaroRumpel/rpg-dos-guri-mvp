@@ -129,6 +129,14 @@ class CharacterCard extends StatelessWidget {
                   label: 'Inventário',
                   small: true,
                 ),
+                RpgButton(
+                  onPressed: () =>
+                      _showArchiveCharacterDialog(context, character),
+                  icon: Icons.archive,
+                  label: 'Arquivar',
+                  variant: RpgButtonVariant.ghost,
+                  small: true,
+                ),
               ],
             ),
             if (character.powers.isNotEmpty) ...[
@@ -149,7 +157,7 @@ class CharacterCard extends StatelessWidget {
                       ),
                       onPressed: () => context
                           .read<RpgSessionController>()
-                          .togglePowerRequest(character.id, power.id),
+                          .togglePowerUsed(character.id, power.id),
                     ),
                 ],
               ),
@@ -238,7 +246,7 @@ class PowerCard extends StatelessWidget {
                 RpgButton(
                   onPressed: () => context
                       .read<RpgSessionController>()
-                      .togglePowerRequest(character.id, power.id),
+                      .requestPowerUse(character.id, power.id),
                   label: 'Solicitar',
                   small: true,
                 ),
@@ -253,7 +261,7 @@ class PowerCard extends StatelessWidget {
               RpgStatChip(label: 'tipo', value: power.type),
               RpgStatChip(label: 'uso', value: _usageLabel(power.usageLimit)),
               if (power.used)
-                const RpgStatChip(label: 'estado', value: 'solicitado'),
+                const RpgStatChip(label: 'estado', value: 'usado'),
             ],
           ),
           const SizedBox(height: RpgSpacing.sm),

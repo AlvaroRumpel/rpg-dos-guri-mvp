@@ -41,6 +41,9 @@ Este documento compara `docs/specification.md` com o estado atual do app Flutter
 - Reducao de quantidade de consumivel.
 - Log informativo de acoes.
 - Reset de poderes por combate ao finalizar combate.
+- Reset manual de poderes por sessao e por descanso longo.
+- Fila persistida de pedidos de uso de poder/magia para aprovacao do mestre.
+- Arquivamento e restauracao de fichas pelo mestre.
 - Jogador ve combate sem vida de monstros.
 - Importador oficial do vault em `tools/import_official_vault.dart`.
 - Assets JSON oficiais em `assets/data/official/`.
@@ -56,6 +59,9 @@ Este documento compara `docs/specification.md` com o estado atual do app Flutter
 - Sincronizacao Firestore conectada ao controller atual.
 - Pendencias de aprovacao persistidas no documento da mesa.
 - Entrada/criacao de mesa por codigo na tela inicial.
+- Deep link de mesa por `?mesa=GURI-1234`.
+- Cache local de ultima mesa e ultima ficha selecionada.
+- PIN domestico de mestre, salvo como hash local por mesa.
 - Colecoes vazias do Firestore nao re-seedam personagens indevidamente.
 - Finalizar combate marca o combate como inativo no Firestore.
 - Arquivos base de Firebase Hosting e Firestore Rules criados.
@@ -65,16 +71,15 @@ Este documento compara `docs/specification.md` com o estado atual do app Flutter
 
 ## Parcialmente implementado
 
-- Poderes/magias/itens oficiais: ficam locais em assets JSON; ainda nao ha persistencia global no Firestore.
+- Poderes/magias/itens oficiais: decisao atual e manter somente assets JSON, sem CRUD Firestore.
 - Mesa/codigo: criacao/entrada por codigo existe, mas ainda falta validacao manual em dispositivos reais.
 - Equipamentos oficiais: a UI usa selecao oficial, mas fichas antigas com texto livre sao normalizadas quando editadas/carregadas.
+- PIN de mestre: barreira domestica contra acesso casual; nao e autenticacao forte contra usuario malicioso.
 
 ## Fora do MVP local atual
 
 - Validacao manual de persistencia Firestore em duas janelas/dispositivos.
 - Validacao manual de tempo real entre celulares.
-- Deploy Firebase Hosting.
-- Cache local.
 - Android build.
 - Importacao/exportacao por usuario.
 - Sincronizacao automatica com Obsidian em runtime.
@@ -84,5 +89,5 @@ Este documento compara `docs/specification.md` com o estado atual do app Flutter
 1. Testar fluxo mestre + jogador em duas janelas.
 2. Testar URL publicada em celulares reais.
 3. Revisar dados importados do vault apos uso em mesa.
-4. Decidir se bibliotecas oficiais devem migrar para Firestore.
-5. Melhorar cache local de ultima ficha visualizada.
+4. Validar instalacao PWA e retorno para ultima mesa/ficha.
+5. Decidir se a barreira domestica de PIN deve evoluir para Firebase Auth ou Cloud Functions.

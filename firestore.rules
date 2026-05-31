@@ -10,6 +10,8 @@ service cloud.firestore {
       return isShortText(data.name, 80)
         && isShortText(data.code, 16)
         && (!('pendingPlayerNames' in data) || (data.pendingPlayerNames is list && data.pendingPlayerNames.size() <= 12))
+        && (!('powerUseRequests' in data) || (data.powerUseRequests is list && data.powerUseRequests.size() <= 20))
+        && (!('masterPinHash' in data) || data.masterPinHash is string || data.masterPinHash == null)
         && (!('activeCombatId' in data) || data.activeCombatId is string || data.activeCombatId == null);
     }
 
@@ -21,7 +23,8 @@ service cloud.firestore {
         && data.level >= 1
         && data.level <= 10
         && data.currentHp is int
-        && data.currentHp >= 0;
+        && data.currentHp >= 0
+        && (!('archived' in data) || data.archived is bool);
     }
 
     function validCombat(data) {
@@ -39,7 +42,7 @@ service cloud.firestore {
       match /characters/{characterId} {
         allow read: if true;
         allow create, update: if validCharacter(request.resource.data);
-        allow delete: if true;
+        allow delete: if false;
       }
 
       match /combats/{combatId} {

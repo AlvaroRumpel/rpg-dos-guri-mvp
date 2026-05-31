@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/official_library_repository.dart';
 import '../data/rpg_repositories.dart';
@@ -88,6 +91,7 @@ class RpgSessionController extends ChangeNotifier {
   CombatState? activeCombat;
   UserRole role = UserRole.landing;
   String? selectedCharacterId;
+  String? _pendingSelectedCharacterId;
   List<String> pendingPlayerNames = [];
   final List<String> actionLog = [];
   StreamSubscription<RpgTable?>? _tableSubscription;
@@ -95,8 +99,14 @@ class RpgSessionController extends ChangeNotifier {
   StreamSubscription<CombatState?>? _combatSubscription;
   StreamSubscription<List<String>>? _logSubscription;
   Timer? _persistDebounce;
+  SharedPreferences? _preferences;
   bool _applyingRemoteState = false;
   bool _remoteTableExists = false;
+  bool _masterAuthorized = false;
+
+  static const _lastTableCodeKey = 'rpg.lastTableCode';
+  static const _lastCharacterIdKey = 'rpg.lastCharacterId';
+  static const _masterAuthPrefix = 'rpg.masterAuth.';
 
   List<EquipmentTemplate> get weapons => equipmentLibrary
       .where((item) => item.category == EquipmentCategory.weapon)
@@ -114,6 +124,18 @@ class RpgSessionController extends ChangeNotifier {
       .where((item) => item.category == EquipmentCategory.accessory)
       .toList();
 
+  List<CharacterSheet> get activeCharacters =>
+      characters.where((character) => !character.archived).toList();
+
+  List<CharacterSheet> get archivedCharacters =>
+      characters.where((character) => character.archived).toList();
+
+  List<PowerUseRequest> get powerUseRequests => table.powerUseRequests;
+
+  bool get hasMasterPin => table.masterPinHash?.isNotEmpty == true;
+
+  bool get masterAuthorized => _masterAuthorized;
+
   EquipmentTemplate? equipmentByName(String name) {
     return OfficialNameMatcher.firstWhereOrNull(
       equipmentLibrary,
@@ -124,9 +146,35 @@ class RpgSessionController extends ChangeNotifier {
   CharacterSheet? get selectedCharacter {
     if (selectedCharacterId == null) return null;
     for (final character in characters) {
-      if (character.id == selectedCharacterId) return character;
+      if (character.id == selectedCharacterId && !character.archived) {
+        return character;
+      }
     }
     return null;
+  }
+
+  Future<void> bootstrap({String? initialTableCode}) async {
+    final preferences = await SharedPreferences.getInstance();
+    _preferences = preferences;
+    final savedCode = preferences.getString(_lastTableCodeKey);
+    final code = initialTableCode?.trim().isNotEmpty == true
+        ? initialTableCode
+        : savedCode;
+    if (code != null && code.trim().isNotEmpty) {
+      await openTableByCode(code);
+    } else {
+      await _rememberTable();
+    }
+    final savedCharacterId = preferences.getString(_lastCharacterIdKey);
+    if (savedCharacterId != null &&
+        activeCharacters.any((character) => character.id == savedCharacterId)) {
+      selectedCharacterId = savedCharacterId;
+    } else {
+      _pendingSelectedCharacterId = savedCharacterId;
+    }
+    _masterAuthorized =
+        preferences.getBool('$_masterAuthPrefix${table.id}') ?? false;
+    notifyListeners();
   }
 
   Future<void> _loadOfficialLibrary() async {
@@ -187,6 +235,9 @@ class RpgSessionController extends ChangeNotifier {
       _applyRemoteState(() {
         table = remoteTable;
         pendingPlayerNames = remoteTable.pendingPlayerNames;
+        _masterAuthorized =
+            _preferences?.getBool('$_masterAuthPrefix${remoteTable.id}') ??
+            false;
       });
     });
 
@@ -196,7 +247,15 @@ class RpgSessionController extends ChangeNotifier {
           if (!_remoteTableExists && remoteCharacters.isEmpty) {
             return;
           }
-          _applyRemoteState(() => characters = remoteCharacters);
+          _applyRemoteState(() {
+            characters = remoteCharacters;
+            final pending = _pendingSelectedCharacterId;
+            if (pending != null &&
+                activeCharacters.any((character) => character.id == pending)) {
+              selectedCharacterId = pending;
+              _pendingSelectedCharacterId = null;
+            }
+          });
         });
 
     _combatSubscription = _combatRepository?.watchActiveCombat(table.id).listen(
@@ -272,9 +331,29 @@ class RpgSessionController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<bool> enterAsMasterWithPin(String pin) async {
+    final cleaned = pin.trim();
+    if (cleaned.length < 4) return false;
+    final hash = _masterPinHash(cleaned, table.id);
+    if (!hasMasterPin) {
+      table = table.copyWith(masterPinHash: hash);
+      _masterAuthorized = true;
+      await _rememberMasterAuth();
+      _log('PIN domestico do mestre configurado.');
+      enterAsMaster();
+      return true;
+    }
+    if (hash != table.masterPinHash) return false;
+    _masterAuthorized = true;
+    await _rememberMasterAuth();
+    enterAsMaster();
+    return true;
+  }
+
   void enterAsPlayer(String characterId) {
     selectedCharacterId = characterId;
     role = UserRole.player;
+    unawaited(_rememberCharacter(characterId));
     notifyListeners();
   }
 
@@ -289,6 +368,7 @@ class RpgSessionController extends ChangeNotifier {
         ? table.code
         : code.trim().toUpperCase();
     table = table.copyWith(name: cleanedName, code: cleanedCode);
+    unawaited(_rememberTable());
     _log('Mesa atualizada para ${table.name} (${table.code}).');
     notifyListeners();
   }
@@ -297,6 +377,7 @@ class RpgSessionController extends ChangeNotifier {
     final timestamp = DateTime.now().millisecondsSinceEpoch;
     final suffix = (timestamp % 10000).toString().padLeft(4, '0');
     table = table.copyWith(code: 'GURI-$suffix');
+    unawaited(_rememberTable());
     _log('Codigo da mesa regenerado: ${table.code}.');
     notifyListeners();
   }
@@ -308,6 +389,7 @@ class RpgSessionController extends ChangeNotifier {
     final repository = _tableRepository;
     if (repository == null) {
       table = table.copyWith(code: code);
+      await _rememberTable();
       notifyListeners();
       return;
     }
@@ -315,6 +397,7 @@ class RpgSessionController extends ChangeNotifier {
     final existing = await repository.findByCode(code);
     if (existing != null) {
       _switchTable(existing, seedCharacters: const []);
+      await _rememberTable();
       _log('Mesa ${existing.code} carregada.');
       notifyListeners();
       return;
@@ -326,6 +409,7 @@ class RpgSessionController extends ChangeNotifier {
       code: code,
     );
     _switchTable(newTable, seedCharacters: CharacterFactory.seedCharacters());
+    await _rememberTable();
     _log('Mesa ${newTable.code} criada.');
     notifyListeners();
   }
@@ -344,6 +428,8 @@ class RpgSessionController extends ChangeNotifier {
     activeCombat = null;
     selectedCharacterId = null;
     actionLog.clear();
+    _masterAuthorized =
+        _preferences?.getBool('$_masterAuthPrefix${nextTable.id}') ?? false;
     role = UserRole.landing;
     _applyingRemoteState = false;
     _connectFirestore();
@@ -390,7 +476,7 @@ class RpgSessionController extends ChangeNotifier {
   }
 
   void startCombat() {
-    final participants = characters
+    final participants = activeCharacters
         .map(CombatService.participantFromCharacter)
         .toList();
     activeCombat = CombatState(
@@ -412,6 +498,7 @@ class RpgSessionController extends ChangeNotifier {
         .map((participant) => participant.sourceCharacterId)
         .toSet();
     final missing = characters
+        .where((character) => !character.archived)
         .where((character) => !existingCharacterIds.contains(character.id))
         .toList();
     if (missing.isEmpty) return;
@@ -597,7 +684,7 @@ class RpgSessionController extends ChangeNotifier {
     _log('Estado manual alterado.');
   }
 
-  void togglePowerRequest(String characterId, String powerId) {
+  void togglePowerUsed(String characterId, String powerId) {
     characters = [
       for (final character in characters)
         if (character.id == characterId)
@@ -610,7 +697,79 @@ class RpgSessionController extends ChangeNotifier {
         else
           character,
     ];
-    _log('Solicitacao/uso de poder registrado.');
+    _log('Uso de poder atualizado.');
+    notifyListeners();
+  }
+
+  void requestPowerUse(String characterId, String powerId) {
+    final character = characters
+        .where((item) => item.id == characterId && !item.archived)
+        .firstOrNull;
+    final power = character?.powers
+        .where((item) => item.id == powerId)
+        .firstOrNull;
+    if (character == null || power == null || power.used) return;
+    final alreadyRequested = table.powerUseRequests.any(
+      (request) =>
+          request.characterId == characterId && request.powerId == powerId,
+    );
+    if (alreadyRequested) return;
+    final request = PowerUseRequest(
+      id: 'power-request-${DateTime.now().microsecondsSinceEpoch}',
+      characterId: character.id,
+      characterName: character.name,
+      powerId: power.id,
+      powerName: power.name,
+      usageLimit: power.usageLimit,
+      createdAt: DateTime.now(),
+    );
+    table = table.copyWith(
+      powerUseRequests: [...table.powerUseRequests, request],
+    );
+    _log('${character.name} pediu uso de ${power.name}.');
+    notifyListeners();
+  }
+
+  void approvePowerUse(String requestId) {
+    final request = table.powerUseRequests
+        .where((item) => item.id == requestId)
+        .firstOrNull;
+    if (request == null) return;
+    characters = [
+      for (final character in characters)
+        if (character.id == request.characterId)
+          character.copyWith(
+            powers: [
+              for (final power in character.powers)
+                power.id == request.powerId
+                    ? power.copyWith(used: true)
+                    : power,
+            ],
+          )
+        else
+          character,
+    ];
+    table = table.copyWith(
+      powerUseRequests: table.powerUseRequests
+          .where((item) => item.id != requestId)
+          .toList(),
+    );
+    _log('${request.powerName} de ${request.characterName} aprovado.');
+    notifyListeners();
+  }
+
+  void discardPowerUseRequest(String requestId) {
+    final request = table.powerUseRequests
+        .where((item) => item.id == requestId)
+        .firstOrNull;
+    table = table.copyWith(
+      powerUseRequests: table.powerUseRequests
+          .where((item) => item.id != requestId)
+          .toList(),
+    );
+    if (request != null) {
+      _log('Pedido de ${request.powerName} descartado.');
+    }
     notifyListeners();
   }
 
@@ -630,6 +789,60 @@ class RpgSessionController extends ChangeNotifier {
       _log('Usos por combate resetados.');
       notifyListeners();
     }
+  }
+
+  void resetSessionUses() {
+    _resetUsesFor(UsageLimit.session, 'Usos por sessao resetados.');
+  }
+
+  void resetLongRestUses() {
+    _resetUsesFor(UsageLimit.longRest, 'Usos por descanso longo resetados.');
+  }
+
+  void _resetUsesFor(UsageLimit usageLimit, String message) {
+    characters = [
+      for (final character in characters)
+        character.copyWith(
+          powers: [
+            for (final power in character.powers)
+              power.usageLimit == usageLimit
+                  ? power.copyWith(used: false)
+                  : power,
+          ],
+        ),
+    ];
+    _log(message);
+    notifyListeners();
+  }
+
+  void archiveCharacter(String characterId) {
+    characters = [
+      for (final character in characters)
+        if (character.id == characterId)
+          character.copyWith(archived: true)
+        else
+          character,
+    ];
+    if (selectedCharacterId == characterId) selectedCharacterId = null;
+    table = table.copyWith(
+      powerUseRequests: table.powerUseRequests
+          .where((request) => request.characterId != characterId)
+          .toList(),
+    );
+    _log('Ficha arquivada.');
+    notifyListeners();
+  }
+
+  void restoreCharacter(String characterId) {
+    characters = [
+      for (final character in characters)
+        if (character.id == characterId)
+          character.copyWith(archived: false)
+        else
+          character,
+    ];
+    _log('Ficha restaurada.');
+    notifyListeners();
   }
 
   void addPowerToCharacter(String characterId, PowerTemplate template) {
@@ -1083,5 +1296,21 @@ class RpgSessionController extends ChangeNotifier {
       final repository = _actionLogRepository;
       if (repository != null) unawaited(repository.add(table.id, entry));
     }
+  }
+
+  String _masterPinHash(String pin, String tableId) {
+    return sha256.convert(utf8.encode('$tableId:$pin')).toString();
+  }
+
+  Future<void> _rememberTable() async {
+    await _preferences?.setString(_lastTableCodeKey, table.code);
+  }
+
+  Future<void> _rememberCharacter(String characterId) async {
+    await _preferences?.setString(_lastCharacterIdKey, characterId);
+  }
+
+  Future<void> _rememberMasterAuth() async {
+    await _preferences?.setBool('$_masterAuthPrefix${table.id}', true);
   }
 }

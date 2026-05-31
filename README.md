@@ -6,9 +6,17 @@ O app nao rola dados, nao decide acerto e nao aplica dano a partir de rolagem. T
 
 Estado atual: MVP Flutter Web com `provider` e Firestore. O app inicializa Firebase quando `lib/firebase_options.dart` existe e cai para dados locais seedados se Firebase estiver indisponivel.
 
-O fluxo online atual permite entrar/criar mesa por codigo `GURI-0000`, persistir fichas, pendencias de aprovacao, combate ativo/inativo e logs informativos no Firestore.
+O fluxo online atual permite entrar/criar mesa por codigo `GURI-0000`, persistir fichas, pendencias de aprovacao, pedidos de uso de poderes, combate ativo/inativo e logs informativos no Firestore.
 
-As regras oficiais do vault do Obsidian sao importadas para JSON versionado em `assets/data/official/`. O app nao le o vault em runtime.
+Links de mesa usam o formato:
+
+```text
+https://rpgdosguri.web.app/?mesa=GURI-1234
+```
+
+O PIN de mestre e uma barreira domestica contra acesso casual. Ele nao substitui autenticacao forte.
+
+As regras oficiais do vault do Obsidian sao importadas para JSON versionado em `assets/data/official/`. O app nao le o vault em runtime e a biblioteca oficial continua local em assets.
 
 ## Rodar localmente
 

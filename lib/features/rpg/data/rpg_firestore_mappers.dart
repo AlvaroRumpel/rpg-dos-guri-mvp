@@ -6,17 +6,25 @@ RpgTable tableFromMap(String id, Map<String, dynamic> data) {
     name: data['name'] as String? ?? 'RPG dos Guri',
     code: data['code'] as String? ?? 'GURI-1234',
     pendingPlayerNames: _stringList(data['pendingPlayerNames']),
+    powerUseRequests: _mapList(
+      data['powerUseRequests'],
+    ).map(powerUseRequestFromMap).toList(),
+    masterPinHash: data['masterPinHash'] as String?,
     activeCombatId: data['activeCombatId'] as String?,
   );
 }
 
 Map<String, dynamic> tableToMap(RpgTable table) {
-  return {
+  return _withoutNulls({
     'name': table.name,
     'code': table.code,
     'pendingPlayerNames': table.pendingPlayerNames,
+    'powerUseRequests': table.powerUseRequests
+        .map(powerUseRequestToMap)
+        .toList(),
+    'masterPinHash': table.masterPinHash,
     'activeCombatId': table.activeCombatId,
-  };
+  });
 }
 
 CharacterSheet characterFromMap(String id, Map<String, dynamic> data) {
@@ -40,6 +48,7 @@ CharacterSheet characterFromMap(String id, Map<String, dynamic> data) {
     statuses: _mapList(data['statuses']).map(statusFromMap).toList(),
     coins: _int(data['coins']),
     ownerName: data['ownerName'] as String?,
+    archived: data['archived'] as bool? ?? false,
   );
 }
 
@@ -63,6 +72,33 @@ Map<String, dynamic> characterToMap(CharacterSheet character) {
     'statuses': character.statuses.map(statusToMap).toList(),
     'coins': character.coins,
     'ownerName': character.ownerName,
+    'archived': character.archived,
+  };
+}
+
+PowerUseRequest powerUseRequestFromMap(Map<String, dynamic> data) {
+  return PowerUseRequest(
+    id: data['id'] as String? ?? 'request',
+    characterId: data['characterId'] as String? ?? '',
+    characterName: data['characterName'] as String? ?? 'Personagem',
+    powerId: data['powerId'] as String? ?? '',
+    powerName: data['powerName'] as String? ?? 'Poder',
+    usageLimit:
+        _enumByName(UsageLimit.values, data['usageLimit'] as String?) ??
+        UsageLimit.free,
+    createdAt: _dateTime(data['createdAt']),
+  );
+}
+
+Map<String, dynamic> powerUseRequestToMap(PowerUseRequest request) {
+  return {
+    'id': request.id,
+    'characterId': request.characterId,
+    'characterName': request.characterName,
+    'powerId': request.powerId,
+    'powerName': request.powerName,
+    'usageLimit': request.usageLimit.name,
+    'createdAt': request.createdAt.toIso8601String(),
   };
 }
 
@@ -268,4 +304,10 @@ Map<String, dynamic> _withoutNulls(Map<String, dynamic> value) {
     for (final entry in value.entries)
       if (entry.value != null) entry.key: entry.value,
   };
+}
+
+DateTime _dateTime(Object? value) {
+  if (value is DateTime) return value;
+  if (value is String) return DateTime.tryParse(value) ?? DateTime.now();
+  return DateTime.now();
 }

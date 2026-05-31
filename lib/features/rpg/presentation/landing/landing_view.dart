@@ -46,21 +46,27 @@ class LandingView extends StatelessWidget {
                     _LandingCodePill(
                       code: controller.table.code,
                       onCopy: () {
-                        Clipboard.setData(
-                          ClipboardData(text: controller.table.code),
+                        final url = Uri.base.replace(
+                          queryParameters: {
+                            ...Uri.base.queryParameters,
+                            'mesa': controller.table.code,
+                          },
                         );
+                        Clipboard.setData(ClipboardData(text: url.toString()));
                       },
                       onEdit: () => _showTableCodeDialog(context),
                     ),
                     const SizedBox(height: 28),
-                    _LandingMasterCard(onTap: controller.enterAsMaster),
+                    _LandingMasterCard(
+                      onTap: () => _showMasterPinDialog(context),
+                    ),
                     const SizedBox(height: 18),
                     const RpgSectionTitle(
                       title: 'Fichas aprovadas',
                       icon: Icons.groups,
                     ),
                     const SizedBox(height: 10),
-                    if (controller.characters.isEmpty)
+                    if (controller.activeCharacters.isEmpty)
                       const _EmptyState(message: 'Nenhuma ficha aprovada.')
                     else
                       _LandingCharacterGrid(controller: controller),
@@ -210,7 +216,7 @@ class _LandingCharacterGrid extends StatelessWidget {
           spacing: spacing,
           runSpacing: spacing,
           children: [
-            for (final character in controller.characters)
+            for (final character in controller.activeCharacters)
               SizedBox(
                 width: width,
                 child: RpgPanel(

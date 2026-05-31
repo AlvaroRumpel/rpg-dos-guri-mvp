@@ -1,5 +1,93 @@
 part of '../shell/session_shell.dart';
 
+void _showMasterPinDialog(BuildContext context) {
+  final controller = context.read<RpgSessionController>();
+  if (controller.masterAuthorized) {
+    controller.enterAsMaster();
+    return;
+  }
+  final pin = TextEditingController();
+  final creating = !controller.hasMasterPin;
+
+  showDialog<void>(
+    context: context,
+    builder: (context) => RpgModal(
+      title: Text(creating ? 'Criar PIN do mestre' : 'PIN do mestre'),
+      content: RpgFieldGroup(
+        children: [
+          TextField(
+            controller: pin,
+            autofocus: true,
+            obscureText: true,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: creating ? 'Novo PIN' : 'PIN',
+              helperText:
+                  'Use pelo menos 4 dígitos. Esta é uma proteção doméstica.',
+            ),
+          ),
+          const RpgInfoRow(
+            label: 'Aviso',
+            value:
+                'O PIN evita acesso casual, mas não substitui autenticação real.',
+            icon: Icons.lock,
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancelar'),
+        ),
+        FilledButton(
+          onPressed: () async {
+            final ok = await context
+                .read<RpgSessionController>()
+                .enterAsMasterWithPin(pin.text);
+            if (!context.mounted) return;
+            if (ok) {
+              Navigator.of(context).pop();
+              return;
+            }
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('PIN inválido.')));
+          },
+          child: Text(creating ? 'Criar e entrar' : 'Entrar'),
+        ),
+      ],
+    ),
+  );
+}
+
+void _showArchiveCharacterDialog(
+  BuildContext context,
+  CharacterSheet character,
+) {
+  showDialog<void>(
+    context: context,
+    builder: (context) => RpgModal(
+      title: Text('Arquivar ${character.name}?'),
+      content: const Text(
+        'A ficha sairá da landing, da companhia ativa e de novos combates. O mestre pode restaurar depois.',
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancelar'),
+        ),
+        FilledButton(
+          onPressed: () {
+            context.read<RpgSessionController>().archiveCharacter(character.id);
+            Navigator.of(context).pop();
+          },
+          child: const Text('Arquivar'),
+        ),
+      ],
+    ),
+  );
+}
+
 void _showDefeatedStateDialog(
   BuildContext context,
   CombatParticipant participant,
@@ -1543,6 +1631,7 @@ void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
                     .clamp(0, 999999)
                     .toInt(),
                 ownerName: existing?.ownerName,
+                archived: existing?.archived ?? false,
               );
               if (existing == null) {
                 context.read<RpgSessionController>().addCharacter(character);

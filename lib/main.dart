@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,14 +27,21 @@ Future<void> main() async {
   runApp(
     ChangeNotifierProvider(
       create: (_) {
-        if (!firebaseReady) return RpgSessionController.seeded();
+        final initialCode = Uri.base.queryParameters['mesa'];
+        if (!firebaseReady) {
+          final controller = RpgSessionController.seeded();
+          unawaited(controller.bootstrap(initialTableCode: initialCode));
+          return controller;
+        }
         final firestore = FirebaseFirestore.instance;
-        return RpgSessionController.firestore(
+        final controller = RpgSessionController.firestore(
           tableRepository: FirestoreTableRepository(firestore),
           characterRepository: FirestoreCharacterRepository(firestore),
           combatRepository: FirestoreCombatRepository(firestore),
           actionLogRepository: FirestoreActionLogRepository(firestore),
         );
+        unawaited(controller.bootstrap(initialTableCode: initialCode));
+        return controller;
       },
       child: const RpgApp(),
     ),
