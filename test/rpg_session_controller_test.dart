@@ -156,4 +156,28 @@ void main() {
 
     expect(controller.table.code, 'GURI-2222');
   });
+
+  test('troca de classe remove pedidos de poderes descartados', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    final character = controller.characters.first.copyWith(
+      powers: const [
+        PowerEntry(
+          id: 'classe-antiga',
+          name: 'Golpe antigo',
+          type: 'Habilidade de classe',
+          description: '',
+          suggestedTest: '',
+          effect: '',
+          usageLimit: UsageLimit.combat,
+        ),
+      ],
+    );
+    controller.updateCharacter(character);
+    controller.requestPowerUse(character.id, 'classe-antiga');
+
+    controller.updateCharacter(character.copyWith(characterClass: 'Ladino'));
+
+    expect(controller.powerUseRequests, isEmpty);
+  });
 }

@@ -979,10 +979,12 @@ enum _LibraryTab {
 class _LibrarySceneState extends State<_LibraryScene> {
   _LibraryTab tab = _LibraryTab.monsters;
   final TextEditingController _searchController = TextEditingController();
+  Timer? _searchDebounce;
   String query = '';
 
   @override
   void dispose() {
+    _searchDebounce?.cancel();
     _searchController.dispose();
     super.dispose();
   }
@@ -1067,18 +1069,21 @@ class _LibrarySceneState extends State<_LibraryScene> {
               RpgSearchField(
                 controller: _searchController,
                 hintText: 'Buscar nesta aba',
-                onChanged: (value) => setState(() => query = value),
+                onChanged: (value) {
+                  _searchDebounce?.cancel();
+                  _searchDebounce = Timer(
+                    const Duration(milliseconds: 180),
+                    () {
+                      if (mounted) setState(() => query = value);
+                    },
+                  );
+                },
               ),
               const SizedBox(height: 14),
             ],
           ),
         ),
-        Expanded(
-          child: ListView(
-            padding: const EdgeInsets.all(22),
-            children: [_libraryContent(controller)],
-          ),
-        ),
+        Expanded(child: _libraryContent(controller)),
       ],
     );
   }
@@ -1112,7 +1117,13 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 if (race.actionCost != null)
                   _LibraryChip('uso', race.actionCost!),
               ],
-              details: [race.powerName, race.powerEffect, ?race.notes],
+              details: [
+                race.powerName,
+                race.powerDescription,
+                race.powerEffect,
+                ?race.notes,
+                ?race.source,
+              ],
             ),
       ],
       _LibraryTab.classes => [
@@ -1132,7 +1143,7 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 _LibraryChip('perícias', klass.skills.join(', ')),
                 _LibraryChip('inicial', klass.initialPowerName),
               ],
-              details: [?klass.description],
+              details: [?klass.description, ?klass.notes, ?klass.source],
             ),
       ],
       _LibraryTab.progression => [
@@ -1153,7 +1164,7 @@ class _LibrarySceneState extends State<_LibraryScene> {
                   _LibraryChip('uso', entry.actionCost!),
                 if (entry.roll != null) _LibraryChip('rolagem', entry.roll!),
               ],
-              details: [entry.description, ?entry.notes],
+              details: [entry.description, ?entry.notes, ?entry.source],
             ),
       ],
       _LibraryTab.grimoire => [
@@ -1192,6 +1203,7 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 spell.effect,
                 ?spell.extraEffect,
                 ?spell.notes,
+                ?spell.source,
               ],
             ),
         const _LibrarySectionHeader(title: 'Rituais', icon: Icons.menu_book),
@@ -1220,6 +1232,7 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 ritual.difficulty,
                 ?ritual.extraEffect,
                 ?ritual.notes,
+                ?ritual.source,
               ],
             ),
       ],
@@ -1257,6 +1270,7 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 power.effect,
                 ?power.extraEffect,
                 ?power.notes,
+                ?power.source,
               ],
             ),
       ],
@@ -1299,6 +1313,7 @@ class _LibrarySceneState extends State<_LibraryScene> {
                   'Classes: ${equipment.recommendedClasses.join(', ')}',
                 ?equipment.effect,
                 ?equipment.notes,
+                ?equipment.source,
               ],
             ),
       ],
@@ -1330,7 +1345,12 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 if (item.effectKind != null)
                   _LibraryChip('efeito', _effectKindLabel(item.effectKind!)),
               ],
-              details: [item.description, ?item.extraEffect, ?item.notes],
+              details: [
+                item.description,
+                ?item.extraEffect,
+                ?item.notes,
+                ?item.source,
+              ],
             ),
       ],
       _LibraryTab.kits => [
@@ -1341,7 +1361,7 @@ class _LibrarySceneState extends State<_LibraryScene> {
               title: kit.name,
               subtitle: kit.characterClass,
               chips: [_LibraryChip('itens', '${kit.items.length}')],
-              details: [...kit.items, ?kit.notes],
+              details: [...kit.items, ?kit.notes, ?kit.source],
             ),
       ],
       _LibraryTab.monsters => [
@@ -1369,17 +1389,23 @@ class _LibrarySceneState extends State<_LibraryScene> {
               ],
               details: [
                 monster.description,
+                monster.movement,
                 monster.instinct,
                 monster.special,
                 ?monster.behavior,
                 ?monster.encounterUse,
+                ?monster.rewards,
+                ?monster.notes,
+                ?monster.source,
               ],
             ),
       ],
     };
 
     if (cards.isEmpty) {
-      return const _EmptyState(message: 'Nada encontrado nesta biblioteca.');
+      return const Center(
+        child: _EmptyState(message: 'Nada encontrado nesta biblioteca.'),
+      );
     }
     return _LibraryGrid(children: cards);
   }
@@ -1528,24 +1554,59 @@ class _LibraryGrid extends StatelessWidget {
             ? 2
             : 1;
         const spacing = 12.0;
-        final width =
-            (constraints.maxWidth - (spacing * (columns - 1))) / columns;
         final displayChildren = _groupedChildren(children);
-        return Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          children: [
-            for (final child in displayChildren)
-              SizedBox(
-                width: child is _LibrarySectionHeader
-                    ? constraints.maxWidth
-                    : width,
-                child: child,
-              ),
+        return CustomScrollView(
+          key: const PageStorageKey('official-library'),
+          slivers: [
+            const SliverPadding(padding: EdgeInsets.only(top: 22)),
+            for (final section in _sections(displayChildren))
+              if (section.header != null)
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 22),
+                  sliver: SliverToBoxAdapter(child: section.header),
+                )
+              else
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(22, 0, 22, 12),
+                  sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => section.cards[index],
+                      childCount: section.cards.length,
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: columns,
+                      crossAxisSpacing: spacing,
+                      mainAxisSpacing: spacing,
+                      mainAxisExtent: 230,
+                    ),
+                  ),
+                ),
+            const SliverPadding(padding: EdgeInsets.only(bottom: 22)),
           ],
         );
       },
     );
+  }
+
+  List<_LibraryGridSection> _sections(List<Widget> children) {
+    final sections = <_LibraryGridSection>[];
+    var cards = <Widget>[];
+    void flushCards() {
+      if (cards.isEmpty) return;
+      sections.add(_LibraryGridSection(cards: cards));
+      cards = <Widget>[];
+    }
+
+    for (final child in children) {
+      if (child is _LibrarySectionHeader) {
+        flushCards();
+        sections.add(_LibraryGridSection(header: child));
+      } else {
+        cards.add(child);
+      }
+    }
+    flushCards();
+    return sections;
   }
 
   List<Widget> _groupedChildren(List<Widget> source) {
@@ -1586,6 +1647,13 @@ class _LibraryGrid extends StatelessWidget {
       ],
     ];
   }
+}
+
+class _LibraryGridSection {
+  const _LibraryGridSection({this.header, this.cards = const []});
+
+  final Widget? header;
+  final List<Widget> cards;
 }
 
 class _LibrarySectionHeader extends StatelessWidget {
@@ -1633,61 +1701,72 @@ class _LibraryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RpgPanel(
-      inset: true,
-      doubleBorder: true,
-      borderColor: RpgTheme.lineStrong,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              RpgPortrait(label: title, icon: icon, size: 34, color: accent),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  title,
-                  overflow: TextOverflow.ellipsis,
-                  style: RpgTextStyles.display(
-                    size: 14,
-                    color: RpgTheme.inkBright,
-                    weight: FontWeight.w700,
-                    letterSpacing: 1.05,
+    return InkWell(
+      onTap: () => _showDetailDialog(
+        context,
+        title: title,
+        subtitle: subtitle,
+        fields: [
+          for (final chip in chips) MapEntry(chip.label, chip.value),
+          for (final detail in details) MapEntry('Detalhe', detail),
+        ],
+      ),
+      borderRadius: BorderRadius.circular(RpgRadius.md),
+      child: RpgPanel(
+        inset: true,
+        doubleBorder: true,
+        borderColor: RpgTheme.lineStrong,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                RpgPortrait(label: title, icon: icon, size: 34, color: accent),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    title,
+                    overflow: TextOverflow.ellipsis,
+                    style: RpgTextStyles.display(
+                      size: 14,
+                      color: RpgTheme.inkBright,
+                      weight: FontWeight.w700,
+                      letterSpacing: 1.05,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(
-            subtitle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: RpgTextStyles.eyebrow(size: 9.5, color: accent),
-          ),
-          if (chips.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: [
-                for (final chip in chips)
-                  RpgStatChip(label: chip.label, value: chip.value),
               ],
             ),
-          ],
-          const SizedBox(height: 10),
-          for (final detail in details.where((item) => item.trim().isNotEmpty))
-            Padding(
-              padding: const EdgeInsets.only(bottom: 6),
-              child: Text(
+            const SizedBox(height: 6),
+            Text(
+              subtitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: RpgTextStyles.eyebrow(size: 9.5, color: accent),
+            ),
+            if (chips.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  for (final chip in chips)
+                    RpgStatChip(label: chip.label, value: chip.value),
+                ],
+              ),
+            ],
+            if (details.where((item) => item.trim().isNotEmpty).firstOrNull
+                case final detail?) ...[
+              const SizedBox(height: 10),
+              Text(
                 detail,
-                maxLines: 4,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: RpgTheme.mutedInk, fontSize: 12),
               ),
-            ),
-        ],
+            ],
+          ],
+        ),
       ),
     );
   }

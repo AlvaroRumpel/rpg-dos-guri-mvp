@@ -62,7 +62,11 @@ class RpgStage extends StatelessWidget {
               ),
             ),
           ),
-          Positioned.fill(child: CustomPaint(painter: _RpgGrainPainter())),
+          Positioned.fill(
+            child: RepaintBoundary(
+              child: CustomPaint(painter: _RpgGrainPainter()),
+            ),
+          ),
           Positioned.fill(child: child),
         ],
       ),
@@ -1167,79 +1171,33 @@ class RpgSegmentedControl<T> extends StatelessWidget {
   }
 }
 
-class RpgStateLamp extends StatefulWidget {
+class RpgStateLamp extends StatelessWidget {
   const RpgStateLamp({required this.state, super.key});
 
   final DefeatedState state;
 
   @override
-  State<RpgStateLamp> createState() => _RpgStateLampState();
-}
-
-class _RpgStateLampState extends State<RpgStateLamp>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1100),
-    );
-    if (widget.state == DefeatedState.active) {
-      _controller.repeat(reverse: true);
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant RpgStateLamp oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.state == DefeatedState.active && !_controller.isAnimating) {
-      _controller.repeat(reverse: true);
-    } else if (widget.state != DefeatedState.active &&
-        _controller.isAnimating) {
-      _controller.stop();
-      _controller.value = 0;
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final color = switch (widget.state) {
+    final color = switch (state) {
       DefeatedState.active => RpgTheme.mossBright,
       DefeatedState.unconscious => RpgTheme.ochre,
       DefeatedState.defeated => RpgTheme.danger,
       DefeatedState.dead => RpgTheme.charcoal,
     };
 
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, _) {
-        final pulse = widget.state == DefeatedState.active
-            ? 0.45 + (_controller.value * 0.36)
-            : 0.55;
-        return Container(
-          width: 10,
-          height: 10,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: color.withValues(alpha: pulse),
-                blurRadius: widget.state == DefeatedState.active ? 14 : 10,
-              ),
-            ],
+    return Container(
+      width: 10,
+      height: 10,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: color.withValues(alpha: 0.55),
+            blurRadius: state == DefeatedState.active ? 10 : 8,
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

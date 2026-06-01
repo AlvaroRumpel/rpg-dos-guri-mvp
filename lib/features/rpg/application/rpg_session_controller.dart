@@ -9,6 +9,7 @@ import '../data/official_library_repository.dart';
 import '../data/rpg_repositories.dart';
 import '../domain/domain.dart';
 import 'services/character_factory.dart';
+import 'services/character_power_reconciliation_service.dart';
 import 'services/character_progression_service.dart';
 import 'services/combat_service.dart';
 import 'services/official_name_matcher.dart';
@@ -99,30 +100,32 @@ class RpgSessionController extends ChangeNotifier {
   StreamSubscription<CombatState?>? _combatSubscription;
   StreamSubscription<List<String>>? _logSubscription;
   Timer? _persistDebounce;
+  RpgTable? _persistedTable;
+  CombatState? _persistedCombat;
+  final Map<String, CharacterSheet> _persistedCharacters = {};
   SharedPreferences? _preferences;
   bool _applyingRemoteState = false;
   bool _remoteTableExists = false;
   bool _masterAuthorized = false;
+  Map<String, EquipmentTemplate> _equipmentByName = const {};
+  Map<EquipmentCategory, List<EquipmentTemplate>> _equipmentByCategory =
+      const {};
 
   static const _lastTableCodeKey = 'rpg.lastTableCode';
   static const _lastCharacterIdKey = 'rpg.lastCharacterId';
   static const _masterAuthPrefix = 'rpg.masterAuth.';
 
-  List<EquipmentTemplate> get weapons => equipmentLibrary
-      .where((item) => item.category == EquipmentCategory.weapon)
-      .toList();
+  List<EquipmentTemplate> get weapons =>
+      _equipmentByCategory[EquipmentCategory.weapon] ?? const [];
 
-  List<EquipmentTemplate> get shields => equipmentLibrary
-      .where((item) => item.category == EquipmentCategory.shield)
-      .toList();
+  List<EquipmentTemplate> get shields =>
+      _equipmentByCategory[EquipmentCategory.shield] ?? const [];
 
-  List<EquipmentTemplate> get armors => equipmentLibrary
-      .where((item) => item.category == EquipmentCategory.armor)
-      .toList();
+  List<EquipmentTemplate> get armors =>
+      _equipmentByCategory[EquipmentCategory.armor] ?? const [];
 
-  List<EquipmentTemplate> get accessories => equipmentLibrary
-      .where((item) => item.category == EquipmentCategory.accessory)
-      .toList();
+  List<EquipmentTemplate> get accessories =>
+      _equipmentByCategory[EquipmentCategory.accessory] ?? const [];
 
   List<CharacterSheet> get activeCharacters =>
       characters.where((character) => !character.archived).toList();
@@ -137,10 +140,7 @@ class RpgSessionController extends ChangeNotifier {
   bool get masterAuthorized => _masterAuthorized;
 
   EquipmentTemplate? equipmentByName(String name) {
-    return OfficialNameMatcher.firstWhereOrNull(
-      equipmentLibrary,
-      (item) => OfficialNameMatcher.same(item.name, name),
-    );
+    return _equipmentByName[OfficialNameMatcher.canonical(name)];
   }
 
   CharacterSheet? get selectedCharacter {
@@ -188,6 +188,7 @@ class RpgSessionController extends ChangeNotifier {
       ritualLibrary = library.rituals;
       itemLibrary = library.items;
       equipmentLibrary = library.equipment;
+      _indexEquipment();
       starterKits = library.starterKits;
       classProgression = library.progression;
       characters = characters.map(_prepareCharacter).toList();
@@ -201,7 +202,7 @@ class RpgSessionController extends ChangeNotifier {
   @override
   void notifyListeners() {
     super.notifyListeners();
-    if (!_applyingRemoteState) _schedulePersistSnapshot();
+    if (!_applyingRemoteState) _schedulePersistChanges();
   }
 
   @override
@@ -228,12 +229,13 @@ class RpgSessionController extends ChangeNotifier {
     ) {
       if (remoteTable == null) {
         _remoteTableExists = false;
-        _persistSnapshot();
+        _persistChanges(forceAll: true);
         return;
       }
       _remoteTableExists = true;
       _applyRemoteState(() {
         table = remoteTable;
+        _persistedTable = remoteTable;
         pendingPlayerNames = remoteTable.pendingPlayerNames;
         _masterAuthorized =
             _preferences?.getBool('$_masterAuthPrefix${remoteTable.id}') ??
@@ -249,6 +251,13 @@ class RpgSessionController extends ChangeNotifier {
           }
           _applyRemoteState(() {
             characters = remoteCharacters;
+            _persistedCharacters
+              ..clear()
+              ..addEntries(
+                remoteCharacters.map(
+                  (character) => MapEntry(character.id, character),
+                ),
+              );
             final pending = _pendingSelectedCharacterId;
             if (pending != null &&
                 activeCharacters.any((character) => character.id == pending)) {
@@ -262,6 +271,7 @@ class RpgSessionController extends ChangeNotifier {
       (remoteCombat) {
         _applyRemoteState(() {
           activeCombat = remoteCombat;
+          _persistedCombat = remoteCombat;
           table = table.copyWith(activeCombatId: remoteCombat?.id);
         });
       },
@@ -285,7 +295,7 @@ class RpgSessionController extends ChangeNotifier {
     _applyingRemoteState = false;
   }
 
-  void _schedulePersistSnapshot() {
+  void _schedulePersistChanges() {
     if (_tableRepository == null ||
         _characterRepository == null ||
         _combatRepository == null) {
@@ -294,11 +304,11 @@ class RpgSessionController extends ChangeNotifier {
     _persistDebounce?.cancel();
     _persistDebounce = Timer(
       const Duration(milliseconds: 250),
-      _persistSnapshot,
+      _persistChanges,
     );
   }
 
-  Future<void> _persistSnapshot() async {
+  Future<void> _persistChanges({bool forceAll = false}) async {
     if (_applyingRemoteState) return;
     final tableRepository = _tableRepository;
     final characterRepository = _characterRepository;
@@ -310,15 +320,29 @@ class RpgSessionController extends ChangeNotifier {
     }
 
     try {
-      table = table.copyWith(pendingPlayerNames: pendingPlayerNames);
-      await tableRepository.saveTable(table);
-      await Future.wait([
+      final tableToSave = table;
+      final combatToSave = activeCombat;
+      final charactersToSave = [
         for (final character in characters)
+          if (forceAll ||
+              !identical(_persistedCharacters[character.id], character))
+            character,
+      ];
+      if (forceAll || !identical(_persistedTable, tableToSave)) {
+        await tableRepository.saveTable(tableToSave);
+        _persistedTable = tableToSave;
+      }
+      await Future.wait([
+        for (final character in charactersToSave)
           characterRepository.saveCharacter(table.id, character),
       ]);
-      final combat = activeCombat;
-      if (combat != null) {
-        await combatRepository.saveCombat(table.id, combat);
+      for (final character in charactersToSave) {
+        _persistedCharacters[character.id] = character;
+      }
+      if (combatToSave != null &&
+          (forceAll || !identical(_persistedCombat, combatToSave))) {
+        await combatRepository.saveCombat(table.id, combatToSave);
+        _persistedCombat = combatToSave;
       }
     } catch (error, stackTrace) {
       debugPrint('Falha ao sincronizar Firestore: $error');
@@ -421,6 +445,9 @@ class RpgSessionController extends ChangeNotifier {
     _cancelFirestoreSubscriptions();
     _persistDebounce?.cancel();
     _remoteTableExists = false;
+    _persistedTable = null;
+    _persistedCombat = null;
+    _persistedCharacters.clear();
     _applyingRemoteState = true;
     table = nextTable;
     characters = seedCharacters;
@@ -464,8 +491,37 @@ class RpgSessionController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateCharacter(CharacterSheet updated) {
-    final prepared = _prepareCharacter(updated);
+  void updateCharacter(
+    CharacterSheet updated, {
+    List<String> selectedMageSpellIds = const [],
+  }) {
+    final previous = characters
+        .where((item) => item.id == updated.id)
+        .firstOrNull;
+    var prepared = _prepareCharacter(updated);
+    if (previous != null) {
+      prepared = prepared.copyWith(
+        powers: CharacterPowerReconciliationService.reconcile(
+          previous: previous,
+          updated: prepared,
+          races: races,
+          progression: classProgression,
+          spells: spellLibrary,
+          selectedMageSpellIds: selectedMageSpellIds,
+        ),
+      );
+      final validPowerIds = prepared.powers.map((power) => power.id).toSet();
+      final validRequests = table.powerUseRequests
+          .where(
+            (request) =>
+                request.characterId != prepared.id ||
+                validPowerIds.contains(request.powerId),
+          )
+          .toList();
+      if (validRequests.length != table.powerUseRequests.length) {
+        table = table.copyWith(powerUseRequests: validRequests);
+      }
+    }
     characters = [
       for (final character in characters)
         if (character.id == prepared.id) prepared else character,
@@ -1225,6 +1281,20 @@ class RpgSessionController extends ChangeNotifier {
 
   bool _isShieldName(String name) {
     return shields.any((item) => OfficialNameMatcher.same(item.name, name));
+  }
+
+  void _indexEquipment() {
+    _equipmentByName = {
+      for (final item in equipmentLibrary)
+        OfficialNameMatcher.canonical(item.name): item,
+    };
+    _equipmentByCategory = {
+      for (final category in EquipmentCategory.values)
+        category: [
+          for (final item in equipmentLibrary)
+            if (item.category == category) item,
+        ],
+    };
   }
 
   bool _hasPowerNamed(CharacterSheet character, String name) {

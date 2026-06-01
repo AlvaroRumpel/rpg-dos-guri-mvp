@@ -32,11 +32,21 @@ class OfficialLibrary {
 
 class OfficialLibraryRepository {
   OfficialLibraryRepository({AssetBundle? bundle})
-    : _bundle = bundle ?? rootBundle;
+    : _bundle = bundle ?? rootBundle,
+      _useSharedCache = bundle == null;
 
   final AssetBundle _bundle;
+  final bool _useSharedCache;
+  static Future<OfficialLibrary>? _sharedLoad;
 
   Future<OfficialLibrary> load() async {
+    if (_useSharedCache) {
+      return _sharedLoad ??= _load();
+    }
+    return _load();
+  }
+
+  Future<OfficialLibrary> _load() async {
     final results = await Future.wait([
       _readList('assets/data/official/races.json'),
       _readList('assets/data/official/classes.json'),

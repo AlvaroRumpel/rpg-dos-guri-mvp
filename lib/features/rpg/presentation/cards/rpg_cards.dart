@@ -12,9 +12,12 @@ class CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<RpgSessionController>();
-    final combatIsActive = controller.activeCombat?.active == true;
-    final weapon = controller.equipmentByName(character.mainWeapon);
+    final combatIsActive = context.select<RpgSessionController, bool>(
+      (controller) => controller.activeCombat?.active == true,
+    );
+    final weapon = context.select<RpgSessionController, EquipmentTemplate?>(
+      (controller) => controller.equipmentByName(character.mainWeapon),
+    );
 
     return RpgPanel(
       ornate: true,
@@ -213,84 +216,88 @@ class PowerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final combatPower = power.usageLimit == UsageLimit.combat;
-    return RpgPanel(
-      inset: true,
-      doubleBorder: combatPower && !power.used,
-      borderColor: combatPower ? RpgTheme.ochre : RpgTheme.line,
-      ornate: combatPower && !power.used,
-      padding: const EdgeInsets.all(RpgSpacing.md),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                power.type.toLowerCase().contains('magia')
-                    ? Icons.auto_awesome
-                    : Icons.flash_on,
-                color: combatPower ? RpgTheme.ochre : RpgTheme.gold,
-                size: 18,
-              ),
-              const SizedBox(width: RpgSpacing.sm),
-              Expanded(
-                child: Text(
-                  power.name,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.titleMedium,
+    return InkWell(
+      onTap: () => _showPowerEntryDetails(context, power),
+      borderRadius: BorderRadius.circular(RpgRadius.md),
+      child: RpgPanel(
+        inset: true,
+        doubleBorder: combatPower && !power.used,
+        borderColor: combatPower ? RpgTheme.ochre : RpgTheme.line,
+        ornate: combatPower && !power.used,
+        padding: const EdgeInsets.all(RpgSpacing.md),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  power.type.toLowerCase().contains('magia')
+                      ? Icons.auto_awesome
+                      : Icons.flash_on,
+                  color: combatPower ? RpgTheme.ochre : RpgTheme.gold,
+                  size: 18,
                 ),
-              ),
-              if (!power.used) ...[
                 const SizedBox(width: RpgSpacing.sm),
-                RpgButton(
-                  onPressed: () => context
-                      .read<RpgSessionController>()
-                      .requestPowerUse(character.id, power.id),
-                  label: 'Solicitar',
-                  small: true,
+                Expanded(
+                  child: Text(
+                    power.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
+                if (!power.used) ...[
+                  const SizedBox(width: RpgSpacing.sm),
+                  RpgButton(
+                    onPressed: () => context
+                        .read<RpgSessionController>()
+                        .requestPowerUse(character.id, power.id),
+                    label: 'Solicitar',
+                    small: true,
+                  ),
+                ],
               ],
-            ],
-          ),
-          const SizedBox(height: RpgSpacing.sm),
-          Wrap(
-            spacing: RpgSpacing.sm,
-            runSpacing: RpgSpacing.sm,
-            children: [
-              RpgStatChip(label: 'tipo', value: power.type),
-              RpgStatChip(label: 'uso', value: _usageLabel(power.usageLimit)),
-              if (power.used)
-                const RpgStatChip(label: 'estado', value: 'usado'),
-            ],
-          ),
-          const SizedBox(height: RpgSpacing.sm),
-          Text(
-            power.suggestedTest,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: RpgTextStyles.eyebrow(size: 9),
-          ),
-          const SizedBox(height: RpgSpacing.xs),
-          Text(
-            power.effect,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: RpgTheme.mutedInk, fontSize: 12),
-          ),
-          if (power.extraEffect != null || power.notes != null) ...[
+            ),
+            const SizedBox(height: RpgSpacing.sm),
+            Wrap(
+              spacing: RpgSpacing.sm,
+              runSpacing: RpgSpacing.sm,
+              children: [
+                RpgStatChip(label: 'tipo', value: power.type),
+                RpgStatChip(label: 'uso', value: _usageLabel(power.usageLimit)),
+                if (power.used)
+                  const RpgStatChip(label: 'estado', value: 'usado'),
+              ],
+            ),
+            const SizedBox(height: RpgSpacing.sm),
+            Text(
+              power.suggestedTest,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: RpgTextStyles.eyebrow(size: 9),
+            ),
             const SizedBox(height: RpgSpacing.xs),
             Text(
-              [power.extraEffect, power.notes]
-                  .whereType<String>()
-                  .where((value) => value.trim().isNotEmpty)
-                  .join(' - '),
-              maxLines: 2,
+              power.effect,
+              maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(color: RpgTheme.inkDim, fontSize: 11),
+              style: const TextStyle(color: RpgTheme.mutedInk, fontSize: 12),
             ),
+            if (power.extraEffect != null || power.notes != null) ...[
+              const SizedBox(height: RpgSpacing.xs),
+              Text(
+                [power.extraEffect, power.notes]
+                    .whereType<String>()
+                    .where((value) => value.trim().isNotEmpty)
+                    .join(' - '),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(color: RpgTheme.inkDim, fontSize: 11),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

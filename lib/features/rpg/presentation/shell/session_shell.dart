@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -21,9 +23,11 @@ class SessionShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<RpgSessionController>();
+    final role = context.select<RpgSessionController, UserRole>(
+      (controller) => controller.role,
+    );
 
-    return switch (controller.role) {
+    return switch (role) {
       UserRole.master => const MasterView(),
       UserRole.player => const PlayerView(),
       UserRole.landing => const LandingView(),

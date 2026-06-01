@@ -1,5 +1,58 @@
 part of '../shell/session_shell.dart';
 
+void _showDetailDialog(
+  BuildContext context, {
+  required String title,
+  required String subtitle,
+  required List<MapEntry<String, String?>> fields,
+}) {
+  showDialog<void>(
+    context: context,
+    builder: (context) => RpgModal(
+      title: Text(title),
+      eyebrow: subtitle,
+      width: 680,
+      content: RpgFieldGroup(
+        children: [
+          for (final field in fields)
+            if (field.value?.trim().isNotEmpty == true)
+              RpgInfoRow(label: field.key, value: field.value!.trim()),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Fechar'),
+        ),
+      ],
+    ),
+  );
+}
+
+void _showPowerEntryDetails(BuildContext context, PowerEntry power) {
+  _showDetailDialog(
+    context,
+    title: power.name,
+    subtitle: power.type,
+    fields: [
+      MapEntry('Descrição', power.description),
+      MapEntry('Teste sugerido', power.suggestedTest),
+      MapEntry('Efeito', power.effect),
+      MapEntry('Limite', _usageLabel(power.usageLimit)),
+      MapEntry('Origem', power.origin),
+      MapEntry('Uso', power.actionCost),
+      MapEntry('Alcance', power.range),
+      MapEntry('Duração', power.duration),
+      MapEntry('Rolagem', power.roll),
+      MapEntry('Dano', power.damage),
+      MapEntry('Cura', power.healing),
+      MapEntry('Efeito extra', power.extraEffect),
+      MapEntry('Notas', power.notes),
+      MapEntry('Fonte', power.source),
+    ],
+  );
+}
+
 void _showMasterPinDialog(BuildContext context) {
   final controller = context.read<RpgSessionController>();
   if (controller.masterAuthorized) {
@@ -1363,6 +1416,7 @@ void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
     classOptions,
     'Guerreiro',
   );
+  final mageSpellSelections = <int, String?>{};
   var armor = _officialValue(existing?.armor, armorOptions, 'Sem armadura');
   var mainWeapon = _officialValue(
     existing?.mainWeapon,
@@ -1426,15 +1480,54 @@ void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
                       items: _stringDropdownItems(
                         _ensureDropdownOptions(classOptions, characterClass),
                       ),
-                      onChanged: (value) => setState(
-                        () => characterClass = value ?? characterClass,
-                      ),
+                      onChanged: (value) => setState(() {
+                        characterClass = value ?? characterClass;
+                        mageSpellSelections.clear();
+                      }),
                       decoration: const InputDecoration(labelText: 'Classe'),
                     ),
                   ],
                 ),
               ],
             ),
+            if (existing != null &&
+                !_sameOptionName(existing.characterClass, characterClass) &&
+                _sameOptionName(characterClass, 'Mago') &&
+                existing.level > 1)
+              RpgFormSection(
+                title: 'Grimório do mago',
+                subtitle: 'escolha as magias adquiridas nos níveis anteriores',
+                icon: Icons.auto_awesome,
+                children: [
+                  for (var level = 2; level <= existing.level; level += 1)
+                    DropdownButtonFormField<String>(
+                      initialValue: mageSpellSelections[level],
+                      isExpanded: true,
+                      items: [
+                        for (final spell in controller.spellLibrary)
+                          if ((level.isOdd
+                                  ? spell.usageLimit == UsageLimit.combat
+                                  : spell.usageLimit == UsageLimit.free) &&
+                              !mageSpellSelections.entries.any(
+                                (entry) =>
+                                    entry.key != level &&
+                                    entry.value == spell.id,
+                              ))
+                            DropdownMenuItem(
+                              value: spell.id,
+                              child: _dropdownLabel(spell.name),
+                            ),
+                      ],
+                      onChanged: (value) =>
+                          setState(() => mageSpellSelections[level] = value),
+                      decoration: InputDecoration(
+                        labelText: level.isOdd
+                            ? 'Nível $level - magia forte'
+                            : 'Nível $level - magia simples',
+                      ),
+                    ),
+                ],
+              ),
             RpgFormSection(
               title: 'Combate',
               icon: Icons.shield,
@@ -1597,6 +1690,19 @@ void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
                 accessoryOne.trim(),
                 accessoryTwo.trim(),
               ].where((item) => item.isNotEmpty).toList();
+              final changingToMage =
+                  existing != null &&
+                  !_sameOptionName(existing.characterClass, characterClass) &&
+                  _sameOptionName(characterClass, 'Mago');
+              if (changingToMage &&
+                  mageSpellSelections.length < existing.level - 1) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Escolha as magias adquiridas pelo mago.'),
+                  ),
+                );
+                return;
+              }
               final hasShield = shieldOptions.any(
                 (item) => _sameOptionName(item, secondaryItem),
               );
@@ -1636,7 +1742,12 @@ void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
               if (existing == null) {
                 context.read<RpgSessionController>().addCharacter(character);
               } else {
-                context.read<RpgSessionController>().updateCharacter(character);
+                context.read<RpgSessionController>().updateCharacter(
+                  character,
+                  selectedMageSpellIds: mageSpellSelections.values
+                      .whereType<String>()
+                      .toList(),
+                );
               }
               Navigator.of(context).pop();
             },
