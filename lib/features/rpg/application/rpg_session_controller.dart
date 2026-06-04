@@ -69,6 +69,7 @@ class RpgSessionController extends ChangeNotifier {
        _combatRepository = combatRepository,
        _actionLogRepository = actionLogRepository {
     _loadOfficialLibrary();
+    _markCurrentStatePersisted();
     _connectFirestore();
   }
 
@@ -141,6 +142,42 @@ class RpgSessionController extends ChangeNotifier {
 
   EquipmentTemplate? equipmentByName(String name) {
     return _equipmentByName[OfficialNameMatcher.canonical(name)];
+  }
+
+  MonsterTemplate? monsterById(String id) {
+    return monsters.where((monster) => monster.id == id).firstOrNull;
+  }
+
+  CharacterSheet? characterById(String id) {
+    return characters.where((character) => character.id == id).firstOrNull;
+  }
+
+  Object? mentionTargetByName(String rawName) {
+    final cleaned = rawName.trim();
+    if (cleaned.isEmpty) return null;
+    final character = activeCharacters
+        .where((item) => OfficialNameMatcher.same(item.name, cleaned))
+        .firstOrNull;
+    if (character != null) return character;
+    return table.customNpcs
+        .where((item) => OfficialNameMatcher.same(item.name, cleaned))
+        .firstOrNull;
+  }
+
+  List<Object> mentionSuggestions(String rawQuery, {int limit = 8}) {
+    final query = OfficialNameMatcher.canonical(rawQuery);
+    bool matches(String name) {
+      final canonical = OfficialNameMatcher.canonical(name);
+      return query.isEmpty || canonical.contains(query);
+    }
+
+    final suggestions = <Object>[
+      for (final character in activeCharacters)
+        if (matches(character.name)) character,
+      for (final npc in table.customNpcs)
+        if (npc.name.trim().isNotEmpty && matches(npc.name)) npc,
+    ];
+    return suggestions.take(limit).toList();
   }
 
   CharacterSheet? get selectedCharacter {
@@ -293,6 +330,16 @@ class RpgSessionController extends ChangeNotifier {
     apply();
     super.notifyListeners();
     _applyingRemoteState = false;
+  }
+
+  void _markCurrentStatePersisted() {
+    _persistedTable = table;
+    _persistedCombat = activeCombat;
+    _persistedCharacters
+      ..clear()
+      ..addEntries(
+        characters.map((character) => MapEntry(character.id, character)),
+      );
   }
 
   void _schedulePersistChanges() {
@@ -459,6 +506,7 @@ class RpgSessionController extends ChangeNotifier {
         _preferences?.getBool('$_masterAuthPrefix${nextTable.id}') ?? false;
     role = UserRole.landing;
     _applyingRemoteState = false;
+    _markCurrentStatePersisted();
     _connectFirestore();
   }
 
@@ -528,6 +576,132 @@ class RpgSessionController extends ChangeNotifier {
     ];
     _syncActiveParticipant(prepared);
     _log('Ficha de ${prepared.name} atualizada.');
+    notifyListeners();
+  }
+
+  void upsertCharacterNote(String characterId, CampaignNote note) {
+    characters = [
+      for (final character in characters)
+        if (character.id == characterId)
+          character.copyWith(notes: _upsertNote(character.notes, note))
+        else
+          character,
+    ];
+    _log('Nota de ficha atualizada.');
+    notifyListeners();
+  }
+
+  void deleteCharacterNote(String characterId, String noteId) {
+    characters = [
+      for (final character in characters)
+        if (character.id == characterId)
+          character.copyWith(
+            notes: character.notes.where((note) => note.id != noteId).toList(),
+          )
+        else
+          character,
+    ];
+    _log('Nota de ficha removida.');
+    notifyListeners();
+  }
+
+  void upsertMasterNote(CampaignNote note) {
+    table = table.copyWith(masterNotes: _upsertNote(table.masterNotes, note));
+    _log('Nota do mestre atualizada.');
+    notifyListeners();
+  }
+
+  void deleteMasterNote(String noteId) {
+    table = table.copyWith(
+      masterNotes: table.masterNotes
+          .where((note) => note.id != noteId)
+          .toList(),
+    );
+    _log('Nota do mestre removida.');
+    notifyListeners();
+  }
+
+  void upsertStoryPoint(StoryPoint point) {
+    final next = [
+      for (final current in table.storyPoints)
+        if (current.id == point.id) point else current,
+    ];
+    if (!next.any((current) => current.id == point.id)) next.add(point);
+    next.sort((a, b) => a.order.compareTo(b.order));
+    table = table.copyWith(storyPoints: next);
+    _log('Ponto de história atualizado.');
+    notifyListeners();
+  }
+
+  void deleteStoryPoint(String pointId) {
+    table = table.copyWith(
+      storyPoints: table.storyPoints
+          .where((point) => point.id != pointId)
+          .toList(),
+    );
+    _log('Ponto de história removido.');
+    notifyListeners();
+  }
+
+  void moveStoryPoint(String pointId, int delta) {
+    final points = [...table.storyPoints]
+      ..sort((a, b) => a.order.compareTo(b.order));
+    final index = points.indexWhere((point) => point.id == pointId);
+    if (index < 0) return;
+    final target = (index + delta).clamp(0, points.length - 1).toInt();
+    if (target == index) return;
+    final point = points.removeAt(index);
+    points.insert(target, point);
+    final now = DateTime.now();
+    table = table.copyWith(
+      storyPoints: [
+        for (var index = 0; index < points.length; index += 1)
+          points[index].copyWith(order: index, updatedAt: now),
+      ],
+    );
+    _log('Ordem da história ajustada.');
+    notifyListeners();
+  }
+
+  void reorderStoryPoint(String pointId, int newIndex) {
+    final points = [...table.storyPoints]
+      ..sort((a, b) => a.order.compareTo(b.order));
+    final index = points.indexWhere((point) => point.id == pointId);
+    if (index < 0) return;
+    final target = newIndex.clamp(0, points.length - 1).toInt();
+    if (target == index) return;
+    final point = points.removeAt(index);
+    points.insert(target, point);
+    final now = DateTime.now();
+    table = table.copyWith(
+      storyPoints: [
+        for (var index = 0; index < points.length; index += 1)
+          points[index].copyWith(order: index, updatedAt: now),
+      ],
+    );
+    _log('Ordem da história ajustada.');
+    notifyListeners();
+  }
+
+  void upsertCustomNpc(CustomNpc npc) {
+    final next = [
+      for (final current in table.customNpcs)
+        if (current.id == npc.id) npc else current,
+    ];
+    if (!next.any((current) => current.id == npc.id)) next.add(npc);
+    next.sort((a, b) => a.name.compareTo(b.name));
+    table = table.copyWith(customNpcs: next);
+    _log(
+      'NPC ${npc.name.trim().isEmpty ? 'customizado' : npc.name} atualizado.',
+    );
+    notifyListeners();
+  }
+
+  void deleteCustomNpc(String npcId) {
+    table = table.copyWith(
+      customNpcs: table.customNpcs.where((npc) => npc.id != npcId).toList(),
+    );
+    _log('NPC customizado removido.');
     notifyListeners();
   }
 
@@ -609,6 +783,7 @@ class RpgSessionController extends ChangeNotifier {
           id: 'monster-${DateTime.now().microsecondsSinceEpoch}-$index',
           name: quantity > 1 ? '${template.name} $index' : template.name,
           type: ParticipantType.monster,
+          sourceMonsterId: template.id,
           currentHp: hp,
           maxHp: hp,
           defense: defense ?? template.defense,
@@ -678,6 +853,17 @@ class RpgSessionController extends ChangeNotifier {
     }
     _log('${updated.name} editado pelo mestre.');
     notifyListeners();
+  }
+
+  void setParticipantActiveWeaponSlot(
+    String participantId,
+    ActiveWeaponSlot slot,
+  ) {
+    _updateParticipant(
+      participantId,
+      (participant) => participant.copyWith(activeWeaponSlot: slot),
+    );
+    _log('Arma ativa do participante ajustada.');
   }
 
   void applyDamage(String participantId, int amount) {
@@ -1281,6 +1467,16 @@ class RpgSessionController extends ChangeNotifier {
 
   bool _isShieldName(String name) {
     return shields.any((item) => OfficialNameMatcher.same(item.name, name));
+  }
+
+  List<CampaignNote> _upsertNote(List<CampaignNote> notes, CampaignNote note) {
+    final next = [
+      for (final current in notes)
+        if (current.id == note.id) note else current,
+    ];
+    if (!next.any((current) => current.id == note.id)) next.add(note);
+    next.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    return next;
   }
 
   void _indexEquipment() {

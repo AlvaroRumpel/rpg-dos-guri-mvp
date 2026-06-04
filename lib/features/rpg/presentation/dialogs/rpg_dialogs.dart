@@ -53,6 +53,623 @@ void _showPowerEntryDetails(BuildContext context, PowerEntry power) {
   );
 }
 
+CampaignNote _newCampaignNote({String title = '', String body = ''}) {
+  final now = DateTime.now();
+  return CampaignNote(
+    id: 'note-${now.microsecondsSinceEpoch}',
+    createdAt: now,
+    updatedAt: now,
+    title: title,
+    body: body,
+  );
+}
+
+StoryPoint _newStoryPoint(RpgSessionController controller) {
+  final now = DateTime.now();
+  final nextOrder = controller.table.storyPoints.length;
+  return StoryPoint(
+    id: 'story-${now.microsecondsSinceEpoch}',
+    createdAt: now,
+    updatedAt: now,
+    title: '',
+    body: '',
+    order: nextOrder,
+  );
+}
+
+CustomNpc _newCustomNpc() {
+  final now = DateTime.now();
+  return CustomNpc(
+    id: 'npc-${now.microsecondsSinceEpoch}',
+    createdAt: now,
+    updatedAt: now,
+    name: '',
+  );
+}
+
+void _showCharacterNoteEditor(
+  BuildContext context,
+  CharacterSheet character, {
+  CampaignNote? existing,
+}) {
+  _showNoteEditor(
+    context,
+    title: existing == null ? 'Nova nota' : 'Editar nota',
+    existing: existing,
+    onSave: (note) => context.read<RpgSessionController>().upsertCharacterNote(
+      character.id,
+      note,
+    ),
+  );
+}
+
+void _showMasterNoteEditor(BuildContext context, {CampaignNote? existing}) {
+  _showNoteEditor(
+    context,
+    title: existing == null ? 'Nova nota do mestre' : 'Editar nota do mestre',
+    existing: existing,
+    enableMentions: true,
+    onSave: context.read<RpgSessionController>().upsertMasterNote,
+  );
+}
+
+void _showNoteEditor(
+  BuildContext context, {
+  required String title,
+  required ValueChanged<CampaignNote> onSave,
+  CampaignNote? existing,
+  bool enableMentions = false,
+}) {
+  final sessionController = context.read<RpgSessionController>();
+  final titleController = TextEditingController(text: existing?.title ?? '');
+  final bodyController = TextEditingController(text: existing?.body ?? '');
+
+  showDialog<void>(
+    context: context,
+    builder: (context) => RpgModal(
+      title: Text(title),
+      width: 620,
+      content: RpgFieldGroup(
+        children: [
+          TextField(
+            controller: titleController,
+            autofocus: true,
+            decoration: const InputDecoration(labelText: 'Título'),
+          ),
+          if (enableMentions)
+            _MentionTextField(
+              controller: bodyController,
+              sessionController: sessionController,
+              minLines: 5,
+              maxLines: 10,
+              decoration: const InputDecoration(
+                labelText: 'Nota',
+                helperText: 'Use @Nome para linkar jogadores e NPCs.',
+              ),
+            )
+          else
+            TextField(
+              controller: bodyController,
+              minLines: 5,
+              maxLines: 10,
+              decoration: const InputDecoration(labelText: 'Nota'),
+            ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancelar'),
+        ),
+        FilledButton(
+          onPressed: () {
+            final now = DateTime.now();
+            final note = (existing ?? _newCampaignNote()).copyWith(
+              updatedAt: now,
+              title: titleController.text.trim(),
+              body: bodyController.text.trim(),
+            );
+            onSave(note);
+            Navigator.of(context).pop();
+          },
+          child: const Text('Salvar'),
+        ),
+      ],
+    ),
+  );
+}
+
+void _showStoryPointEditor(BuildContext context, {StoryPoint? existing}) {
+  final controller = context.read<RpgSessionController>();
+  final point = existing ?? _newStoryPoint(controller);
+  final titleController = TextEditingController(text: point.title);
+  final bodyController = TextEditingController(text: point.body);
+  var status = point.status;
+
+  showDialog<void>(
+    context: context,
+    builder: (context) => StatefulBuilder(
+      builder: (context, setState) => RpgModal(
+        title: Text(existing == null ? 'Nova ideia' : 'Editar ideia'),
+        width: 640,
+        content: RpgFieldGroup(
+          children: [
+            TextField(
+              controller: titleController,
+              autofocus: true,
+              decoration: const InputDecoration(labelText: 'Título'),
+            ),
+            DropdownButtonFormField<String>(
+              initialValue: status,
+              isExpanded: true,
+              items: _stringDropdownItems(const [
+                'ideia',
+                'ponto-chave',
+                'em jogo',
+                'resolvido',
+              ]),
+              onChanged: (value) => setState(() => status = value ?? status),
+              decoration: const InputDecoration(labelText: 'Status'),
+            ),
+            _MentionTextField(
+              controller: bodyController,
+              sessionController: controller,
+              minLines: 5,
+              maxLines: 10,
+              decoration: const InputDecoration(
+                labelText: 'Descrição',
+                helperText: 'Use @Nome para linkar jogadores e NPCs.',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancelar'),
+          ),
+          FilledButton(
+            onPressed: () {
+              controller.upsertStoryPoint(
+                point.copyWith(
+                  updatedAt: DateTime.now(),
+                  title: titleController.text.trim(),
+                  body: bodyController.text.trim(),
+                  status: status,
+                ),
+              );
+              Navigator.of(context).pop();
+            },
+            child: const Text('Salvar'),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+class _MentionTextField extends StatefulWidget {
+  const _MentionTextField({
+    required this.controller,
+    required this.sessionController,
+    required this.decoration,
+    this.minLines,
+    this.maxLines,
+  });
+
+  final TextEditingController controller;
+  final RpgSessionController sessionController;
+  final InputDecoration decoration;
+  final int? minLines;
+  final int? maxLines;
+
+  @override
+  State<_MentionTextField> createState() => _MentionTextFieldState();
+}
+
+class _MentionTextFieldState extends State<_MentionTextField> {
+  _MentionRange? _activeRange;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_refreshSuggestions);
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_refreshSuggestions);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final range = _activeRange;
+    final suggestions = range == null
+        ? const <Object>[]
+        : widget.sessionController.mentionSuggestions(range.query);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TextField(
+          controller: widget.controller,
+          minLines: widget.minLines,
+          maxLines: widget.maxLines,
+          decoration: widget.decoration,
+        ),
+        if (suggestions.isNotEmpty) ...[
+          const SizedBox(height: 6),
+          RpgPanel(
+            inset: true,
+            padding: const EdgeInsets.all(6),
+            borderColor: RpgTheme.lineGold,
+            child: Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                for (final suggestion in suggestions)
+                  ActionChip(
+                    avatar: Icon(
+                      suggestion is CharacterSheet ? Icons.person : Icons.face,
+                      size: 16,
+                    ),
+                    label: Text(_mentionDisplayName(suggestion)),
+                    onPressed: () => _insertMention(suggestion),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  void _refreshSuggestions() {
+    final nextRange = _activeMentionRange(widget.controller);
+    if (nextRange == _activeRange) return;
+    setState(() => _activeRange = nextRange);
+  }
+
+  void _insertMention(Object target) {
+    final range = _activeRange;
+    if (range == null) return;
+    final name = _mentionDisplayName(target);
+    final value = widget.controller.text;
+    final nextText =
+        '${value.substring(0, range.start)}@$name ${value.substring(range.end)}';
+    final cursor = range.start + name.length + 2;
+    widget.controller.value = TextEditingValue(
+      text: nextText,
+      selection: TextSelection.collapsed(offset: cursor),
+    );
+    setState(() => _activeRange = null);
+  }
+}
+
+class _MentionRange {
+  const _MentionRange(this.start, this.end, this.query);
+
+  final int start;
+  final int end;
+  final String query;
+
+  @override
+  bool operator ==(Object other) {
+    return other is _MentionRange &&
+        other.start == start &&
+        other.end == end &&
+        other.query == query;
+  }
+
+  @override
+  int get hashCode => Object.hash(start, end, query);
+}
+
+_MentionRange? _activeMentionRange(TextEditingController controller) {
+  final selection = controller.selection;
+  if (!selection.isValid || !selection.isCollapsed) return null;
+  final text = controller.text;
+  final cursor = selection.baseOffset;
+  if (cursor < 0 || cursor > text.length) return null;
+  final beforeCursor = text.substring(0, cursor);
+  final atIndex = beforeCursor.lastIndexOf('@');
+  if (atIndex < 0) return null;
+  final query = beforeCursor.substring(atIndex + 1);
+  if (query.contains('\n') ||
+      query.contains('\r') ||
+      query.contains('\t') ||
+      query.contains('.') ||
+      query.contains(',') ||
+      query.contains(';') ||
+      query.contains(':') ||
+      query.contains('!') ||
+      query.contains('?')) {
+    return null;
+  }
+  return _MentionRange(atIndex, cursor, query);
+}
+
+String _mentionDisplayName(Object target) {
+  return switch (target) {
+    CharacterSheet(:final name) => name,
+    CustomNpc(:final name) => name,
+    _ => '$target',
+  };
+}
+
+void _showCustomNpcEditor(BuildContext context, {CustomNpc? existing}) {
+  final controller = context.read<RpgSessionController>();
+  final npc = existing ?? _newCustomNpc();
+  final name = TextEditingController(text: npc.name);
+  final raceOptions = controller.races.map((item) => item.name).toList();
+  const occupationOptions = [
+    'Artesao',
+    'Bardo',
+    'Cacador',
+    'Comerciante',
+    'Curandeiro',
+    'Ferreiro',
+    'Guarda',
+    'Informante',
+    'Lider local',
+    'Mercenario',
+    'Nobre',
+    'Sacerdote',
+    'Viajante',
+  ];
+  var race = npc.race;
+  var occupation = npc.occupation;
+  final appearance = TextEditingController(text: npc.appearance);
+  final description = TextEditingController(text: npc.description);
+  final personality = TextEditingController(text: npc.personality);
+  final goal = TextEditingController(text: npc.goal);
+  final storyHook = TextEditingController(text: npc.storyHook);
+  final notes = TextEditingController(text: npc.notes);
+
+  showDialog<void>(
+    context: context,
+    builder: (context) => StatefulBuilder(
+      builder: (context, setState) => RpgModal(
+        title: Text(existing == null ? 'Novo NPC' : 'Editar NPC'),
+        width: 760,
+        content: RpgFieldGroup(
+          children: [
+            RpgFieldGrid(
+              minColumnWidth: 220,
+              children: [
+                TextField(
+                  controller: name,
+                  autofocus: true,
+                  decoration: const InputDecoration(labelText: 'Nome'),
+                ),
+                DropdownButtonFormField<String>(
+                  initialValue: race,
+                  isExpanded: true,
+                  items: _stringDropdownItems([
+                    '',
+                    ..._ensureDropdownOptions(raceOptions, race),
+                  ]),
+                  onChanged: (value) => setState(() => race = value ?? race),
+                  decoration: const InputDecoration(labelText: 'Raça'),
+                ),
+                DropdownButtonFormField<String>(
+                  initialValue: occupation,
+                  isExpanded: true,
+                  items: _stringDropdownItems([
+                    '',
+                    ..._ensureDropdownOptions(occupationOptions, occupation),
+                  ]),
+                  onChanged: (value) =>
+                      setState(() => occupation = value ?? occupation),
+                  decoration: const InputDecoration(labelText: 'Ocupação'),
+                ),
+              ],
+            ),
+            TextField(
+              controller: appearance,
+              minLines: 2,
+              maxLines: 4,
+              decoration: const InputDecoration(labelText: 'Aparência'),
+            ),
+            TextField(
+              controller: description,
+              minLines: 3,
+              maxLines: 6,
+              decoration: const InputDecoration(labelText: 'Descrição básica'),
+            ),
+            RpgFieldGrid(
+              minColumnWidth: 240,
+              children: [
+                TextField(
+                  controller: personality,
+                  minLines: 2,
+                  maxLines: 4,
+                  decoration: const InputDecoration(
+                    labelText: 'Personalidade/voz',
+                  ),
+                ),
+                TextField(
+                  controller: goal,
+                  minLines: 2,
+                  maxLines: 4,
+                  decoration: const InputDecoration(labelText: 'Objetivo'),
+                ),
+              ],
+            ),
+            TextField(
+              controller: storyHook,
+              minLines: 2,
+              maxLines: 4,
+              decoration: const InputDecoration(
+                labelText: 'Vínculo na história',
+              ),
+            ),
+            TextField(
+              controller: notes,
+              minLines: 3,
+              maxLines: 6,
+              decoration: const InputDecoration(labelText: 'Observações'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancelar'),
+          ),
+          FilledButton(
+            onPressed: () {
+              controller.upsertCustomNpc(
+                npc.copyWith(
+                  updatedAt: DateTime.now(),
+                  name: name.text.trim(),
+                  race: race.trim(),
+                  occupation: occupation.trim(),
+                  appearance: appearance.text.trim(),
+                  description: description.text.trim(),
+                  personality: personality.text.trim(),
+                  goal: goal.text.trim(),
+                  storyHook: storyHook.text.trim(),
+                  notes: notes.text.trim(),
+                ),
+              );
+              Navigator.of(context).pop();
+            },
+            child: const Text('Salvar'),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+void _showMentionTargetDetails(BuildContext context, Object target) {
+  if (target is CharacterSheet) {
+    _showCharacterSummaryDialog(context, target);
+  } else if (target is CustomNpc) {
+    _showCustomNpcDetails(context, target);
+  }
+}
+
+void _showCustomNpcDetails(BuildContext context, CustomNpc npc) {
+  _showDetailDialog(
+    context,
+    title: npc.name.isEmpty ? 'NPC sem nome' : npc.name,
+    subtitle: [
+      npc.race,
+      npc.occupation,
+    ].where((item) => item.trim().isNotEmpty).join(' - '),
+    fields: [
+      MapEntry('Aparência', npc.appearance),
+      MapEntry('Descrição', npc.description),
+      MapEntry('Personalidade/voz', npc.personality),
+      MapEntry('Objetivo', npc.goal),
+      MapEntry('Vínculo na história', npc.storyHook),
+      MapEntry('Observações', npc.notes),
+    ],
+  );
+}
+
+void _showCharacterSummaryDialog(
+  BuildContext context,
+  CharacterSheet character,
+) {
+  final controller = context.read<RpgSessionController>();
+  final primary = controller.equipmentByName(character.mainWeapon);
+  final secondary = controller.equipmentByName(character.secondaryItem);
+  _showDetailDialog(
+    context,
+    title: character.name,
+    subtitle:
+        '${character.race} ${character.characterClass} - nível ${character.level}',
+    fields: [
+      MapEntry('Jogador', character.ownerName),
+      MapEntry('Conceito', character.concept),
+      MapEntry('Vida', '${character.currentHp}/${character.maxHp}'),
+      MapEntry('Defesa', '${character.defense}'),
+      MapEntry('Arma principal', character.mainWeapon),
+      MapEntry('Dano principal', primary?.damage),
+      MapEntry('Secundário', character.secondaryItem),
+      MapEntry(
+        secondary?.category == EquipmentCategory.shield
+            ? 'Defesa secundária'
+            : 'Dano secundário',
+        secondary?.category == EquipmentCategory.shield
+            ? '+${secondary?.defenseBonus ?? 0}'
+            : secondary?.damage,
+      ),
+      MapEntry('Acessórios', character.accessories.join(', ')),
+      MapEntry(
+        'Status',
+        character.statuses.map((status) => status.name).join(', '),
+      ),
+      MapEntry(
+        'Inventário',
+        character.inventory
+            .take(6)
+            .map((item) => '${item.name} x${item.quantity}')
+            .join(', '),
+      ),
+      MapEntry(
+        'Poderes',
+        character.powers
+            .map(
+              (power) =>
+                  '${power.used ? 'usado' : 'disponível'}: ${power.name}',
+            )
+            .join('\n'),
+      ),
+    ],
+  );
+}
+
+void _showMonsterTemplateDetails(
+  BuildContext context,
+  MonsterTemplate monster,
+) {
+  _showDetailDialog(
+    context,
+    title: monster.name,
+    subtitle: monster.category,
+    fields: [
+      MapEntry('Vida', '${monster.maxHp}'),
+      MapEntry('Defesa', '${monster.defense}'),
+      MapEntry('Ataque', monster.attack),
+      MapEntry('Dano', monster.damage),
+      MapEntry('Movimento', monster.movement),
+      MapEntry('Como funciona', monster.howItWorks ?? monster.behavior),
+      MapEntry('Poder/Efeito', monster.special),
+      MapEntry('História', monster.history ?? monster.instinct),
+      MapEntry('Aparência', monster.appearance ?? monster.description),
+      MapEntry('Uso em cena', monster.encounterUse),
+      MapEntry('Recompensas', monster.rewards),
+      MapEntry('Notas', monster.notes),
+      MapEntry('Fonte', monster.source),
+    ],
+  );
+}
+
+void _showParticipantSummaryDialog(
+  BuildContext context,
+  CombatParticipant participant,
+) {
+  _showDetailDialog(
+    context,
+    title: participant.name,
+    subtitle: _participantTypeLabel(participant.type),
+    fields: [
+      MapEntry('Vida', '${participant.currentHp}/${participant.maxHp}'),
+      MapEntry('Defesa', '${participant.defense}'),
+      MapEntry('Dano sugerido', participant.damageSuggestion),
+      MapEntry(
+        'Status',
+        participant.statuses.map((status) => status.name).join(', '),
+      ),
+      MapEntry('Estado', _defeatedLabel(participant.defeatedState)),
+    ],
+  );
+}
+
 void _showMasterPinDialog(BuildContext context) {
   final controller = context.read<RpgSessionController>();
   if (controller.masterAuthorized) {
@@ -1736,6 +2353,7 @@ void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
                 coins: (int.tryParse(coins.text) ?? existing?.coins ?? 5)
                     .clamp(0, 999999)
                     .toInt(),
+                notes: existing?.notes ?? const [],
                 ownerName: existing?.ownerName,
                 archived: existing?.archived ?? false,
               );

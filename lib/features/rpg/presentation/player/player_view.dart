@@ -9,6 +9,7 @@ class PlayerView extends StatefulWidget {
 
 class _PlayerViewState extends State<PlayerView> {
   _PlayerTab tab = _PlayerTab.sheet;
+  bool showSecondaryWeapon = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,11 @@ class _PlayerViewState extends State<PlayerView> {
                               character: character,
                               controller: controller,
                               inCombat: inCombat,
+                              showSecondaryWeapon: showSecondaryWeapon,
+                              onToggleWeapon: () => setState(
+                                () =>
+                                    showSecondaryWeapon = !showSecondaryWeapon,
+                              ),
                             ),
                             const SizedBox(height: 12),
                             RpgTabs<_PlayerTab>(
@@ -71,6 +77,12 @@ class _PlayerViewState extends State<PlayerView> {
                                   icon: Icons.label,
                                   badge: character.statuses.length,
                                 ),
+                                RpgTabItem(
+                                  value: _PlayerTab.notes,
+                                  label: 'Notas',
+                                  icon: Icons.sticky_note_2,
+                                  badge: character.notes.length,
+                                ),
                               ],
                             ),
                             const SizedBox(height: 14),
@@ -96,6 +108,8 @@ class _PlayerViewState extends State<PlayerView> {
                               _PlayerItemsTab(character: character),
                             if (tab == _PlayerTab.status)
                               _PlayerStatusTab(character: character),
+                            if (tab == _PlayerTab.notes)
+                              _PlayerNotesTab(character: character),
                           ],
                         ),
                       ),
@@ -125,15 +139,31 @@ class _PlayerHero extends StatelessWidget {
     required this.character,
     required this.controller,
     required this.inCombat,
+    required this.showSecondaryWeapon,
+    required this.onToggleWeapon,
   });
 
   final CharacterSheet character;
   final RpgSessionController controller;
   final bool inCombat;
+  final bool showSecondaryWeapon;
+  final VoidCallback onToggleWeapon;
 
   @override
   Widget build(BuildContext context) {
-    final weapon = controller.equipmentByName(character.mainWeapon);
+    final primary = controller.equipmentByName(character.mainWeapon);
+    final secondary = controller.equipmentByName(character.secondaryItem);
+    final selectedEquipment = showSecondaryWeapon && secondary != null
+        ? secondary
+        : primary;
+    final selectedName = showSecondaryWeapon && secondary != null
+        ? character.secondaryItem
+        : character.mainWeapon;
+    final selectedIsShield =
+        selectedEquipment?.category == EquipmentCategory.shield;
+    final selectedValue = selectedIsShield
+        ? '+${selectedEquipment?.defenseBonus ?? 0}'
+        : selectedEquipment?.damage ?? '-';
     return Container(
       padding: const EdgeInsets.fromLTRB(8, 18, 8, 18),
       decoration: const BoxDecoration(
@@ -192,6 +222,16 @@ class _PlayerHero extends StatelessWidget {
             children: [
               SizedBox(
                 width: 150,
+                child: RpgButton(
+                  onPressed: onToggleWeapon,
+                  icon: Icons.swap_horiz,
+                  label: showSecondaryWeapon ? 'Secundária' : 'Principal',
+                  small: true,
+                  expand: true,
+                ),
+              ),
+              SizedBox(
+                width: 150,
                 child: RpgMetaPill(
                   icon: Icons.shield,
                   label: 'Defesa',
@@ -201,9 +241,19 @@ class _PlayerHero extends StatelessWidget {
               SizedBox(
                 width: 150,
                 child: RpgMetaPill(
-                  icon: Icons.local_fire_department,
-                  label: 'Dano',
-                  value: weapon?.damage ?? '-',
+                  icon: selectedIsShield
+                      ? Icons.security
+                      : Icons.local_fire_department,
+                  label: selectedIsShield ? 'Bônus escudo' : 'Dano',
+                  value: selectedValue,
+                ),
+              ),
+              SizedBox(
+                width: 150,
+                child: RpgMetaPill(
+                  icon: Icons.gavel,
+                  label: 'Equipamento',
+                  value: selectedName,
                 ),
               ),
               SizedBox(
@@ -479,6 +529,83 @@ class _PlayerStatusTab extends StatelessWidget {
               ],
             ),
           ),
+      ],
+    );
+  }
+}
+
+class _PlayerNotesTab extends StatefulWidget {
+  const _PlayerNotesTab({required this.character});
+
+  final CharacterSheet character;
+
+  @override
+  State<_PlayerNotesTab> createState() => _PlayerNotesTabState();
+}
+
+class _PlayerNotesTabState extends State<_PlayerNotesTab> {
+  final TextEditingController _searchController = TextEditingController();
+  String query = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = context.read<RpgSessionController>();
+    final notes =
+        widget.character.notes
+            .where((note) => _noteMatches(note, query))
+            .toList()
+          ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: RpgSearchField(
+                controller: _searchController,
+                hintText: 'Buscar nas suas notas',
+                onChanged: (value) => setState(() => query = value),
+              ),
+            ),
+            const SizedBox(width: 8),
+            RpgButton(
+              onPressed: () =>
+                  _showCharacterNoteEditor(context, widget.character),
+              icon: Icons.add,
+              label: 'Nota',
+              variant: RpgButtonVariant.primary,
+              small: true,
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        if (notes.isEmpty)
+          const _EmptyState(message: 'Nenhuma nota encontrada.')
+        else
+          for (final note in notes)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: _CampaignNoteCard(
+                note: note,
+                linkMentions: false,
+                onEdit: () => _showCharacterNoteEditor(
+                  context,
+                  widget.character,
+                  existing: note,
+                ),
+                onDelete: () => controller.deleteCharacterNote(
+                  widget.character.id,
+                  note.id,
+                ),
+              ),
+            ),
       ],
     );
   }

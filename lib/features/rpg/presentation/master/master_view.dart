@@ -516,6 +516,24 @@ List<RpgTabItem<_MasterScene>> _masterTabs(RpgSessionController controller) {
       icon: Icons.auto_stories,
     ),
     RpgTabItem(
+      value: _MasterScene.notes,
+      label: 'Notas',
+      icon: Icons.sticky_note_2,
+      badge: controller.table.masterNotes.length,
+    ),
+    RpgTabItem(
+      value: _MasterScene.story,
+      label: 'História',
+      icon: Icons.timeline,
+      badge: controller.table.storyPoints.length,
+    ),
+    RpgTabItem(
+      value: _MasterScene.npcs,
+      label: 'NPCs',
+      icon: Icons.face,
+      badge: controller.table.customNpcs.length,
+    ),
+    RpgTabItem(
       value: _MasterScene.log,
       label: 'Log',
       icon: Icons.history_edu,
@@ -623,6 +641,9 @@ class _MasterSceneBody extends StatelessWidget {
       _MasterScene.table => _TableCombatScene(combat: combat),
       _MasterScene.roster => _RosterScene(controller: controller),
       _MasterScene.library => _LibraryScene(controller: controller),
+      _MasterScene.notes => _MasterNotesScene(controller: controller),
+      _MasterScene.story => _StoryScene(controller: controller),
+      _MasterScene.npcs => _NpcsScene(controller: controller),
       _MasterScene.log => _LogScene(controller: controller),
     };
   }
@@ -840,6 +861,557 @@ class _RosterScene extends StatelessWidget {
       ],
     );
   }
+}
+
+class _MasterNotesScene extends StatefulWidget {
+  const _MasterNotesScene({required this.controller});
+
+  final RpgSessionController controller;
+
+  @override
+  State<_MasterNotesScene> createState() => _MasterNotesSceneState();
+}
+
+class _MasterNotesSceneState extends State<_MasterNotesScene> {
+  final TextEditingController _searchController = TextEditingController();
+  String query = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final notes =
+        widget.controller.table.masterNotes
+            .where((note) => _noteMatches(note, query))
+            .toList()
+          ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+
+    return ListView(
+      padding: const EdgeInsets.all(22),
+      children: [
+        RpgSectionTitle(
+          title: 'Notas do mestre',
+          subtitle: '${notes.length} post-its',
+          icon: Icons.sticky_note_2,
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: RpgSearchField(
+                controller: _searchController,
+                hintText: 'Buscar nas notas',
+                onChanged: (value) => setState(() => query = value),
+              ),
+            ),
+            const SizedBox(width: 10),
+            RpgButton(
+              onPressed: () => _showMasterNoteEditor(context),
+              icon: Icons.add,
+              label: 'Nota',
+              variant: RpgButtonVariant.primary,
+              small: true,
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        if (notes.isEmpty)
+          const _EmptyState(message: 'Nenhuma nota encontrada.')
+        else
+          for (final note in notes)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: _CampaignNoteCard(
+                note: note,
+                onEdit: () => _showMasterNoteEditor(context, existing: note),
+                onDelete: () => widget.controller.deleteMasterNote(note.id),
+              ),
+            ),
+      ],
+    );
+  }
+}
+
+class _StoryScene extends StatefulWidget {
+  const _StoryScene({required this.controller});
+
+  final RpgSessionController controller;
+
+  @override
+  State<_StoryScene> createState() => _StorySceneState();
+}
+
+class _StorySceneState extends State<_StoryScene> {
+  final TextEditingController _searchController = TextEditingController();
+  String query = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final points =
+        widget.controller.table.storyPoints
+            .where((point) => _storyPointMatches(point, query))
+            .toList()
+          ..sort((a, b) => a.order.compareTo(b.order));
+
+    return ListView(
+      padding: const EdgeInsets.all(22),
+      children: [
+        RpgSectionTitle(
+          title: 'História',
+          subtitle: '${points.length} pontos-chave',
+          icon: Icons.timeline,
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: RpgSearchField(
+                controller: _searchController,
+                hintText: 'Buscar na história',
+                onChanged: (value) => setState(() => query = value),
+              ),
+            ),
+            const SizedBox(width: 10),
+            RpgButton(
+              onPressed: () => _showStoryPointEditor(context),
+              icon: Icons.add,
+              label: 'Ideia',
+              variant: RpgButtonVariant.primary,
+              small: true,
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        if (points.isEmpty)
+          const _EmptyState(message: 'Nenhum ponto de história encontrado.')
+        else if (query.trim().isEmpty)
+          ReorderableListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            buildDefaultDragHandles: false,
+            itemCount: points.length,
+            onReorder: (oldIndex, newIndex) {
+              final targetIndex = newIndex > oldIndex ? newIndex - 1 : newIndex;
+              widget.controller.reorderStoryPoint(
+                points[oldIndex].id,
+                targetIndex,
+              );
+            },
+            itemBuilder: (context, index) {
+              final point = points[index];
+              return Padding(
+                key: ValueKey(point.id),
+                padding: const EdgeInsets.only(bottom: 10),
+                child: _StoryPointCard(
+                  index: index,
+                  point: point,
+                  draggable: true,
+                  onEdit: () => _showStoryPointEditor(context, existing: point),
+                  onDelete: () => widget.controller.deleteStoryPoint(point.id),
+                ),
+              );
+            },
+          )
+        else
+          for (final point in points)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: _StoryPointCard(
+                point: point,
+                onEdit: () => _showStoryPointEditor(context, existing: point),
+                onDelete: () => widget.controller.deleteStoryPoint(point.id),
+              ),
+            ),
+      ],
+    );
+  }
+}
+
+class _NpcsScene extends StatefulWidget {
+  const _NpcsScene({required this.controller});
+
+  final RpgSessionController controller;
+
+  @override
+  State<_NpcsScene> createState() => _NpcsSceneState();
+}
+
+class _NpcsSceneState extends State<_NpcsScene> {
+  final TextEditingController _searchController = TextEditingController();
+  String query = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final npcs =
+        widget.controller.table.customNpcs
+            .where((npc) => _npcMatches(npc, query))
+            .toList()
+          ..sort((a, b) => a.name.compareTo(b.name));
+
+    return ListView(
+      padding: const EdgeInsets.all(22),
+      children: [
+        RpgSectionTitle(
+          title: 'NPCs',
+          subtitle: '${npcs.length} personagens customizados',
+          icon: Icons.face,
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: RpgSearchField(
+                controller: _searchController,
+                hintText: 'Buscar NPCs',
+                onChanged: (value) => setState(() => query = value),
+              ),
+            ),
+            const SizedBox(width: 10),
+            RpgButton(
+              onPressed: () => _showCustomNpcEditor(context),
+              icon: Icons.add,
+              label: 'NPC',
+              variant: RpgButtonVariant.primary,
+              small: true,
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        if (npcs.isEmpty)
+          const _EmptyState(message: 'Nenhum NPC customizado encontrado.')
+        else
+          for (final npc in npcs)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: _CustomNpcCard(
+                npc: npc,
+                onOpen: () => _showCustomNpcDetails(context, npc),
+                onEdit: () => _showCustomNpcEditor(context, existing: npc),
+                onDelete: () => widget.controller.deleteCustomNpc(npc.id),
+              ),
+            ),
+      ],
+    );
+  }
+}
+
+class _CampaignNoteCard extends StatelessWidget {
+  const _CampaignNoteCard({
+    required this.note,
+    required this.onEdit,
+    required this.onDelete,
+    this.linkMentions = true,
+  });
+
+  final CampaignNote note;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+  final bool linkMentions;
+
+  @override
+  Widget build(BuildContext context) {
+    return RpgPanel(
+      borderColor: RpgTheme.ochre,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _CardTitleRow(
+            title: note.title.isEmpty ? 'Nota sem título' : note.title,
+            subtitle: _formatDate(note.updatedAt),
+            icon: Icons.sticky_note_2,
+            onEdit: onEdit,
+            onDelete: onDelete,
+          ),
+          if (note.body.trim().isNotEmpty) ...[
+            const SizedBox(height: 8),
+            if (linkMentions)
+              _LinkedText(note.body)
+            else
+              Text(note.body, style: const TextStyle(color: RpgTheme.mutedInk)),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _StoryPointCard extends StatelessWidget {
+  const _StoryPointCard({
+    required this.point,
+    required this.onEdit,
+    required this.onDelete,
+    this.index,
+    this.draggable = false,
+  });
+
+  final StoryPoint point;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+  final int? index;
+  final bool draggable;
+
+  @override
+  Widget build(BuildContext context) {
+    return RpgPanel(
+      borderColor: RpgTheme.gold,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RpgPortrait(
+                label: '${point.order + 1}',
+                sigil: 'rune',
+                size: 42,
+                color: RpgTheme.gold,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _CardTitleRow(
+                  title: point.title.isEmpty ? 'Ponto sem título' : point.title,
+                  subtitle: '${point.status} - ${_formatDate(point.updatedAt)}',
+                  icon: Icons.timeline,
+                  onEdit: onEdit,
+                  onDelete: onDelete,
+                  extraActions: [
+                    if (draggable && index != null)
+                      ReorderableDragStartListener(
+                        index: index!,
+                        child: const RpgIconButton(
+                          onPressed: null,
+                          icon: Icons.drag_indicator,
+                          tooltip: 'Arrastar',
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          if (point.body.trim().isNotEmpty) ...[
+            const SizedBox(height: 8),
+            _LinkedText(point.body),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomNpcCard extends StatelessWidget {
+  const _CustomNpcCard({
+    required this.npc,
+    required this.onOpen,
+    required this.onEdit,
+    required this.onDelete,
+  });
+
+  final CustomNpc npc;
+  final VoidCallback onOpen;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onOpen,
+      borderRadius: BorderRadius.circular(RpgRadius.md),
+      child: RpgPanel(
+        borderColor: RpgTheme.mossBright,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _CardTitleRow(
+              title: npc.name.isEmpty ? 'NPC sem nome' : npc.name,
+              subtitle: [
+                npc.race,
+                npc.occupation,
+              ].where((item) => item.trim().isNotEmpty).join(' - '),
+              icon: Icons.face,
+              onEdit: onEdit,
+              onDelete: onDelete,
+            ),
+            if (npc.appearance.trim().isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(
+                npc.appearance,
+                style: const TextStyle(color: RpgTheme.mutedInk, fontSize: 13),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardTitleRow extends StatelessWidget {
+  const _CardTitleRow({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.onEdit,
+    required this.onDelete,
+    this.extraActions = const [],
+  });
+
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+  final List<Widget> extraActions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: RpgTheme.gold),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: Theme.of(context).textTheme.titleMedium),
+              if (subtitle.trim().isNotEmpty)
+                Text(
+                  subtitle,
+                  style: const TextStyle(color: RpgTheme.inkDim, fontSize: 12),
+                ),
+            ],
+          ),
+        ),
+        ...extraActions,
+        RpgIconButton(onPressed: onEdit, icon: Icons.edit, tooltip: 'Editar'),
+        RpgIconButton(
+          onPressed: onDelete,
+          icon: Icons.delete_outline,
+          tooltip: 'Remover',
+        ),
+      ],
+    );
+  }
+}
+
+class _LinkedText extends StatelessWidget {
+  const _LinkedText(this.text);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = context.read<RpgSessionController>();
+    final targets = <MapEntry<String, Object>>[
+      for (final character in controller.activeCharacters)
+        MapEntry(character.name, character),
+      for (final npc in controller.table.customNpcs) MapEntry(npc.name, npc),
+    ]..sort((a, b) => b.key.length.compareTo(a.key.length));
+    final spans = <InlineSpan>[];
+    var offset = 0;
+    while (offset < text.length) {
+      var matched = false;
+      for (final target in targets) {
+        final name = target.key.trim();
+        if (name.isEmpty) continue;
+        final mention = '@$name';
+        final end = offset + mention.length;
+        if (end > text.length) continue;
+        final segment = text.substring(offset, end);
+        if (segment.toLowerCase() != mention.toLowerCase()) continue;
+        if (end < text.length && !_isMentionBoundary(text[end])) continue;
+        spans.add(
+          WidgetSpan(
+            alignment: PlaceholderAlignment.baseline,
+            baseline: TextBaseline.alphabetic,
+            child: GestureDetector(
+              onTap: () => _showMentionTargetDetails(context, target.value),
+              child: Text(
+                segment,
+                style: const TextStyle(
+                  color: RpgTheme.goldBright,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+        );
+        offset = end;
+        matched = true;
+        break;
+      }
+      if (!matched) {
+        spans.add(TextSpan(text: text[offset]));
+        offset += 1;
+      }
+    }
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(color: RpgTheme.mutedInk, fontSize: 13),
+        children: spans,
+      ),
+    );
+  }
+}
+
+bool _isMentionBoundary(String character) {
+  return !RegExp(r'[A-Za-zÀ-ÿ0-9]').hasMatch(character);
+}
+
+bool _noteMatches(CampaignNote note, String query) {
+  final cleaned = query.trim().toLowerCase();
+  if (cleaned.isEmpty) return true;
+  return '${note.title}\n${note.body}'.toLowerCase().contains(cleaned);
+}
+
+bool _storyPointMatches(StoryPoint point, String query) {
+  final cleaned = query.trim().toLowerCase();
+  if (cleaned.isEmpty) return true;
+  return '${point.title}\n${point.body}\n${point.status}'
+      .toLowerCase()
+      .contains(cleaned);
+}
+
+bool _npcMatches(CustomNpc npc, String query) {
+  final cleaned = query.trim().toLowerCase();
+  if (cleaned.isEmpty) return true;
+  return [
+    npc.name,
+    npc.race,
+    npc.occupation,
+    npc.appearance,
+    npc.description,
+    npc.personality,
+    npc.goal,
+    npc.storyHook,
+    npc.notes,
+  ].join('\n').toLowerCase().contains(cleaned);
+}
+
+String _formatDate(DateTime date) {
+  final day = date.day.toString().padLeft(2, '0');
+  final month = date.month.toString().padLeft(2, '0');
+  final hour = date.hour.toString().padLeft(2, '0');
+  final minute = date.minute.toString().padLeft(2, '0');
+  return '$day/$month/${date.year} $hour:$minute';
 }
 
 class _LogScene extends StatelessWidget {
@@ -1315,6 +1887,31 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 ?equipment.notes,
                 ?equipment.source,
               ],
+              detailFields: [
+                MapEntry(
+                  'Como funciona',
+                  equipment.howItWorks ?? equipment.description,
+                ),
+                MapEntry('Poder/Efeito', equipment.effect),
+                MapEntry('História', equipment.history),
+                MapEntry('Aparência', equipment.appearance),
+                MapEntry('Dano', equipment.damage),
+                MapEntry('Atributo', equipment.attribute),
+                MapEntry(
+                  'Propriedades',
+                  equipment.properties.isEmpty
+                      ? null
+                      : equipment.properties.join(', '),
+                ),
+                MapEntry(
+                  'Classes',
+                  equipment.recommendedClasses.isEmpty
+                      ? null
+                      : equipment.recommendedClasses.join(', '),
+                ),
+                MapEntry('Notas', equipment.notes),
+                MapEntry('Fonte', equipment.source),
+              ],
             ),
       ],
       _LibraryTab.items => [
@@ -1350,6 +1947,22 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 ?item.extraEffect,
                 ?item.notes,
                 ?item.source,
+              ],
+              detailFields: [
+                MapEntry('Como funciona', item.howItWorks ?? item.description),
+                MapEntry('Poder/Efeito', item.power ?? item.extraEffect),
+                MapEntry('História', item.history),
+                MapEntry('Aparência', item.appearance),
+                MapEntry('Rolagem', item.roll),
+                MapEntry(
+                  'Bônus fixo',
+                  item.fixedBonus == 0 ? null : '+${item.fixedBonus}',
+                ),
+                MapEntry('Uso', item.actionCost),
+                MapEntry('Alcance', item.range),
+                MapEntry('Duração', item.duration),
+                MapEntry('Notas', item.notes),
+                MapEntry('Fonte', item.source),
               ],
             ),
       ],
@@ -1397,6 +2010,27 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 ?monster.rewards,
                 ?monster.notes,
                 ?monster.source,
+              ],
+              detailFields: [
+                MapEntry('Vida', '${monster.maxHp}'),
+                MapEntry('Defesa', '${monster.defense}'),
+                MapEntry('Ataque', monster.attack),
+                MapEntry('Dano', monster.damage),
+                MapEntry('Movimento', monster.movement),
+                MapEntry(
+                  'Como funciona',
+                  monster.howItWorks ?? monster.behavior,
+                ),
+                MapEntry('Poder/Efeito', monster.special),
+                MapEntry('História', monster.history ?? monster.instinct),
+                MapEntry(
+                  'Aparência',
+                  monster.appearance ?? monster.description,
+                ),
+                MapEntry('Uso em cena', monster.encounterUse),
+                MapEntry('Recompensas', monster.rewards),
+                MapEntry('Notas', monster.notes),
+                MapEntry('Fonte', monster.source),
               ],
             ),
       ],
@@ -1683,6 +2317,7 @@ class _LibraryCard extends StatelessWidget {
     required this.subtitle,
     required this.details,
     this.chips = const [],
+    this.detailFields,
     this.accent = RpgTheme.gold,
     this.groupTitle,
     this.groupIcon,
@@ -1694,6 +2329,7 @@ class _LibraryCard extends StatelessWidget {
   final String subtitle;
   final List<String> details;
   final List<_LibraryChip> chips;
+  final List<MapEntry<String, String?>>? detailFields;
   final Color accent;
   final String? groupTitle;
   final IconData? groupIcon;
@@ -1706,10 +2342,12 @@ class _LibraryCard extends StatelessWidget {
         context,
         title: title,
         subtitle: subtitle,
-        fields: [
-          for (final chip in chips) MapEntry(chip.label, chip.value),
-          for (final detail in details) MapEntry('Detalhe', detail),
-        ],
+        fields:
+            detailFields ??
+            [
+              for (final chip in chips) MapEntry(chip.label, chip.value),
+              for (final detail in details) MapEntry('Detalhe', detail),
+            ],
       ),
       borderRadius: BorderRadius.circular(RpgRadius.md),
       child: RpgPanel(

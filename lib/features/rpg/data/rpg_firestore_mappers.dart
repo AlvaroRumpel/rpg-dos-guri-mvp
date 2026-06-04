@@ -9,6 +9,11 @@ RpgTable tableFromMap(String id, Map<String, dynamic> data) {
     powerUseRequests: _mapList(
       data['powerUseRequests'],
     ).map(powerUseRequestFromMap).toList(),
+    masterNotes: _mapList(
+      data['masterNotes'],
+    ).map(campaignNoteFromMap).toList(),
+    storyPoints: _mapList(data['storyPoints']).map(storyPointFromMap).toList(),
+    customNpcs: _mapList(data['customNpcs']).map(customNpcFromMap).toList(),
     masterPinHash: data['masterPinHash'] as String?,
     activeCombatId: data['activeCombatId'] as String?,
   );
@@ -22,6 +27,9 @@ Map<String, dynamic> tableToMap(RpgTable table) {
     'powerUseRequests': table.powerUseRequests
         .map(powerUseRequestToMap)
         .toList(),
+    'masterNotes': table.masterNotes.map(campaignNoteToMap).toList(),
+    'storyPoints': table.storyPoints.map(storyPointToMap).toList(),
+    'customNpcs': table.customNpcs.map(customNpcToMap).toList(),
     'masterPinHash': table.masterPinHash,
     'activeCombatId': table.activeCombatId,
   });
@@ -47,6 +55,7 @@ CharacterSheet characterFromMap(String id, Map<String, dynamic> data) {
     inventory: _mapList(data['inventory']).map(inventoryItemFromMap).toList(),
     statuses: _mapList(data['statuses']).map(statusFromMap).toList(),
     coins: _int(data['coins']),
+    notes: _mapList(data['notes']).map(campaignNoteFromMap).toList(),
     ownerName: data['ownerName'] as String?,
     archived: data['archived'] as bool? ?? false,
   );
@@ -71,8 +80,90 @@ Map<String, dynamic> characterToMap(CharacterSheet character) {
     'inventory': character.inventory.map(inventoryItemToMap).toList(),
     'statuses': character.statuses.map(statusToMap).toList(),
     'coins': character.coins,
+    'notes': character.notes.map(campaignNoteToMap).toList(),
     'ownerName': character.ownerName,
     'archived': character.archived,
+  };
+}
+
+CampaignNote campaignNoteFromMap(Map<String, dynamic> data) {
+  final createdAt = _dateTime(data['createdAt']);
+  return CampaignNote(
+    id: data['id'] as String? ?? 'note',
+    createdAt: createdAt,
+    updatedAt: _dateTime(data['updatedAt'], fallback: createdAt),
+    title: data['title'] as String? ?? '',
+    body: data['body'] as String? ?? '',
+  );
+}
+
+Map<String, dynamic> campaignNoteToMap(CampaignNote note) {
+  return {
+    'id': note.id,
+    'createdAt': note.createdAt.toIso8601String(),
+    'updatedAt': note.updatedAt.toIso8601String(),
+    'title': note.title,
+    'body': note.body,
+  };
+}
+
+StoryPoint storyPointFromMap(Map<String, dynamic> data) {
+  final createdAt = _dateTime(data['createdAt']);
+  return StoryPoint(
+    id: data['id'] as String? ?? 'story',
+    createdAt: createdAt,
+    updatedAt: _dateTime(data['updatedAt'], fallback: createdAt),
+    title: data['title'] as String? ?? '',
+    body: data['body'] as String? ?? '',
+    order: _int(data['order']),
+    status: data['status'] as String? ?? 'ideia',
+  );
+}
+
+Map<String, dynamic> storyPointToMap(StoryPoint point) {
+  return {
+    'id': point.id,
+    'createdAt': point.createdAt.toIso8601String(),
+    'updatedAt': point.updatedAt.toIso8601String(),
+    'title': point.title,
+    'body': point.body,
+    'order': point.order,
+    'status': point.status,
+  };
+}
+
+CustomNpc customNpcFromMap(Map<String, dynamic> data) {
+  final createdAt = _dateTime(data['createdAt']);
+  return CustomNpc(
+    id: data['id'] as String? ?? 'npc',
+    createdAt: createdAt,
+    updatedAt: _dateTime(data['updatedAt'], fallback: createdAt),
+    name: data['name'] as String? ?? '',
+    race: data['race'] as String? ?? '',
+    occupation: data['occupation'] as String? ?? '',
+    appearance: data['appearance'] as String? ?? '',
+    description: data['description'] as String? ?? '',
+    personality: data['personality'] as String? ?? '',
+    goal: data['goal'] as String? ?? '',
+    storyHook: data['storyHook'] as String? ?? '',
+    notes: data['notes'] as String? ?? '',
+  );
+}
+
+Map<String, dynamic> customNpcToMap(CustomNpc npc) {
+  return {
+    'id': npc.id,
+    'createdAt': npc.createdAt.toIso8601String(),
+    'updatedAt': npc.updatedAt.toIso8601String(),
+    'name': npc.name,
+    'race': npc.race,
+    'occupation': npc.occupation,
+    'appearance': npc.appearance,
+    'description': npc.description,
+    'personality': npc.personality,
+    'goal': npc.goal,
+    'storyHook': npc.storyHook,
+    'notes': npc.notes,
   };
 }
 
@@ -165,6 +256,10 @@ InventoryItem inventoryItemFromMap(Map<String, dynamic> data) {
     range: data['range'] as String?,
     duration: data['duration'] as String?,
     extraEffect: data['extraEffect'] as String?,
+    howItWorks: data['howItWorks'] as String?,
+    power: data['power'] as String?,
+    history: data['history'] as String?,
+    appearance: data['appearance'] as String?,
     notes: data['notes'] as String?,
     source: data['source'] as String?,
   );
@@ -185,6 +280,10 @@ Map<String, dynamic> inventoryItemToMap(InventoryItem item) {
     'range': item.range,
     'duration': item.duration,
     'extraEffect': item.extraEffect,
+    'howItWorks': item.howItWorks,
+    'power': item.power,
+    'history': item.history,
+    'appearance': item.appearance,
     'notes': item.notes,
     'source': item.source,
   });
@@ -243,10 +342,17 @@ CombatParticipant combatParticipantFromMap(Map<String, dynamic> data) {
     defense: _int(data['defense'], fallback: 10),
     statuses: _mapList(data['statuses']).map(statusFromMap).toList(),
     sourceCharacterId: data['sourceCharacterId'] as String?,
+    sourceMonsterId: data['sourceMonsterId'] as String?,
     damageSuggestion: data['damageSuggestion'] as String?,
     defeatedState:
         _enumByName(DefeatedState.values, data['defeatedState'] as String?) ??
         DefeatedState.active,
+    activeWeaponSlot:
+        _enumByName(
+          ActiveWeaponSlot.values,
+          data['activeWeaponSlot'] as String?,
+        ) ??
+        ActiveWeaponSlot.primary,
   );
 }
 
@@ -260,8 +366,10 @@ Map<String, dynamic> combatParticipantToMap(CombatParticipant participant) {
     'defense': participant.defense,
     'statuses': participant.statuses.map(statusToMap).toList(),
     'sourceCharacterId': participant.sourceCharacterId,
+    'sourceMonsterId': participant.sourceMonsterId,
     'damageSuggestion': participant.damageSuggestion,
     'defeatedState': participant.defeatedState.name,
+    'activeWeaponSlot': participant.activeWeaponSlot.name,
   };
 }
 
@@ -306,8 +414,10 @@ Map<String, dynamic> _withoutNulls(Map<String, dynamic> value) {
   };
 }
 
-DateTime _dateTime(Object? value) {
+DateTime _dateTime(Object? value, {DateTime? fallback}) {
   if (value is DateTime) return value;
-  if (value is String) return DateTime.tryParse(value) ?? DateTime.now();
-  return DateTime.now();
+  if (value is String) {
+    return DateTime.tryParse(value) ?? fallback ?? DateTime.now();
+  }
+  return fallback ?? DateTime.now();
 }

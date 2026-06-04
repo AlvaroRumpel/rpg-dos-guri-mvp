@@ -35,6 +35,6 @@ class SessionShell extends StatelessWidget {
   }
 }
 
-enum _MasterScene { table, roster, library, log }
+enum _MasterScene { table, roster, library, notes, story, npcs, log }
 
-enum _PlayerTab { sheet, powers, items, status }
+enum _PlayerTab { sheet, powers, items, status, notes }

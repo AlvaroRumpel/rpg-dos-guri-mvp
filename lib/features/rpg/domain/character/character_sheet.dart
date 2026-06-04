@@ -1,4 +1,5 @@
 import '../combat/status_entry.dart';
+import '../table/campaign_note.dart';
 import 'inventory_item.dart';
 import 'power_entry.dart';
 
@@ -22,6 +23,7 @@ class CharacterSheet {
     required this.inventory,
     required this.statuses,
     required this.coins,
+    this.notes = const [],
     this.ownerName,
     this.archived = false,
   });
@@ -44,6 +46,7 @@ class CharacterSheet {
   final List<InventoryItem> inventory;
   final List<StatusEntry> statuses;
   final int coins;
+  final List<CampaignNote> notes;
   final String? ownerName;
   final bool archived;
 
@@ -78,6 +81,7 @@ class CharacterSheet {
     List<InventoryItem>? inventory,
     List<StatusEntry>? statuses,
     int? coins,
+    List<CampaignNote>? notes,
     String? ownerName,
     bool? archived,
   }) {
@@ -100,6 +104,7 @@ class CharacterSheet {
       inventory: inventory ?? this.inventory,
       statuses: statuses ?? this.statuses,
       coins: coins ?? this.coins,
+      notes: notes ?? this.notes,
       ownerName: ownerName ?? this.ownerName,
       archived: archived ?? this.archived,
     );

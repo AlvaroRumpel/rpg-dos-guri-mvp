@@ -1,6 +1,9 @@
 export 'shared/rpg_enums.dart';
 export 'table/rpg_table.dart';
 export 'table/power_use_request.dart';
+export 'table/campaign_note.dart';
+export 'table/story_point.dart';
+export 'table/custom_npc.dart';
 export 'character/character_sheet.dart';
 export 'character/power_entry.dart';
 export 'character/inventory_item.dart';

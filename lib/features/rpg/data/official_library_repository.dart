@@ -224,6 +224,9 @@ EquipmentTemplate _equipmentFromJson(Map<String, dynamic> json) {
     duration: _nullableString(json['duration']),
     roll: _nullableString(json['roll']),
     effect: _nullableString(json['effect']),
+    howItWorks: _nullableString(json['howItWorks'] ?? json['comoFunciona']),
+    history: _nullableString(json['history'] ?? json['historia']),
+    appearance: _nullableString(json['appearance'] ?? json['aparencia']),
     notes: _nullableString(json['notes']),
     source: _nullableString(json['source']),
   );
@@ -244,6 +247,10 @@ ItemTemplate _itemFromJson(Map<String, dynamic> json) {
     range: _nullableString(json['range']),
     duration: _nullableString(json['duration']),
     extraEffect: _nullableString(json['extraEffect']),
+    howItWorks: _nullableString(json['howItWorks'] ?? json['comoFunciona']),
+    power: _nullableString(json['power'] ?? json['poder']),
+    history: _nullableString(json['history'] ?? json['historia']),
+    appearance: _nullableString(json['appearance'] ?? json['aparencia']),
     notes: _nullableString(json['notes']),
     source: _nullableString(json['source']),
   );
@@ -276,6 +283,9 @@ MonsterTemplate _monsterFromJson(Map<String, dynamic> json) {
     behavior: _nullableString(json['behavior']),
     encounterUse: _nullableString(json['encounterUse']),
     rewards: _nullableString(json['rewards']),
+    howItWorks: _nullableString(json['howItWorks'] ?? json['comoFunciona']),
+    history: _nullableString(json['history'] ?? json['historia']),
+    appearance: _nullableString(json['appearance'] ?? json['aparencia']),
     notes: _nullableString(json['notes']),
     source: _nullableString(json['source']),
   );

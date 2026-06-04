@@ -13,6 +13,10 @@ class InventoryItem {
     this.range,
     this.duration,
     this.extraEffect,
+    this.howItWorks,
+    this.power,
+    this.history,
+    this.appearance,
     this.notes,
     this.source,
   });
@@ -30,6 +34,10 @@ class InventoryItem {
   final String? range;
   final String? duration;
   final String? extraEffect;
+  final String? howItWorks;
+  final String? power;
+  final String? history;
+  final String? appearance;
   final String? notes;
   final String? source;
 
@@ -46,6 +54,10 @@ class InventoryItem {
     String? range,
     String? duration,
     String? extraEffect,
+    String? howItWorks,
+    String? power,
+    String? history,
+    String? appearance,
     String? notes,
     String? source,
   }) {
@@ -63,6 +75,10 @@ class InventoryItem {
       range: range ?? this.range,
       duration: duration ?? this.duration,
       extraEffect: extraEffect ?? this.extraEffect,
+      howItWorks: howItWorks ?? this.howItWorks,
+      power: power ?? this.power,
+      history: history ?? this.history,
+      appearance: appearance ?? this.appearance,
       notes: notes ?? this.notes,
       source: source ?? this.source,
     );
@@ -84,6 +100,10 @@ class ItemTemplate {
     this.range,
     this.duration,
     this.extraEffect,
+    this.howItWorks,
+    this.power,
+    this.history,
+    this.appearance,
     this.notes,
     this.source,
   });
@@ -101,6 +121,10 @@ class ItemTemplate {
   final String? range;
   final String? duration;
   final String? extraEffect;
+  final String? howItWorks;
+  final String? power;
+  final String? history;
+  final String? appearance;
   final String? notes;
   final String? source;
 
@@ -119,6 +143,10 @@ class ItemTemplate {
       range: range,
       duration: duration,
       extraEffect: extraEffect,
+      howItWorks: howItWorks,
+      power: power,
+      history: history,
+      appearance: appearance,
       notes: notes,
       source: source,
     );

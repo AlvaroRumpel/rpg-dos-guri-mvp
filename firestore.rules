@@ -11,6 +11,9 @@ service cloud.firestore {
         && isShortText(data.code, 16)
         && (!('pendingPlayerNames' in data) || (data.pendingPlayerNames is list && data.pendingPlayerNames.size() <= 12))
         && (!('powerUseRequests' in data) || (data.powerUseRequests is list && data.powerUseRequests.size() <= 20))
+        && (!('masterNotes' in data) || (data.masterNotes is list && data.masterNotes.size() <= 120))
+        && (!('storyPoints' in data) || (data.storyPoints is list && data.storyPoints.size() <= 120))
+        && (!('customNpcs' in data) || (data.customNpcs is list && data.customNpcs.size() <= 120))
         && (!('masterPinHash' in data) || data.masterPinHash is string || data.masterPinHash == null)
         && (!('activeCombatId' in data) || data.activeCombatId is string || data.activeCombatId == null);
     }
@@ -24,6 +27,7 @@ service cloud.firestore {
         && data.level <= 10
         && data.currentHp is int
         && data.currentHp >= 0
+        && (!('notes' in data) || (data.notes is list && data.notes.size() <= 120))
         && (!('archived' in data) || data.archived is bool);
     }
 

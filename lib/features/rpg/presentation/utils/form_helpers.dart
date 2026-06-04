@@ -19,6 +19,7 @@ String _officialValue(String? current, List<String> options, String fallback) {
       if (_sameOptionName(option, fallback)) return option;
     }
   }
+  if (fallback.isEmpty) return '';
   if (options.isNotEmpty) return options.first;
   return fallback;
 }

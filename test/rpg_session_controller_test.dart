@@ -5,6 +5,8 @@ import 'package:rpg_dos_guri/features/rpg/application/application.dart';
 import 'package:rpg_dos_guri/features/rpg/domain/domain.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   setUp(() {
     SharedPreferences.setMockInitialValues({});
   });
@@ -179,5 +181,195 @@ void main() {
     controller.updateCharacter(character.copyWith(characterClass: 'Ladino'));
 
     expect(controller.powerUseRequests, isEmpty);
+  });
+
+  test('edicao de ficha preserva acessorios vazios', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    final character = controller.characters.first.copyWith(
+      accessories: const [],
+    );
+
+    controller.updateCharacter(character);
+
+    expect(controller.characters.first.accessories, isEmpty);
+  });
+
+  test('notas historia npcs e mencoes sao atualizados na mesa', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    final now = DateTime(2026, 6, 4, 12);
+    final masterNote = CampaignNote(
+      id: 'note-1',
+      createdAt: now,
+      updatedAt: now,
+      title: 'Cena',
+      body: '@${controller.characters.first.name} encontrou @Bardo',
+    );
+    final storyPoint = StoryPoint(
+      id: 'story-1',
+      createdAt: now,
+      updatedAt: now,
+      title: 'Gancho',
+      body: 'Encontrar @Bardo',
+      order: 0,
+    );
+    final npc = CustomNpc(
+      id: 'npc-1',
+      createdAt: now,
+      updatedAt: now,
+      name: 'Bardo',
+      occupation: 'Informante',
+    );
+
+    controller.upsertMasterNote(masterNote);
+    controller.upsertStoryPoint(storyPoint);
+    controller.upsertCustomNpc(npc);
+
+    expect(controller.table.masterNotes.single.title, 'Cena');
+    expect(controller.table.storyPoints.single.title, 'Gancho');
+    expect(controller.table.customNpcs.single.name, 'Bardo');
+    expect(
+      controller.mentionTargetByName(controller.characters.first.name),
+      isA<CharacterSheet>(),
+    );
+    expect(controller.mentionTargetByName('Bardo'), isA<CustomNpc>());
+  });
+
+  test('mencao duplicada prioriza jogador ativo antes de npc', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    final now = DateTime(2026, 6, 4, 12);
+    controller.upsertCustomNpc(
+      CustomNpc(
+        id: 'npc-1',
+        createdAt: now,
+        updatedAt: now,
+        name: controller.characters.first.name,
+      ),
+    );
+
+    expect(
+      controller.mentionTargetByName(controller.characters.first.name),
+      isA<CharacterSheet>(),
+    );
+  });
+
+  test('sugestoes de mencao retornam jogadores antes de npcs', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    final now = DateTime(2026, 6, 4, 12);
+    final playerName = controller.characters.first.name;
+    controller.upsertCustomNpc(
+      CustomNpc(id: 'npc-1', createdAt: now, updatedAt: now, name: playerName),
+    );
+
+    final suggestions = controller.mentionSuggestions(playerName);
+
+    expect(suggestions.first, isA<CharacterSheet>());
+    expect(suggestions.whereType<CustomNpc>(), isNotEmpty);
+  });
+
+  test('reordenacao de historia por indice persiste nova ordem', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    final now = DateTime(2026, 6, 4, 12);
+    controller.upsertStoryPoint(
+      StoryPoint(
+        id: 'story-1',
+        createdAt: now,
+        updatedAt: now,
+        title: 'Primeira',
+        body: '',
+        order: 0,
+      ),
+    );
+    controller.upsertStoryPoint(
+      StoryPoint(
+        id: 'story-2',
+        createdAt: now,
+        updatedAt: now,
+        title: 'Segunda',
+        body: '',
+        order: 1,
+      ),
+    );
+
+    controller.reorderStoryPoint('story-1', 1);
+
+    expect(controller.table.storyPoints.map((point) => point.id), [
+      'story-2',
+      'story-1',
+    ]);
+    expect(controller.table.storyPoints.last.order, 1);
+  });
+
+  test('notas do jogador sao salvas e removidas da ficha', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    final characterId = controller.characters.first.id;
+    final now = DateTime(2026, 6, 4, 12);
+    final note = CampaignNote(
+      id: 'note-player',
+      createdAt: now,
+      updatedAt: now,
+      title: 'Pista',
+      body: 'Porta secreta',
+    );
+
+    controller.upsertCharacterNote(characterId, note);
+    expect(controller.characters.first.notes.single.body, 'Porta secreta');
+
+    controller.deleteCharacterNote(characterId, note.id);
+    expect(controller.characters.first.notes, isEmpty);
+  });
+
+  test('monstro adicionado ao combate guarda referencia oficial', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+    const monster = MonsterTemplate(
+      id: 'goblin',
+      name: 'Goblin',
+      category: 'Fraco',
+      defense: 11,
+      maxHp: 5,
+      attack: '1d20',
+      damage: '1d4',
+      movement: 'Rápido',
+      instinct: 'Emboscar',
+      special: 'Fuga',
+      description: 'Pequeno e sorrateiro',
+    );
+
+    controller.startCombat();
+    controller.addMonsterToCombat(monster, 1);
+
+    final participant = controller.activeCombat!.participants
+        .where((item) => item.type == ParticipantType.monster)
+        .single;
+    expect(participant.sourceMonsterId, 'goblin');
+  });
+
+  test('arma ativa do jogador em combate fica no participante', () {
+    final controller = RpgSessionController.seeded();
+    addTearDown(controller.dispose);
+
+    controller.startCombat();
+    final participant = controller.activeCombat!.participants
+        .where((item) => item.type == ParticipantType.player)
+        .first;
+
+    controller.setParticipantActiveWeaponSlot(
+      participant.id,
+      ActiveWeaponSlot.secondary,
+    );
+
+    expect(
+      controller.activeCombat!.participants
+          .where((item) => item.id == participant.id)
+          .single
+          .activeWeaponSlot,
+      ActiveWeaponSlot.secondary,
+    );
   });
 }

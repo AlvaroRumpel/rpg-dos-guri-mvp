@@ -106,6 +106,9 @@ class EquipmentTemplate {
     this.duration,
     this.roll,
     this.effect,
+    this.howItWorks,
+    this.history,
+    this.appearance,
     this.notes,
     this.source,
   });
@@ -127,6 +130,9 @@ class EquipmentTemplate {
   final String? duration;
   final String? roll;
   final String? effect;
+  final String? howItWorks;
+  final String? history;
+  final String? appearance;
   final String? notes;
   final String? source;
 }
@@ -197,6 +203,9 @@ class MonsterTemplate {
     this.behavior,
     this.encounterUse,
     this.rewards,
+    this.howItWorks,
+    this.history,
+    this.appearance,
     this.notes,
     this.source,
   });
@@ -215,6 +224,9 @@ class MonsterTemplate {
   final String? behavior;
   final String? encounterUse;
   final String? rewards;
+  final String? howItWorks;
+  final String? history;
+  final String? appearance;
   final String? notes;
   final String? source;
 }

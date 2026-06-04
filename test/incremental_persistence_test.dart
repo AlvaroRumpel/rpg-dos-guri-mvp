@@ -7,6 +7,8 @@ import 'package:rpg_dos_guri/features/rpg/data/rpg_repositories.dart';
 import 'package:rpg_dos_guri/features/rpg/domain/domain.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   test('persiste somente os domínios alterados após o debounce', () async {
     final tables = _TableRepository();
     final characters = _CharacterRepository();
