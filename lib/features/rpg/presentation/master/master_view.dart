@@ -12,15 +12,20 @@ class _MasterViewState extends State<MasterView> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<RpgSessionController>();
-    final combat = controller.activeCombat;
+    final controller = context.read<RpgSessionController>();
+    final combat = context.select<RpgSessionController, CombatState?>(
+      (controller) => controller.activeCombat,
+    );
+    final tabCounts = context.select<RpgSessionController, _MasterTabCounts>(
+      _MasterTabCounts.fromController,
+    );
 
     return Scaffold(
       body: RpgStage(
         child: SafeArea(
           child: Column(
             children: [
-              _MasterTopBar(controller: controller, combat: combat),
+              _MasterTopBar(combat: combat),
               Expanded(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -42,8 +47,14 @@ class _MasterViewState extends State<MasterView> {
                           RpgTabs<_MasterScene>(
                             dense: true,
                             value: scene,
-                            onChanged: (value) => setState(() => scene = value),
-                            tabs: _masterTabs(controller),
+                            onChanged: (value) {
+                              RpgPerformanceTrace.mark('master.tab_change', {
+                                'from': scene.name,
+                                'to': value.name,
+                              });
+                              setState(() => scene = value);
+                            },
+                            tabs: _masterTabs(tabCounts),
                           ),
                           Expanded(child: main),
                         ],
@@ -58,9 +69,15 @@ class _MasterViewState extends State<MasterView> {
                           child: _MasterSideRail(
                             controller: controller,
                             combat: combat,
+                            tabCounts: tabCounts,
                             scene: scene,
-                            onSceneChanged: (value) =>
-                                setState(() => scene = value),
+                            onSceneChanged: (value) {
+                              RpgPerformanceTrace.mark('master.tab_change', {
+                                'from': scene.name,
+                                'to': value.name,
+                              });
+                              setState(() => scene = value);
+                            },
                           ),
                         ),
                         Expanded(child: main),
@@ -82,13 +99,18 @@ class _MasterViewState extends State<MasterView> {
 }
 
 class _MasterTopBar extends StatelessWidget {
-  const _MasterTopBar({required this.controller, required this.combat});
+  const _MasterTopBar({required this.combat});
 
-  final RpgSessionController controller;
   final CombatState? combat;
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<RpgSessionController>();
+    final header = context
+        .select<RpgSessionController, ({String code, String name})>(
+          (controller) =>
+              (code: controller.table.code, name: controller.table.name),
+        );
     final active = combat?.active == true;
     return Container(
       height: 62,
@@ -139,7 +161,7 @@ class _MasterTopBar extends StatelessWidget {
                 Text('MESA', style: RpgTextStyles.eyebrow(size: 9)),
                 const SizedBox(width: 8),
                 Text(
-                  controller.table.code,
+                  header.code,
                   style: RpgTextStyles.mono(
                     color: RpgTheme.goldBright,
                     size: 13,
@@ -153,7 +175,7 @@ class _MasterTopBar extends StatelessWidget {
           const SizedBox(width: 16),
           Expanded(
             child: Text(
-              controller.table.name,
+              header.name,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(color: RpgTheme.mutedInk, fontSize: 11),
             ),
@@ -232,12 +254,14 @@ class _MasterSideRail extends StatelessWidget {
   const _MasterSideRail({
     required this.controller,
     required this.combat,
+    required this.tabCounts,
     required this.scene,
     required this.onSceneChanged,
   });
 
   final RpgSessionController controller;
   final CombatState? combat;
+  final _MasterTabCounts tabCounts;
   final _MasterScene scene;
   final ValueChanged<_MasterScene> onSceneChanged;
 
@@ -253,7 +277,7 @@ class _MasterSideRail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          for (final tab in _masterTabs(controller))
+          for (final tab in _masterTabs(tabCounts))
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: _MasterNavButton(
@@ -306,15 +330,15 @@ class _MasterSideRail extends StatelessWidget {
                   const SizedBox(height: 10),
                   _StatRow(
                     label: 'Personagens',
-                    value: '${controller.activeCharacters.length}',
+                    value: '${tabCounts.activeCharacters}',
                   ),
                   _StatRow(
                     label: 'Pendentes',
-                    value: '${controller.pendingPlayerNames.length}',
+                    value: '${tabCounts.pendingPlayers}',
                   ),
                   _StatRow(
                     label: 'Pedidos',
-                    value: '${controller.powerUseRequests.length}',
+                    value: '${tabCounts.powerRequests}',
                   ),
                 ],
               ),
@@ -357,6 +381,13 @@ class _MasterRightRail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pendingPlayerNames = context
+        .select<RpgSessionController, List<String>>(
+          (controller) => controller.pendingPlayerNames,
+        );
+    final actionLog = context.select<RpgSessionController, List<String>>(
+      (controller) => controller.actionLog,
+    );
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: const BoxDecoration(
@@ -367,14 +398,14 @@ class _MasterRightRail extends StatelessWidget {
         children: [
           const RpgSectionTitle(title: 'Pendentes', icon: Icons.person_add),
           const SizedBox(height: 10),
-          if (controller.pendingPlayerNames.isEmpty)
+          if (pendingPlayerNames.isEmpty)
             const Text(
               'Nenhum pedido.',
               textAlign: TextAlign.center,
               style: TextStyle(color: RpgTheme.inkDim),
             )
           else
-            for (final playerName in controller.pendingPlayerNames)
+            for (final playerName in pendingPlayerNames)
               RpgPanel(
                 margin: const EdgeInsets.only(bottom: 8),
                 borderColor: RpgTheme.ochre,
@@ -407,7 +438,7 @@ class _MasterRightRail extends StatelessWidget {
           const SizedBox(height: 18),
           const RpgSectionTitle(title: 'Cronica', icon: Icons.history_edu),
           const SizedBox(height: 10),
-          for (final item in controller.actionLog.take(10))
+          for (final item in actionLog.take(10))
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -497,7 +528,62 @@ class _MasterNavButton extends StatelessWidget {
   }
 }
 
-List<RpgTabItem<_MasterScene>> _masterTabs(RpgSessionController controller) {
+class _MasterTabCounts {
+  const _MasterTabCounts({
+    required this.activeCharacters,
+    required this.pendingPlayers,
+    required this.powerRequests,
+    required this.masterNotes,
+    required this.storyPoints,
+    required this.customNpcs,
+    required this.actionLog,
+  });
+
+  final int activeCharacters;
+  final int pendingPlayers;
+  final int powerRequests;
+  final int masterNotes;
+  final int storyPoints;
+  final int customNpcs;
+  final int actionLog;
+
+  static _MasterTabCounts fromController(RpgSessionController controller) {
+    return _MasterTabCounts(
+      activeCharacters: controller.activeCharacters.length,
+      pendingPlayers: controller.pendingPlayerNames.length,
+      powerRequests: controller.powerUseRequests.length,
+      masterNotes: controller.table.masterNotes.length,
+      storyPoints: controller.table.storyPoints.length,
+      customNpcs: controller.table.customNpcs.length,
+      actionLog: controller.actionLog.length,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is _MasterTabCounts &&
+        activeCharacters == other.activeCharacters &&
+        pendingPlayers == other.pendingPlayers &&
+        powerRequests == other.powerRequests &&
+        masterNotes == other.masterNotes &&
+        storyPoints == other.storyPoints &&
+        customNpcs == other.customNpcs &&
+        actionLog == other.actionLog;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    activeCharacters,
+    pendingPlayers,
+    powerRequests,
+    masterNotes,
+    storyPoints,
+    customNpcs,
+    actionLog,
+  );
+}
+
+List<RpgTabItem<_MasterScene>> _masterTabs(_MasterTabCounts counts) {
   return [
     const RpgTabItem(
       value: _MasterScene.table,
@@ -508,7 +594,7 @@ List<RpgTabItem<_MasterScene>> _masterTabs(RpgSessionController controller) {
       value: _MasterScene.roster,
       label: 'Companhia',
       icon: Icons.groups,
-      badge: controller.activeCharacters.length,
+      badge: counts.activeCharacters,
     ),
     const RpgTabItem(
       value: _MasterScene.library,
@@ -519,25 +605,25 @@ List<RpgTabItem<_MasterScene>> _masterTabs(RpgSessionController controller) {
       value: _MasterScene.notes,
       label: 'Notas',
       icon: Icons.sticky_note_2,
-      badge: controller.table.masterNotes.length,
+      badge: counts.masterNotes,
     ),
     RpgTabItem(
       value: _MasterScene.story,
       label: 'História',
       icon: Icons.timeline,
-      badge: controller.table.storyPoints.length,
+      badge: counts.storyPoints,
     ),
     RpgTabItem(
       value: _MasterScene.npcs,
       label: 'NPCs',
       icon: Icons.face,
-      badge: controller.table.customNpcs.length,
+      badge: counts.customNpcs,
     ),
     RpgTabItem(
       value: _MasterScene.log,
       label: 'Log',
       icon: Icons.history_edu,
-      badge: controller.actionLog.length,
+      badge: counts.actionLog,
     ),
   ];
 }
@@ -664,7 +750,7 @@ class _TableCombatScene extends StatelessWidget {
           Column(
             children: [
               _PowerRequestsPanel(
-                controller: context.watch<RpgSessionController>(),
+                controller: context.read<RpgSessionController>(),
               ),
               const SizedBox(height: 12),
               _NoCombatState(
@@ -676,7 +762,7 @@ class _TableCombatScene extends StatelessWidget {
           Column(
             children: [
               _PowerRequestsPanel(
-                controller: context.watch<RpgSessionController>(),
+                controller: context.read<RpgSessionController>(),
               ),
               const SizedBox(height: 12),
               _PostCombatScene(combat: combat!),
@@ -686,7 +772,7 @@ class _TableCombatScene extends StatelessWidget {
           Column(
             children: [
               _PowerRequestsPanel(
-                controller: context.watch<RpgSessionController>(),
+                controller: context.read<RpgSessionController>(),
               ),
               const SizedBox(height: 12),
               CombatPanel(combat: combat!),
@@ -704,6 +790,10 @@ class _PowerRequestsPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final powerUseRequests = context
+        .select<RpgSessionController, List<PowerUseRequest>>(
+          (controller) => controller.powerUseRequests,
+        );
     return RpgPanel(
       inset: true,
       child: Column(
@@ -712,7 +802,7 @@ class _PowerRequestsPanel extends StatelessWidget {
           const RpgPanelHeader(title: 'Pedidos de poder', icon: Icons.bolt),
           Padding(
             padding: const EdgeInsets.all(10),
-            child: controller.powerUseRequests.isEmpty
+            child: powerUseRequests.isEmpty
                 ? const Text(
                     'Nenhum pedido de poder.',
                     textAlign: TextAlign.center,
@@ -720,7 +810,7 @@ class _PowerRequestsPanel extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      for (final request in controller.powerUseRequests)
+                      for (final request in powerUseRequests)
                         RpgPanel(
                           margin: const EdgeInsets.only(bottom: 8),
                           borderColor: RpgTheme.lineGold,
@@ -781,6 +871,14 @@ class _RosterScene extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final activeCharacters = context
+        .select<RpgSessionController, List<CharacterSheet>>(
+          (controller) => controller.activeCharacters,
+        );
+    final archivedCharacters = context
+        .select<RpgSessionController, List<CharacterSheet>>(
+          (controller) => controller.archivedCharacters,
+        );
     return ListView(
       padding: const EdgeInsets.all(22),
       children: [
@@ -816,7 +914,7 @@ class _RosterScene extends StatelessWidget {
               spacing: spacing,
               runSpacing: spacing,
               children: [
-                for (final character in controller.activeCharacters)
+                for (final character in activeCharacters)
                   SizedBox(
                     width: width,
                     child: CharacterCard(
@@ -828,7 +926,7 @@ class _RosterScene extends StatelessWidget {
             );
           },
         ),
-        if (controller.archivedCharacters.isNotEmpty) ...[
+        if (archivedCharacters.isNotEmpty) ...[
           const SizedBox(height: 20),
           const RpgSectionTitle(
             title: 'Arquivo',
@@ -836,7 +934,7 @@ class _RosterScene extends StatelessWidget {
             icon: Icons.archive,
           ),
           const SizedBox(height: 12),
-          for (final character in controller.archivedCharacters)
+          for (final character in archivedCharacters)
             RpgPanel(
               margin: const EdgeInsets.only(bottom: 8),
               inset: true,
@@ -875,6 +973,9 @@ class _MasterNotesScene extends StatefulWidget {
 class _MasterNotesSceneState extends State<_MasterNotesScene> {
   final TextEditingController _searchController = TextEditingController();
   String query = '';
+  List<CampaignNote>? _cachedSource;
+  String? _cachedQuery;
+  List<CampaignNote> _cachedNotes = const [];
 
   @override
   void dispose() {
@@ -884,11 +985,12 @@ class _MasterNotesSceneState extends State<_MasterNotesScene> {
 
   @override
   Widget build(BuildContext context) {
-    final notes =
-        widget.controller.table.masterNotes
-            .where((note) => _noteMatches(note, query))
-            .toList()
-          ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    final masterNotes = context
+        .select<RpgSessionController, List<CampaignNote>>(
+          (controller) => controller.table.masterNotes,
+        );
+    final controller = context.read<RpgSessionController>();
+    final notes = _filteredNotes(masterNotes);
 
     return ListView(
       padding: const EdgeInsets.all(22),
@@ -928,11 +1030,23 @@ class _MasterNotesSceneState extends State<_MasterNotesScene> {
               child: _CampaignNoteCard(
                 note: note,
                 onEdit: () => _showMasterNoteEditor(context, existing: note),
-                onDelete: () => widget.controller.deleteMasterNote(note.id),
+                onDelete: () => controller.deleteMasterNote(note.id),
               ),
             ),
       ],
     );
+  }
+
+  List<CampaignNote> _filteredNotes(List<CampaignNote> source) {
+    if (identical(_cachedSource, source) && _cachedQuery == query) {
+      return _cachedNotes;
+    }
+    final notes = source.where((note) => _noteMatches(note, query)).toList()
+      ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    _cachedSource = source;
+    _cachedQuery = query;
+    _cachedNotes = notes;
+    return notes;
   }
 }
 
@@ -948,6 +1062,9 @@ class _StoryScene extends StatefulWidget {
 class _StorySceneState extends State<_StoryScene> {
   final TextEditingController _searchController = TextEditingController();
   String query = '';
+  List<StoryPoint>? _cachedSource;
+  String? _cachedQuery;
+  List<StoryPoint> _cachedPoints = const [];
 
   @override
   void dispose() {
@@ -957,11 +1074,11 @@ class _StorySceneState extends State<_StoryScene> {
 
   @override
   Widget build(BuildContext context) {
-    final points =
-        widget.controller.table.storyPoints
-            .where((point) => _storyPointMatches(point, query))
-            .toList()
-          ..sort((a, b) => a.order.compareTo(b.order));
+    final storyPoints = context.select<RpgSessionController, List<StoryPoint>>(
+      (controller) => controller.table.storyPoints,
+    );
+    final controller = context.read<RpgSessionController>();
+    final points = _filteredPoints(storyPoints);
 
     return ListView(
       padding: const EdgeInsets.all(22),
@@ -1002,10 +1119,7 @@ class _StorySceneState extends State<_StoryScene> {
             itemCount: points.length,
             onReorder: (oldIndex, newIndex) {
               final targetIndex = newIndex > oldIndex ? newIndex - 1 : newIndex;
-              widget.controller.reorderStoryPoint(
-                points[oldIndex].id,
-                targetIndex,
-              );
+              controller.reorderStoryPoint(points[oldIndex].id, targetIndex);
             },
             itemBuilder: (context, index) {
               final point = points[index];
@@ -1017,7 +1131,7 @@ class _StorySceneState extends State<_StoryScene> {
                   point: point,
                   draggable: true,
                   onEdit: () => _showStoryPointEditor(context, existing: point),
-                  onDelete: () => widget.controller.deleteStoryPoint(point.id),
+                  onDelete: () => controller.deleteStoryPoint(point.id),
                 ),
               );
             },
@@ -1029,11 +1143,24 @@ class _StorySceneState extends State<_StoryScene> {
               child: _StoryPointCard(
                 point: point,
                 onEdit: () => _showStoryPointEditor(context, existing: point),
-                onDelete: () => widget.controller.deleteStoryPoint(point.id),
+                onDelete: () => controller.deleteStoryPoint(point.id),
               ),
             ),
       ],
     );
+  }
+
+  List<StoryPoint> _filteredPoints(List<StoryPoint> source) {
+    if (identical(_cachedSource, source) && _cachedQuery == query) {
+      return _cachedPoints;
+    }
+    final points =
+        source.where((point) => _storyPointMatches(point, query)).toList()
+          ..sort((a, b) => a.order.compareTo(b.order));
+    _cachedSource = source;
+    _cachedQuery = query;
+    _cachedPoints = points;
+    return points;
   }
 }
 
@@ -1049,6 +1176,9 @@ class _NpcsScene extends StatefulWidget {
 class _NpcsSceneState extends State<_NpcsScene> {
   final TextEditingController _searchController = TextEditingController();
   String query = '';
+  List<CustomNpc>? _cachedSource;
+  String? _cachedQuery;
+  List<CustomNpc> _cachedNpcs = const [];
 
   @override
   void dispose() {
@@ -1058,11 +1188,11 @@ class _NpcsSceneState extends State<_NpcsScene> {
 
   @override
   Widget build(BuildContext context) {
-    final npcs =
-        widget.controller.table.customNpcs
-            .where((npc) => _npcMatches(npc, query))
-            .toList()
-          ..sort((a, b) => a.name.compareTo(b.name));
+    final customNpcs = context.select<RpgSessionController, List<CustomNpc>>(
+      (controller) => controller.table.customNpcs,
+    );
+    final controller = context.read<RpgSessionController>();
+    final npcs = _filteredNpcs(customNpcs);
 
     return ListView(
       padding: const EdgeInsets.all(22),
@@ -1103,11 +1233,23 @@ class _NpcsSceneState extends State<_NpcsScene> {
                 npc: npc,
                 onOpen: () => _showCustomNpcDetails(context, npc),
                 onEdit: () => _showCustomNpcEditor(context, existing: npc),
-                onDelete: () => widget.controller.deleteCustomNpc(npc.id),
+                onDelete: () => controller.deleteCustomNpc(npc.id),
               ),
             ),
       ],
     );
+  }
+
+  List<CustomNpc> _filteredNpcs(List<CustomNpc> source) {
+    if (identical(_cachedSource, source) && _cachedQuery == query) {
+      return _cachedNpcs;
+    }
+    final npcs = source.where((npc) => _npcMatches(npc, query)).toList()
+      ..sort((a, b) => a.name.compareTo(b.name));
+    _cachedSource = source;
+    _cachedQuery = query;
+    _cachedNpcs = npcs;
+    return npcs;
   }
 }
 
@@ -1421,6 +1563,9 @@ class _LogScene extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final actionLog = context.select<RpgSessionController, List<String>>(
+      (controller) => controller.actionLog,
+    );
     return ListView(
       padding: const EdgeInsets.all(22),
       children: [
@@ -1428,12 +1573,12 @@ class _LogScene extends StatelessWidget {
         const SizedBox(height: 12),
         RpgPanel(
           padding: const EdgeInsets.all(18),
-          child: controller.actionLog.isEmpty
+          child: actionLog.isEmpty
               ? const Text('Sem eventos ainda.')
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (final item in controller.actionLog)
+                    for (final item in actionLog)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 7),
                         child: Text(item),
@@ -1563,7 +1708,26 @@ class _LibrarySceneState extends State<_LibraryScene> {
 
   @override
   Widget build(BuildContext context) {
+    final libraryVersion = context.select<RpgSessionController, int>(
+      (controller) => Object.hashAll([
+        controller.races,
+        controller.classes,
+        controller.classProgression,
+        controller.spellLibrary,
+        controller.ritualLibrary,
+        controller.powerLibrary,
+        controller.equipmentLibrary,
+        controller.itemLibrary,
+        controller.starterKits,
+        controller.monsters,
+      ]),
+    );
     final controller = widget.controller;
+    RpgPerformanceTrace.mark('library.build', {
+      'tab': tab.name,
+      'queryLength': query.length,
+      'version': libraryVersion,
+    });
     final tabs = [
       RpgTabItem(
         value: _LibraryTab.races,
@@ -1631,6 +1795,10 @@ class _LibrarySceneState extends State<_LibraryScene> {
                 dense: true,
                 value: tab,
                 onChanged: (value) => setState(() {
+                  RpgPerformanceTrace.mark('library.tab_change', {
+                    'from': tab.name,
+                    'to': value.name,
+                  });
                   tab = value;
                   query = '';
                   _searchController.clear();
@@ -1646,7 +1814,13 @@ class _LibrarySceneState extends State<_LibraryScene> {
                   _searchDebounce = Timer(
                     const Duration(milliseconds: 180),
                     () {
-                      if (mounted) setState(() => query = value);
+                      if (mounted) {
+                        RpgPerformanceTrace.mark('library.search', {
+                          'tab': tab.name,
+                          'queryLength': value.length,
+                        });
+                        setState(() => query = value);
+                      }
                     },
                   );
                 },

@@ -5,7 +5,13 @@ class LandingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<RpgSessionController>();
+    final tableCode = context.select<RpgSessionController, String>(
+      (controller) => controller.table.code,
+    );
+    final activeCharacters = context
+        .select<RpgSessionController, List<CharacterSheet>>(
+          (controller) => controller.activeCharacters,
+        );
 
     return Scaffold(
       body: RpgStage(
@@ -19,7 +25,9 @@ class LandingView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Center(child: RpgCrest(size: 136)),
+                    const RepaintBoundary(
+                      child: Center(child: RpgCrest(size: 136)),
+                    ),
                     const SizedBox(height: 26),
                     Text(
                       'RPG dos Guri - Mesa Aberta'.toUpperCase(),
@@ -44,12 +52,12 @@ class LandingView extends StatelessWidget {
                     const Center(child: RpgOrnament(width: 240)),
                     const SizedBox(height: 22),
                     _LandingCodePill(
-                      code: controller.table.code,
+                      code: tableCode,
                       onCopy: () {
                         final url = Uri.base.replace(
                           queryParameters: {
                             ...Uri.base.queryParameters,
-                            'mesa': controller.table.code,
+                            'mesa': tableCode,
                           },
                         );
                         Clipboard.setData(ClipboardData(text: url.toString()));
@@ -57,8 +65,10 @@ class LandingView extends StatelessWidget {
                       onEdit: () => _showTableCodeDialog(context),
                     ),
                     const SizedBox(height: 28),
-                    _LandingMasterCard(
-                      onTap: () => _showMasterPinDialog(context),
+                    RepaintBoundary(
+                      child: _LandingMasterCard(
+                        onTap: () => _showMasterPinDialog(context),
+                      ),
                     ),
                     const SizedBox(height: 18),
                     const RpgSectionTitle(
@@ -66,10 +76,10 @@ class LandingView extends StatelessWidget {
                       icon: Icons.groups,
                     ),
                     const SizedBox(height: 10),
-                    if (controller.activeCharacters.isEmpty)
+                    if (activeCharacters.isEmpty)
                       const _EmptyState(message: 'Nenhuma ficha aprovada.')
                     else
-                      _LandingCharacterGrid(controller: controller),
+                      _LandingCharacterGrid(characters: activeCharacters),
                     const SizedBox(height: 14),
                     RpgButton(
                       onPressed: () => _showJoinRequestDialog(context),
@@ -200,12 +210,13 @@ class _LandingMasterCard extends StatelessWidget {
 }
 
 class _LandingCharacterGrid extends StatelessWidget {
-  const _LandingCharacterGrid({required this.controller});
+  const _LandingCharacterGrid({required this.characters});
 
-  final RpgSessionController controller;
+  final List<CharacterSheet> characters;
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.read<RpgSessionController>();
     return LayoutBuilder(
       builder: (context, constraints) {
         final columns = constraints.maxWidth > 460 ? 2 : 1;
@@ -216,57 +227,59 @@ class _LandingCharacterGrid extends StatelessWidget {
           spacing: spacing,
           runSpacing: spacing,
           children: [
-            for (final character in controller.activeCharacters)
-              SizedBox(
-                width: width,
-                child: RpgPanel(
-                  inset: true,
-                  padding: const EdgeInsets.all(12),
-                  child: InkWell(
-                    onTap: () => controller.enterAsPlayer(character.id),
-                    child: Row(
-                      children: [
-                        RpgPortrait(
-                          label: character.name,
-                          size: 44,
-                          sigil: character.characterClass,
-                          color: RpgTheme.lineGold,
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                character.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: RpgTextStyles.body(
-                                  size: 12.5,
-                                  color: RpgTheme.inkBright,
-                                  weight: FontWeight.w800,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                '${character.characterClass} - nv ${character.level}',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: RpgTheme.mutedInk,
-                                  fontSize: 10.5,
-                                ),
-                              ),
-                            ],
+            for (final character in characters)
+              RepaintBoundary(
+                child: SizedBox(
+                  width: width,
+                  child: RpgPanel(
+                    inset: true,
+                    padding: const EdgeInsets.all(12),
+                    child: InkWell(
+                      onTap: () => controller.enterAsPlayer(character.id),
+                      child: Row(
+                        children: [
+                          RpgPortrait(
+                            label: character.name,
+                            size: 44,
+                            sigil: character.characterClass,
+                            color: RpgTheme.lineGold,
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        RpgStateLamp(
-                          state: character.currentHp <= 0
-                              ? DefeatedState.unconscious
-                              : DefeatedState.active,
-                        ),
-                      ],
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  character.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: RpgTextStyles.body(
+                                    size: 12.5,
+                                    color: RpgTheme.inkBright,
+                                    weight: FontWeight.w800,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  '${character.characterClass} - nv ${character.level}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: RpgTheme.mutedInk,
+                                    fontSize: 10.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          RpgStateLamp(
+                            state: character.currentHp <= 0
+                                ? DefeatedState.unconscious
+                                : DefeatedState.active,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

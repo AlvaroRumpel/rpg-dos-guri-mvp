@@ -13,9 +13,13 @@ class _PlayerViewState extends State<PlayerView> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<RpgSessionController>();
-    final character = controller.selectedCharacter;
-    final inCombat = controller.activeCombat?.active == true;
+    final character = context.select<RpgSessionController, CharacterSheet?>(
+      (controller) => controller.selectedCharacter,
+    );
+    final combat = context.select<RpgSessionController, CombatState?>(
+      (controller) => controller.activeCombat,
+    );
+    final inCombat = combat?.active == true;
 
     return Scaffold(
       body: RpgStage(
@@ -35,12 +39,9 @@ class _PlayerViewState extends State<PlayerView> {
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 154),
                           children: [
                             if (inCombat)
-                              _PlayerCombatBanner(
-                                round: controller.activeCombat!.round,
-                              ),
+                              _PlayerCombatBanner(round: combat!.round),
                             _PlayerHero(
                               character: character,
-                              controller: controller,
                               inCombat: inCombat,
                               showSecondaryWeapon: showSecondaryWeapon,
                               onToggleWeapon: () => setState(
@@ -52,7 +53,13 @@ class _PlayerViewState extends State<PlayerView> {
                             RpgTabs<_PlayerTab>(
                               dense: true,
                               value: tab,
-                              onChanged: (value) => setState(() => tab = value),
+                              onChanged: (value) {
+                                RpgPerformanceTrace.mark('player.tab_change', {
+                                  'from': tab.name,
+                                  'to': value.name,
+                                });
+                                setState(() => tab = value);
+                              },
                               tabs: [
                                 const RpgTabItem(
                                   value: _PlayerTab.sheet,
@@ -90,9 +97,7 @@ class _PlayerViewState extends State<PlayerView> {
                               _PlayerSheetTab(character: character),
                               if (inCombat) ...[
                                 const SizedBox(height: 16),
-                                PlayerCombatSummary(
-                                  combat: controller.activeCombat!,
-                                ),
+                                PlayerCombatSummary(combat: combat!),
                               ],
                             ],
                             if (tab == _PlayerTab.powers)
@@ -137,22 +142,24 @@ class _PlayerViewState extends State<PlayerView> {
 class _PlayerHero extends StatelessWidget {
   const _PlayerHero({
     required this.character,
-    required this.controller,
     required this.inCombat,
     required this.showSecondaryWeapon,
     required this.onToggleWeapon,
   });
 
   final CharacterSheet character;
-  final RpgSessionController controller;
   final bool inCombat;
   final bool showSecondaryWeapon;
   final VoidCallback onToggleWeapon;
 
   @override
   Widget build(BuildContext context) {
-    final primary = controller.equipmentByName(character.mainWeapon);
-    final secondary = controller.equipmentByName(character.secondaryItem);
+    final primary = context.select<RpgSessionController, EquipmentTemplate?>(
+      (controller) => controller.equipmentByName(character.mainWeapon),
+    );
+    final secondary = context.select<RpgSessionController, EquipmentTemplate?>(
+      (controller) => controller.equipmentByName(character.secondaryItem),
+    );
     final selectedEquipment = showSecondaryWeapon && secondary != null
         ? secondary
         : primary;
@@ -177,7 +184,7 @@ class _PlayerHero extends StatelessWidget {
               label: 'Sair',
               icon: Icons.logout,
               small: true,
-              onPressed: controller.backToLanding,
+              onPressed: context.read<RpgSessionController>().backToLanding,
             ),
           ),
           RpgPortrait(
@@ -546,6 +553,9 @@ class _PlayerNotesTab extends StatefulWidget {
 class _PlayerNotesTabState extends State<_PlayerNotesTab> {
   final TextEditingController _searchController = TextEditingController();
   String query = '';
+  List<CampaignNote>? _cachedSource;
+  String? _cachedQuery;
+  List<CampaignNote> _cachedNotes = const [];
 
   @override
   void dispose() {
@@ -556,11 +566,7 @@ class _PlayerNotesTabState extends State<_PlayerNotesTab> {
   @override
   Widget build(BuildContext context) {
     final controller = context.read<RpgSessionController>();
-    final notes =
-        widget.character.notes
-            .where((note) => _noteMatches(note, query))
-            .toList()
-          ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    final notes = _filteredNotes(widget.character.notes);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -608,6 +614,18 @@ class _PlayerNotesTabState extends State<_PlayerNotesTab> {
             ),
       ],
     );
+  }
+
+  List<CampaignNote> _filteredNotes(List<CampaignNote> source) {
+    if (identical(_cachedSource, source) && _cachedQuery == query) {
+      return _cachedNotes;
+    }
+    final notes = source.where((note) => _noteMatches(note, query)).toList()
+      ..sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    _cachedSource = source;
+    _cachedQuery = query;
+    _cachedNotes = notes;
+    return notes;
   }
 }
 

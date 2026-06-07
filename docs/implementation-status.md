@@ -65,29 +65,35 @@ Este documento compara `docs/specification.md` com o estado atual do app Flutter
 - Colecoes vazias do Firestore nao re-seedam personagens indevidamente.
 - Finalizar combate marca o combate como inativo no Firestore.
 - Arquivos base de Firebase Hosting e Firestore Rules criados.
+- Notas do jogador, notas do mestre, historia e NPCs customizados.
+- Mencoes por `@nome` nos campos do mestre, com jogador ativo priorizado antes de NPC homonimo.
+- Card de combate com arma ativa por participante e persistencia da escolha.
 - `flutter analyze` validado sem issues.
 - `flutter build web` validado com sucesso.
 - Deploy Firebase Hosting publicado em `https://rpgdosguri.web.app`.
+- QA manual em celulares reais e instalacao PWA reportados como concluidos em 2026-06-04.
+- Rodada inicial de performance publicada em Hosting, com instrumentacao debug-only, reducao de rebuilds por Provider e cache de listas filtradas.
+- Segunda rodada de performance publicada em Hosting, removendo blur real de modais, adicionando secoes lazy no formulario de ficha e isolando pintura de landing/cards.
 
 ## Parcialmente implementado
 
 - Poderes/magias/itens oficiais: decisao atual e manter somente assets JSON, sem CRUD Firestore.
-- Mesa/codigo: criacao/entrada por codigo existe, mas ainda falta validacao manual em dispositivos reais.
+- Mesa/codigo: criacao/entrada por codigo existe e ja teve validacao manual em dispositivos reais.
 - Equipamentos oficiais: a UI usa selecao oficial, mas fichas antigas com texto livre sao normalizadas quando editadas/carregadas.
 - PIN de mestre: barreira domestica contra acesso casual; nao e autenticacao forte contra usuario malicioso.
+- Performance: duas rodadas aplicadas; ainda precisa comparacao manual pos-deploy com Chrome Performance/DevTools e mobile real.
 
 ## Fora do MVP local atual
 
-- Validacao manual de persistencia Firestore em duas janelas/dispositivos.
-- Validacao manual de tempo real entre celulares.
 - Android build.
 - Importacao/exportacao por usuario.
 - Sincronizacao automatica com Obsidian em runtime.
+- Profiling manual detalhado de long tasks e quedas de frame em mobile/web desktop.
 
 ## Proximas implementacoes recomendadas
 
-1. Testar fluxo mestre + jogador em duas janelas.
-2. Testar URL publicada em celulares reais.
-3. Revisar dados importados do vault apos uso em mesa.
-4. Validar instalacao PWA e retorno para ultima mesa/ficha.
-5. Decidir se a barreira domestica de PIN deve evoluir para Firebase Auth ou Cloud Functions.
+1. Repetir cenarios de `docs/performance-baseline-2026-06-04.md` em mobile real e Chrome Performance.
+2. Comparar o novo trace contra `Trace-20260604T185714.json`, especialmente landing, PIN, cards e formulario de ficha.
+3. Se ainda houver travas perceptiveis, tratar card mobile/listas grandes na proxima rodada sem simplificar identidade visual.
+4. Revisar dados importados do vault apos uso em mesa.
+5. Manter Android build, importacao/exportacao, Obsidian runtime e autenticacao forte fora da fila imediata.

@@ -6,6 +6,7 @@ void _showDetailDialog(
   required String subtitle,
   required List<MapEntry<String, String?>> fields,
 }) {
+  RpgPerformanceTrace.mark('dialog.open', {'title': title});
   showDialog<void>(
     context: context,
     builder: (context) => RpgModal(
@@ -1175,6 +1176,7 @@ void _showPowerLibraryDialog(BuildContext context, CharacterSheet character) {
 }
 
 void _showInventoryEditor(BuildContext context, CharacterSheet character) {
+  RpgPerformanceTrace.mark('dialog.open', {'title': 'inventory'});
   final addQuantity = TextEditingController(text: '1');
   final initialLibrary = context.read<RpgSessionController>().itemLibrary;
   var selectedTemplate = initialLibrary.isEmpty ? null : initialLibrary.first;
@@ -1183,11 +1185,13 @@ void _showInventoryEditor(BuildContext context, CharacterSheet character) {
     context: context,
     builder: (context) => StatefulBuilder(
       builder: (context, setState) {
-        final controller = context.watch<RpgSessionController>();
+        final controller = context.read<RpgSessionController>();
         final liveCharacter =
-            _firstOrNull(
-              controller.characters,
-              (item) => item.id == character.id,
+            context.select<RpgSessionController, CharacterSheet?>(
+              (controller) => _firstOrNull(
+                controller.characters,
+                (item) => item.id == character.id,
+              ),
             ) ??
             character;
 
@@ -2004,6 +2008,22 @@ void _showJoinRequestDialog(BuildContext context) {
   );
 }
 
+enum _CharacterFormSection {
+  identity,
+  grimoire,
+  combat,
+  attributes,
+  skills,
+  accessories,
+}
+
+bool _requiresMageGrimoire(CharacterSheet? existing, String characterClass) {
+  return existing != null &&
+      !_sameOptionName(existing.characterClass, characterClass) &&
+      _sameOptionName(characterClass, 'Mago') &&
+      existing.level > 1;
+}
+
 void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
   final controller = context.read<RpgSessionController>();
   final raceOptions = controller.races.map((item) => item.name).toList();
@@ -2057,321 +2077,373 @@ void _showCharacterForm(BuildContext context, {CharacterSheet? existing}) {
     accessoryOptions,
     '',
   );
+  final raceItems = _stringDropdownItems(
+    _ensureDropdownOptions(raceOptions, race),
+  );
+  final classItems = _stringDropdownItems(
+    _ensureDropdownOptions(classOptions, characterClass),
+  );
+  final armorItems = _stringDropdownItems(
+    _ensureDropdownOptions(armorOptions, armor),
+  );
+  final mainWeaponItems = _stringDropdownItems(
+    _ensureDropdownOptions(weaponOptions, mainWeapon),
+  );
+  final secondaryItems = _stringDropdownItems(
+    _ensureDropdownOptions(secondaryOptions, secondaryItem),
+  );
+  final accessoryItems = _stringDropdownItems(['', ...accessoryOptions]);
+  final openSections = <_CharacterFormSection>{
+    _CharacterFormSection.identity,
+    _CharacterFormSection.combat,
+  };
 
   showDialog<void>(
     context: context,
     builder: (context) => StatefulBuilder(
-      builder: (context, setState) => RpgModal(
-        title: Text(existing == null ? 'Criar ficha' : 'Editar ficha'),
-        width: 760,
-        content: RpgFieldGroup(
-          children: [
-            RpgFormSection(
-              title: 'Identidade',
-              icon: Icons.badge,
-              children: [
-                TextField(
-                  controller: name,
-                  decoration: const InputDecoration(labelText: 'Nome'),
-                ),
-                TextField(
-                  controller: concept,
-                  decoration: const InputDecoration(labelText: 'Conceito'),
-                ),
-                RpgFieldGrid(
-                  minColumnWidth: 230,
-                  children: [
-                    DropdownButtonFormField<String>(
-                      initialValue: race,
-                      isExpanded: true,
-                      items: _stringDropdownItems(
-                        _ensureDropdownOptions(raceOptions, race),
+      builder: (context, setState) {
+        final showMageGrimoire = _requiresMageGrimoire(
+          existing,
+          characterClass,
+        );
+        final grimoireSection = _CharacterFormSection.grimoire;
+        if (!showMageGrimoire) {
+          openSections.remove(grimoireSection);
+        }
+        bool isOpen(_CharacterFormSection section) =>
+            openSections.contains(section);
+        void toggleSection(_CharacterFormSection section) {
+          setState(() {
+            if (!openSections.remove(section)) {
+              openSections.add(section);
+            }
+          });
+        }
+
+        return RpgModal(
+          title: Text(existing == null ? 'Criar ficha' : 'Editar ficha'),
+          width: 760,
+          content: RpgFieldGroup(
+            children: [
+              RpgExpandableFormSection(
+                title: 'Identidade',
+                icon: Icons.badge,
+                expanded: isOpen(_CharacterFormSection.identity),
+                onToggle: () => toggleSection(_CharacterFormSection.identity),
+                childrenBuilder: (context) => [
+                  TextField(
+                    controller: name,
+                    decoration: const InputDecoration(labelText: 'Nome'),
+                  ),
+                  TextField(
+                    controller: concept,
+                    decoration: const InputDecoration(labelText: 'Conceito'),
+                  ),
+                  RpgFieldGrid(
+                    minColumnWidth: 230,
+                    children: [
+                      DropdownButtonFormField<String>(
+                        initialValue: race,
+                        isExpanded: true,
+                        items: raceItems,
+                        onChanged: (value) =>
+                            setState(() => race = value ?? race),
+                        decoration: const InputDecoration(labelText: 'Raça'),
                       ),
-                      onChanged: (value) =>
-                          setState(() => race = value ?? race),
-                      decoration: const InputDecoration(labelText: 'Raça'),
-                    ),
-                    DropdownButtonFormField<String>(
-                      initialValue: characterClass,
-                      isExpanded: true,
-                      items: _stringDropdownItems(
-                        _ensureDropdownOptions(classOptions, characterClass),
+                      DropdownButtonFormField<String>(
+                        initialValue: characterClass,
+                        isExpanded: true,
+                        items: classItems,
+                        onChanged: (value) => setState(() {
+                          characterClass = value ?? characterClass;
+                          mageSpellSelections.clear();
+                          if (_requiresMageGrimoire(existing, characterClass)) {
+                            openSections.add(_CharacterFormSection.grimoire);
+                          } else {
+                            openSections.remove(_CharacterFormSection.grimoire);
+                          }
+                        }),
+                        decoration: const InputDecoration(labelText: 'Classe'),
                       ),
-                      onChanged: (value) => setState(() {
-                        characterClass = value ?? characterClass;
-                        mageSpellSelections.clear();
-                      }),
-                      decoration: const InputDecoration(labelText: 'Classe'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            if (existing != null &&
-                !_sameOptionName(existing.characterClass, characterClass) &&
-                _sameOptionName(characterClass, 'Mago') &&
-                existing.level > 1)
-              RpgFormSection(
-                title: 'Grimório do mago',
-                subtitle: 'escolha as magias adquiridas nos níveis anteriores',
-                icon: Icons.auto_awesome,
-                children: [
-                  for (var level = 2; level <= existing.level; level += 1)
-                    DropdownButtonFormField<String>(
-                      initialValue: mageSpellSelections[level],
-                      isExpanded: true,
-                      items: [
-                        for (final spell in controller.spellLibrary)
-                          if ((level.isOdd
-                                  ? spell.usageLimit == UsageLimit.combat
-                                  : spell.usageLimit == UsageLimit.free) &&
-                              !mageSpellSelections.entries.any(
-                                (entry) =>
-                                    entry.key != level &&
-                                    entry.value == spell.id,
-                              ))
-                            DropdownMenuItem(
-                              value: spell.id,
-                              child: _dropdownLabel(spell.name),
-                            ),
-                      ],
-                      onChanged: (value) =>
-                          setState(() => mageSpellSelections[level] = value),
-                      decoration: InputDecoration(
-                        labelText: level.isOdd
-                            ? 'Nível $level - magia forte'
-                            : 'Nível $level - magia simples',
-                      ),
-                    ),
+                    ],
+                  ),
                 ],
               ),
-            RpgFormSection(
-              title: 'Combate',
-              icon: Icons.shield,
-              children: [
-                RpgFieldGrid(
-                  minColumnWidth: 230,
-                  children: [
-                    DropdownButtonFormField<String>(
-                      initialValue: armor,
-                      isExpanded: true,
-                      items: _stringDropdownItems(
-                        _ensureDropdownOptions(armorOptions, armor),
+              if (showMageGrimoire)
+                RpgExpandableFormSection(
+                  title: 'Grimório do mago',
+                  subtitle:
+                      'escolha as magias adquiridas nos níveis anteriores',
+                  icon: Icons.auto_awesome,
+                  expanded: isOpen(_CharacterFormSection.grimoire),
+                  onToggle: () => toggleSection(_CharacterFormSection.grimoire),
+                  childrenBuilder: (context) => [
+                    for (var level = 2; level <= existing!.level; level += 1)
+                      DropdownButtonFormField<String>(
+                        initialValue: mageSpellSelections[level],
+                        isExpanded: true,
+                        items: [
+                          for (final spell in controller.spellLibrary)
+                            if ((level.isOdd
+                                    ? spell.usageLimit == UsageLimit.combat
+                                    : spell.usageLimit == UsageLimit.free) &&
+                                !mageSpellSelections.entries.any(
+                                  (entry) =>
+                                      entry.key != level &&
+                                      entry.value == spell.id,
+                                ))
+                              DropdownMenuItem(
+                                value: spell.id,
+                                child: _dropdownLabel(spell.name),
+                              ),
+                        ],
+                        onChanged: (value) =>
+                            setState(() => mageSpellSelections[level] = value),
+                        decoration: InputDecoration(
+                          labelText: level.isOdd
+                              ? 'Nível $level - magia forte'
+                              : 'Nível $level - magia simples',
+                        ),
                       ),
-                      onChanged: (value) =>
-                          setState(() => armor = value ?? armor),
-                      decoration: const InputDecoration(labelText: 'Armadura'),
-                    ),
-                    DropdownButtonFormField<String>(
-                      initialValue: mainWeapon,
-                      isExpanded: true,
-                      items: _stringDropdownItems(
-                        _ensureDropdownOptions(weaponOptions, mainWeapon),
-                      ),
-                      onChanged: (value) =>
-                          setState(() => mainWeapon = value ?? mainWeapon),
-                      decoration: const InputDecoration(
-                        labelText: 'Arma principal',
-                      ),
-                    ),
-                    DropdownButtonFormField<String>(
-                      initialValue: secondaryItem,
-                      isExpanded: true,
-                      items: _stringDropdownItems(
-                        _ensureDropdownOptions(secondaryOptions, secondaryItem),
-                      ),
-                      onChanged: (value) => setState(
-                        () => secondaryItem = value ?? secondaryItem,
-                      ),
-                      decoration: const InputDecoration(
-                        labelText: 'Secundário ou escudo',
-                      ),
-                    ),
-                    TextField(
-                      controller: currentHp,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: 'Vida atual',
-                      ),
-                    ),
-                    TextField(
-                      controller: coins,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(labelText: 'Moedas'),
-                    ),
                   ],
                 ),
-              ],
-            ),
-            RpgFormSection(
-              title: 'Atributos',
-              subtitle: 'máximo +6',
-              icon: Icons.tune,
-              children: [
-                RpgFieldGrid(
-                  minColumnWidth: 126,
-                  children: [
-                    for (final entry in attributeControllers.entries)
+              RpgExpandableFormSection(
+                title: 'Combate',
+                icon: Icons.shield,
+                expanded: isOpen(_CharacterFormSection.combat),
+                onToggle: () => toggleSection(_CharacterFormSection.combat),
+                childrenBuilder: (context) => [
+                  RpgFieldGrid(
+                    minColumnWidth: 230,
+                    children: [
+                      DropdownButtonFormField<String>(
+                        initialValue: armor,
+                        isExpanded: true,
+                        items: armorItems,
+                        onChanged: (value) =>
+                            setState(() => armor = value ?? armor),
+                        decoration: const InputDecoration(
+                          labelText: 'Armadura',
+                        ),
+                      ),
+                      DropdownButtonFormField<String>(
+                        initialValue: mainWeapon,
+                        isExpanded: true,
+                        items: mainWeaponItems,
+                        onChanged: (value) =>
+                            setState(() => mainWeapon = value ?? mainWeapon),
+                        decoration: const InputDecoration(
+                          labelText: 'Arma principal',
+                        ),
+                      ),
+                      DropdownButtonFormField<String>(
+                        initialValue: secondaryItem,
+                        isExpanded: true,
+                        items: secondaryItems,
+                        onChanged: (value) => setState(
+                          () => secondaryItem = value ?? secondaryItem,
+                        ),
+                        decoration: const InputDecoration(
+                          labelText: 'Secundário ou escudo',
+                        ),
+                      ),
                       TextField(
-                        controller: entry.value,
+                        controller: currentHp,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(labelText: entry.key),
+                        decoration: const InputDecoration(
+                          labelText: 'Vida atual',
+                        ),
                       ),
-                  ],
-                ),
-              ],
-            ),
-            RpgFormSection(
-              title: 'Perícias',
-              subtitle: 'máximo +3',
-              icon: Icons.checklist,
-              children: [
-                RpgFieldGrid(
-                  minColumnWidth: 142,
-                  children: [
-                    for (final entry in skillControllers.entries)
                       TextField(
-                        controller: entry.value,
+                        controller: coins,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(labelText: entry.key),
+                        decoration: const InputDecoration(labelText: 'Moedas'),
                       ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
+              RpgExpandableFormSection(
+                title: 'Atributos',
+                subtitle: 'máximo +6',
+                icon: Icons.tune,
+                expanded: isOpen(_CharacterFormSection.attributes),
+                onToggle: () => toggleSection(_CharacterFormSection.attributes),
+                childrenBuilder: (context) => [
+                  RpgFieldGrid(
+                    minColumnWidth: 126,
+                    children: [
+                      for (final entry in attributeControllers.entries)
+                        TextField(
+                          controller: entry.value,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(labelText: entry.key),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+              RpgExpandableFormSection(
+                title: 'Perícias',
+                subtitle: 'máximo +3',
+                icon: Icons.checklist,
+                expanded: isOpen(_CharacterFormSection.skills),
+                onToggle: () => toggleSection(_CharacterFormSection.skills),
+                childrenBuilder: (context) => [
+                  RpgFieldGrid(
+                    minColumnWidth: 142,
+                    children: [
+                      for (final entry in skillControllers.entries)
+                        TextField(
+                          controller: entry.value,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(labelText: entry.key),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+              RpgExpandableFormSection(
+                title: 'Acessórios',
+                subtitle: 'limite de 2 especiais',
+                icon: Icons.diamond,
+                expanded: isOpen(_CharacterFormSection.accessories),
+                onToggle: () =>
+                    toggleSection(_CharacterFormSection.accessories),
+                childrenBuilder: (context) => [
+                  RpgFieldGrid(
+                    minColumnWidth: 230,
+                    children: [
+                      DropdownButtonFormField<String>(
+                        initialValue: accessoryOne,
+                        isExpanded: true,
+                        items: accessoryItems,
+                        onChanged: (value) => setState(
+                          () => accessoryOne = value ?? accessoryOne,
+                        ),
+                        decoration: const InputDecoration(
+                          labelText: 'Acessório especial 1',
+                        ),
+                      ),
+                      DropdownButtonFormField<String>(
+                        initialValue: accessoryTwo,
+                        isExpanded: true,
+                        items: accessoryItems,
+                        onChanged: (value) => setState(
+                          () => accessoryTwo = value ?? accessoryTwo,
+                        ),
+                        decoration: const InputDecoration(
+                          labelText: 'Acessório especial 2',
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            RpgButton(
+              label: 'Cancelar',
+              onPressed: () => Navigator.of(context).pop(),
             ),
-            RpgFormSection(
-              title: 'Acessórios',
-              subtitle: 'limite de 2 especiais',
-              icon: Icons.diamond,
-              children: [
-                RpgFieldGrid(
-                  minColumnWidth: 230,
-                  children: [
-                    DropdownButtonFormField<String>(
-                      initialValue: accessoryOne,
-                      isExpanded: true,
-                      items: _stringDropdownItems(['', ...accessoryOptions]),
-                      onChanged: (value) =>
-                          setState(() => accessoryOne = value ?? accessoryOne),
-                      decoration: const InputDecoration(
-                        labelText: 'Acessório especial 1',
-                      ),
+            RpgButton(
+              label: existing == null ? 'Criar' : 'Salvar',
+              icon: Icons.save,
+              variant: RpgButtonVariant.primary,
+              onPressed: () {
+                final attributes = _parseStats(attributeControllers);
+                final skills = _parseStats(skillControllers);
+                final invalidAttribute = _firstInvalidStat(attributes, 6);
+                final invalidSkill = _firstInvalidStat(skills, 3);
+                if (invalidAttribute != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('$invalidAttribute nao pode passar de +6.'),
                     ),
-                    DropdownButtonFormField<String>(
-                      initialValue: accessoryTwo,
-                      isExpanded: true,
-                      items: _stringDropdownItems(['', ...accessoryOptions]),
-                      onChanged: (value) =>
-                          setState(() => accessoryTwo = value ?? accessoryTwo),
-                      decoration: const InputDecoration(
-                        labelText: 'Acessório especial 2',
-                      ),
+                  );
+                  return;
+                }
+                if (invalidSkill != null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('$invalidSkill nao pode passar de +3.'),
                     ),
-                  ],
-                ),
-              ],
+                  );
+                  return;
+                }
+                final accessories = [
+                  accessoryOne.trim(),
+                  accessoryTwo.trim(),
+                ].where((item) => item.isNotEmpty).toList();
+                final changingToMage =
+                    existing != null &&
+                    !_sameOptionName(existing.characterClass, characterClass) &&
+                    _sameOptionName(characterClass, 'Mago');
+                if (changingToMage &&
+                    mageSpellSelections.length < existing.level - 1) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Escolha as magias adquiridas pelo mago.'),
+                    ),
+                  );
+                  return;
+                }
+                final hasShield = shieldOptions.any(
+                  (item) => _sameOptionName(item, secondaryItem),
+                );
+                final maxHp = 10 + (attributes['Vigor'] ?? 0);
+                final parsedCurrentHp =
+                    (int.tryParse(currentHp.text) ??
+                            existing?.currentHp ??
+                            maxHp)
+                        .clamp(0, maxHp)
+                        .toInt();
+                final character = CharacterSheet(
+                  id:
+                      existing?.id ??
+                      'char-${DateTime.now().microsecondsSinceEpoch}',
+                  name: name.text.trim().isEmpty
+                      ? 'Novo personagem'
+                      : name.text.trim(),
+                  race: race,
+                  characterClass: characterClass,
+                  level: existing?.level ?? 1,
+                  concept: concept.text,
+                  attributes: attributes,
+                  skills: skills,
+                  currentHp: parsedCurrentHp,
+                  armor: armor,
+                  hasShield: hasShield,
+                  mainWeapon: mainWeapon,
+                  secondaryItem: secondaryItem,
+                  accessories: accessories,
+                  powers: existing?.powers ?? const [],
+                  inventory: existing?.inventory ?? const [],
+                  statuses: existing?.statuses ?? const [],
+                  coins: (int.tryParse(coins.text) ?? existing?.coins ?? 5)
+                      .clamp(0, 999999)
+                      .toInt(),
+                  notes: existing?.notes ?? const [],
+                  ownerName: existing?.ownerName,
+                  archived: existing?.archived ?? false,
+                );
+                if (existing == null) {
+                  context.read<RpgSessionController>().addCharacter(character);
+                } else {
+                  context.read<RpgSessionController>().updateCharacter(
+                    character,
+                    selectedMageSpellIds: mageSpellSelections.values
+                        .whereType<String>()
+                        .toList(),
+                  );
+                }
+                Navigator.of(context).pop();
+              },
             ),
           ],
-        ),
-        actions: [
-          RpgButton(
-            label: 'Cancelar',
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          RpgButton(
-            label: existing == null ? 'Criar' : 'Salvar',
-            icon: Icons.save,
-            variant: RpgButtonVariant.primary,
-            onPressed: () {
-              final attributes = _parseStats(attributeControllers);
-              final skills = _parseStats(skillControllers);
-              final invalidAttribute = _firstInvalidStat(attributes, 6);
-              final invalidSkill = _firstInvalidStat(skills, 3);
-              if (invalidAttribute != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('$invalidAttribute nao pode passar de +6.'),
-                  ),
-                );
-                return;
-              }
-              if (invalidSkill != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('$invalidSkill nao pode passar de +3.'),
-                  ),
-                );
-                return;
-              }
-              final accessories = [
-                accessoryOne.trim(),
-                accessoryTwo.trim(),
-              ].where((item) => item.isNotEmpty).toList();
-              final changingToMage =
-                  existing != null &&
-                  !_sameOptionName(existing.characterClass, characterClass) &&
-                  _sameOptionName(characterClass, 'Mago');
-              if (changingToMage &&
-                  mageSpellSelections.length < existing.level - 1) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Escolha as magias adquiridas pelo mago.'),
-                  ),
-                );
-                return;
-              }
-              final hasShield = shieldOptions.any(
-                (item) => _sameOptionName(item, secondaryItem),
-              );
-              final maxHp = 10 + (attributes['Vigor'] ?? 0);
-              final parsedCurrentHp =
-                  (int.tryParse(currentHp.text) ?? existing?.currentHp ?? maxHp)
-                      .clamp(0, maxHp)
-                      .toInt();
-              final character = CharacterSheet(
-                id:
-                    existing?.id ??
-                    'char-${DateTime.now().microsecondsSinceEpoch}',
-                name: name.text.trim().isEmpty
-                    ? 'Novo personagem'
-                    : name.text.trim(),
-                race: race,
-                characterClass: characterClass,
-                level: existing?.level ?? 1,
-                concept: concept.text,
-                attributes: attributes,
-                skills: skills,
-                currentHp: parsedCurrentHp,
-                armor: armor,
-                hasShield: hasShield,
-                mainWeapon: mainWeapon,
-                secondaryItem: secondaryItem,
-                accessories: accessories,
-                powers: existing?.powers ?? const [],
-                inventory: existing?.inventory ?? const [],
-                statuses: existing?.statuses ?? const [],
-                coins: (int.tryParse(coins.text) ?? existing?.coins ?? 5)
-                    .clamp(0, 999999)
-                    .toInt(),
-                notes: existing?.notes ?? const [],
-                ownerName: existing?.ownerName,
-                archived: existing?.archived ?? false,
-              );
-              if (existing == null) {
-                context.read<RpgSessionController>().addCharacter(character);
-              } else {
-                context.read<RpgSessionController>().updateCharacter(
-                  character,
-                  selectedMageSpellIds: mageSpellSelections.values
-                      .whereType<String>()
-                      .toList(),
-                );
-              }
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
+        );
+      },
     ),
   );
 }

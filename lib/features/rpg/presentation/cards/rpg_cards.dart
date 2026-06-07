@@ -19,189 +19,194 @@ class CharacterCard extends StatelessWidget {
       (controller) => controller.equipmentByName(character.mainWeapon),
     );
 
-    return RpgPanel(
-      ornate: true,
-      raised: !masterMode,
-      borderColor: masterMode ? RpgTheme.line : RpgTheme.lineGold,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RpgPortrait(
-                label: character.name,
-                sigil: character.characterClass,
-                size: masterMode ? 46 : 84,
-                color: RpgTheme.lineGold,
-                showLabel: !masterMode,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      character.name,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      'Nível ${character.level} - ${character.race} ${character.characterClass}',
-                      style: const TextStyle(color: RpgTheme.gold),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      character.concept,
-                      maxLines: masterMode ? 2 : null,
-                      overflow: masterMode
-                          ? TextOverflow.ellipsis
-                          : TextOverflow.visible,
-                      style: const TextStyle(
-                        color: RpgTheme.mutedInk,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
+    return RepaintBoundary(
+      child: RpgPanel(
+        ornate: true,
+        raised: !masterMode,
+        borderColor: masterMode ? RpgTheme.line : RpgTheme.lineGold,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RpgPortrait(
+                  label: character.name,
+                  sigil: character.characterClass,
+                  size: masterMode ? 46 : 84,
+                  color: RpgTheme.lineGold,
+                  showLabel: !masterMode,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          RpgHpBar(current: character.currentHp, max: character.maxHp),
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              _InfoChip(
-                label: 'Vida',
-                value: '${character.currentHp}/${character.maxHp}',
-              ),
-              _InfoChip(label: 'Defesa', value: '${character.defense}'),
-              _InfoChip(label: 'Arma', value: character.mainWeapon),
-              if (weapon?.damage != null)
-                _InfoChip(label: 'Dano', value: weapon!.damage!),
-              _InfoChip(label: 'Armadura', value: character.armor),
-              _InfoChip(label: 'Moedas', value: '${character.coins}'),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            'Atributos: ${_joinStats(character.attributes)}',
-            maxLines: masterMode ? 2 : null,
-            overflow: masterMode ? TextOverflow.ellipsis : null,
-            style: const TextStyle(fontSize: 12),
-          ),
-          Text(
-            'Perícias: ${_joinStats(character.skills)}',
-            maxLines: masterMode ? 2 : null,
-            overflow: masterMode ? TextOverflow.ellipsis : null,
-            style: const TextStyle(fontSize: 12),
-          ),
-          if (masterMode) ...[
-            const SizedBox(height: 8),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        character.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        'Nível ${character.level} - ${character.race} ${character.characterClass}',
+                        style: const TextStyle(color: RpgTheme.gold),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        character.concept,
+                        maxLines: masterMode ? 2 : null,
+                        overflow: masterMode
+                            ? TextOverflow.ellipsis
+                            : TextOverflow.visible,
+                        style: const TextStyle(
+                          color: RpgTheme.mutedInk,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            RpgHpBar(current: character.currentHp, max: character.maxHp),
+            const SizedBox(height: 10),
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: [
-                RpgButton(
-                  onPressed: () => _showLevelUpDialog(context, character),
-                  icon: Icons.trending_up,
-                  label: 'Subir nível',
-                  small: true,
+                _InfoChip(
+                  label: 'Vida',
+                  value: '${character.currentHp}/${character.maxHp}',
                 ),
-                RpgButton(
-                  onPressed: () =>
-                      _showCharacterForm(context, existing: character),
-                  icon: Icons.edit,
-                  label: 'Editar ficha',
-                  small: true,
-                ),
-                RpgButton(
-                  onPressed: () => _showPowerLibraryDialog(context, character),
-                  icon: Icons.auto_stories,
-                  label: 'Poderes/magias',
-                  small: true,
-                ),
-                RpgButton(
-                  onPressed: () => _showInventoryEditor(context, character),
-                  icon: Icons.inventory_2,
-                  label: 'Inventário',
-                  small: true,
-                ),
-                RpgButton(
-                  onPressed: () =>
-                      _showArchiveCharacterDialog(context, character),
-                  icon: Icons.archive,
-                  label: 'Arquivar',
-                  variant: RpgButtonVariant.ghost,
-                  small: true,
-                ),
+                _InfoChip(label: 'Defesa', value: '${character.defense}'),
+                _InfoChip(label: 'Arma', value: character.mainWeapon),
+                if (weapon?.damage != null)
+                  _InfoChip(label: 'Dano', value: weapon!.damage!),
+                _InfoChip(label: 'Armadura', value: character.armor),
+                _InfoChip(label: 'Moedas', value: '${character.coins}'),
               ],
             ),
-            if (character.powers.isNotEmpty) ...[
-              const SizedBox(height: 10),
-              Text('Poderes', style: Theme.of(context).textTheme.titleSmall),
-              const SizedBox(height: 6),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (final power in character.powers)
-                    ActionChip(
-                      avatar: Icon(
-                        power.used ? Icons.check_circle : Icons.circle_outlined,
-                      ),
-                      label: Text(
-                        '${power.name} - ${_usageLabel(power.usageLimit)}',
-                      ),
-                      onPressed: () => context
-                          .read<RpgSessionController>()
-                          .togglePowerUsed(character.id, power.id),
-                    ),
-                ],
-              ),
-            ],
-            if (combatIsActive &&
-                character.inventory.any(
-                  (item) => item.effectKind != null && item.quantity > 0,
-                )) ...[
-              const SizedBox(height: 10),
-              Text(
-                'Consumiveis',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              const SizedBox(height: 6),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  for (final item in character.inventory.where(
-                    (item) => item.effectKind != null && item.quantity > 0,
-                  ))
-                    ActionChip(
-                      avatar: const Icon(Icons.local_drink),
-                      label: Text('${item.name} x${item.quantity}'),
-                      onPressed: () =>
-                          _showConsumableDialog(context, character, item),
-                    ),
-                ],
-              ),
-            ],
-          ],
-          if (!masterMode && !combatIsActive) ...[
-            const SizedBox(height: 8),
-            RpgButton(
-              onPressed: () => _showInventoryEditor(context, character),
-              icon: Icons.inventory_2,
-              label: 'Editar inventario',
-              variant: RpgButtonVariant.primary,
+            const SizedBox(height: 10),
+            Text(
+              'Atributos: ${_joinStats(character.attributes)}',
+              maxLines: masterMode ? 2 : null,
+              overflow: masterMode ? TextOverflow.ellipsis : null,
+              style: const TextStyle(fontSize: 12),
             ),
+            Text(
+              'Perícias: ${_joinStats(character.skills)}',
+              maxLines: masterMode ? 2 : null,
+              overflow: masterMode ? TextOverflow.ellipsis : null,
+              style: const TextStyle(fontSize: 12),
+            ),
+            if (masterMode) ...[
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  RpgButton(
+                    onPressed: () => _showLevelUpDialog(context, character),
+                    icon: Icons.trending_up,
+                    label: 'Subir nível',
+                    small: true,
+                  ),
+                  RpgButton(
+                    onPressed: () =>
+                        _showCharacterForm(context, existing: character),
+                    icon: Icons.edit,
+                    label: 'Editar ficha',
+                    small: true,
+                  ),
+                  RpgButton(
+                    onPressed: () =>
+                        _showPowerLibraryDialog(context, character),
+                    icon: Icons.auto_stories,
+                    label: 'Poderes/magias',
+                    small: true,
+                  ),
+                  RpgButton(
+                    onPressed: () => _showInventoryEditor(context, character),
+                    icon: Icons.inventory_2,
+                    label: 'Inventário',
+                    small: true,
+                  ),
+                  RpgButton(
+                    onPressed: () =>
+                        _showArchiveCharacterDialog(context, character),
+                    icon: Icons.archive,
+                    label: 'Arquivar',
+                    variant: RpgButtonVariant.ghost,
+                    small: true,
+                  ),
+                ],
+              ),
+              if (character.powers.isNotEmpty) ...[
+                const SizedBox(height: 10),
+                Text('Poderes', style: Theme.of(context).textTheme.titleSmall),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final power in character.powers)
+                      ActionChip(
+                        avatar: Icon(
+                          power.used
+                              ? Icons.check_circle
+                              : Icons.circle_outlined,
+                        ),
+                        label: Text(
+                          '${power.name} - ${_usageLabel(power.usageLimit)}',
+                        ),
+                        onPressed: () => context
+                            .read<RpgSessionController>()
+                            .togglePowerUsed(character.id, power.id),
+                      ),
+                  ],
+                ),
+              ],
+              if (combatIsActive &&
+                  character.inventory.any(
+                    (item) => item.effectKind != null && item.quantity > 0,
+                  )) ...[
+                const SizedBox(height: 10),
+                Text(
+                  'Consumiveis',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    for (final item in character.inventory.where(
+                      (item) => item.effectKind != null && item.quantity > 0,
+                    ))
+                      ActionChip(
+                        avatar: const Icon(Icons.local_drink),
+                        label: Text('${item.name} x${item.quantity}'),
+                        onPressed: () =>
+                            _showConsumableDialog(context, character, item),
+                      ),
+                  ],
+                ),
+              ],
+            ],
+            if (!masterMode && !combatIsActive) ...[
+              const SizedBox(height: 8),
+              RpgButton(
+                onPressed: () => _showInventoryEditor(context, character),
+                icon: Icons.inventory_2,
+                label: 'Editar inventario',
+                variant: RpgButtonVariant.primary,
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -1228,11 +1226,10 @@ class RpgModal extends StatelessWidget {
         .clamp(320.0, media.size.height)
         .toDouble();
 
-    return BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-      child: Dialog(
-        insetPadding: const EdgeInsets.all(RpgSpacing.xl),
-        backgroundColor: Colors.transparent,
+    return Dialog(
+      insetPadding: const EdgeInsets.all(RpgSpacing.xl),
+      backgroundColor: Colors.transparent,
+      child: RepaintBoundary(
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: safeWidth,
@@ -1319,6 +1316,61 @@ class RpgFormSection extends StatelessWidget {
           const SizedBox(height: RpgSpacing.md),
           RpgFieldGroup(children: children),
         ],
+      ),
+    );
+  }
+}
+
+class RpgExpandableFormSection extends StatelessWidget {
+  const RpgExpandableFormSection({
+    required this.title,
+    required this.expanded,
+    required this.onToggle,
+    required this.childrenBuilder,
+    this.subtitle,
+    this.icon,
+    super.key,
+  });
+
+  final String title;
+  final String? subtitle;
+  final IconData? icon;
+  final bool expanded;
+  final VoidCallback onToggle;
+  final List<Widget> Function(BuildContext context) childrenBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    final borderColor = expanded ? RpgTheme.lineGold : RpgTheme.line;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: RpgSpacing.md),
+      child: RpgPanel(
+        inset: !expanded,
+        borderColor: borderColor,
+        padding: EdgeInsets.zero,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            InkWell(
+              onTap: onToggle,
+              child: RpgPanelHeader(
+                title: title,
+                subtitle: subtitle,
+                icon: icon,
+                trailing: Icon(
+                  expanded ? Icons.expand_less : Icons.expand_more,
+                  color: RpgTheme.gold,
+                  size: 18,
+                ),
+              ),
+            ),
+            if (expanded)
+              Padding(
+                padding: const EdgeInsets.all(RpgSpacing.md),
+                child: RpgFieldGroup(children: childrenBuilder(context)),
+              ),
+          ],
+        ),
       ),
     );
   }

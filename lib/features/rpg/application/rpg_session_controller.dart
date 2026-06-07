@@ -13,6 +13,7 @@ import 'services/character_power_reconciliation_service.dart';
 import 'services/character_progression_service.dart';
 import 'services/combat_service.dart';
 import 'services/official_name_matcher.dart';
+import 'services/performance_trace.dart';
 import 'services/table_code_service.dart';
 
 class RpgSessionController extends ChangeNotifier {
@@ -104,6 +105,9 @@ class RpgSessionController extends ChangeNotifier {
   RpgTable? _persistedTable;
   CombatState? _persistedCombat;
   final Map<String, CharacterSheet> _persistedCharacters = {};
+  List<CharacterSheet>? _activeCharactersCache;
+  List<CharacterSheet>? _archivedCharactersCache;
+  List<CharacterSheet>? _characterCacheSource;
   SharedPreferences? _preferences;
   bool _applyingRemoteState = false;
   bool _remoteTableExists = false;
@@ -128,11 +132,15 @@ class RpgSessionController extends ChangeNotifier {
   List<EquipmentTemplate> get accessories =>
       _equipmentByCategory[EquipmentCategory.accessory] ?? const [];
 
-  List<CharacterSheet> get activeCharacters =>
-      characters.where((character) => !character.archived).toList();
+  List<CharacterSheet> get activeCharacters {
+    _refreshCharacterCaches();
+    return _activeCharactersCache!;
+  }
 
-  List<CharacterSheet> get archivedCharacters =>
-      characters.where((character) => character.archived).toList();
+  List<CharacterSheet> get archivedCharacters {
+    _refreshCharacterCaches();
+    return _archivedCharactersCache!;
+  }
 
   List<PowerUseRequest> get powerUseRequests => table.powerUseRequests;
 
@@ -216,7 +224,10 @@ class RpgSessionController extends ChangeNotifier {
 
   Future<void> _loadOfficialLibrary() async {
     try {
-      final library = await _libraryRepository.load();
+      final library = await RpgPerformanceTrace.async(
+        'official_library.load',
+        _libraryRepository.load,
+      );
       races = library.races;
       classes = library.classes;
       monsters = library.monsters;
@@ -326,10 +337,15 @@ class RpgSessionController extends ChangeNotifier {
   }
 
   void _applyRemoteState(VoidCallback apply) {
-    _applyingRemoteState = true;
-    apply();
-    super.notifyListeners();
-    _applyingRemoteState = false;
+    RpgPerformanceTrace.sync('firestore.remote_apply', () {
+      _applyingRemoteState = true;
+      try {
+        apply();
+        super.notifyListeners();
+      } finally {
+        _applyingRemoteState = false;
+      }
+    });
   }
 
   void _markCurrentStatePersisted() {
@@ -366,7 +382,7 @@ class RpgSessionController extends ChangeNotifier {
       return;
     }
 
-    try {
+    await RpgPerformanceTrace.async('firestore.persist_changes', () async {
       final tableToSave = table;
       final combatToSave = activeCombat;
       final charactersToSave = [
@@ -391,10 +407,23 @@ class RpgSessionController extends ChangeNotifier {
         await combatRepository.saveCombat(table.id, combatToSave);
         _persistedCombat = combatToSave;
       }
-    } catch (error, stackTrace) {
+    }).catchError((Object error, StackTrace stackTrace) {
       debugPrint('Falha ao sincronizar Firestore: $error');
       debugPrint('$stackTrace');
-    }
+    });
+  }
+
+  void _refreshCharacterCaches() {
+    if (identical(_characterCacheSource, characters)) return;
+    _characterCacheSource = characters;
+    _activeCharactersCache = [
+      for (final character in characters)
+        if (!character.archived) character,
+    ];
+    _archivedCharactersCache = [
+      for (final character in characters)
+        if (character.archived) character,
+    ];
   }
 
   void enterAsMaster() {
