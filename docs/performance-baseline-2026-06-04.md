@@ -62,3 +62,33 @@
 - `DropdownMenuItem` estaveis do formulario de ficha sao pre-calculados fora do `StatefulBuilder`.
 - Landing e `CharacterCard` receberam `RepaintBoundary` em blocos pesados, sem simplificacao visual.
 - Deploy Hosting publicado na versao `projects/880074034144/sites/rpgdosguri/versions/cb11766f9d762b42`.
+
+## Trace pos-segunda rodada
+
+Arquivo analisado:
+
+```text
+C:\Users\alvar\Downloads\Trace-20260604T223509.json
+```
+
+Comparacao com `Trace-20260604T185714.json`:
+
+- Pior long task: `519 ms` -> `368 ms`.
+- Long tasks acima de `300 ms`: `56` -> `10`.
+- Pior interacao Chrome: `690 ms` -> `488 ms`.
+- Interacoes acima de `300 ms`: `49` -> `7`.
+- Pior evento de teclado: `459 ms` -> `96 ms`.
+- Sends Google/Firestore: `29` -> `17`.
+- Long `GPUTask` somado: `17.9 s` -> `13.3 s`.
+
+Observacao:
+
+- O total bruto de long tasks `>=50 ms` subiu no trace novo, mas o trace tambem tem mais eventos/interacoes. O indicador mais relevante foi a queda forte nos piores travamentos.
+- Screenshots dos piores intervalos indicaram gargalos remanescentes em landing/PIN, entrada no mestre, cards de ficha e formulario de ficha com varias secoes/dropdowns abertos.
+- Firestore/rede nao parece ser o gargalo principal nesta etapa.
+
+Proxima rodada sugerida, se ainda houver travamento perceptivel:
+
+- Card mobile/listas com montagem mais leve, mantendo visual.
+- Formulario de ficha com politica mobile para reduzir secoes pesadas simultaneamente abertas.
+- Mais isolamento de pintura na landing/PIN se o trace continuar apontando esse fluxo.
